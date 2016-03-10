@@ -47,6 +47,20 @@ Thread::Thread(char* threadName)
     space = NULL;
 #endif
 }
+
+Thread::Thread(char* threadName, int uid)
+{
+    threadID = threadCounts;
+    threadCounts++;
+    userID = uid;
+    name = threadName;
+    stackTop = NULL;
+    stack = NULL;
+    status = JUST_CREATED;
+#ifdef USER_PROGRAM
+    space = NULL;
+#endif
+}
 //----------------------------------------------------------------------
 // Thread::~Thread
 // 	De-allocate a thread.

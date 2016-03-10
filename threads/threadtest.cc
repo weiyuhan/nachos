@@ -62,7 +62,7 @@ ThreadTest2()
     DEBUG('t', "Entering ThreadTest2");
     for(int i = 0; i < 10; i++)
     {
-        Thread *t = new Thread("forked thread");
+        Thread *t = new Thread("forked thread", 1);
         t->Fork(PrintThread, (void*)1);
     }
     PrintThread(0);
