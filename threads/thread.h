@@ -102,7 +102,7 @@ class Thread {
     char* getName() { return (name); }
     int getuid(){return userID;}
     int gettid(){return threadID;}
-    void Print() { printf("%s, uid:%d, tid:%d, ", name, userID, threadID); }
+    void Print() { printf("%s, uid:%d, tid:%d\n", name, userID, threadID); }
 
   private:
     // some of the private data for this class is listed above

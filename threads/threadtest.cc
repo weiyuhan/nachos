@@ -56,7 +56,17 @@ ThreadTest1()
     t->Fork(SimpleThread, (void*)1);
     SimpleThread(0);
 }
-
+void
+ThreadTest2()
+{
+    DEBUG('t', "Entering ThreadTest2");
+    for(int i = 0; i < 10; i++)
+    {
+        Thread *t = new Thread("forked thread");
+        t->Fork(PrintThread, (void*)1);
+    }
+    PrintThread(0);
+}
 
 //----------------------------------------------------------------------
 // ThreadTest
@@ -70,6 +80,9 @@ ThreadTest()
     case 1:
 	ThreadTest1();
 	break;
+    case 2:
+    ThreadTest2();
+    break;
     default:
 	printf("No test specified.\n");
 	break;
