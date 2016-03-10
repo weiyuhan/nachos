@@ -24,6 +24,8 @@
 					// execution stack, for detecting 
 					// stack overflows
 
+int threadCounts = 0;
+
 //----------------------------------------------------------------------
 // Thread::Thread
 // 	Initialize a thread control block, so that we can then call
@@ -34,6 +36,9 @@
 
 Thread::Thread(char* threadName)
 {
+    threadID = threadCounts;
+    threadCounts++;
+    userID = 0;
     name = threadName;
     stackTop = NULL;
     stack = NULL;
@@ -42,7 +47,6 @@ Thread::Thread(char* threadName)
     space = NULL;
 #endif
 }
-
 //----------------------------------------------------------------------
 // Thread::~Thread
 // 	De-allocate a thread.

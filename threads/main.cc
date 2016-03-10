@@ -116,13 +116,15 @@ main(int argc, char **argv)
 	    	ASSERT(argc > 1);
             StartProcess(*(argv + 1));
             argCount = 2;
-        } else if (!strcmp(*argv, "-c")) {      // test the console
-	    if (argc == 1)
-	        ConsoleTest(NULL, NULL);
-	    else {
-		ASSERT(argc > 2);
-	        ConsoleTest(*(argv + 1), *(argv + 2));
-	        argCount = 3;
+        } else if (!strcmp(*argv, "-c")) 
+        {
+              // test the console
+		    if (argc == 1)
+		        ConsoleTest(NULL, NULL);
+		    else {
+			ASSERT(argc > 2);
+		        ConsoleTest(*(argv + 1), *(argv + 2));
+		        argCount = 3;
 	    }
 	    interrupt->Halt();		// once we start the console, then 
 					// Nachos will loop forever waiting 
@@ -162,7 +164,7 @@ main(int argc, char **argv)
 		printf("in network\n");
 #endif // NETWORK
     }
-
+    printf("finish\n");
     currentThread->Finish();	// NOTE: if the procedure "main" 
 				// returns, then the program "nachos"
 				// will exit (as any other normal program

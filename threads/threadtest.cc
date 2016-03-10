@@ -29,11 +29,16 @@ void
 SimpleThread(int which)
 {
     int num;
-    
+    currentThread->Print();
     for (num = 0; num < 5; num++) {
 	printf("*** thread %d looped %d times\n", which, num);
         currentThread->Yield();
     }
+}
+
+void PrintThread(int dummy)
+{
+    currentThread->Print();
 }
 
 //----------------------------------------------------------------------
@@ -48,10 +53,10 @@ ThreadTest1()
     DEBUG('t', "Entering ThreadTest1");
 
     Thread *t = new Thread("forked thread");
-
     t->Fork(SimpleThread, (void*)1);
     SimpleThread(0);
 }
+
 
 //----------------------------------------------------------------------
 // ThreadTest

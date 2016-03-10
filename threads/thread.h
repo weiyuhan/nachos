@@ -100,7 +100,9 @@ class Thread {
 						// overflowed its stack
     void setStatus(ThreadStatus st) { status = st; }
     char* getName() { return (name); }
-    void Print() { printf("%s, ", name); }
+    int getuid(){return userID;}
+    int gettid(){return threadID;}
+    void Print() { printf("%s, uid:%d, tid:%d, ", name, userID, threadID); }
 
   private:
     // some of the private data for this class is listed above
@@ -110,6 +112,8 @@ class Thread {
 					// (If NULL, don't deallocate stack)
     ThreadStatus status;		// ready, running or blocked
     char* name;
+    int userID;
+    int threadID;
 
     void StackAllocate(VoidFunctionPtr func, void *arg);
     					// Allocate a stack for thread.
