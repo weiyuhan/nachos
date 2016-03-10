@@ -92,8 +92,6 @@ Thread::Thread(char* threadName, int uid)
 
 Thread::~Thread()
 {
-    currentCounts--;
-    scheduler->RemoveThread(this);
     DEBUG('t', "Deleting thread \"%s\"\n", name);
 
     ASSERT(this != currentThread);
@@ -199,6 +197,8 @@ Thread::CheckOverflow()
 void
 Thread::Finish ()
 {
+    currentCounts--;
+    scheduler->RemoveThread(this);
     (void) interrupt->SetLevel(IntOff);		
     ASSERT(this == currentThread);
     

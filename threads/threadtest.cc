@@ -38,7 +38,9 @@ SimpleThread(int which)
 
 void PrintThread(int dummy)
 {
+    scheduler->ThreadStatus();
     currentThread->Print();
+    printf("\n\n");
 }
 
 //----------------------------------------------------------------------
