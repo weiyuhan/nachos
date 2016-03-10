@@ -21,7 +21,9 @@ class Scheduler {
   public:
     Scheduler();			// Initialize list of ready threads 
     ~Scheduler();			// De-allocate ready list
-
+    void ThreadStatus();
+    int AddThread(Thread *thread);
+    void RemoveThread(Thread *thread);
     void ReadyToRun(Thread* thread);	// Thread can be dispatched.
     Thread* FindNextToRun();		// Dequeue first thread on the ready 
 					// list, if any, and return thread.
@@ -31,6 +33,7 @@ class Scheduler {
   private:
     List *readyList;  		// queue of threads that are ready to run,
 				// but not running
+    List *allList; // all the threads
 };
 
 #endif // SCHEDULER_H

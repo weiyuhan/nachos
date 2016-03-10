@@ -30,6 +30,7 @@
 Scheduler::Scheduler()
 { 
     readyList = new List; 
+    allList = new List;
 } 
 
 //----------------------------------------------------------------------
@@ -40,7 +41,23 @@ Scheduler::Scheduler()
 Scheduler::~Scheduler()
 { 
     delete readyList; 
+    delete allList;
 } 
+
+
+int
+Scheduler::AddThread(Thread *thread)
+{
+    if(allList->NumInList() > 128)
+        return -1;
+    allList->SortedInsert(thread, thread->gettid());
+    return 0;
+}
+void 
+Scheduler::RemoveThread(Thread *thread)
+{
+    allList->Remove(thread);
+}
 
 //----------------------------------------------------------------------
 // Scheduler::ReadyToRun
@@ -144,4 +161,10 @@ Scheduler::Print()
 {
     printf("Ready list contents:\n");
     readyList->Mapcar((VoidFunctionPtr) ThreadPrint);
+}
+void
+Scheduler::ThreadStatus()
+{
+    printf("all threads:\n");
+    allList->Mapcar((VoidFunctionPtr) ThreadPrint);
 }

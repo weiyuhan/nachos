@@ -25,6 +25,7 @@
 					// stack overflows
 
 int threadCounts = 0;
+int currentCounts = 0;
 
 //----------------------------------------------------------------------
 // Thread::Thread
@@ -36,9 +37,17 @@ int threadCounts = 0;
 
 Thread::Thread(char* threadName)
 {
+    if(currentCounts >= 128)
+    {
+        threadID = -1;
+        return;
+    }
     threadID = threadCounts;
     threadCounts++;
+    currentCounts++;
     userID = 0;
+    scheduler->AddThread(this);
+
     name = threadName;
     stackTop = NULL;
     stack = NULL;
@@ -50,9 +59,17 @@ Thread::Thread(char* threadName)
 
 Thread::Thread(char* threadName, int uid)
 {
+    if(currentCounts >= 128)
+    {
+        threadID = -1;
+        return;
+    }
     threadID = threadCounts;
     threadCounts++;
+    currentCounts++;
     userID = uid;
+    scheduler->AddThread(this);
+
     name = threadName;
     stackTop = NULL;
     stack = NULL;
@@ -75,12 +92,33 @@ Thread::Thread(char* threadName, int uid)
 
 Thread::~Thread()
 {
+    currentCounts--;
+    scheduler->RemoveThread(this);
     DEBUG('t', "Deleting thread \"%s\"\n", name);
 
     ASSERT(this != currentThread);
     if (stack != NULL)
 	DeallocBoundedArray((char *) stack, StackSize * sizeof(int));
 }
+
+char* 
+Thread::getStatus()
+{
+    switch(status)
+    {
+        case JUST_CREATED:
+            return "JUST_CREATED";
+        case RUNNING:
+            return "RUNNING";
+        case READY:
+            return "READY";
+        case BLOCKED:
+            return "BLOCKED";
+        default:
+            return "unknown";
+    }
+}
+
 
 //----------------------------------------------------------------------
 // Thread::Fork

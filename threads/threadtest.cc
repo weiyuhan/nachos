@@ -60,9 +60,14 @@ void
 ThreadTest2()
 {
     DEBUG('t', "Entering ThreadTest2");
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < 130; i++)
     {
         Thread *t = new Thread("forked thread", 1);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+            continue;
+        }
         t->Fork(PrintThread, (void*)1);
     }
     PrintThread(0);

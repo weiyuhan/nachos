@@ -100,10 +100,11 @@ class Thread {
     void CheckOverflow();   			// Check if thread has 
 						// overflowed its stack
     void setStatus(ThreadStatus st) { status = st; }
+    char* getStatus();
     char* getName() { return (name); }
     int getuid(){return userID;}
     int gettid(){return threadID;}
-    void Print() { printf("%s, uid:%d, tid:%d\n", name, userID, threadID); }
+    void Print() { printf("%s, uid:%d, tid:%d, status:%s\n", name, userID, threadID, getStatus()); }
 
   private:
     // some of the private data for this class is listed above
