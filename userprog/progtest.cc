@@ -63,6 +63,7 @@ static void WriteDone(int arg) { writeDone->V(); }
 // ConsoleTest
 // 	Test the console by echoing characters typed at the input onto
 //	the output.  Stop when the user types a 'q'.
+//  Print Threads Status when the user types a 't'
 //----------------------------------------------------------------------
 
 void 
@@ -80,9 +81,21 @@ ConsoleTest (char *in, char *out)
     	console->PutChar(ch);	// echo it!
     	writeDone->P() ;        // wait for write to finish
     	if (ch == 'q') return;  // if q, quit
-        if (ch == 't')
+        if (ch == 't') // ts
         {
             scheduler->ThreadStatus();
+        }
+        if(ch == 'c') // create 130 thread
+        {
+            for(int i = 0; i < 130; i++)
+            {
+                Thread *t = new Thread("forked thread", 1);
+                if(t->gettid() == -1)
+                {
+                    printf("can't fork!\n");
+                    continue;
+                }
+            }
         }
     }
 }

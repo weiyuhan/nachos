@@ -25,6 +25,7 @@
 //----------------------------------------------------------------------
 // Scheduler::Scheduler
 // 	Initialize the list of ready but not running threads to empty.
+//  Initialize the list of all threads to empty.
 //----------------------------------------------------------------------
 
 Scheduler::Scheduler()
@@ -36,6 +37,7 @@ Scheduler::Scheduler()
 //----------------------------------------------------------------------
 // Scheduler::~Scheduler
 // 	De-allocate the list of ready threads.
+//  De-allocate the list of all threads.
 //----------------------------------------------------------------------
 
 Scheduler::~Scheduler()
@@ -44,6 +46,12 @@ Scheduler::~Scheduler()
     delete allList;
 } 
 
+//----------------------------------------------------------------------
+// Scheduler::AddThread
+//  add a thread to all threads list
+//  if success, return threadID
+//  else, return -1
+//----------------------------------------------------------------------
 
 int
 Scheduler::AddThread(Thread *thread)
@@ -51,8 +59,14 @@ Scheduler::AddThread(Thread *thread)
     if(allList->NumInList() > 128)
         return -1;
     allList->SortedInsert(thread, thread->gettid());
-    return 0;
+    return thread->gettid();
 }
+
+//----------------------------------------------------------------------
+// Scheduler::RemoveThread
+//  remove a thread from all threads List
+//----------------------------------------------------------------------
+
 void 
 Scheduler::RemoveThread(Thread *thread)
 {
@@ -162,6 +176,12 @@ Scheduler::Print()
     printf("Ready list contents:\n");
     readyList->Mapcar((VoidFunctionPtr) ThreadPrint);
 }
+
+
+//----------------------------------------------------------------------
+// Scheduler::ThreadStatus
+//  Print the ThreadStatus 
+//----------------------------------------------------------------------
 void
 Scheduler::ThreadStatus()
 {

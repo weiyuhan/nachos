@@ -36,6 +36,10 @@ SimpleThread(int which)
     }
 }
 
+//----------------------------------------------------------------------
+// PrintThread
+//  print the status of currentThread
+//----------------------------------------------------------------------
 void PrintThread(int dummy)
 {
     scheduler->ThreadStatus();
@@ -58,6 +62,12 @@ ThreadTest1()
     t->Fork(SimpleThread, (void*)1);
     SimpleThread(0);
 }
+
+//----------------------------------------------------------------------
+// ThreadTest2
+//  Loop 130 times to create a printThread
+//----------------------------------------------------------------------
+
 void
 ThreadTest2()
 {

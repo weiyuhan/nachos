@@ -147,9 +147,10 @@ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
  ../network/post.h ../machine/network.h ../threads/synchlist.h \
  ../threads/synch.h
-thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/thread.h \
- ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
- ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
+thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/switch.h \
+ ../threads/synch.h ../threads/thread.h ../threads/utility.h \
+ ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
+ /usr/include/stdio.h /usr/include/features.h \
  /usr/include/i386-linux-gnu/bits/predefs.h \
  /usr/include/i386-linux-gnu/sys/cdefs.h \
  /usr/include/i386-linux-gnu/bits/wordsize.h \
@@ -163,12 +164,11 @@ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/thread.h \
  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
- ../filesys/filesys.h ../filesys/openfile.h ../threads/switch.h \
- ../threads/synch.h ../threads/list.h ../threads/system.h \
- ../threads/scheduler.h ../machine/interrupt.h ../threads/list.h \
- ../machine/stats.h ../machine/timer.h ../filesys/synchdisk.h \
- ../machine/disk.h ../threads/synch.h ../network/post.h \
- ../machine/network.h ../threads/synchlist.h
+ ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+ ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+ ../threads/list.h ../machine/stats.h ../machine/timer.h \
+ ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+ ../network/post.h ../machine/network.h ../threads/synchlist.h
 utility.o: ../threads/utility.cc ../threads/copyright.h \
  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \

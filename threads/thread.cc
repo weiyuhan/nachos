@@ -14,8 +14,7 @@
 // All rights reserved.  See copyright.h for copyright notice and limitation 
 // of liability and disclaimer of warranty provisions.
 
-#include "copyright.h"
-#include "thread.h"
+#include "copyright.h"r
 #include "switch.h"
 #include "synch.h"
 #include "system.h"
@@ -31,6 +30,7 @@ int currentCounts = 0;
 // Thread::Thread
 // 	Initialize a thread control block, so that we can then call
 //	Thread::Fork.
+//  userID = 0
 //
 //	"threadName" is an arbitrary string, useful for debugging.
 //----------------------------------------------------------------------
@@ -42,11 +42,14 @@ Thread::Thread(char* threadName)
         threadID = -1;
         return;
     }
+
     threadID = threadCounts;
+    threadID = scheduler->AddThread(this);
+    if(threadID == -1)
+        return;
     threadCounts++;
     currentCounts++;
     userID = 0;
-    scheduler->AddThread(this);
 
     name = threadName;
     stackTop = NULL;
@@ -57,6 +60,14 @@ Thread::Thread(char* threadName)
 #endif
 }
 
+//----------------------------------------------------------------------
+// Thread::Thread
+//  Initialize a thread control block, so that we can then call
+//  Thread::Fork.
+//  userID is pass by user
+//
+//  "threadName" is an arbitrary string, useful for debugging.
+//----------------------------------------------------------------------
 Thread::Thread(char* threadName, int uid)
 {
     if(currentCounts >= 128)
@@ -64,11 +75,14 @@ Thread::Thread(char* threadName, int uid)
         threadID = -1;
         return;
     }
+
     threadID = threadCounts;
+    threadID = scheduler->AddThread(this);
+    if(threadID == -1)
+        return;
     threadCounts++;
     currentCounts++;
     userID = uid;
-    scheduler->AddThread(this);
 
     name = threadName;
     stackTop = NULL;
@@ -99,6 +113,11 @@ Thread::~Thread()
 	DeallocBoundedArray((char *) stack, StackSize * sizeof(int));
 }
 
+
+//----------------------------------------------------------------------
+// Thread::getStatus
+//  return a string describes the status of the thread
+//----------------------------------------------------------------------
 char* 
 Thread::getStatus()
 {
@@ -199,6 +218,7 @@ Thread::Finish ()
 {
     currentCounts--;
     scheduler->RemoveThread(this);
+
     (void) interrupt->SetLevel(IntOff);		
     ASSERT(this == currentThread);
     
