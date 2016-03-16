@@ -42,9 +42,8 @@ SimpleThread(int which)
 //----------------------------------------------------------------------
 void PrintThread(int dummy)
 {
-    scheduler->ThreadStatus();
     currentThread->Print();
-    printf("\n\n");
+    //printf("\n\n");
 }
 
 //----------------------------------------------------------------------
@@ -74,7 +73,7 @@ ThreadTest2()
     DEBUG('t', "Entering ThreadTest2");
     for(int i = 0; i < 130; i++)
     {
-        Thread *t = new Thread("forked thread", 1);
+        Thread *t = new Thread("forked thread", testnum);
         if(t->gettid() == -1)
         {
             printf("can't fork!\n");
@@ -83,6 +82,7 @@ ThreadTest2()
         t->Fork(PrintThread, (void*)1);
     }
     PrintThread(0);
+    scheduler->ThreadStatus();
 }
 
 //----------------------------------------------------------------------

@@ -35,40 +35,7 @@ int currentCounts = 0;
 //	"threadName" is an arbitrary string, useful for debugging.
 //----------------------------------------------------------------------
 
-Thread::Thread(char* threadName)
-{
-    if(currentCounts >= 128)
-    {
-        threadID = -1;
-        return;
-    }
-
-    threadID = threadCounts;
-    threadID = scheduler->AddThread(this);
-    if(threadID == -1)
-        return;
-    threadCounts++;
-    currentCounts++;
-    userID = 0;
-
-    name = threadName;
-    stackTop = NULL;
-    stack = NULL;
-    status = JUST_CREATED;
-#ifdef USER_PROGRAM
-    space = NULL;
-#endif
-}
-
-//----------------------------------------------------------------------
-// Thread::Thread
-//  Initialize a thread control block, so that we can then call
-//  Thread::Fork.
-//  userID is pass by user
-//
-//  "threadName" is an arbitrary string, useful for debugging.
-//----------------------------------------------------------------------
-Thread::Thread(char* threadName, int uid)
+Thread::Thread(char* threadName, int uid = 0)
 {
     if(currentCounts >= 128)
     {
@@ -92,6 +59,7 @@ Thread::Thread(char* threadName, int uid)
     space = NULL;
 #endif
 }
+
 //----------------------------------------------------------------------
 // Thread::~Thread
 // 	De-allocate a thread.
@@ -216,10 +184,10 @@ Thread::CheckOverflow()
 void
 Thread::Finish ()
 {
+    (void) interrupt->SetLevel(IntOff);		
+
     currentCounts--;
     scheduler->RemoveThread(this);
-
-    (void) interrupt->SetLevel(IntOff);		
     ASSERT(this == currentThread);
     
     DEBUG('t', "Finishing thread \"%s\"\n", getName());
