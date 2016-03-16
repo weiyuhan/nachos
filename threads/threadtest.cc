@@ -85,6 +85,34 @@ ThreadTest2()
     scheduler->ThreadStatus();
 }
 
+void
+ThreadTest3()
+{
+    DEBUG('t', "Entering ThreadTest3");
+    for(int i = 0; i < 10; i++)
+    {
+        Thread *t = new Thread("forked thread", testnum, 9);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+            continue;
+        }
+        t->Fork(PrintThread, (void*)1);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+        Thread *t = new Thread("forked thread", testnum, 20);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+            continue;
+        }
+        t->Fork(PrintThread, (void*)1);
+    }
+    PrintThread(0);
+    scheduler->ThreadStatus();
+}
+
 //----------------------------------------------------------------------
 // ThreadTest
 // 	Invoke a test routine.
@@ -99,6 +127,9 @@ ThreadTest()
 	break;
     case 2:
     ThreadTest2();
+    break;
+    case 3:
+    ThreadTest3();
     break;
     default:
 	printf("No test specified.\n");

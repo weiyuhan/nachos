@@ -14,6 +14,8 @@
 #include "addrspace.h"
 #include "synch.h"
 
+extern void PrintThread(int dummy);
+
 //----------------------------------------------------------------------
 // StartProcess
 // 	Run a user program.  Open the executable, load it into
@@ -96,6 +98,18 @@ ConsoleTest (char *in, char *out)
                     continue;
                 }
             }
+        }
+
+        if(ch >= '0' && ch <= '9')
+        {
+            int priority = ch - '0';
+            Thread *t = new Thread("forked thread", 1, priority);
+            if(t->gettid() == -1)
+            {
+                printf("can't fork!\n");
+                continue;
+            }
+            t->Fork(PrintThread, (void*)1);
         }
     }
 }

@@ -35,7 +35,7 @@ int currentCounts = 0;
 //	"threadName" is an arbitrary string, useful for debugging.
 //----------------------------------------------------------------------
 
-Thread::Thread(char* threadName, int uid = 0)
+Thread::Thread(char* threadName, int uid = 0, int _priority = 10)
 {
     if(currentCounts >= 128)
     {
@@ -50,6 +50,7 @@ Thread::Thread(char* threadName, int uid = 0)
     threadCounts++;
     currentCounts++;
     userID = uid;
+    priority = _priority;
 
     name = threadName;
     stackTop = NULL;
@@ -137,6 +138,7 @@ Thread::Fork(VoidFunctionPtr func, void *arg)
     scheduler->ReadyToRun(this);	// ReadyToRun assumes that interrupts 
 					// are disabled!
     (void) interrupt->SetLevel(oldLevel);
+    currentThread->Yield();
 }    
 
 //----------------------------------------------------------------------
@@ -226,13 +228,18 @@ Thread::Yield ()
     DEBUG('t', "Yielding thread \"%s\"\n", getName());
     
     nextThread = scheduler->FindNextToRun();
-    if (nextThread != NULL) {
-	scheduler->ReadyToRun(this);
-	scheduler->Run(nextThread);
+    if (nextThread != NULL) 
+    {
+        if(nextThread->priority < this->priority)
+        {
+        	scheduler->ReadyToRun(this);
+        	scheduler->Run(nextThread);
+        }
+        else
+            scheduler->ReadyToRun(nextThread);
     }
     (void) interrupt->SetLevel(oldLevel);
 }
-
 //----------------------------------------------------------------------
 // Thread::Sleep
 // 	Relinquish the CPU, because the current thread is blocked
