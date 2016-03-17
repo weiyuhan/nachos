@@ -48,7 +48,7 @@ void PrintThread(int dummy)
 
 void TickThread(int dummy)
 {
-    for(int i = 0; i <90; i++)
+    for(int i = 0; i <1000; i++)
         interrupt->OneTick();
 }
 
@@ -117,7 +117,7 @@ void
 ThreadTest4()
 {
     DEBUG('t', "Entering ThreadTest4");
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 1; i++)
     {
         Thread *t = new Thread("forked thread", testnum);
         if(t->gettid() == -1)
@@ -126,6 +126,7 @@ ThreadTest4()
         }
         t->Fork(TickThread, (void*)1);
     }
+    scheduler->Print();
     TickThread(1);
 }
 

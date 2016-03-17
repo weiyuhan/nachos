@@ -104,11 +104,12 @@ class Thread {
     int getuid(){return userID;}
     int gettid(){return threadID;}
     int getpriority(){return priority;}
+    void setpriority(int p){priority = p;}
     void timePass(int time){remainTime -= time;}
     void setremainTime(int time){remainTime = time;}
     int getremainTime(){return remainTime;}
-    void Print() { printf("%s, uid:%d, tid:%d, status:%s, remainTime:%d\n", 
-        name, userID, threadID, getStatus(), getremainTime()); }
+    void Print() { printf("%s, uid:%d, tid:%d, status:%s, priority:%d, remainTime:%d\n", 
+        name, userID, threadID, getStatus(), getpriority(), getremainTime()); }
 
   private:
     // some of the private data for this class is listed above

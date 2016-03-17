@@ -139,7 +139,7 @@ Thread::Fork(VoidFunctionPtr func, void *arg)
     scheduler->ReadyToRun(this);	// ReadyToRun assumes that interrupts 
 					// are disabled!
     (void) interrupt->SetLevel(oldLevel);
-    currentThread->Yield();
+    //currentThread->Yield();
 }    
 
 //----------------------------------------------------------------------
@@ -228,18 +228,20 @@ Thread::Yield ()
     
     DEBUG('t', "Yielding thread \"%s\"\n", getName());
 
-
-    if(currentThread->getremainTime() <= 0)
+    nextThread = scheduler->FindNextToRun();
+    if(nextThread != NULL)
     {
-        nextThread = scheduler->FindNextToRun();
-        if (nextThread != NULL) 
+        if(currentThread->getremainTime() <= 0)
         {
+            currentThread->setpriority(currentThread->getpriority() - 1);
             scheduler->ReadyToRun(this);
             scheduler->Run(nextThread);
         }
         else
-            scheduler->Run(this);
+            scheduler->ReadyToRun(nextThread);
     }
+    else
+        scheduler->Run(this);
     (void) interrupt->SetLevel(oldLevel);
 }
 //----------------------------------------------------------------------
