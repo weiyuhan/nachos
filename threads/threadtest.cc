@@ -46,6 +46,12 @@ void PrintThread(int dummy)
     //printf("\n\n");
 }
 
+void TickThread(int dummy)
+{
+    for(int i = 0; i <90; i++)
+        interrupt->OneTick();
+}
+
 //----------------------------------------------------------------------
 // ThreadTest1
 // 	Set up a ping-pong between two threads, by forking a thread 
@@ -107,6 +113,22 @@ ThreadTest3()
     scheduler->ThreadStatus();
 }
 
+void
+ThreadTest4()
+{
+    DEBUG('t', "Entering ThreadTest4");
+    for(int i = 0; i < 3; i++)
+    {
+        Thread *t = new Thread("forked thread", testnum);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+        }
+        t->Fork(TickThread, (void*)1);
+    }
+    TickThread(1);
+}
+
 //----------------------------------------------------------------------
 // ThreadTest
 // 	Invoke a test routine.
@@ -124,6 +146,9 @@ ThreadTest()
     break;
     case 3:
     ThreadTest3();
+    break;
+    case 4:
+    ThreadTest4();
     break;
     default:
 	printf("No test specified.\n");

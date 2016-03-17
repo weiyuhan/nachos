@@ -86,9 +86,9 @@ Scheduler::ReadyToRun (Thread *thread)
 {
     DEBUG('t', "Putting thread %s on ready list.\n", thread->getName());
 
-    thread->setremainTime(500);
     thread->setStatus(READY);
-    readyList->SortedInsert((void *)thread, thread->getpriority());
+    //readyList->SortedInsert((void *)thread, thread->getpriority());   //for priority
+    readyList->Append(thread);
 }
 
 //----------------------------------------------------------------------
@@ -136,7 +136,7 @@ Scheduler::Run (Thread *nextThread)
 
     currentThread = nextThread;		    // switch to the next thread
     currentThread->setStatus(RUNNING);      // nextThread is now running
-    
+    currentThread->setremainTime(500);
     DEBUG('t', "Switching from thread \"%s\" to thread \"%s\"\n",
 	  oldThread->getName(), nextThread->getName());
     

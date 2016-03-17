@@ -51,6 +51,7 @@ Thread::Thread(char* threadName, int uid = 0, int _priority = 10)
     currentCounts++;
     userID = uid;
     priority = _priority;
+    remainTime = 500;
 
     name = threadName;
     stackTop = NULL;
@@ -226,17 +227,18 @@ Thread::Yield ()
     ASSERT(this == currentThread);
     
     DEBUG('t', "Yielding thread \"%s\"\n", getName());
-    
-    nextThread = scheduler->FindNextToRun();
-    if (nextThread != NULL) 
+
+
+    if(currentThread->getremainTime() <= 0)
     {
-        if(nextThread->priority < this->priority)
+        nextThread = scheduler->FindNextToRun();
+        if (nextThread != NULL) 
         {
-        	scheduler->ReadyToRun(this);
-        	scheduler->Run(nextThread);
+            scheduler->ReadyToRun(this);
+            scheduler->Run(nextThread);
         }
         else
-            scheduler->ReadyToRun(nextThread);
+            scheduler->Run(this);
     }
     (void) interrupt->SetLevel(oldLevel);
 }

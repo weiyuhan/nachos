@@ -104,6 +104,7 @@ class Thread {
     int getuid(){return userID;}
     int gettid(){return threadID;}
     int getpriority(){return priority;}
+    void timePass(int time){remainTime -= time;}
     void setremainTime(int time){remainTime = time;}
     int getremainTime(){return remainTime;}
     void Print() { printf("%s, uid:%d, tid:%d, status:%s, remainTime:%d\n", 
