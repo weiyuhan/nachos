@@ -234,8 +234,18 @@ Thread::Yield ()
         if(currentThread->getremainTime() <= 0)
         {
             currentThread->setpriority(currentThread->getpriority() - 1);
-            scheduler->ReadyToRun(this);
-            scheduler->Run(nextThread);
+            if(currentThread->getpriority() > nextThread->getpriority())
+            {
+                //currentThread->setpriority(currentThread->getpriority() - 1);
+                scheduler->ReadyToRun(nextThread);
+                scheduler->Run(this);
+            }
+            else
+            {
+                //currentThread->setpriority(currentThread->getpriority() - 1);
+                scheduler->ReadyToRun(this);
+                scheduler->Run(nextThread);
+            }
         }
         else
             scheduler->ReadyToRun(nextThread);
