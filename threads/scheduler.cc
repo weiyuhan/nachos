@@ -59,7 +59,7 @@ Scheduler::AddThread(Thread *thread)
     if(allList->NumInList() > 128)
         return -1;
     allList->SortedInsert(thread, thread->gettid());
-    return thread->gettid();
+    return 0;
 }
 
 //----------------------------------------------------------------------
@@ -86,8 +86,9 @@ Scheduler::ReadyToRun (Thread *thread)
 {
     DEBUG('t', "Putting thread %s on ready list.\n", thread->getName());
 
+    thread->setremainTime(500);
     thread->setStatus(READY);
-    readyList->Append((void *)thread);
+    readyList->SortedInsert((void *)thread, thread->getpriority());
 }
 
 //----------------------------------------------------------------------

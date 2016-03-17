@@ -89,19 +89,13 @@ void
 ThreadTest3()
 {
     DEBUG('t', "Entering ThreadTest3");
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < 20; i++)
     {
-        Thread *t = new Thread("forked thread", testnum, 9);
-        if(t->gettid() == -1)
-        {
-            printf("can't fork!\n");
-            continue;
-        }
-        t->Fork(PrintThread, (void*)1);
-    }
-    for(int i = 0; i < 10; i++)
-    {
-        Thread *t = new Thread("forked thread", testnum, 20);
+        Thread *t = NULL;
+        if(i % 2 == 0)
+            t = new Thread("forked thread", 1, 9);
+        else
+            t = new Thread("forked thread", 2, 11);
         if(t->gettid() == -1)
         {
             printf("can't fork!\n");

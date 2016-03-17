@@ -44,8 +44,8 @@ Thread::Thread(char* threadName, int uid = 0, int _priority = 10)
     }
 
     threadID = threadCounts;
-    threadID = scheduler->AddThread(this);
-    if(threadID == -1)
+    int success = scheduler->AddThread(this);
+    if(success == -1)
         return;
     threadCounts++;
     currentCounts++;

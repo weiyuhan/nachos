@@ -103,7 +103,11 @@ class Thread {
     char* getName() { return (name); }
     int getuid(){return userID;}
     int gettid(){return threadID;}
-    void Print() { printf("%s, uid:%d, tid:%d, status:%s\n", name, userID, threadID, getStatus()); }
+    int getpriority(){return priority;}
+    void setremainTime(int time){remainTime = time;}
+    int getremainTime(){return remainTime;}
+    void Print() { printf("%s, uid:%d, tid:%d, status:%s, remainTime:%d\n", 
+        name, userID, threadID, getStatus(), getremainTime()); }
 
   private:
     // some of the private data for this class is listed above
@@ -116,6 +120,7 @@ class Thread {
     int userID;
     int threadID;
     int priority;
+    int remainTime;
 
     void StackAllocate(VoidFunctionPtr func, void *arg);
     					// Allocate a stack for thread.
