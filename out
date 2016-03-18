@@ -1,0 +1,574 @@
+hello
+Ready list contents:
+forked thread, uid:4, tid:3, status:READY, priority:4, remainTime:500
+forked thread, uid:4, tid:2, status:READY, priority:4, remainTime:500
+forked thread, uid:4, tid:4, status:READY, priority:4, remainTime:500
+forked thread, uid:4, tid:1, status:READY, priority:4, remainTime:500
+main, uid:0, tid:0, status:RUNNING, priority:3, remainTime:400
+main, uid:0, tid:0, status:RUNNING, priority:3, remainTime:300
+main, uid:0, tid:0, status:RUNNING, priority:3, remainTime:200
+main, uid:0, tid:0, status:RUNNING, priority:3, remainTime:100
+main, uid:0, tid:0, status:RUNNING, priority:3, remainTime:0
+forked thread, uid:4, tid:3, status:RUNNING, priority:4, remainTime:700
+forked thread, uid:4, tid:3, status:RUNNING, priority:4, remainTime:600
+forked thread, uid:4, tid:3, status:RUNNING, priority:4, remainTime:500
+forked thread, uid:4, tid:3, status:RUNNING, priority:4, remainTime:400
+forked thread, uid:4, tid:3, status:RUNNING, priority:4, remainTime:300
+forked thread, uid:4, tid:3, status:RUNNING, priority:4, remainTime:200
+forked thread, uid:4, tid:3, status:RUNNING, priority:4, remainTime:100
+forked thread, uid:4, tid:3, status:RUNNING, priority:4, remainTime:0
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:900
+forked thread, uid:4, tid:2, status:RUNNING, priority:4, remainTime:700
+forked thread, uid:4, tid:2, status:RUNNING, priority:4, remainTime:600
+forked thread, uid:4, tid:2, status:RUNNING, priority:4, remainTime:500
+forked thread, uid:4, tid:2, status:RUNNING, priority:4, remainTime:400
+forked thread, uid:4, tid:2, status:RUNNING, priority:4, remainTime:300
+forked thread, uid:4, tid:2, status:RUNNING, priority:4, remainTime:200
+forked thread, uid:4, tid:2, status:RUNNING, priority:4, remainTime:100
+forked thread, uid:4, tid:2, status:RUNNING, priority:4, remainTime:0
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:900
+main, uid:0, tid:0, status:RUNNING, priority:4, remainTime:700
+main, uid:0, tid:0, status:RUNNING, priority:4, remainTime:600
+main, uid:0, tid:0, status:RUNNING, priority:4, remainTime:500
+main, uid:0, tid:0, status:RUNNING, priority:4, remainTime:400
+main, uid:0, tid:0, status:RUNNING, priority:4, remainTime:300
+main, uid:0, tid:0, status:RUNNING, priority:4, remainTime:200
+main, uid:0, tid:0, status:RUNNING, priority:4, remainTime:100
+main, uid:0, tid:0, status:RUNNING, priority:4, remainTime:0
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:900
+forked thread, uid:4, tid:1, status:RUNNING, priority:4, remainTime:700
+forked thread, uid:4, tid:1, status:RUNNING, priority:4, remainTime:600
+forked thread, uid:4, tid:1, status:RUNNING, priority:4, remainTime:500
+forked thread, uid:4, tid:1, status:RUNNING, priority:4, remainTime:400
+forked thread, uid:4, tid:1, status:RUNNING, priority:4, remainTime:300
+forked thread, uid:4, tid:1, status:RUNNING, priority:4, remainTime:200
+forked thread, uid:4, tid:1, status:RUNNING, priority:4, remainTime:100
+forked thread, uid:4, tid:1, status:RUNNING, priority:4, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:900
+forked thread, uid:4, tid:4, status:RUNNING, priority:4, remainTime:700
+forked thread, uid:4, tid:4, status:RUNNING, priority:4, remainTime:600
+forked thread, uid:4, tid:4, status:RUNNING, priority:4, remainTime:500
+forked thread, uid:4, tid:4, status:RUNNING, priority:4, remainTime:400
+forked thread, uid:4, tid:4, status:RUNNING, priority:4, remainTime:300
+forked thread, uid:4, tid:4, status:RUNNING, priority:4, remainTime:200
+forked thread, uid:4, tid:4, status:RUNNING, priority:4, remainTime:100
+forked thread, uid:4, tid:4, status:RUNNING, priority:4, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:900
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:800
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:700
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:600
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:500
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:400
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:300
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:200
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:100
+forked thread, uid:4, tid:1, status:RUNNING, priority:5, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:1100
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:900
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:800
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:700
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:600
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:500
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:400
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:300
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:200
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:100
+forked thread, uid:4, tid:3, status:RUNNING, priority:5, remainTime:0
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:1100
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:900
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:800
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:700
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:600
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:500
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:400
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:300
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:200
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:100
+forked thread, uid:4, tid:2, status:RUNNING, priority:5, remainTime:0
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:1100
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:900
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:800
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:700
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:600
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:500
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:400
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:300
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:200
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:100
+forked thread, uid:4, tid:4, status:RUNNING, priority:5, remainTime:0
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:1100
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:900
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:800
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:700
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:600
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:500
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:400
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:300
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:200
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:100
+main, uid:0, tid:0, status:RUNNING, priority:5, remainTime:0
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:1100
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:1000
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:900
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:800
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:700
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:600
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:500
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:400
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:300
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:200
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:100
+forked thread, uid:4, tid:2, status:RUNNING, priority:6, remainTime:0
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:1300
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:1100
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:1000
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:900
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:800
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:700
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:600
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:500
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:400
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:300
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:200
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:100
+forked thread, uid:4, tid:1, status:RUNNING, priority:6, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:1300
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:1100
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:1000
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:900
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:800
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:700
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:600
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:500
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:400
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:300
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:200
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:100
+forked thread, uid:4, tid:4, status:RUNNING, priority:6, remainTime:0
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:1300
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:1100
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:1000
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:900
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:800
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:700
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:600
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:500
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:400
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:300
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:200
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:100
+main, uid:0, tid:0, status:RUNNING, priority:6, remainTime:0
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:1300
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:1100
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:1000
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:900
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:800
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:700
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:600
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:500
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:400
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:300
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:200
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:100
+forked thread, uid:4, tid:3, status:RUNNING, priority:6, remainTime:0
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:1300
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:1200
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:1100
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:1000
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:900
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:800
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:700
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:600
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:500
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:400
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:300
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:200
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:100
+main, uid:0, tid:0, status:RUNNING, priority:7, remainTime:0
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:1500
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:1300
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:1200
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:1100
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:1000
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:900
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:800
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:700
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:600
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:500
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:400
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:300
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:200
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:100
+forked thread, uid:4, tid:2, status:RUNNING, priority:7, remainTime:0
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:1500
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:1300
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:1200
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:1100
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:1000
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:900
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:800
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:700
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:600
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:500
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:400
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:300
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:200
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:100
+forked thread, uid:4, tid:4, status:RUNNING, priority:7, remainTime:0
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:1500
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:1300
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:1200
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:1100
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:1000
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:900
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:800
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:700
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:600
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:500
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:400
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:300
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:200
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:100
+forked thread, uid:4, tid:1, status:RUNNING, priority:7, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:1500
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:1300
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:1200
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:1100
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:1000
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:900
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:800
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:700
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:600
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:500
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:400
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:300
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:200
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:100
+forked thread, uid:4, tid:3, status:RUNNING, priority:7, remainTime:0
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:1500
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:1400
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:1300
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:1200
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:1100
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:1000
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:900
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:800
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:700
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:600
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:500
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:400
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:300
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:200
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:100
+forked thread, uid:4, tid:4, status:RUNNING, priority:8, remainTime:0
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1700
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:1500
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:1400
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:1300
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:1200
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:1100
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:1000
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:900
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:800
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:700
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:600
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:500
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:400
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:300
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:200
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:100
+main, uid:0, tid:0, status:RUNNING, priority:8, remainTime:0
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1700
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:1500
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:1400
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:1300
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:1200
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:1100
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:1000
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:900
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:800
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:700
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:600
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:500
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:400
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:300
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:200
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:100
+forked thread, uid:4, tid:2, status:RUNNING, priority:8, remainTime:0
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1700
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:1500
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:1400
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:1300
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:1200
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:1100
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:1000
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:900
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:800
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:700
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:600
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:500
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:400
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:300
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:200
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:100
+forked thread, uid:4, tid:1, status:RUNNING, priority:8, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1700
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:1500
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:1400
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:1300
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:1200
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:1100
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:1000
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:900
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:800
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:700
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:600
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:500
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:400
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:300
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:200
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:100
+forked thread, uid:4, tid:3, status:RUNNING, priority:8, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1700
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1600
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1500
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1400
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1300
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1200
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1100
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:1000
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:900
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:800
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:700
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:600
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:500
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:400
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:300
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:200
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:100
+forked thread, uid:4, tid:1, status:RUNNING, priority:9, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1900
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1700
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1600
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1500
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1400
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1300
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1200
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1100
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:1000
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:900
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:800
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:700
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:600
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:500
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:400
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:300
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:200
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:100
+forked thread, uid:4, tid:4, status:RUNNING, priority:9, remainTime:0
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1900
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:1700
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:1600
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:1500
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:1400
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:1300
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:1200
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:1100
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:1000
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:900
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:800
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:700
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:600
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:500
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:400
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:300
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:200
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:100
+forked thread, uid:4, tid:3, status:RUNNING, priority:9, remainTime:0
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1900
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1700
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1600
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1500
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1400
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1300
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1200
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1100
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:1000
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:900
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:800
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:700
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:600
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:500
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:400
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:300
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:200
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:100
+forked thread, uid:4, tid:2, status:RUNNING, priority:9, remainTime:0
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1900
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1700
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1600
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1500
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1400
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1300
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1200
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1100
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:1000
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:900
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:800
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:700
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:600
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:500
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:400
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:300
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:200
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:100
+main, uid:0, tid:0, status:RUNNING, priority:9, remainTime:0
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1900
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1800
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1700
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1600
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1500
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1400
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1300
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1200
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1100
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:1000
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:900
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:800
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:700
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:600
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:500
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:400
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:300
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:200
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:100
+forked thread, uid:4, tid:3, status:RUNNING, priority:10, remainTime:0
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1900
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1800
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1700
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1600
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1500
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1400
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1300
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1200
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1100
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:1000
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:900
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:800
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:700
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:600
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:500
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:400
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:300
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:200
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:100
+forked thread, uid:4, tid:1, status:RUNNING, priority:10, remainTime:0
+forked thread, uid:4, tid:1, status:RUNNING, priority:11, remainTime:2100
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1900
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1800
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1700
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1600
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1500
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1400
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1300
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1200
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1100
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:1000
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:900
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:800
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:700
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:600
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:500
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:400
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:300
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:200
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:100
+main, uid:0, tid:0, status:RUNNING, priority:10, remainTime:0
+main, uid:0, tid:0, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1900
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1800
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1700
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1600
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1500
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1400
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1300
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1200
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1100
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:1000
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:900
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:800
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:700
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:600
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:500
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:400
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:300
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:200
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:100
+forked thread, uid:4, tid:4, status:RUNNING, priority:10, remainTime:0
+forked thread, uid:4, tid:4, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1900
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1800
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1700
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1600
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1500
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1400
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1300
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1200
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1100
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:1000
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:900
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:800
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:700
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:600
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:500
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:400
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:300
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:200
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:100
+forked thread, uid:4, tid:2, status:RUNNING, priority:10, remainTime:0
+forked thread, uid:4, tid:4, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:4, status:RUNNING, priority:11, remainTime:2000
+forked thread, uid:4, tid:4, status:RUNNING, priority:11, remainTime:1900
+forked thread, uid:4, tid:4, status:RUNNING, priority:11, remainTime:1800
+forked thread, uid:4, tid:4, status:RUNNING, priority:11, remainTime:1700
+forked thread, uid:4, tid:4, status:RUNNING, priority:11, remainTime:1600
+forked thread, uid:4, tid:4, status:RUNNING, priority:11, remainTime:1500
+forked thread, uid:4, tid:2, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:2, status:RUNNING, priority:11, remainTime:2000
+forked thread, uid:4, tid:2, status:RUNNING, priority:11, remainTime:1900
+forked thread, uid:4, tid:2, status:RUNNING, priority:11, remainTime:1800
+forked thread, uid:4, tid:2, status:RUNNING, priority:11, remainTime:1700
+forked thread, uid:4, tid:2, status:RUNNING, priority:11, remainTime:1600
+forked thread, uid:4, tid:2, status:RUNNING, priority:11, remainTime:1500
+main, uid:0, tid:0, status:RUNNING, priority:11, remainTime:2100
+main, uid:0, tid:0, status:RUNNING, priority:11, remainTime:2000
+main, uid:0, tid:0, status:RUNNING, priority:11, remainTime:1900
+main, uid:0, tid:0, status:RUNNING, priority:11, remainTime:1800
+finish
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:2000
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:1900
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:1800
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:1700
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:1600
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:1500
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:1400
+forked thread, uid:4, tid:3, status:RUNNING, priority:11, remainTime:1300
+forked thread, uid:4, tid:1, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:1, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:1, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:1, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:1, status:RUNNING, priority:11, remainTime:2100
+forked thread, uid:4, tid:1, status:RUNNING, priority:11, remainTime:2100
+No threads ready or runnable, and no pending interrupts.
+Assuming the program completed.
+Machine halting!
+
+Ticks: total 55700, idle 10, system 55690, user 0
+Disk I/O: reads 0, writes 0
+Console I/O: reads 0, writes 0
+Paging: faults 0
+Network I/O: packets received 0, sent 0
+
+Cleaning up...

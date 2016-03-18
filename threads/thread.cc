@@ -51,7 +51,7 @@ Thread::Thread(char* threadName, int uid = 0, int _priority = 10)
     currentCounts++;
     userID = uid;
     priority = _priority;
-    remainTime = 500;
+    remainTime = (3000 - 200 * priority)/2;
 
     name = threadName;
     stackTop = NULL;

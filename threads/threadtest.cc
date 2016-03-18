@@ -117,7 +117,7 @@ void
 ThreadTest4()
 {
     DEBUG('t', "Entering ThreadTest4");
-    for(int i = 0; i < 1; i++)
+    for(int i = 0; i < 4; i++)
     {
         Thread *t = new Thread("forked thread", testnum, 11);
         if(t->gettid() == -1)
