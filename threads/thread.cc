@@ -51,7 +51,7 @@ Thread::Thread(char* threadName, int uid = 0, int _priority = 10)
     currentCounts++;
     userID = uid;
     priority = _priority;
-    remainTime = (3000 - 200 * priority)/2;
+    remainTime = 500;
 
     name = threadName;
     stackTop = NULL;
@@ -138,8 +138,6 @@ Thread::Fork(VoidFunctionPtr func, void *arg)
     IntStatus oldLevel = interrupt->SetLevel(IntOff);
     scheduler->ReadyToRun(this);	// ReadyToRun assumes that interrupts 
 					// are disabled!
-    if(this->getpriority() > currentThread->getpriority())
-        currentThread->Yield();
     (void) interrupt->SetLevel(oldLevel);
 }    
 
@@ -236,12 +234,7 @@ Thread::Yield ()
     nextThread = scheduler->FindNextToRun();
     if(nextThread != NULL)
     {
-        if(nextThread->getpriority() > currentThread->getpriority())
-        {
-            scheduler->ReadyToRun(this);
-            scheduler->Run(nextThread);
-        }
-        else if(currentThread->getremainTime() <= 0)
+        if(currentThread->getremainTime() <= 0)
         {
             currentThread->setpriority(currentThread->getpriority() - 1);
             if(currentThread->getpriority() > nextThread->getpriority())

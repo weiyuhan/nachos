@@ -12,10 +12,13 @@
 #include "copyright.h"
 #include "system.h"
 #include "elevatortest.h"
+#include "synch.h"
 
 // testnum is set in main.cc
 int testnum = 1;
-
+int locknum = 0;
+Lock* lock;
+Condition* condition;
 //----------------------------------------------------------------------
 // SimpleThread
 // 	Loop 5 times, yielding the CPU to another ready thread 
@@ -50,6 +53,40 @@ void TickThread(int dummy)
 {
     for(int i = 0; i <1000; i++)
         interrupt->OneTick();
+}
+
+void LockThread(int dummy)
+{
+    lock->Acquire();
+    for(int i = 0; i <20; i++)
+    {
+        for(int j = 0; j <20; j++)
+            interrupt->OneTick();
+        printf("tid: %d ,locknum = %d\n", currentThread->gettid(), locknum);
+        locknum++;
+    }
+    lock->Release();
+}
+
+void ConditionThread(int dummy)
+{
+    lock->Acquire();
+    for(int i = 1; i < 21; i++)
+    {
+        printf("tid: %d ,locknum = %d\n", currentThread->gettid(), locknum);
+        locknum++;
+        if(i % 5 == 0 && dummy == 0)
+        {
+            condition->Wait(lock);
+            condition->Signal(lock);
+        }
+        if(i % 5 == 0 && dummy == 1)
+        {
+            condition->Signal(lock);
+            condition->Wait(lock);
+        }
+    }
+    lock->Release();
 }
 
 //----------------------------------------------------------------------
@@ -107,7 +144,7 @@ ThreadTest3()
             printf("can't fork!\n");
             continue;
         }
-        t->Fork(PrintThread, (void*)1);
+        t->Fork(PrintThread, (void*)t->gettid());
     }
     PrintThread(0);
     scheduler->ThreadStatus();
@@ -130,6 +167,21 @@ ThreadTest4()
     TickThread(1);
 }
 
+ThreadTest5()
+{
+    lock = new Lock("lock");
+    condition = new Condition("condition");
+    for(int i = 0; i < 2; i++)
+    {
+        Thread *t = new Thread("forked thread", testnum, 5);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+        }
+        t->Fork(ConditionThread, (void*)i);
+    }
+}
+
 //----------------------------------------------------------------------
 // ThreadTest
 // 	Invoke a test routine.
@@ -150,6 +202,9 @@ ThreadTest()
     break;
     case 4:
     ThreadTest4();
+    break;
+    case 5:
+    ThreadTest5();
     break;
     default:
 	printf("No test specified.\n");

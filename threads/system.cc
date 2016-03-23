@@ -62,7 +62,7 @@ static void
 TimerInterruptHandler(int dummy)
 {
     currentThread->timePass(100);
-    currentThread->Print();
+    //currentThread->Print();
     if (interrupt->getStatus() != IdleMode)
 	interrupt->YieldOnReturn();
 }
