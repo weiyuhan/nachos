@@ -13,12 +13,19 @@
 #include "system.h"
 #include "elevatortest.h"
 #include "synch.h"
+#include "synchlist.h"
 
 // testnum is set in main.cc
 int testnum = 1;
 int locknum = 0;
 Lock* lock;
 Condition* condition;
+Condition* notfull;
+Condition* notempty;
+SynchList* synchlist;
+Semaphore* mutex;
+Semaphore* full;
+Semaphore* empty;
 //----------------------------------------------------------------------
 // SimpleThread
 // 	Loop 5 times, yielding the CPU to another ready thread 
@@ -87,6 +94,96 @@ void ConditionThread(int dummy)
         }
     }
     lock->Release();
+}
+
+void producerThread(int dummy)
+{
+    int i = 0;
+    while(true)
+    {
+        if( i % 7 == 0)
+            currentThread->Yield();
+        for(int j = 0; j < 10; j++)
+            interrupt->OneTick();
+        i++;
+        lock->Acquire();
+        if(locknum == 10)
+        {
+            printf("wait for consumer\n");
+            notfull->Wait(lock);
+        }
+        locknum++;
+        printf("producer: now item %d\n", locknum);
+        if(locknum == 1)
+        {
+            notempty->Signal(lock);   
+        }
+        lock->Release();
+    }
+}
+
+void consumerThread(int dummy)
+{
+    int i = 0;
+    while(true)
+    {
+        if(i % 13 == 0 )
+            currentThread->Yield();
+        for(int j = 0; j < 10; j++)
+            interrupt->OneTick();
+        i++;
+        lock->Acquire();
+        if(locknum == 0)
+        {
+            printf("wait for producer\n");
+            notempty->Wait(lock);
+        }
+        locknum--;
+        printf("consumer: now item %d\n", locknum);
+        if(locknum == 9)
+        {
+            notfull->Signal(lock);   
+        }
+        lock->Release();
+    }
+}
+
+void producerThreadSem(int dummy)
+{
+    int i = 0;
+    while(true)
+    {
+        if( i % 7 == 0)
+            currentThread->Yield();
+        for(int j = 0; j < 10; j++)
+            interrupt->OneTick();
+        i++;
+        empty->P();
+        mutex->P();
+        locknum++;
+        printf("producer: now item %d\n", locknum);
+        mutex->V();
+        full->V();
+    }
+}
+
+void consumerThreadSem(int dummy)
+{
+    int i = 0;
+    while(true)
+    {
+        if(i % 13 == 0 )
+            currentThread->Yield();
+        for(int j = 0; j < 10; j++)
+            interrupt->OneTick();
+        i++;
+        full->P();
+        mutex->P();
+        locknum--;
+        printf("consumer: now item %d\n", locknum);
+        mutex->V();
+        empty->V();
+    }
 }
 
 //----------------------------------------------------------------------
@@ -182,6 +279,45 @@ ThreadTest5()
     }
 }
 
+ThreadTest6()
+{
+    lock = new Lock("lock");
+    notfull = new Condition("notfull");
+    notempty = new Condition("notempty");
+    Thread *producer = new Thread("producer", testnum, 5);
+    if(producer->gettid() == -1)
+    {
+        printf("can't fork!\n");
+    }
+    producer->Fork(producerThread, (void*)1);
+    Thread *consumer = new Thread("consumer", testnum, 5);
+    if(consumer->gettid() == -1)
+    {
+        printf("can't fork!\n");
+    }
+    consumer->Fork(consumerThread, (void*)1);
+}
+
+ThreadTest7()
+{
+    mutex = new Semaphore("mutex", 1);
+    empty = new Semaphore("empty", 10);
+    full = new Semaphore("full", 0);
+    Thread *producer = new Thread("producer", testnum, 5);
+    if(producer->gettid() == -1)
+    {
+        printf("can't fork!\n");
+    }
+    producer->Fork(producerThreadSem, (void*)1);
+    Thread *consumer = new Thread("consumer", testnum, 5);
+    if(consumer->gettid() == -1)
+    {
+        printf("can't fork!\n");
+    }
+    consumer->Fork(consumerThreadSem, (void*)1);
+}
+
+
 //----------------------------------------------------------------------
 // ThreadTest
 // 	Invoke a test routine.
@@ -205,6 +341,12 @@ ThreadTest()
     break;
     case 5:
     ThreadTest5();
+    break;
+    case 6:
+    ThreadTest6();
+    break;
+    case 7:
+    ThreadTest7();
     break;
     default:
 	printf("No test specified.\n");
