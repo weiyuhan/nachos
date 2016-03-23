@@ -27,6 +27,7 @@ Semaphore* mutex;
 Semaphore* full;
 Semaphore* empty;
 Barrier* barrier;
+RWLock* rwlock;
 //----------------------------------------------------------------------
 // SimpleThread
 // 	Loop 5 times, yielding the CPU to another ready thread 
@@ -199,6 +200,32 @@ void BarrierThread(int dummy)
     }
 }
 
+void ReaderThread(int dummy)
+{
+    while(true)
+    {
+        for(int j = 0; j < 10; j++)
+            interrupt->OneTick();
+        rwlock->Read_start();
+        printf("Reader %d is reading, locknum is %d\n", 
+            currentThread->gettid(), locknum);
+        rwlock->Read_end();
+    }
+}
+
+void WriterThread(int dummy)
+{
+    while(true)
+    {
+        for(int j = 0; j < 20; j++)
+                interrupt->OneTick();
+        rwlock->Write_start();
+        locknum++;
+        printf("Writer %d is writing, locknum is %d\n", 
+            currentThread->gettid(), locknum);
+        rwlock->Write_end();
+    }
+}
 //----------------------------------------------------------------------
 // ThreadTest1
 // 	Set up a ping-pong between two threads, by forking a thread 
@@ -343,6 +370,30 @@ ThreadTest8()
         t->Fork(BarrierThread, (void*)i);
     }
 }
+
+ThreadTest9()
+{
+    rwlock = new RWLock("rw");
+    locknum = 0;
+    for(int i = 0; i < 5 ; i++)
+    {
+        Thread *t = new Thread("forked thread", testnum, 5);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+        }
+        t->Fork(ReaderThread, (void*)i);
+    }
+    for(int i = 0; i < 2 ; i++)
+    {
+        Thread *t = new Thread("forked thread", testnum, 5);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+        }
+        t->Fork(WriterThread, (void*)i);
+    }
+}
 //----------------------------------------------------------------------
 // ThreadTest
 // 	Invoke a test routine.
@@ -375,6 +426,9 @@ ThreadTest()
     break;
     case 8:
     ThreadTest8();
+    break;
+    case 9:
+    ThreadTest9();
     break;
     default:
 	printf("No test specified.\n");

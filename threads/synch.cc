@@ -67,10 +67,10 @@ Semaphore::P()
     IntStatus oldLevel = interrupt->SetLevel(IntOff);	// disable interrupts
     
     while (value == 0) { 			// semaphore not available
-    printf("go to sleep\n");
+    //printf("go to sleep\n");
 	queue->Append((void *)currentThread);	// so go to sleep
 	currentThread->Sleep();
-    printf("waitup\n");
+    //printf("waitup\n");
     } 
     value--; 					// semaphore available, 
 						// consume its value
@@ -122,7 +122,7 @@ void Lock::Acquire()
 void Lock::Release() 
 {
     IntStatus oldLevel = interrupt->SetLevel(IntOff);
-    ASSERT(isHeldByCurrentThread())
+    //ASSERT(isHeldByCurrentThread())
     lock->V();
     lockingThread = NULL;
     (void) interrupt->SetLevel(oldLevel);
@@ -203,4 +203,50 @@ void Barrier::Wait()
     }
     mutex->Release();
     (void) interrupt->SetLevel(oldLevel);
+}
+
+RWLock::RWLock(char* debugName)
+{
+    name = debugName;
+    mutex = new Lock("mutex");
+    W = new Lock("W");
+    readCount = 0;
+}
+
+RWLock::~RWLock()
+{
+    delete mutex;
+    delete W;
+}
+
+void
+RWLock::Read_start()
+{
+    mutex->Acquire();
+    readCount++;
+    if(readCount == 1)
+        W->Acquire();
+    mutex->Release();
+}
+
+void
+RWLock::Read_end()
+{
+    mutex->Acquire();
+    readCount--;
+    if(readCount == 0)
+        W->Release();
+    mutex->Release();
+}
+
+void
+RWLock::Write_start()
+{
+    W->Acquire();
+}
+
+void
+RWLock::Write_end()
+{
+    W->Release();
 }

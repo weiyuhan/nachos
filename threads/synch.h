@@ -153,4 +153,21 @@ private:
     int currentNum;
 };
 
+class RWLock
+{
+public:
+    RWLock(char* debugName);
+    ~RWLock();
+    void Read_start();
+    void Read_end();
+    void Write_start();
+    void Write_end();
+
+private:
+    Lock* mutex;
+    Lock* W;
+    char* name;
+    int readCount;
+};
+
 #endif // SYNCH_H
