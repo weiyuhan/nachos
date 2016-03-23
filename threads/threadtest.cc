@@ -26,6 +26,7 @@ SynchList* synchlist;
 Semaphore* mutex;
 Semaphore* full;
 Semaphore* empty;
+Barrier* barrier;
 //----------------------------------------------------------------------
 // SimpleThread
 // 	Loop 5 times, yielding the CPU to another ready thread 
@@ -186,6 +187,18 @@ void consumerThreadSem(int dummy)
     }
 }
 
+void BarrierThread(int dummy)
+{
+    for(int i = 0; i < 10; i++)
+    {
+        for(int j = 0; j < 10; j++)
+            interrupt->OneTick();
+        if(i == 7 || i == 3)
+            barrier->Wait();
+        printf("thread %d print %d\n", currentThread->gettid(), i);
+    }
+}
+
 //----------------------------------------------------------------------
 // ThreadTest1
 // 	Set up a ping-pong between two threads, by forking a thread 
@@ -317,7 +330,19 @@ ThreadTest7()
     consumer->Fork(consumerThreadSem, (void*)1);
 }
 
-
+ThreadTest8()
+{
+    barrier = new Barrier("barrier", 5);
+    for(int i = 0; i < 5; i++)
+    {
+        Thread *t = new Thread("forked thread", testnum, 5);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+        }
+        t->Fork(BarrierThread, (void*)i);
+    }
+}
 //----------------------------------------------------------------------
 // ThreadTest
 // 	Invoke a test routine.
@@ -347,6 +372,9 @@ ThreadTest()
     break;
     case 7:
     ThreadTest7();
+    break;
+    case 8:
+    ThreadTest8();
     break;
     default:
 	printf("No test specified.\n");

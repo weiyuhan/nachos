@@ -137,4 +137,20 @@ class Condition {
     char* name;
     // plus some other stuff you'll need to define
 };
+
+class Barrier
+{
+public:
+    Barrier(char* debugName, int num);
+    ~Barrier();
+
+    void Wait();
+private:
+    Condition* arrival;
+    Lock* mutex;
+    char* name;
+    int maxNum;
+    int currentNum;
+};
+
 #endif // SYNCH_H

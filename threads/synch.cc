@@ -169,3 +169,38 @@ void Condition::Broadcast(Lock* conditionLock)
     }
     (void) interrupt->SetLevel(oldLevel); 
 }
+
+
+Barrier::Barrier(char* debugName, int num)
+{
+    name = debugName;
+    maxNum = num;
+    currentNum = 0;
+    mutex = new Lock("mutex");
+    arrival = new Condition("arrival");
+}
+Barrier::~Barrier()
+{
+    delete arrival;
+    delete mutex;
+}
+void Barrier::Wait()
+{
+    IntStatus oldLevel = interrupt->SetLevel(IntOff);
+    mutex->Acquire();
+    currentNum++;
+    if(currentNum == maxNum)
+    {
+        printf("barrier arrival, Release\n");
+        arrival->Broadcast(mutex);
+        currentNum = 0;
+    }
+    else
+    {
+        printf("thread: %d wait at barrier %s\n", 
+            currentThread->gettid(), name);
+        arrival->Wait(mutex);
+    }
+    mutex->Release();
+    (void) interrupt->SetLevel(oldLevel);
+}
