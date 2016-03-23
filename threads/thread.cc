@@ -138,8 +138,9 @@ Thread::Fork(VoidFunctionPtr func, void *arg)
     IntStatus oldLevel = interrupt->SetLevel(IntOff);
     scheduler->ReadyToRun(this);	// ReadyToRun assumes that interrupts 
 					// are disabled!
+    if(this->getpriority() > currentThread->getpriority())
+        currentThread->Yield();
     (void) interrupt->SetLevel(oldLevel);
-    currentThread->Yield();
 }    
 
 //----------------------------------------------------------------------
@@ -195,6 +196,10 @@ Thread::Finish ()
     
     DEBUG('t', "Finishing thread \"%s\"\n", getName());
     
+    if (threadToBeDestroyed != NULL) {
+        delete threadToBeDestroyed;
+        threadToBeDestroyed = NULL;
+    }
     threadToBeDestroyed = currentThread;
     Sleep();					// invokes SWITCH
     // not reached
