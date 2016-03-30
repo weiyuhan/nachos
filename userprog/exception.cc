@@ -53,10 +53,31 @@ ExceptionHandler(ExceptionType which)
 {
     int type = machine->ReadRegister(2);
 
-    if ((which == SyscallException) && (type == SC_Halt)) {
-	DEBUG('a', "Shutdown, initiated by user program.\n");
-   	interrupt->Halt();
-    } else {
+    if (which == SyscallException)
+    {
+        switch(type)
+        {
+            case SC_Halt:
+                DEBUG('a', "Shutdown, initiated by user program.\n");
+                interrupt->Halt();
+                break;
+            case SC_Exit:
+                printf("EXIT NUM : %d\n", machine->ReadRegister(4));
+                printf("Total TLB miss : %d\n",
+                    currentThread->space->TLBMissCount);
+                currentThread->Print();
+                break;
+            default:
+                break;
+        }
+    } else if ((which == TLBMissException))
+    {
+    	DEBUG('a', "TLB Miss.\n");
+        int addr = machine->ReadRegister(BadVAddrReg);
+        machine->TLBLoad(addr);
+        currentThread->space->TLBMissCount++;
+    }
+    else{
 	printf("Unexpected user mode exception %d %d\n", which, type);
 	ASSERT(FALSE);
     }

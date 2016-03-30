@@ -15,6 +15,7 @@
 
 #include "copyright.h"
 #include "filesys.h"
+#include "list.h"
 
 #define UserStackSize		1024 	// increase this as necessary!
 
@@ -29,7 +30,11 @@ class AddrSpace {
 					// before jumping to user code
 
     void SaveState();			// Save/restore address space-specific
-    void RestoreState();		// info on a context switch 
+    void RestoreState();		// info on a context switch
+    int TLBMissCount;
+#ifdef TLB_FIFO
+    List* TLBFIFO_List;
+#endif 
 
   private:
     TranslationEntry *pageTable;	// Assume linear page table translation

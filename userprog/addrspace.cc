@@ -62,6 +62,10 @@ SwapHeader (NoffHeader *noffH)
 
 AddrSpace::AddrSpace(OpenFile *executable)
 {
+    TLBMissCount = 0;
+#ifdef TLB_FIFO
+    TLBFIFO_List = new List;
+#endif
     NoffHeader noffH;
     unsigned int i, size;
 
@@ -126,6 +130,9 @@ AddrSpace::AddrSpace(OpenFile *executable)
 AddrSpace::~AddrSpace()
 {
    delete pageTable;
+#ifdef TLB_FIFO
+    delete TLBFIFO_List;
+#endif
 }
 
 //----------------------------------------------------------------------

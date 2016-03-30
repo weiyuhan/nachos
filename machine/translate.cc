@@ -93,8 +93,26 @@ Machine::ReadMem(int addr, int size, int *value)
     
     DEBUG('a', "Reading VA 0x%x, size %d\n", addr, size);
     
-    exception = Translate(addr, &physicalAddress, size, FALSE);
-    if (exception != NoException) {
+    exception = Translate(addr, &physicalAddress, size, FALSE, FALSE);
+    if(exception == TLBMissException)
+    {
+    	machine->RaiseException(exception, addr);
+    	exception = Translate(addr, &physicalAddress, size, FALSE, TRUE);
+    	if(exception == PageFaultException)
+    	{
+    		machine->RaiseException(exception, addr);
+    		exception = Translate(addr, &physicalAddress, size, FALSE, TRUE);
+    		if (exception != NoException) {
+				machine->RaiseException(exception, addr);
+				return FALSE;
+    		}
+    	}
+    	else if (exception != NoException) {
+			machine->RaiseException(exception, addr);
+			return FALSE;
+    	}
+    	machine->RaiseException(TLBMissException, addr);
+    }else if (exception != NoException) {
 	machine->RaiseException(exception, addr);
 	return FALSE;
     }
@@ -142,8 +160,26 @@ Machine::WriteMem(int addr, int size, int value)
      
     DEBUG('a', "Writing VA 0x%x, size %d, value 0x%x\n", addr, size, value);
 
-    exception = Translate(addr, &physicalAddress, size, TRUE);
-    if (exception != NoException) {
+    exception = Translate(addr, &physicalAddress, size, TRUE, FALSE);
+    if(exception == TLBMissException) // TLB Miss
+    {
+    	exception = Translate(addr, &physicalAddress, size, TRUE, TRUE);
+    	// find in page table
+    	if(exception == PageFaultException) // page fault
+    	{
+    		machine->RaiseException(exception, addr); // load page
+    		exception = Translate(addr, &physicalAddress, size, TRUE, TRUE);
+    		if (exception != NoException) {
+				machine->RaiseException(exception, addr);
+				return FALSE;
+    		}
+    	}
+    	else if (exception != NoException) {
+			machine->RaiseException(exception, addr);
+			return FALSE;
+    	}
+    	machine->RaiseException(TLBMissException, addr);
+    }else if (exception != NoException) {
 	machine->RaiseException(exception, addr);
 	return FALSE;
     }
@@ -184,7 +220,7 @@ Machine::WriteMem(int addr, int size, int value)
 //----------------------------------------------------------------------
 
 ExceptionType
-Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
+Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool usePageTable)
 {
     int i;
     unsigned int vpn, offset;
@@ -199,8 +235,8 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
 	return AddressErrorException;
     }
     
-    // we must have either a TLB or a page table, but not both!
-    ASSERT(tlb == NULL || pageTable == NULL);	
+    // we must have either a TLB or a page table, or both!
+    //ASSERT(tlb == NULL || pageTable == NULL);	
     ASSERT(tlb != NULL || pageTable != NULL);	
 
 // calculate the virtual page number, and offset within the page,
@@ -208,29 +244,37 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
     vpn = (unsigned) virtAddr / PageSize;
     offset = (unsigned) virtAddr % PageSize;
     
-    if (tlb == NULL) {		// => page table => vpn is index into table
+    if (usePageTable) {		// => page table => vpn is index into table
 	if (vpn >= pageTableSize) {
 	    DEBUG('a', "virtual page # %d too large for page table size %d!\n", 
 			virtAddr, pageTableSize);
 	    return AddressErrorException;
 	} else if (!pageTable[vpn].valid) {
-	    DEBUG('a', "virtual page # %d too large for page table size %d!\n", 
-			virtAddr, pageTableSize);
+	    DEBUG('a', "virtual page # %d is invalid!\n", virtAddr);
 	    return PageFaultException;
 	}
 	entry = &pageTable[vpn];
-    } else {
+    } else 
+    {
         for (entry = NULL, i = 0; i < TLBSize; i++)
-    	    if (tlb[i].valid && (tlb[i].virtualPage == vpn)) {
-		entry = &tlb[i];			// FOUND!
-		break;
-	    }
-	if (entry == NULL) {				// not found
-    	    DEBUG('a', "*** no valid TLB entry found for this virtual page!\n");
-    	    return PageFaultException;		// really, this is a TLB fault,
-						// the page may be in memory,
-						// but not in the TLB
-	}
+        {
+    	    if (tlb[i].valid && (tlb[i].virtualPage == vpn)) 
+    	    {
+				entry = &tlb[i];			// FOUND!
+				tlb[i].use = true;
+				#ifdef TLB_LRU
+				tlb[i].TLBlastUseTime = stats->totalTicks;
+				#endif
+				break;
+		    }
+		}
+		if (entry == NULL) 
+		{				// not found
+	    	    DEBUG('a', "*** no valid TLB entry found for this virtual page!\n");
+	    	    return TLBMissException;		// really, this is a TLB fault,
+							// the page may be in memory,
+							// but not in the TLB
+		}
     }
 
     if (entry->readOnly && writing) {	// trying to write to a read-only page
@@ -252,4 +296,59 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
     ASSERT((*physAddr >= 0) && ((*physAddr + size) <= MemorySize));
     DEBUG('a', "phys addr = 0x%x\n", *physAddr);
     return NoException;
+}
+
+
+void Machine::TLBLoad(int virtAddr)
+{
+	int vpn = (unsigned) virtAddr / PageSize;
+	if (vpn >= pageTableSize) {
+	    DEBUG('a', "virtual page # %d too large for page table size %d!\n", 
+			virtAddr, pageTableSize);
+	    return;
+	} else if (!pageTable[vpn].valid) {
+	    DEBUG('a', "virtual page # %d is invalid!\n", virtAddr);
+	    return;
+	}
+	int tlbindex = FindTLBindex();
+	tlb[tlbindex].virtualPage = pageTable[vpn].virtualPage;
+	tlb[tlbindex].physicalPage = pageTable[vpn].physicalPage;
+	tlb[tlbindex].valid = pageTable[vpn].valid;
+	tlb[tlbindex].readOnly = pageTable[vpn].readOnly;
+	tlb[tlbindex].use = pageTable[vpn].use; 
+	tlb[tlbindex].dirty = pageTable[vpn].dirty;
+}
+
+int Machine::FindTLBindex()
+{
+	int index = -1;
+	for(int i = 0; i < TLBSize; i++)
+	{
+		if(!tlb[i].valid)
+		{
+			index = i;
+		}
+	}
+#ifdef TLB_FIFO
+	if(index == -1)
+		index = (int)currentThread->space->TLBFIFO_List->Remove();
+	currentThread->space->TLBFIFO_List->Append((void*)index);
+#endif
+#ifdef TLB_LRU
+	int lastedtime = tlb[0].TLBlastUseTime;
+	if(index == -1)
+	{
+		index = 0;
+		for(int i = 1; i < TLBSize; i++)
+		{
+			if(tlb[i].TLBlastUseTime < lastedtime)
+			{
+				lastedtime = tlb[i].TLBlastUseTime;
+				index = i;
+			}
+		}
+	}
+	tlb[i].TLBlastUseTime = stats->totalTicks;
+#endif
+	return index;
 }

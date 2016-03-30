@@ -39,6 +39,7 @@
 enum ExceptionType { NoException,           // Everything ok!
 		     SyscallException,      // A program executed a system call.
 		     PageFaultException,    // No valid translation found
+             TLBMissException,
 		     ReadOnlyException,     // Write attempted to page marked 
 					    // "read-only"
 		     BusErrorException,     // Translation resulted in an 
@@ -132,7 +133,7 @@ class Machine {
 				// memory (at addr).  Return FALSE if a 
 				// correct translation couldn't be found.
     
-    ExceptionType Translate(int virtAddr, int* physAddr, int size,bool writing);
+    ExceptionType Translate(int virtAddr, int* physAddr, int size, bool writing, bool usePageTable);
     				// Translate an address, and check for 
 				// alignment.  Set the use and dirty bits in 
 				// the translation entry appropriately,
@@ -145,6 +146,9 @@ class Machine {
 
     void Debugger();		// invoke the user program debugger
     void DumpState();		// print the user CPU and memory state 
+
+    void TLBLoad(int virtAddr); // load a tlb entry
+    int FindTLBindex();  // find a tlb index to load tlb
 
 
 // Data structures -- all of these are accessible to Nachos kernel code.

@@ -89,15 +89,17 @@ ConsoleTest (char *in, char *out)
         }
         if(ch == 'c') // create 130 thread
         {
-            for(int i = 0; i < 130; i++)
+            #ifdef TLB_FIFO
+            printf("hahaha\n");
+            #endif
+            Thread *t = new Thread("forked thread", 1);
+            if(t->gettid() == -1)
             {
-                Thread *t = new Thread("forked thread", 1);
-                if(t->gettid() == -1)
-                {
-                    printf("can't fork!\n");
-                    continue;
-                }
+                printf("can't fork!\n");
+                continue;
             }
+            char* filename = "halt.coff";
+            t->Fork(StartProcess, (void*)filename);
         }
 
         if(ch >= '0' && ch <= '9')
