@@ -86,6 +86,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
     DEBUG('a', "Initializing address space, num pages %d, size %d\n", 
 					numPages, size);
 // first, set up the translation 
+    tlbSave = new TranslationEntry[TLBSize];
     TLBMissCount = 0;
 #ifdef TLB_FIFO
     TLBFIFO_List = new List;
@@ -93,7 +94,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
     pageTable = new TranslationEntry[numPages];
     for (i = 0; i < numPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virtual page # = phys page #
-	pageTable[i].physicalPage = i;
+	pageTable[i].physicalPage = pageMap->Find();
 	pageTable[i].valid = TRUE;
 	pageTable[i].use = FALSE;
 	pageTable[i].dirty = FALSE;
@@ -104,20 +105,30 @@ AddrSpace::AddrSpace(OpenFile *executable)
     
 // zero out the entire address space, to zero the unitialized data segment 
 // and the stack segment
-    bzero(machine->mainMemory, size);
+    //bzero(machine->mainMemory, size);
 
 // then, copy in the code and data segments into memory
     if (noffH.code.size > 0) {
         DEBUG('a', "Initializing code segment, at 0x%x, size %d\n", 
 			noffH.code.virtualAddr, noffH.code.size);
-        executable->ReadAt(&(machine->mainMemory[noffH.code.virtualAddr]),
-			noffH.code.size, noffH.code.inFileAddr);
+        for(int i = 0; i < noffH.code.size; i++)
+        {
+            unsigned int vpn = (noffH.code.virtualAddr + i) / PageSize;
+            unsigned int offset = (noffH.code.virtualAddr + i) % PageSize;
+            executable->ReadAt(&(machine->mainMemory[pageTable[vpn].physicalPage*PageSize + offset]),
+            1, noffH.code.inFileAddr + i);
+        }
     }
     if (noffH.initData.size > 0) {
         DEBUG('a', "Initializing data segment, at 0x%x, size %d\n", 
 			noffH.initData.virtualAddr, noffH.initData.size);
-        executable->ReadAt(&(machine->mainMemory[noffH.initData.virtualAddr]),
-			noffH.initData.size, noffH.initData.inFileAddr);
+        for(int i = 0; i < noffH.initData.size; i++)
+        {
+            unsigned int vpn = (noffH.initData.virtualAddr + i) / PageSize;
+            unsigned int offset = (noffH.initData.virtualAddr + i) % PageSize;
+            executable->ReadAt(&(machine->mainMemory[pageTable[vpn].physicalPage*PageSize + offset]),
+            1, noffH.initData.inFileAddr + i);
+        }
     }
 
 }
@@ -129,6 +140,10 @@ AddrSpace::AddrSpace(OpenFile *executable)
 
 AddrSpace::~AddrSpace()
 {
+    for(int i = 0; i < numPages; i++)
+    {
+        pageMap->Clear(pageTable[i].physicalPage);
+    }
    delete pageTable;
 #ifdef TLB_FIFO
     delete TLBFIFO_List;
@@ -176,7 +191,20 @@ AddrSpace::InitRegisters()
 //----------------------------------------------------------------------
 
 void AddrSpace::SaveState() 
-{}
+{
+    for(int i = 0; i < TLBSize; i++)
+    {
+        tlbSave[i].virtualPage = machine->tlb[i].virtualPage;
+        tlbSave[i].physicalPage = machine->tlb[i].physicalPage;
+        tlbSave[i].valid = machine->tlb[i].valid;
+        tlbSave[i].dirty = machine->tlb[i].dirty;
+        tlbSave[i].readOnly = machine->tlb[i].readOnly;
+
+        machine->tlb[i].valid = FALSE;
+        machine->tlb[i].dirty = FALSE;
+        machine->tlb[i].readOnly = FALSE;
+    }
+}
 
 //----------------------------------------------------------------------
 // AddrSpace::RestoreState
@@ -190,4 +218,12 @@ void AddrSpace::RestoreState()
 {
     machine->pageTable = pageTable;
     machine->pageTableSize = numPages;
+    for(int i = 0; i < TLBSize; i++)
+    {
+        machine->tlb[i].virtualPage = tlbSave[i].virtualPage;
+        machine->tlb[i].physicalPage = tlbSave[i].physicalPage;
+        machine->tlb[i].valid = tlbSave[i].valid;
+        machine->tlb[i].dirty = tlbSave[i].dirty;
+        machine->tlb[i].readOnly = tlbSave[i].readOnly;
+    }
 }

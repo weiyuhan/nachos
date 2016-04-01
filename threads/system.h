@@ -30,6 +30,8 @@ extern Statistics *stats;			// performance metrics
 extern Timer *timer;				// the hardware alarm clock
 
 #ifdef USER_PROGRAM
+#include "bitmap.h"
+extern BitMap* pageMap;
 #include "machine.h"
 extern Machine* machine;	// user program memory and registers
 #endif

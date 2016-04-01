@@ -25,6 +25,17 @@ extern void PrintThread(int dummy);
 void
 StartProcess(char *filename)
 {
+
+    if(currentThread->gettid() == 0)
+    {
+        Thread *t = new Thread("forked thread", 1);
+        if(t->gettid() == -1)
+        {
+            printf("can't fork!\n");
+        }
+        t->Fork(StartProcess, (void*)filename);
+    }
+
     OpenFile *executable = fileSystem->Open(filename);
     AddrSpace *space;
 

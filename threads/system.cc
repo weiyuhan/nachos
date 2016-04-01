@@ -29,6 +29,7 @@ SynchDisk   *synchDisk;
 #endif
 
 #ifdef USER_PROGRAM	// requires either FILESYS or FILESYS_STUB
+BitMap *pageMap;
 Machine *machine;	// user program memory and registers
 #endif
 
@@ -136,7 +137,7 @@ Initialize(int argc, char **argv)
     stats = new Statistics();			// collect statistics
     interrupt = new Interrupt;			// start up interrupt handling
     scheduler = new Scheduler();		// initialize the ready queue
-    if (randomYield)				// start the timer (if needed)
+    //if (randomYield)				// start the timer (if needed)
 	timer = new Timer(TimerInterruptHandler, 0, false);
 
     threadToBeDestroyed = NULL;
@@ -151,6 +152,7 @@ Initialize(int argc, char **argv)
     CallOnUserAbort(Cleanup);			// if user hits ctl-C
     
 #ifdef USER_PROGRAM
+    pageMap = new BitMap(NumPhysPages);
     machine = new Machine(debugUserProg);	// this must come first
 #endif
 
