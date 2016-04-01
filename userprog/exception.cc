@@ -55,20 +55,18 @@ ExceptionHandler(ExceptionType which)
 
     if (which == SyscallException)
     {
-        switch(type)
+        if(type == SC_Halt)
         {
-            case SC_Halt:
-                DEBUG('a', "Shutdown, initiated by user program.\n");
-                interrupt->Halt();
-                break;
-            case SC_Exit:
-                printf("EXIT NUM : %d\n", machine->ReadRegister(4));
-                printf("Total TLB miss : %d\n",
+            DEBUG('a', "Shutdown, initiated by user program.\n");
+            interrupt->Halt();
+        }
+        if(type == SC_Exit)
+        {
+            printf("EXIT NUM : %d\n", machine->ReadRegister(4));
+            printf("Total TLB miss : %d\n",
                     currentThread->space->TLBMissCount);
-                currentThread->Print();
-                break;
-            default:
-                break;
+            currentThread->Print();
+            currentThread->Finish();
         }
     } else if ((which == TLBMissException))
     {

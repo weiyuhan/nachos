@@ -62,10 +62,6 @@ SwapHeader (NoffHeader *noffH)
 
 AddrSpace::AddrSpace(OpenFile *executable)
 {
-    TLBMissCount = 0;
-#ifdef TLB_FIFO
-    TLBFIFO_List = new List;
-#endif
     NoffHeader noffH;
     unsigned int i, size;
 
@@ -90,6 +86,10 @@ AddrSpace::AddrSpace(OpenFile *executable)
     DEBUG('a', "Initializing address space, num pages %d, size %d\n", 
 					numPages, size);
 // first, set up the translation 
+    TLBMissCount = 0;
+#ifdef TLB_FIFO
+    TLBFIFO_List = new List;
+#endif
     pageTable = new TranslationEntry[numPages];
     for (i = 0; i < numPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virtual page # = phys page #
