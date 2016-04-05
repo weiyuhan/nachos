@@ -54,6 +54,7 @@ void CheckEndian()
 
 Machine::Machine(bool debug)
 {
+    leftPages = NumPhysPages;
     int i;
 
     for (i = 0; i < NumTotalRegs; i++)

@@ -166,7 +166,6 @@ Machine::WriteMem(int addr, int size, int value)
     if(exception == TLBMissException) // TLB Miss
     {
     	exception = Translate(addr, &physicalAddress, size, TRUE, TRUE);
-    	// find in page table
     	if(exception == PageFaultException) // page fault
     	{
     		machine->RaiseException(exception, addr); // load page
@@ -262,6 +261,10 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
 		    return PageFaultException;
 		}
 		entry = &pageTable[vpn];
+		entry->use = TRUE;
+		if(writing)
+			entry->dirty = TRUE;
+		entry->lastUseTime = stats->totalTicks;
     } 
     else 
     {
@@ -272,8 +275,12 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
 				entry = &tlb[i];			// FOUND!
 			#ifdef TLB_LRU
 				tlb[i].use = true;
-				tlb[i].TLBlastUseTime = stats->totalTicks;
+				tlb[i].lastUseTime = stats->totalTicks;
 			#endif
+				pageTable[vpn].use = TRUE;
+				if(writing)
+					pageTable[vpn].dirty = TRUE;
+				pageTable[vpn].lastUseTime = stats->totalTicks;
 				break;
 		    }
 		}
@@ -350,22 +357,91 @@ int Machine::FindTLBindex()
 	currentThread->space->TLBFIFO_List->Append((void*)index);
 #endif
 #ifdef TLB_LRU
-	int lastedtime = tlb[0].TLBlastUseTime;
+	int lastedtime = tlb[0].lastUseTime;
 	if(index == -1)
 	{
 		DEBUG('a', "replace a tlb entry by LRU");
 		index = 0;
 		for(int i = 1; i < TLBSize; i++)
 		{
-			if(tlb[i].use && tlb[i].TLBlastUseTime < lastedtime)
+			if(tlb[i].use && tlb[i].lastUseTime < lastedtime)
 			{
-				lastedtime = tlb[i].TLBlastUseTime;
+				lastedtime = tlb[i].lastUseTime;
 				index = i;
 			}
 		}
 	}
 	tlb[index].use = true;
-	tlb[index].TLBlastUseTime = stats->totalTicks;
+	tlb[index].lastUseTime = stats->totalTicks;
 #endif
 	return index;
+}
+
+
+void Machine::PageSwap()
+{
+	if(currentThread->space->PagesinMem < currentThread->space->maxPagesinMem)
+		return;
+	int index = -1;
+	int lastedtime = -1;
+	for(int i = 0; i < pageTableSize; i++)
+	{
+		if(pageTable[i].valid)
+		{
+			if(lastedtime < 0)
+			{
+				lastedtime = pageTable[i].lastUseTime;
+				index = i;
+				continue;
+			}
+			//printf("%d : %d, %d\n", i, pageTable[i].lastUseTime, lastedtime);
+			if(pageTable[i].lastUseTime < lastedtime)
+			{
+				index = i;
+				lastedtime = pageTable[i].lastUseTime;
+			}
+		}
+	}
+	//printf("%d\n", index);
+	DEBUG("a", "swap out page : %d\n",index);
+	if(pageTable[index].dirty)
+	{
+		currentThread->space->swap->WriteAt(
+			&(machine->mainMemory[pageTable[index].physicalPage*PageSize])
+			, PageSize, pageTable[index].virtualPage * PageSize);
+	}
+	pageTable[index].dirty = FALSE;
+	pageTable[index].valid = FALSE;
+	pageMap->Clear(pageTable[index].physicalPage);
+
+	for(int i = 0; i < TLBSize; i++)
+	{
+		if(tlb[i].valid && tlb[i].virtualPage == pageTable[index].virtualPage)
+		{
+			tlb[i].valid = FALSE;
+			break;
+		}
+	}
+	currentThread->space->PagesinMem--;
+}
+
+void Machine::PageLoad(int virtAddr)
+{
+	int vpn = virtAddr / PageSize;
+	PageSwap();
+	pageTable[vpn].physicalPage = pageMap->Find();
+
+	currentThread->space->swap->ReadAt(
+		&(machine->mainMemory[pageTable[vpn].physicalPage * PageSize]),
+		PageSize, vpn*PageSize);
+
+	currentThread->space->PagesinMem++;
+
+	pageTable[vpn].valid = TRUE;
+	pageTable[vpn].virtualPage = vpn;
+	pageTable[vpn].use = TRUE;
+	pageTable[vpn].dirty = FALSE;
+	pageTable[vpn].readOnly = FALSE;
+
+	pageTable[vpn].lastUseTime = stats->totalTicks;
 }

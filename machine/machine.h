@@ -32,9 +32,10 @@
 					// the disk sector size, for
 					// simplicity
 
-#define NumPhysPages    1024
+#define NumPhysPages    128
 #define MemorySize 	(NumPhysPages * PageSize)
 #define TLBSize		4		// if there is a TLB, make it small
+
 
 enum ExceptionType { NoException,           // Everything ok!
 		     SyscallException,      // A program executed a system call.
@@ -150,6 +151,8 @@ class Machine {
     void TLBLoad(int virtAddr); // load a tlb entry
     int FindTLBindex();  // find a tlb index to load tlb
 
+    void PageLoad(int virtAddr);
+    void PageSwap();
 
 // Data structures -- all of these are accessible to Nachos kernel code.
 // "public" for convenience.
@@ -185,6 +188,7 @@ class Machine {
 
     TranslationEntry *pageTable;
     unsigned int pageTableSize;
+    int leftPages;
 
   private:
     bool singleStep;		// drop back into the debugger after each

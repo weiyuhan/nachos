@@ -65,6 +65,8 @@ ExceptionHandler(ExceptionType which)
             printf("EXIT NUM : %d\n", machine->ReadRegister(4));
             printf("Total TLB miss : %d\n",
                     currentThread->space->TLBMissCount);
+            printf("Total Page Fault : %d\n",
+                    currentThread->space->PageFaultCount);
             currentThread->Print();
             currentThread->Finish();
         }
@@ -74,6 +76,14 @@ ExceptionHandler(ExceptionType which)
         int addr = machine->ReadRegister(BadVAddrReg);
         machine->TLBLoad(addr);
         currentThread->space->TLBMissCount++;
+    }
+    else if ((which == PageFaultException))
+    {
+        DEBUG('a', "handle PageFault\n");
+        int addr = machine->ReadRegister(BadVAddrReg);
+        machine->PageLoad(addr);
+        currentThread->space->PageFaultCount++;
+        stats->numPageFaults++;
     }
     else{
 	printf("Unexpected user mode exception %d %d\n", which, type);

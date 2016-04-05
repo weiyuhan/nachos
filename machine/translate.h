@@ -40,9 +40,7 @@ class TranslationEntry {
 			// page is referenced or modified.
     bool dirty;         // This bit is set by the hardware every time the
 			// page is modified.
-#ifdef TLB_LRU
-    int TLBlastUseTime;
-#endif
+    int lastUseTime;
 };
 
 #endif

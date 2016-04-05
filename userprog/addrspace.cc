@@ -18,10 +18,32 @@
 #include "copyright.h"
 #include "system.h"
 #include "addrspace.h"
-#include "noff.h"
+#include "noff.h"   
 #ifdef HOST_SPARC
 #include <strings.h>
 #endif
+
+char* itoa(int num)
+{
+    char* _ret = new char[10];
+    int i = 0;
+    if(num == 0)
+    {
+        _ret[0] = '0';
+        i++;
+    }
+    while(num > 0)
+    {
+        int left = num % 10;
+        char tmp = '0' + left;
+        _ret[i] = tmp;
+        i++;
+        num = num / 10;
+    }
+    _ret[i] = '\0';
+    //printf("%s\n", _ret);
+    return _ret;
+}
 
 //----------------------------------------------------------------------
 // SwapHeader
@@ -62,74 +84,26 @@ SwapHeader (NoffHeader *noffH)
 
 AddrSpace::AddrSpace(OpenFile *executable)
 {
-    NoffHeader noffH;
-    unsigned int i, size;
+    LoadSwapSpace(executable);
 
-    executable->ReadAt((char *)&noffH, sizeof(noffH), 0);
-    if ((noffH.noffMagic != NOFFMAGIC) && 
-		(WordToHost(noffH.noffMagic) == NOFFMAGIC))
-    	SwapHeader(&noffH);
-    ASSERT(noffH.noffMagic == NOFFMAGIC);
-
-// how big is address space?
-    size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
-			+ UserStackSize;	// we need to increase the size
-						// to leave room for the stack
-    numPages = divRoundUp(size, PageSize);
-    size = numPages * PageSize;
-
-    ASSERT(numPages <= NumPhysPages);		// check we're not trying
-						// to run anything too big --
-						// at least until we have
-						// virtual memory
-
-    DEBUG('a', "Initializing address space, num pages %d, size %d\n", 
-					numPages, size);
 // first, set up the translation 
     tlbSave = new TranslationEntry[TLBSize];
     TLBMissCount = 0;
+    PageFaultCount = 0;
 #ifdef TLB_FIFO
     TLBFIFO_List = new List;
 #endif
     pageTable = new TranslationEntry[numPages];
-    for (i = 0; i < numPages; i++) {
-	pageTable[i].virtualPage = i;	// for now, virtual page # = phys page #
-	pageTable[i].physicalPage = pageMap->Find();
-	pageTable[i].valid = TRUE;
+    for (int i = 0; i < numPages; i++) {
+	pageTable[i].valid = FALSE;
 	pageTable[i].use = FALSE;
 	pageTable[i].dirty = FALSE;
 	pageTable[i].readOnly = FALSE;  // if the code segment was entirely on 
 					// a separate page, we could set its 
 					// pages to be read-only
     }
-    
-// zero out the entire address space, to zero the unitialized data segment 
-// and the stack segment
-    //bzero(machine->mainMemory, size);
 
-// then, copy in the code and data segments into memory
-    if (noffH.code.size > 0) {
-        DEBUG('a', "Initializing code segment, at 0x%x, size %d\n", 
-			noffH.code.virtualAddr, noffH.code.size);
-        for(int i = 0; i < noffH.code.size; i++)
-        {
-            unsigned int vpn = (noffH.code.virtualAddr + i) / PageSize;
-            unsigned int offset = (noffH.code.virtualAddr + i) % PageSize;
-            executable->ReadAt(&(machine->mainMemory[pageTable[vpn].physicalPage*PageSize + offset]),
-            1, noffH.code.inFileAddr + i);
-        }
-    }
-    if (noffH.initData.size > 0) {
-        DEBUG('a', "Initializing data segment, at 0x%x, size %d\n", 
-			noffH.initData.virtualAddr, noffH.initData.size);
-        for(int i = 0; i < noffH.initData.size; i++)
-        {
-            unsigned int vpn = (noffH.initData.virtualAddr + i) / PageSize;
-            unsigned int offset = (noffH.initData.virtualAddr + i) % PageSize;
-            executable->ReadAt(&(machine->mainMemory[pageTable[vpn].physicalPage*PageSize + offset]),
-            1, noffH.initData.inFileAddr + i);
-        }
-    }
+    PagesinMem = 0;
 
 }
 
@@ -140,14 +114,18 @@ AddrSpace::AddrSpace(OpenFile *executable)
 
 AddrSpace::~AddrSpace()
 {
+    machine->leftPages += maxPagesinMem;
     for(int i = 0; i < numPages; i++)
     {
-        pageMap->Clear(pageTable[i].physicalPage);
+        if(pageTable[i].valid)
+            pageMap->Clear(pageTable[i].physicalPage);
     }
    delete pageTable;
 #ifdef TLB_FIFO
     delete TLBFIFO_List;
 #endif
+    delete swap;
+    fileSystem->Remove(itoa(currentThread->gettid()));
 }
 
 //----------------------------------------------------------------------
@@ -214,6 +192,8 @@ void AddrSpace::SaveState()
 //      For now, tell the machine where to find the page table.
 //----------------------------------------------------------------------
 
+
+
 void AddrSpace::RestoreState() 
 {
     machine->pageTable = pageTable;
@@ -226,4 +206,51 @@ void AddrSpace::RestoreState()
         machine->tlb[i].dirty = tlbSave[i].dirty;
         machine->tlb[i].readOnly = tlbSave[i].readOnly;
     }
+}
+
+void AddrSpace::LoadSwapSpace(OpenFile *executable)
+{
+    NoffHeader noffH;
+    unsigned int i, size;
+
+    executable->ReadAt((char *)&noffH, sizeof(noffH), 0);
+    if ((noffH.noffMagic != NOFFMAGIC) && 
+        (WordToHost(noffH.noffMagic) == NOFFMAGIC))
+        SwapHeader(&noffH);
+    ASSERT(noffH.noffMagic == NOFFMAGIC);
+
+
+// how big is address space?
+    size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
+            + UserStackSize;    // we need to increase the size
+                        // to leave room for the stack
+    numPages = divRoundUp(size, PageSize);
+    size = numPages * PageSize;
+
+    if(numPages < (machine->leftPages / 2) )
+        maxPagesinMem = numPages;
+    else
+        maxPagesinMem = divRoundUp(machine->leftPages, 2);
+    machine->leftPages -= maxPagesinMem;
+    DEBUG('a', "loadint swap space, num pages %d, size %d\n", 
+                numPages, size);
+
+    char* Buffer = new char[size];
+    memset(Buffer,0,sizeof(Buffer));
+
+    if(noffH.code.size > 0)
+    {
+        executable->ReadAt(Buffer, noffH.code.size, noffH.code.inFileAddr);
+    }
+    if(noffH.initData.size > 0)
+    {
+        executable->ReadAt(Buffer + noffH.code.size, noffH.initData.size, 
+            noffH.initData.inFileAddr);
+    }
+    char* swapname = itoa(currentThread->gettid());
+    fileSystem->Create(swapname, size);
+    swap = fileSystem->Open(swapname);
+    swap->WriteAt(Buffer,size,0);
+
+    delete Buffer;
 }

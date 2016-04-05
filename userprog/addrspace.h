@@ -32,11 +32,16 @@ class AddrSpace {
     void SaveState();			// Save/restore address space-specific
     void RestoreState();		// info on a context switch
     int TLBMissCount;
+    int PageFaultCount;
 #ifdef TLB_FIFO
     List* TLBFIFO_List;
 #endif 
+    OpenFile *swap;
+    unsigned int maxPagesinMem;
+    unsigned int PagesinMem;
 
   private:
+    void LoadSwapSpace(OpenFile *executable);
     TranslationEntry *pageTable;	// Assume linear page table translation
 					// for now!
     TranslationEntry* tlbSave;
