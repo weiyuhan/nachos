@@ -297,7 +297,7 @@ List::Remove(void *item)
 		break;
 	    }
         }
-	ASSERT(ptr != NULL);	// should always find item!
+	//ASSERT(ptr != NULL);	// should always find item!
     }
    //ASSERT(!IsInList(item));
 }

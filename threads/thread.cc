@@ -291,6 +291,7 @@ Thread::Sleep ()
     status = BLOCKED;
     while ((nextThread = scheduler->FindNextToRun()) == NULL)
 	interrupt->Idle();	// no one to run, wait for an interrupt
+
         
     scheduler->Run(nextThread); // returns when we've been signalled
 }
@@ -387,4 +388,57 @@ Thread::RestoreUserState()
     for (int i = 0; i < NumTotalRegs; i++)
 	machine->WriteRegister(i, userRegisters[i]);
 }
+
+void
+Thread::Suspend()
+{
+    if(status == READY)
+    {
+        status = READY_SUSPENDED;
+        scheduler->suspendList->Append((void*)this);
+    }
+    else if(status == BLOCKED)
+    {
+        status = BLOCKED_SUSPENDED;
+        scheduler->suspendList->Append((void*)this);
+    }
+    else
+        return;
+    for(int i = 0; i < NumPhysPages; i++)
+    {
+        if(machine->reversePageTable[i].valid &&
+            machine->reversePageTable[i].ownerThread == (void*)this)
+        {
+            machine->PageSwap(i);
+        }
+    }
+}
+
+void Thread::Active()
+{
+    if(status == READY_SUSPENDED)
+    {
+        status = READY;
+        scheduler->ReadyToRun(this);
+    }
+    if(status == BLOCKED_SUSPENDED)
+    {
+        status = BLOCKED;
+    }
+}
+
+int Thread::PagesinMem()
+{
+    int count = 0;
+    for(int i = 0; i < NumPhysPages; i++)
+    {
+        if(machine->reversePageTable[i].valid &&
+            machine->reversePageTable[i].ownerThread == (void*)this)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
 #endif

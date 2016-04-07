@@ -32,6 +32,7 @@ Scheduler::Scheduler()
 { 
     readyList = new List; 
     allList = new List;
+    suspendList = new List;
 } 
 
 //----------------------------------------------------------------------
@@ -44,6 +45,7 @@ Scheduler::~Scheduler()
 { 
     delete readyList; 
     delete allList;
+    delete suspendList;
 } 
 
 //----------------------------------------------------------------------

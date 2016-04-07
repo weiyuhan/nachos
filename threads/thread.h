@@ -57,7 +57,8 @@
 
 
 // Thread state
-enum ThreadStatus { JUST_CREATED, RUNNING, READY, BLOCKED };
+enum ThreadStatus { JUST_CREATED, RUNNING, READY, BLOCKED, READY_SUSPENDED,
+                    BLOCKED_SUSPENDED};
 
 // external function, dummy routine whose sole job is to call Thread::Print
 extern void ThreadPrint(int arg);	 
@@ -98,6 +99,8 @@ class Thread {
     
     void CheckOverflow();   			// Check if thread has 
 						// overflowed its stack
+
+
     void setStatus(ThreadStatus st) { status = st; }
     char* getStatus();
     char* getName() { return (name); }
@@ -138,7 +141,9 @@ class Thread {
   public:
     void SaveUserState();		// save user-level register state
     void RestoreUserState();		// restore user-level register state
-
+    void Suspend();
+    void Active();
+    int PagesinMem();
     AddrSpace *space;			// User code this thread is running.
 #endif
 };

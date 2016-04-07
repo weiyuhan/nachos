@@ -152,7 +152,7 @@ class Machine {
     int FindTLBindex();  // find a tlb index to load tlb
 
     void PageLoad(int virtAddr);
-    void PageSwap();
+    void PageSwap(int index = -1);
     TranslationEntry* getPyhsPage(int vpn);
     void refreshPage(int index);
 

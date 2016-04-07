@@ -25,7 +25,6 @@ extern void PrintThread(int dummy);
 void
 StartProcess(char *filename)
 {
-    
     if(currentThread->gettid() == 0)
     {
         Thread *t = new Thread("forked thread");
@@ -35,6 +34,7 @@ StartProcess(char *filename)
         }
         t->Fork(StartProcess, (void*)filename);
     }
+    
     OpenFile *executable = fileSystem->Open(filename);
     AddrSpace *space;
 

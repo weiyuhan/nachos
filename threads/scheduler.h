@@ -29,10 +29,10 @@ class Scheduler {
 					// list, if any, and return thread.
     void Run(Thread* nextThread);	// Cause nextThread to start running
     void Print();			// Print contents of ready list
-    
-  private:
-    List *readyList;  		// queue of threads that are ready to run,
-				// but not running
+    List *readyList;    // queue of threads that are ready to run,
+                // but not running
+    List *suspendList;
+  private: 	
     List *allList; // all the threads
 };
 

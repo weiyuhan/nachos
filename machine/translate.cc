@@ -409,31 +409,34 @@ int Machine::FindTLBindex()
 }
 
 
-void Machine::PageSwap()
+void Machine::PageSwap(int index = -1)
 {
-	int index = -1;
-	int lastedtime = -1;
-	for(int i = 0; i < NumPhysPages; i++)
+	//int index = -1;
+	if(index == -1)
 	{
-		if(reversePageTable[i].valid)
+		int lastedtime = -1;
+		for(int i = 0; i < NumPhysPages; i++)
 		{
-			refreshPage(index);
-			if(lastedtime < 0)
+			if(reversePageTable[i].valid)
 			{
-				lastedtime = reversePageTable[i].lastUseTime;
-				index = i;
-				continue;
-			}
-			//printf("%d : %d, %d\n", i, reversePageTable[i].lastUseTime, lastedtime);
-			if(reversePageTable[i].lastUseTime < lastedtime)
-			{
-				index = i;
-				lastedtime = reversePageTable[i].lastUseTime;
+				refreshPage(index);
+				if(lastedtime < 0)
+				{
+					lastedtime = reversePageTable[i].lastUseTime;
+					index = i;
+					continue;
+				}
+				//printf("%d : %d, %d\n", i, reversePageTable[i].lastUseTime, lastedtime);
+				if(reversePageTable[i].lastUseTime < lastedtime)
+				{
+					index = i;
+					lastedtime = reversePageTable[i].lastUseTime;
+				}
 			}
 		}
 	}
-	//printf("%d\n", index);
-
+	else
+		refreshPage(index);
 	DEBUG("a", "swap out page : %d\n",index);
 	if(reversePageTable[index].dirty)
 	{
