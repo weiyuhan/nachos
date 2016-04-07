@@ -148,11 +148,13 @@ class Machine {
     void Debugger();		// invoke the user program debugger
     void DumpState();		// print the user CPU and memory state 
 
-    void TLBLoad(int virtAddr); // load a tlb entry
+    void TLBLoad(int virtAddr, TranslationEntry *entry = NULL); // load a tlb entry
     int FindTLBindex();  // find a tlb index to load tlb
 
     void PageLoad(int virtAddr);
     void PageSwap();
+    TranslationEntry* getPyhsPage(int vpn);
+    void refreshPage(int index);
 
 // Data structures -- all of these are accessible to Nachos kernel code.
 // "public" for convenience.
@@ -187,6 +189,7 @@ class Machine {
 					// "read-only" to Nachos kernel code
 
     TranslationEntry *pageTable;
+    TranslationEntry *reversePageTable;
     unsigned int pageTableSize;
     int leftPages;
 

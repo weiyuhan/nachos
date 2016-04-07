@@ -42,9 +42,6 @@ class AddrSpace {
 
   private:
     void LoadSwapSpace(OpenFile *executable);
-    TranslationEntry *pageTable;	// Assume linear page table translation
-					// for now!
-    TranslationEntry* tlbSave;
     unsigned int numPages;		// Number of pages in the virtual 
 					// address space
 };

@@ -99,8 +99,10 @@ Machine::ReadMem(int addr, int size, int *value)
     	//machine->RaiseException(exception, addr);
     	DEBUG('a', "find VA 0x%x in pagrtable\n", addr, size);
     	exception = Translate(addr, &physicalAddress, size, FALSE, TRUE);
+    	bool PageFaultOccur = FALSE;
     	if(exception == PageFaultException)
     	{
+    		PageFaultOccur = TRUE;
     		DEBUG('a', "load VA 0x%x into memory\n", addr, size);
     		machine->RaiseException(exception, addr);
     		exception = Translate(addr, &physicalAddress, size, FALSE, TRUE);
@@ -113,7 +115,8 @@ Machine::ReadMem(int addr, int size, int *value)
 			machine->RaiseException(exception, addr);
 			return FALSE;
     	}
-    	machine->RaiseException(TLBMissException, addr);
+    	if(!PageFaultOccur)
+    		machine->RaiseException(TLBMissException, addr);
     }else if (exception != NoException) {
 	machine->RaiseException(exception, addr);
 	return FALSE;
@@ -166,8 +169,10 @@ Machine::WriteMem(int addr, int size, int value)
     if(exception == TLBMissException) // TLB Miss
     {
     	exception = Translate(addr, &physicalAddress, size, TRUE, TRUE);
-    	if(exception == PageFaultException) // page fault
+    	bool PageFaultOccur = FALSE;
+    	if(exception == PageFaultException)
     	{
+    		PageFaultOccur = TRUE;
     		machine->RaiseException(exception, addr); // load page
     		exception = Translate(addr, &physicalAddress, size, TRUE, TRUE);
     		if (exception != NoException) {
@@ -179,7 +184,8 @@ Machine::WriteMem(int addr, int size, int value)
 			machine->RaiseException(exception, addr);
 			return FALSE;
     	}
-    	machine->RaiseException(TLBMissException, addr);
+    	if(!PageFaultOccur)
+    		machine->RaiseException(TLBMissException, addr);
     }else if (exception != NoException) {
 	machine->RaiseException(exception, addr);
 	return FALSE;
@@ -220,6 +226,39 @@ Machine::WriteMem(int addr, int size, int value)
 // 	"writing" -- if TRUE, check the "read-only" bit in the TLB
 //----------------------------------------------------------------------
 
+TranslationEntry*
+Machine::getPyhsPage(int vpn)
+{
+	TranslationEntry* entry = NULL;
+	for(int i = 0; i < NumPhysPages; i++)
+	{
+		if(reversePageTable[i].valid &&
+			reversePageTable[i].ownerThread == (void*) currentThread &&
+			reversePageTable[i].virtualPage == vpn)
+		{
+			entry = &reversePageTable[i];
+		}
+	}
+	return entry;
+}
+
+void Machine::refreshPage(int index)
+{
+	TranslationEntry *entry = &reversePageTable[index];
+	if(entry->ownerThread != (void*)currentThread)
+		return;
+	for(int i = 0; i < TLBSize; i++)
+	{
+		if(tlb[i].virtualPage == entry->virtualPage)
+		{
+			entry->dirty = tlb[i].dirty;
+			entry->use = tlb[i].use;
+			entry->lastUseTime = tlb[i].lastUseTime;
+			entry->readOnly = tlb[i].readOnly;
+		}
+	}
+}
+
 ExceptionType
 Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool usePageTable)
 {
@@ -239,8 +278,6 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
     }
     
     // we must have either a TLB or a page table, or both!
-    //ASSERT(tlb == NULL || pageTable == NULL);	
-    ASSERT(tlb != NULL || pageTable != NULL);	
 
 // calculate the virtual page number, and offset within the page,
 // from the virtual address
@@ -249,18 +286,12 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
     
     if (usePageTable) 
     {		// => page table => vpn is index into table
-		if (vpn >= pageTableSize) 
+		entry = getPyhsPage(vpn);
+		if(entry == NULL)
 		{
-		    DEBUG('a', "virtual page # %d too large for page table size %d!\n", 
-				virtAddr, pageTableSize);
-		    return AddressErrorException;
-		} 
-		else if (!pageTable[vpn].valid) 
-		{
-		    DEBUG('a', "virtual page # %d is invalid!\n", virtAddr);
-		    return PageFaultException;
+			DEBUG('a', "*** no valid PageFrame found for this virtual page!\n");
+	    	return PageFaultException;		
 		}
-		entry = &pageTable[vpn];
 		entry->use = TRUE;
 		if(writing)
 			entry->dirty = TRUE;
@@ -277,10 +308,6 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
 				tlb[i].use = true;
 				tlb[i].lastUseTime = stats->totalTicks;
 			#endif
-				pageTable[vpn].use = TRUE;
-				if(writing)
-					pageTable[vpn].dirty = TRUE;
-				pageTable[vpn].lastUseTime = stats->totalTicks;
 				break;
 		    }
 		}
@@ -294,7 +321,7 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
 		}
     }
 
-    if (entry->readOnly && writing) 
+    if (entry->readOnly && writing)
     {	// trying to write to a read-only page
 		DEBUG('a', "%d mapped read-only at %d in TLB!\n", virtAddr, i);
 		return ReadOnlyException;
@@ -318,24 +345,20 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
 }
 
 
-void Machine::TLBLoad(int virtAddr)
+void Machine::TLBLoad(int virtAddr, TranslationEntry *entry = NULL)
 {
 	int vpn = (unsigned) virtAddr / PageSize;
-	if (vpn >= pageTableSize) {
-	    DEBUG('a', "virtual page # %d too large for page table size %d! in tlb\n", 
-			virtAddr, pageTableSize);
-	    return;
-	} else if (!pageTable[vpn].valid) {
-	    DEBUG('a', "virtual page # %d is invalid! in tlb\n", virtAddr);
-	    return;
-	}
+
+	if(entry == NULL)
+		entry = getPyhsPage(vpn);
+
 	int tlbindex = FindTLBindex();
-	tlb[tlbindex].virtualPage = pageTable[vpn].virtualPage;
-	tlb[tlbindex].physicalPage = pageTable[vpn].physicalPage;
-	tlb[tlbindex].valid = pageTable[vpn].valid;
-	tlb[tlbindex].readOnly = pageTable[vpn].readOnly;
-	tlb[tlbindex].use = pageTable[vpn].use; 
-	tlb[tlbindex].dirty = pageTable[vpn].dirty;
+	tlb[tlbindex].virtualPage = entry->virtualPage;
+	tlb[tlbindex].physicalPage = entry->physicalPage;
+	tlb[tlbindex].valid = entry->valid;
+	tlb[tlbindex].readOnly = entry->readOnly;
+	tlb[tlbindex].use = entry->use; 
+	tlb[tlbindex].dirty = entry->dirty;
 }
 
 int Machine::FindTLBindex()
@@ -374,74 +397,90 @@ int Machine::FindTLBindex()
 	tlb[index].use = true;
 	tlb[index].lastUseTime = stats->totalTicks;
 #endif
+	TranslationEntry *entry = getPyhsPage(tlb[index].virtualPage);
+	if(entry != NULL)
+	{
+		entry->dirty = tlb[index].dirty;
+		entry->use = tlb[index].use;
+		entry->lastUseTime = tlb[index].lastUseTime;
+		entry->readOnly = tlb[index].readOnly;
+	}
 	return index;
 }
 
 
 void Machine::PageSwap()
 {
-	if(currentThread->space->PagesinMem < currentThread->space->maxPagesinMem)
-		return;
 	int index = -1;
 	int lastedtime = -1;
-	for(int i = 0; i < pageTableSize; i++)
+	for(int i = 0; i < NumPhysPages; i++)
 	{
-		if(pageTable[i].valid)
+		if(reversePageTable[i].valid)
 		{
+			refreshPage(index);
 			if(lastedtime < 0)
 			{
-				lastedtime = pageTable[i].lastUseTime;
+				lastedtime = reversePageTable[i].lastUseTime;
 				index = i;
 				continue;
 			}
-			//printf("%d : %d, %d\n", i, pageTable[i].lastUseTime, lastedtime);
-			if(pageTable[i].lastUseTime < lastedtime)
+			//printf("%d : %d, %d\n", i, reversePageTable[i].lastUseTime, lastedtime);
+			if(reversePageTable[i].lastUseTime < lastedtime)
 			{
 				index = i;
-				lastedtime = pageTable[i].lastUseTime;
+				lastedtime = reversePageTable[i].lastUseTime;
 			}
 		}
 	}
 	//printf("%d\n", index);
+
 	DEBUG("a", "swap out page : %d\n",index);
-	if(pageTable[index].dirty)
+	if(reversePageTable[index].dirty)
 	{
-		currentThread->space->swap->WriteAt(
-			&(machine->mainMemory[pageTable[index].physicalPage*PageSize])
-			, PageSize, pageTable[index].virtualPage * PageSize);
+		Thread* ownerThread = (Thread*)reversePageTable[index].ownerThread;
+		ownerThread->space->swap->WriteAt(
+			&(machine->mainMemory[index*PageSize])
+			, PageSize, reversePageTable[index].virtualPage * PageSize);
 	}
-	pageTable[index].dirty = FALSE;
-	pageTable[index].valid = FALSE;
-	pageMap->Clear(pageTable[index].physicalPage);
+	reversePageTable[index].dirty = FALSE;
+	reversePageTable[index].valid = FALSE;
+	pageMap->Clear(index);
 
 	for(int i = 0; i < TLBSize; i++)
 	{
-		if(tlb[i].valid && tlb[i].virtualPage == pageTable[index].virtualPage)
+		if(tlb[i].valid && tlb[i].virtualPage == reversePageTable[index].virtualPage
+			&& ((Thread*)reversePageTable[index].ownerThread) == currentThread)
 		{
 			tlb[i].valid = FALSE;
 			break;
 		}
 	}
-	currentThread->space->PagesinMem--;
 }
 
 void Machine::PageLoad(int virtAddr)
 {
 	int vpn = virtAddr / PageSize;
-	PageSwap();
-	pageTable[vpn].physicalPage = pageMap->Find();
+	if(pageMap->NumClear() == 0)
+	{
+		PageSwap();
+	}
+
+	int physicalPage = pageMap->Find();
+
+	TranslationEntry *entry = &reversePageTable[physicalPage];
 
 	currentThread->space->swap->ReadAt(
-		&(machine->mainMemory[pageTable[vpn].physicalPage * PageSize]),
+		&(machine->mainMemory[physicalPage * PageSize]),
 		PageSize, vpn*PageSize);
 
-	currentThread->space->PagesinMem++;
+	entry->valid = TRUE;
+	entry->virtualPage = vpn;
+	entry->use = TRUE;
+	entry->dirty = FALSE;
+	entry->readOnly = FALSE;
 
-	pageTable[vpn].valid = TRUE;
-	pageTable[vpn].virtualPage = vpn;
-	pageTable[vpn].use = TRUE;
-	pageTable[vpn].dirty = FALSE;
-	pageTable[vpn].readOnly = FALSE;
-
-	pageTable[vpn].lastUseTime = stats->totalTicks;
+	entry->lastUseTime = stats->totalTicks;
+	entry->ownerThread = (void*)currentThread;
+	currentThread->space->TLBMissCount++;
+	TLBLoad(vpn, entry);
 }

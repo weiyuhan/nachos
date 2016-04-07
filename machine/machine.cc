@@ -62,6 +62,17 @@ Machine::Machine(bool debug)
     mainMemory = new char[MemorySize];
     for (i = 0; i < MemorySize; i++)
       	mainMemory[i] = 0;
+    reversePageTable = new TranslationEntry[NumPhysPages];
+    for(i = 0; i < NumPhysPages; i++)
+    {
+        reversePageTable[i].use = FALSE;
+        reversePageTable[i].dirty = FALSE;
+        reversePageTable[i].readOnly = FALSE;
+        reversePageTable[i].valid = FALSE;
+        reversePageTable[i].physicalPage = i;
+        reversePageTable[i].ownerThread = NULL;
+        reversePageTable[i].lastUseTime = 0;
+    }
 #ifdef USE_TLB
     tlb = new TranslationEntry[TLBSize];
     for (i = 0; i < TLBSize; i++)
@@ -89,6 +100,7 @@ Machine::Machine(bool debug)
 Machine::~Machine()
 {
     delete [] mainMemory;
+    delete [] reversePageTable;
     if (tlb != NULL)
         delete [] tlb;
 }

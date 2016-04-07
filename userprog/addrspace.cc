@@ -87,23 +87,11 @@ AddrSpace::AddrSpace(OpenFile *executable)
     LoadSwapSpace(executable);
 
 // first, set up the translation 
-    tlbSave = new TranslationEntry[TLBSize];
     TLBMissCount = 0;
     PageFaultCount = 0;
 #ifdef TLB_FIFO
     TLBFIFO_List = new List;
 #endif
-    pageTable = new TranslationEntry[numPages];
-    for (int i = 0; i < numPages; i++) {
-	pageTable[i].valid = FALSE;
-	pageTable[i].use = FALSE;
-	pageTable[i].dirty = FALSE;
-	pageTable[i].readOnly = FALSE;  // if the code segment was entirely on 
-					// a separate page, we could set its 
-					// pages to be read-only
-    }
-
-    PagesinMem = 0;
 
 }
 
@@ -114,18 +102,22 @@ AddrSpace::AddrSpace(OpenFile *executable)
 
 AddrSpace::~AddrSpace()
 {
-    machine->leftPages += maxPagesinMem;
-    for(int i = 0; i < numPages; i++)
+    //machine->leftPages += maxPagesinMem;
+    for(int i = 0; i < NumPhysPages; i++)
     {
-        if(pageTable[i].valid)
-            pageMap->Clear(pageTable[i].physicalPage);
+        if(machine->reversePageTable[i].valid &&
+            machine->reversePageTable[i].ownerThread == (void*) threadToBeDestroyed)
+        {
+            pageMap->Clear(i);
+            machine->reversePageTable[i].valid = FALSE;
+        }
     }
-   delete pageTable;
 #ifdef TLB_FIFO
     delete TLBFIFO_List;
 #endif
     delete swap;
-    fileSystem->Remove(itoa(currentThread->gettid()));
+    fileSystem->Remove(itoa(threadToBeDestroyed->gettid()));
+
 }
 
 //----------------------------------------------------------------------
@@ -172,12 +164,6 @@ void AddrSpace::SaveState()
 {
     for(int i = 0; i < TLBSize; i++)
     {
-        tlbSave[i].virtualPage = machine->tlb[i].virtualPage;
-        tlbSave[i].physicalPage = machine->tlb[i].physicalPage;
-        tlbSave[i].valid = machine->tlb[i].valid;
-        tlbSave[i].dirty = machine->tlb[i].dirty;
-        tlbSave[i].readOnly = machine->tlb[i].readOnly;
-
         machine->tlb[i].valid = FALSE;
         machine->tlb[i].dirty = FALSE;
         machine->tlb[i].readOnly = FALSE;
@@ -196,16 +182,7 @@ void AddrSpace::SaveState()
 
 void AddrSpace::RestoreState() 
 {
-    machine->pageTable = pageTable;
-    machine->pageTableSize = numPages;
-    for(int i = 0; i < TLBSize; i++)
-    {
-        machine->tlb[i].virtualPage = tlbSave[i].virtualPage;
-        machine->tlb[i].physicalPage = tlbSave[i].physicalPage;
-        machine->tlb[i].valid = tlbSave[i].valid;
-        machine->tlb[i].dirty = tlbSave[i].dirty;
-        machine->tlb[i].readOnly = tlbSave[i].readOnly;
-    }
+
 }
 
 void AddrSpace::LoadSwapSpace(OpenFile *executable)
@@ -227,11 +204,6 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable)
     numPages = divRoundUp(size, PageSize);
     size = numPages * PageSize;
 
-    if(numPages < (machine->leftPages / 2) )
-        maxPagesinMem = numPages;
-    else
-        maxPagesinMem = divRoundUp(machine->leftPages, 2);
-    machine->leftPages -= maxPagesinMem;
     DEBUG('a', "loadint swap space, num pages %d, size %d\n", 
                 numPages, size);
 
@@ -252,5 +224,5 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable)
     swap = fileSystem->Open(swapname);
     swap->WriteAt(Buffer,size,0);
 
-    delete Buffer;
+    delete [] Buffer;
 }

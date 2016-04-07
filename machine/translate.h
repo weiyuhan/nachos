@@ -41,6 +41,8 @@ class TranslationEntry {
     bool dirty;         // This bit is set by the hardware every time the
 			// page is modified.
     int lastUseTime;
+
+    void* ownerThread;
 };
 
 #endif
