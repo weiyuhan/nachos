@@ -62,29 +62,6 @@ extern void Cleanup();
 static void
 TimerInterruptHandler(int dummy)
 {
-    #ifdef USER_PROGRAM
-    if(currentThread->gettid() == 0 && stats->totalTicks > 5000 && !suspend)
-    {
-        printf("Suspend!\n");
-        Thread* another = (Thread*)scheduler->readyList->Remove();
-        if(another != NULL && !suspend)
-        {
-            suspend = TRUE;
-            printf("before : %d\n", another->PagesinMem());
-            another->Sleep();
-            another->Suspend();
-            printf("after : %d\n\n", another->PagesinMem());
-        }
-    }
-    if(currentThread->gettid() == 0 && suspend)
-    {
-        Thread* another = (Thread*)scheduler->suspendList->Remove();
-        if(another != NULL)
-        {
-            another->Active();
-        }
-    }
-    #endif
     currentThread->timePass(100);
     //currentThread->Print();
     if (interrupt->getStatus() != IdleMode)
