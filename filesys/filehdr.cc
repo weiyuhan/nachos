@@ -76,7 +76,8 @@ FileHeader::Deallocate(BitMap *freeMap)
 
 void
 FileHeader::FetchFrom(int sector)
-{
+{   
+    this->sector = sector;
     synchDisk->ReadSector(sector, (char *)this);
 }
 
@@ -90,6 +91,7 @@ FileHeader::FetchFrom(int sector)
 void
 FileHeader::WriteBack(int sector)
 {
+    this->sector = sector;
     synchDisk->WriteSector(sector, (char *)this); 
 }
 
@@ -132,7 +134,11 @@ FileHeader::Print()
     int i, j, k;
     char *data = new char[SectorSize];
 
-    printf("FileHeader contents.  File size: %d.  File blocks:\n", numBytes);
+    printf("FileHeader contents.  File size: %d.  ", numBytes);
+    printf("CreateTime: %s.  ", getCreateTime());
+    printf("LastAccess: %s.  ", getLastAccessTime());
+    printf("LastModify: %s.  ", getLastModifyTime());
+    printf("File blocks:\n");
     for (i = 0; i < numSectors; i++)
 	printf("%d ", dataSectors[i]);
     printf("\nFile contents:\n");
@@ -147,4 +153,46 @@ FileHeader::Print()
         printf("\n"); 
     }
     delete [] data;
+}
+
+void FileHeader::setCreateTime()
+{
+    time_t rawtime;
+    time(&rawtime);
+    createTime = rawtime;
+    lastAccessTime = rawtime;
+    lastModifyTime = rawtime;
+}
+void FileHeader::setLastAccessTime()
+{
+    time_t rawtime;
+    time(&rawtime);
+    lastAccessTime = rawtime;
+    WriteBack(sector);
+}
+void FileHeader::setLastModifyTime()
+{
+    time_t rawtime;
+    time(&rawtime);
+    lastAccessTime = rawtime;
+    lastModifyTime = rawtime;
+    WriteBack(sector);
+}
+char* FileHeader::getCreateTime()
+{
+    struct tm* timeinfo;
+    timeinfo = localtime (&createTime);
+    return asctime(timeinfo);
+}
+char* FileHeader::getLastAccessTime()
+{
+    struct tm* timeinfo;
+    timeinfo = localtime (&lastAccessTime);
+    return asctime(timeinfo);
+}
+char* FileHeader::getLastModifyTime()
+{
+    struct tm* timeinfo;
+    timeinfo = localtime (&lastModifyTime);
+    return asctime(timeinfo);
 }

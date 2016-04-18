@@ -135,8 +135,8 @@ OpenFile::ReadAt(char *into, int numBytes, int position)
     buf = new char[numSectors * SectorSize];
     for (i = firstSector; i <= lastSector; i++)	
         synchDisk->ReadSector(hdr->ByteToSector(i * SectorSize), 
-					&buf[(i - firstSector) * SectorSize]);
-
+					&buf[(i - firstSector) * SectorSize]); 
+    hdr->setLastAccessTime();
     // copy the part we want
     bcopy(&buf[position - (firstSector * SectorSize)], into, numBytes);
     delete [] buf;
@@ -157,7 +157,6 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
 	numBytes = fileLength - position;
     DEBUG('f', "Writing %d bytes at %d, from file of length %d.\n", 	
 			numBytes, position, fileLength);
-
     firstSector = divRoundDown(position, SectorSize);
     lastSector = divRoundDown(position + numBytes - 1, SectorSize);
     numSectors = 1 + lastSector - firstSector;
@@ -181,6 +180,7 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
     for (i = firstSector; i <= lastSector; i++)	
         synchDisk->WriteSector(hdr->ByteToSector(i * SectorSize), 
 					&buf[(i - firstSector) * SectorSize]);
+    hdr->setLastModifyTime();
     delete [] buf;
     return numBytes;
 }

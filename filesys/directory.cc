@@ -24,6 +24,52 @@
 #include "utility.h"
 #include "filehdr.h"
 #include "directory.h"
+#include <cstring>
+
+#define meSector 0
+#define paSector 1
+
+char* getNameFromDictorySector(int sector)
+{
+    if(sector == 1)
+    {
+        char* _ret = new char[2];
+        _ret[0] = '/';
+        _ret[1] = '\0';
+        return _ret;
+    }
+    OpenFile* directoryFile = new OpenFile(sector);
+    Directory *directory;
+    directory = new Directory(10);
+    directory->FetchFrom(directoryFile);
+    char* name = directory->FindEntryName(paSector);
+    int fatherSector = directory->Find(name);
+    char* fatherName = getNameFromDictorySector(fatherSector);
+    delete directoryFile;
+    delete directory;
+    char* _ret = new char[strlen(fatherName) + 1 + strlen(name)];
+    strcpy(_ret, fatherName);
+    strcat(_ret, name);
+    strcat(_ret, "/");
+    delete [] fatherName;
+    return _ret;
+}
+
+char*
+DirectoryEntry::getName(int fatherSector = 0)
+{
+    if(fatherSector > 0)
+    {
+        char* fatherName = getNameFromDictorySector(fatherSector);
+        char* _ret = new char[strlen(fatherName) + 1 + strlen(name)];
+        strcpy(_ret, fatherName);
+        strcat(_ret, name);
+        delete [] fatherName;
+        return _ret;
+    }
+    else
+        return name;
+}
 
 //----------------------------------------------------------------------
 // Directory::Directory
@@ -35,12 +81,24 @@
 //	"size" is the number of entries in the directory
 //----------------------------------------------------------------------
 
-Directory::Directory(int size)
+Directory::Directory(int size, int thisSector = 1, int fatherSector = 1)
 {
     table = new DirectoryEntry[size];
     tableSize = size;
-    for (int i = 0; i < tableSize; i++)
-	table[i].inUse = FALSE;
+
+    table[meSector].inUse = TRUE;
+    table[meSector].isDirectory = TRUE;
+    table[meSector].sector = thisSector;
+
+    table[paSector].inUse = TRUE;
+    table[paSector].isDirectory = TRUE;
+    table[paSector].sector = fatherSector;
+
+    for (int i = 2; i < tableSize; i++)
+    {
+	   table[i].inUse = FALSE;
+       table[i].isDirectory = FALSE;
+   }
 }
 
 //----------------------------------------------------------------------
@@ -127,7 +185,7 @@ Directory::Find(char *name)
 //----------------------------------------------------------------------
 
 bool
-Directory::Add(char *name, int newSector)
+Directory::Add(char *name, int newSector, bool isDirectory = FALSE)
 { 
     if (FindIndex(name) != -1)
 	return FALSE;
@@ -135,6 +193,7 @@ Directory::Add(char *name, int newSector)
     for (int i = 0; i < tableSize; i++)
         if (!table[i].inUse) {
             table[i].inUse = TRUE;
+            table[i].isDirectory = isDirectory;
             strncpy(table[i].name, name, FileNameMaxLen); 
             table[i].sector = newSector;
         return TRUE;
@@ -171,7 +230,12 @@ Directory::List()
 {
    for (int i = 0; i < tableSize; i++)
 	if (table[i].inUse)
-	    printf("%s\n", table[i].name);
+    {
+        if(table[i].isDirectory)
+            printf("%s/\n", table[i].name);
+        else
+	        printf("%s\n", table[i].name);
+    }
 }
 
 //----------------------------------------------------------------------
@@ -186,9 +250,10 @@ Directory::Print()
     FileHeader *hdr = new FileHeader;
 
     printf("Directory contents:\n");
-    for (int i = 0; i < tableSize; i++)
+    for (int i = 2; i < tableSize; i++)
 	if (table[i].inUse) {
-	    printf("Name: %s, Sector: %d\n", table[i].name, table[i].sector);
+	    printf("Name: %s, Sector: %d\n", 
+            table[i].getName(table[meSector].sector), table[i].sector);
 	    hdr->FetchFrom(table[i].sector);
 	    hdr->Print();
 	}
