@@ -1,0 +1,3061 @@
+sectorNumber: 0
+sectorNumber: 1
+sectorNumber: 3
+sectorNumber: 4
+sectorNumber: 5
+sectorNumber: 6
+// filesyssectorNumber: 6
+.cc 
+//	RosectorNumber: 6
+utines to sectorNumber: 6
+manage thesectorNumber: 6
+ overall osectorNumber: 6
+peration osectorNumber: 6
+f the filesectorNumber: 6
+ system.
+/sectorNumber: 6
+/	ImplemensectorNumber: 6
+ts routinesectorNumber: 6
+s to map fsectorNumber: 6
+rom textuasectorNumber: 6
+sectorNumber: 7
+l file namsectorNumber: 7
+es to filesectorNumber: 7
+s.
+//
+//	EsectorNumber: 7
+ach file isectorNumber: 7
+n the filesectorNumber: 7
+ system hasectorNumber: 7
+s:
+//	   AsectorNumber: 7
+ file headsectorNumber: 7
+er, storedsectorNumber: 7
+ in a sectsectorNumber: 7
+or on disksectorNumber: 7
+ 
+//		(thesectorNumber: 7
+ size of tsectorNumber: 7
+sectorNumber: 8
+he file hesectorNumber: 8
+ader data sectorNumber: 8
+structure sectorNumber: 8
+is arrangesectorNumber: 8
+d
+//		to bsectorNumber: 8
+e preciselsectorNumber: 8
+y the sizesectorNumber: 8
+ of 1 disksectorNumber: 8
+ sector)
+/sectorNumber: 8
+/	   A numsectorNumber: 8
+ber of datsectorNumber: 8
+a blocks
+/sectorNumber: 8
+/	   An ensectorNumber: 8
+sectorNumber: 9
+try in thesectorNumber: 9
+ file systsectorNumber: 9
+em directosectorNumber: 9
+ry
+//
+// 	sectorNumber: 9
+The file ssectorNumber: 9
+ystem conssectorNumber: 9
+ists of sesectorNumber: 9
+veral datasectorNumber: 9
+ structuresectorNumber: 9
+s:
+//	   AsectorNumber: 9
+ bitmap ofsectorNumber: 9
+ free disksectorNumber: 9
+ sectors (sectorNumber: 9
+sectorNumber: 10
+cf. bitmapsectorNumber: 10
+.h)
+//	   sectorNumber: 10
+A directorsectorNumber: 10
+y of file sectorNumber: 10
+names and sectorNumber: 10
+file headesectorNumber: 10
+rs
+//
+//  sectorNumber: 10
+    Both tsectorNumber: 10
+he bitmap sectorNumber: 10
+and the disectorNumber: 10
+rectory arsectorNumber: 10
+e represensectorNumber: 10
+ted as norsectorNumber: 11
+mal
+//	filsectorNumber: 11
+es.  TheirsectorNumber: 11
+ file headsectorNumber: 11
+ers are losectorNumber: 11
+cated in ssectorNumber: 11
+pecific sesectorNumber: 11
+ctors
+//	(sectorNumber: 11
+sector 0 asectorNumber: 11
+nd sector sectorNumber: 11
+1), so thasectorNumber: 11
+t the filesectorNumber: 11
+ system casectorNumber: 11
+sectorNumber: 12
+n find thesectorNumber: 12
+m 
+//	on bsectorNumber: 12
+ootup.
+//
+sectorNumber: 12
+//	The filsectorNumber: 12
+e system asectorNumber: 12
+ssumes thasectorNumber: 12
+t the bitmsectorNumber: 12
+ap and dirsectorNumber: 12
+ectory filsectorNumber: 12
+es are
+//	sectorNumber: 12
+kept "opensectorNumber: 12
+" continuosectorNumber: 12
+usly whilesectorNumber: 12
+sectorNumber: 13
+ Nachos issectorNumber: 13
+ running.
+sectorNumber: 13
+//
+//	For sectorNumber: 13
+those opersectorNumber: 13
+ations (susectorNumber: 13
+ch as CreasectorNumber: 13
+te, RemovesectorNumber: 13
+) that modsectorNumber: 13
+ify the
+//sectorNumber: 13
+	directorysectorNumber: 13
+ and/or bisectorNumber: 13
+tmap, if tsectorNumber: 13
+he operatisectorNumber: 13
+sectorNumber: 14
+on succeedsectorNumber: 14
+s, the chasectorNumber: 14
+nges
+//	arsectorNumber: 14
+e written sectorNumber: 14
+immediatelsectorNumber: 14
+y back to sectorNumber: 14
+disk (the sectorNumber: 14
+two files sectorNumber: 14
+are kept
+/sectorNumber: 14
+/	open dursectorNumber: 14
+ing all thsectorNumber: 14
+is time). sectorNumber: 14
+ If the opsectorNumber: 14
+sectorNumber: 15
+eration fasectorNumber: 15
+ils, and wsectorNumber: 15
+e have
+//	sectorNumber: 15
+modified psectorNumber: 15
+art of thesectorNumber: 15
+ directorysectorNumber: 15
+ and/or bisectorNumber: 15
+tmap, we ssectorNumber: 15
+imply discsectorNumber: 15
+ard
+//	thesectorNumber: 15
+ changed vsectorNumber: 15
+ersion, wisectorNumber: 15
+thout writsectorNumber: 16
+ing it bacsectorNumber: 16
+k to disk.sectorNumber: 16
+
+//
+// 	OusectorNumber: 16
+r implemensectorNumber: 16
+tation at sectorNumber: 16
+this pointsectorNumber: 16
+ has the fsectorNumber: 16
+ollowing rsectorNumber: 16
+estrictionsectorNumber: 16
+s:
+//
+//	 sectorNumber: 16
+  there issectorNumber: 16
+ no synchrsectorNumber: 16
+sectorNumber: 17
+onization sectorNumber: 17
+for concursectorNumber: 17
+rent accessectorNumber: 17
+ses
+//	   sectorNumber: 17
+files havesectorNumber: 17
+ a fixed ssectorNumber: 17
+ize, set wsectorNumber: 17
+hen the fisectorNumber: 17
+le is creasectorNumber: 17
+ted
+//	   sectorNumber: 17
+files cannsectorNumber: 17
+ot be biggsectorNumber: 17
+er than absectorNumber: 17
+sectorNumber: 18
+out 3KB insectorNumber: 18
+ size
+//	 sectorNumber: 18
+  there issectorNumber: 18
+ no hierarsectorNumber: 18
+chical dirsectorNumber: 18
+ectory strsectorNumber: 18
+ucture, ansectorNumber: 18
+d only a lsectorNumber: 18
+imited
+//	sectorNumber: 18
+     numbesectorNumber: 18
+r of filessectorNumber: 18
+ can be adsectorNumber: 18
+ded to thesectorNumber: 18
+sectorNumber: 19
+ system
+//sectorNumber: 19
+	   there sectorNumber: 19
+is no attesectorNumber: 19
+mpt to maksectorNumber: 19
+e the systsectorNumber: 19
+em robust sectorNumber: 19
+to failuresectorNumber: 19
+s
+//	    (sectorNumber: 19
+if Nachos sectorNumber: 19
+exits in tsectorNumber: 19
+he middle sectorNumber: 19
+of an opersectorNumber: 19
+ation thatsectorNumber: 19
+sectorNumber: 20
+ modifies
+sectorNumber: 20
+//	    thesectorNumber: 20
+ file systsectorNumber: 20
+em, it maysectorNumber: 20
+ corrupt tsectorNumber: 20
+he disk)
+/sectorNumber: 20
+/
+// CopyrsectorNumber: 20
+ight (c) 1sectorNumber: 20
+992-1993 TsectorNumber: 20
+he RegentssectorNumber: 20
+ of the UnsectorNumber: 20
+iversity osectorNumber: 20
+f CalifornsectorNumber: 21
+ia.
+// AllsectorNumber: 21
+ rights resectorNumber: 21
+served.  SsectorNumber: 21
+ee copyrigsectorNumber: 21
+ht.h for csectorNumber: 21
+opyright nsectorNumber: 21
+otice and sectorNumber: 21
+limitationsectorNumber: 21
+ 
+// of lisectorNumber: 21
+ability ansectorNumber: 21
+d disclaimsectorNumber: 21
+er of warrsectorNumber: 21
+sectorNumber: 22
+anty provisectorNumber: 22
+sions.
+
+#isectorNumber: 22
+nclude "cosectorNumber: 22
+pyright.h"sectorNumber: 22
+
+
+#includesectorNumber: 22
+ "disk.h"
+sectorNumber: 22
+#include "sectorNumber: 22
+bitmap.h"
+sectorNumber: 22
+#include "sectorNumber: 22
+directory.sectorNumber: 22
+h"
+#includsectorNumber: 22
+e "filehdrsectorNumber: 22
+.h"
+#inclusectorNumber: 22
+sectorNumber: 23
+de "filesysectorNumber: 23
+s.h"
+
+// SsectorNumber: 23
+ectors consectorNumber: 23
+taining thsectorNumber: 23
+e file heasectorNumber: 23
+ders for tsectorNumber: 23
+he bitmap sectorNumber: 23
+of free sesectorNumber: 23
+ctors,
+// sectorNumber: 23
+and the disectorNumber: 23
+rectory ofsectorNumber: 23
+ files.  TsectorNumber: 23
+hese file sectorNumber: 23
+sectorNumber: 24
+headers arsectorNumber: 24
+e placed isectorNumber: 24
+n well-knosectorNumber: 24
+wn 
+// secsectorNumber: 24
+tors, so tsectorNumber: 24
+hat they csectorNumber: 24
+an be locasectorNumber: 24
+ted on boosectorNumber: 24
+t-up.
+#defsectorNumber: 24
+ine FreeMasectorNumber: 24
+pSector 		sectorNumber: 24
+0
+#define sectorNumber: 24
+DirectorySsectorNumber: 24
+sectorNumber: 25
+ector 	1
+
+sectorNumber: 25
+// InitialsectorNumber: 25
+ file sizesectorNumber: 25
+s for the sectorNumber: 25
+bitmap andsectorNumber: 25
+ directorysectorNumber: 25
+; until thsectorNumber: 25
+e file syssectorNumber: 25
+tem
+// supsectorNumber: 25
+ports extesectorNumber: 25
+nsible filsectorNumber: 25
+es, the disectorNumber: 25
+rectory sisectorNumber: 26
+ze sets thsectorNumber: 26
+e maximum sectorNumber: 26
+number 
+//sectorNumber: 26
+ of files sectorNumber: 26
+that can bsectorNumber: 26
+e loaded osectorNumber: 26
+nto the disectorNumber: 26
+sk.
+#definsectorNumber: 26
+e FreeMapFsectorNumber: 26
+ileSize 	(sectorNumber: 26
+NumSectorssectorNumber: 26
+ / BitsInBsectorNumber: 26
+sectorNumber: 27
+yte)
+#defisectorNumber: 27
+ne NumDirEsectorNumber: 27
+ntries 		1sectorNumber: 27
+0
+#define sectorNumber: 27
+DirectoryFsectorNumber: 27
+ileSize 	(sectorNumber: 27
+sizeof(DirsectorNumber: 27
+ectoryEntrsectorNumber: 27
+y) * NumDisectorNumber: 27
+rEntries)
+sectorNumber: 27
+
+//-------sectorNumber: 27
+----------sectorNumber: 27
+----------sectorNumber: 27
+sectorNumber: 28
+----------sectorNumber: 28
+----------sectorNumber: 28
+----------sectorNumber: 28
+----------sectorNumber: 28
+---
+// FilsectorNumber: 28
+eSystem::FsectorNumber: 28
+ileSystem
+sectorNumber: 28
+// 	InitiasectorNumber: 28
+lize the fsectorNumber: 28
+ile systemsectorNumber: 28
+.  If formsectorNumber: 28
+at = TRUE,sectorNumber: 28
+ the disk sectorNumber: 28
+sectorNumber: 29
+sectorNumber: 31
+has
+//	notsectorNumber: 29
+sectorNumber: 31
+hing on itsectorNumber: 29
+sectorNumber: 31
+, and we nsectorNumber: 29
+sectorNumber: 31
+eed to inisectorNumber: 29
+sectorNumber: 31
+tialize thsectorNumber: 29
+sectorNumber: 31
+e disk to sectorNumber: 29
+sectorNumber: 31
+contain
+//sectorNumber: 29
+sectorNumber: 31
+	an empty sectorNumber: 29
+sectorNumber: 31
+directory,sectorNumber: 29
+sectorNumber: 31
+ and a bitsectorNumber: 29
+sectorNumber: 31
+map of fresectorNumber: 29
+sectorNumber: 31
+e sectors sectorNumber: 29
+sectorNumber: 31
+(with almosectorNumber: 29
+sectorNumber: 31
+sectorNumber: 29
+sectorNumber: 32
+st but
+//	sectorNumber: 29
+sectorNumber: 32
+not all ofsectorNumber: 29
+sectorNumber: 32
+ the sectosectorNumber: 29
+sectorNumber: 32
+rs marked sectorNumber: 29
+sectorNumber: 32
+as free). sectorNumber: 29
+sectorNumber: 32
+ 
+//
+//	IfsectorNumber: 29
+sectorNumber: 32
+ format = sectorNumber: 29
+sectorNumber: 32
+FALSE, we sectorNumber: 29
+sectorNumber: 32
+just have sectorNumber: 29
+sectorNumber: 32
+to open thsectorNumber: 29
+sectorNumber: 32
+e files
+//sectorNumber: 29
+sectorNumber: 32
+	representsectorNumber: 29
+sectorNumber: 32
+ing the bisectorNumber: 29
+sectorNumber: 33
+tmap and tsectorNumber: 29
+sectorNumber: 33
+he directosectorNumber: 29
+sectorNumber: 33
+ry.
+//
+//	sectorNumber: 29
+sectorNumber: 33
+"format" -sectorNumber: 29
+sectorNumber: 33
+- should wsectorNumber: 29
+sectorNumber: 33
+e initialisectorNumber: 29
+sectorNumber: 33
+ze the dissectorNumber: 29
+sectorNumber: 33
+k?
+//-----sectorNumber: 29
+sectorNumber: 33
+----------sectorNumber: 29
+sectorNumber: 33
+----------sectorNumber: 29
+sectorNumber: 33
+----------sectorNumber: 29
+sectorNumber: 33
+----------sectorNumber: 29
+sectorNumber: 33
+sectorNumber: 29
+sectorNumber: 34
+----------sectorNumber: 29
+sectorNumber: 34
+----------sectorNumber: 29
+sectorNumber: 34
+-----
+
+FilsectorNumber: 29
+sectorNumber: 34
+eSystem::FsectorNumber: 29
+sectorNumber: 34
+ileSystem(sectorNumber: 29
+sectorNumber: 34
+bool formasectorNumber: 29
+sectorNumber: 34
+t)
+{ 
+    sectorNumber: 29
+sectorNumber: 34
+DEBUG('f',sectorNumber: 29
+sectorNumber: 34
+ "InitialisectorNumber: 29
+sectorNumber: 34
+zing the fsectorNumber: 29
+sectorNumber: 34
+ile systemsectorNumber: 29
+sectorNumber: 34
+.\n");
+   sectorNumber: 29
+sectorNumber: 34
+ if (formasectorNumber: 29
+sectorNumber: 34
+sectorNumber: 29
+sectorNumber: 35
+t) {
+     sectorNumber: 29
+sectorNumber: 35
+   BitMap sectorNumber: 29
+sectorNumber: 35
+*freeMap =sectorNumber: 29
+sectorNumber: 35
+ new BitMasectorNumber: 29
+sectorNumber: 35
+p(NumSectosectorNumber: 29
+sectorNumber: 35
+rs);
+     sectorNumber: 29
+sectorNumber: 35
+   DirectosectorNumber: 29
+sectorNumber: 35
+ry *directsectorNumber: 29
+sectorNumber: 35
+ory = new sectorNumber: 29
+sectorNumber: 35
+Directory(sectorNumber: 29
+sectorNumber: 35
+NumDirEntrsectorNumber: 29
+sectorNumber: 35
+ies);
+	FilsectorNumber: 29
+sectorNumber: 35
+eHeader *msectorNumber: 29
+sectorNumber: 35
+sectorNumber: 29
+sectorNumber: 36
+apHdr = nesectorNumber: 29
+sectorNumber: 36
+w FileHeadsectorNumber: 29
+sectorNumber: 36
+er;
+	FileHsectorNumber: 29
+sectorNumber: 36
+eader *dirsectorNumber: 29
+sectorNumber: 36
+Hdr = new sectorNumber: 29
+sectorNumber: 36
+FileHeadersectorNumber: 29
+sectorNumber: 36
+;
+
+       sectorNumber: 29
+sectorNumber: 36
+ DEBUG('f'sectorNumber: 29
+sectorNumber: 36
+, "FormattsectorNumber: 29
+sectorNumber: 36
+ing the fisectorNumber: 29
+sectorNumber: 36
+le system.sectorNumber: 29
+sectorNumber: 36
+\n");
+
+   sectorNumber: 29
+sectorNumber: 36
+ // First,sectorNumber: 29
+sectorNumber: 36
+sectorNumber: 29
+sectorNumber: 37
+ allocate sectorNumber: 29
+sectorNumber: 37
+space for sectorNumber: 29
+sectorNumber: 37
+FileHeadersectorNumber: 29
+sectorNumber: 37
+s for the sectorNumber: 29
+sectorNumber: 37
+directory sectorNumber: 29
+sectorNumber: 37
+and bitmapsectorNumber: 29
+sectorNumber: 37
+
+    // (msectorNumber: 29
+sectorNumber: 37
+ake sure nsectorNumber: 29
+sectorNumber: 37
+o one elsesectorNumber: 29
+sectorNumber: 37
+ grabs thesectorNumber: 29
+sectorNumber: 37
+se!)
+	freesectorNumber: 29
+sectorNumber: 37
+Map->Mark(sectorNumber: 29
+sectorNumber: 37
+FreeMapSecsectorNumber: 29
+sectorNumber: 38
+tor);	    sectorNumber: 29
+sectorNumber: 38
+
+	freeMap-sectorNumber: 29
+sectorNumber: 38
+>Mark(DiresectorNumber: 29
+sectorNumber: 38
+ctorySectosectorNumber: 29
+sectorNumber: 38
+r);
+
+    /sectorNumber: 29
+sectorNumber: 38
+/ Second, sectorNumber: 29
+sectorNumber: 38
+allocate ssectorNumber: 29
+sectorNumber: 38
+pace for tsectorNumber: 29
+sectorNumber: 38
+he data blsectorNumber: 29
+sectorNumber: 38
+ocks contasectorNumber: 29
+sectorNumber: 38
+ining the sectorNumber: 29
+sectorNumber: 38
+contents
+ sectorNumber: 29
+sectorNumber: 38
+sectorNumber: 29
+sectorNumber: 39
+   // of tsectorNumber: 29
+sectorNumber: 39
+he directosectorNumber: 29
+sectorNumber: 39
+ry and bitsectorNumber: 29
+sectorNumber: 39
+map files.sectorNumber: 29
+sectorNumber: 39
+  There besectorNumber: 29
+sectorNumber: 39
+tter be ensectorNumber: 29
+sectorNumber: 39
+ough spacesectorNumber: 29
+sectorNumber: 39
+!
+
+	ASSERTsectorNumber: 29
+sectorNumber: 39
+(mapHdr->AsectorNumber: 29
+sectorNumber: 39
+llocate(frsectorNumber: 29
+sectorNumber: 39
+eeMap, FresectorNumber: 29
+sectorNumber: 39
+eMapFileSisectorNumber: 29
+sectorNumber: 39
+ze));
+	ASSsectorNumber: 29
+sectorNumber: 39
+sectorNumber: 29
+sectorNumber: 40
+ERT(dirHdrsectorNumber: 29
+sectorNumber: 40
+->AllocatesectorNumber: 29
+sectorNumber: 40
+(freeMap, sectorNumber: 29
+sectorNumber: 40
+DirectoryFsectorNumber: 29
+sectorNumber: 40
+ileSize));sectorNumber: 29
+sectorNumber: 40
+
+
+    // FsectorNumber: 29
+sectorNumber: 40
+lush the bsectorNumber: 29
+sectorNumber: 40
+itmap and sectorNumber: 29
+sectorNumber: 40
+directory sectorNumber: 29
+sectorNumber: 40
+FileHeadersectorNumber: 29
+sectorNumber: 40
+s back to sectorNumber: 29
+sectorNumber: 40
+disk
+    /sectorNumber: 29
+sectorNumber: 40
+/ We need sectorNumber: 29
+sectorNumber: 40
+sectorNumber: 29
+sectorNumber: 41
+to do thissectorNumber: 29
+sectorNumber: 41
+ before wesectorNumber: 29
+sectorNumber: 41
+ can "OpensectorNumber: 29
+sectorNumber: 41
+" the filesectorNumber: 29
+sectorNumber: 41
+, since opsectorNumber: 29
+sectorNumber: 41
+en
+    // sectorNumber: 29
+sectorNumber: 41
+reads the sectorNumber: 29
+sectorNumber: 41
+file headesectorNumber: 29
+sectorNumber: 41
+r off of dsectorNumber: 29
+sectorNumber: 41
+isk (and csectorNumber: 29
+sectorNumber: 41
+urrently tsectorNumber: 29
+sectorNumber: 41
+he disk hasectorNumber: 29
+sectorNumber: 41
+s garbage
+sectorNumber: 29
+sectorNumber: 41
+sectorNumber: 29
+sectorNumber: 42
+    // on sectorNumber: 29
+sectorNumber: 42
+it!).
+
+   sectorNumber: 29
+sectorNumber: 42
+     DEBUGsectorNumber: 29
+sectorNumber: 42
+('f', "WrisectorNumber: 29
+sectorNumber: 42
+ting headesectorNumber: 29
+sectorNumber: 42
+rs back tosectorNumber: 29
+sectorNumber: 42
+ disk.\n")sectorNumber: 29
+sectorNumber: 42
+;
+        sectorNumber: 29
+sectorNumber: 42
+mapHdr->sesectorNumber: 29
+sectorNumber: 42
+tCreateTimsectorNumber: 29
+sectorNumber: 42
+e();
+     sectorNumber: 29
+sectorNumber: 42
+   dirHdr-sectorNumber: 29
+sectorNumber: 42
+>setCreatesectorNumber: 29
+sectorNumber: 43
+Time();
+	msectorNumber: 29
+sectorNumber: 43
+apHdr->WrisectorNumber: 29
+sectorNumber: 43
+teBack(FresectorNumber: 29
+sectorNumber: 43
+eMapSectorsectorNumber: 29
+sectorNumber: 43
+);    
+	disectorNumber: 29
+sectorNumber: 43
+rHdr->WritsectorNumber: 29
+sectorNumber: 43
+eBack(DiresectorNumber: 29
+sectorNumber: 43
+ctorySectosectorNumber: 29
+sectorNumber: 43
+r);
+
+    /sectorNumber: 29
+sectorNumber: 43
+/ OK to opsectorNumber: 29
+sectorNumber: 43
+en the bitsectorNumber: 29
+sectorNumber: 43
+map and disectorNumber: 29
+sectorNumber: 43
+sectorNumber: 29
+sectorNumber: 44
+rectory fisectorNumber: 29
+sectorNumber: 44
+les now
+  sectorNumber: 29
+sectorNumber: 44
+  // The fsectorNumber: 29
+sectorNumber: 44
+ile systemsectorNumber: 29
+sectorNumber: 44
+ operationsectorNumber: 29
+sectorNumber: 44
+s assume tsectorNumber: 29
+sectorNumber: 44
+hese two fsectorNumber: 29
+sectorNumber: 44
+iles are lsectorNumber: 29
+sectorNumber: 44
+eft open
+ sectorNumber: 29
+sectorNumber: 44
+   // whilsectorNumber: 29
+sectorNumber: 44
+e Nachos isectorNumber: 29
+sectorNumber: 44
+s running.sectorNumber: 29
+sectorNumber: 44
+
+
+        sectorNumber: 29
+sectorNumber: 44
+sectorNumber: 29
+sectorNumber: 45
+freeMapFilsectorNumber: 29
+sectorNumber: 45
+e = new OpsectorNumber: 29
+sectorNumber: 45
+enFile(FresectorNumber: 29
+sectorNumber: 45
+eMapSectorsectorNumber: 29
+sectorNumber: 45
+);
+       sectorNumber: 29
+sectorNumber: 45
+ directorysectorNumber: 29
+sectorNumber: 45
+File = newsectorNumber: 29
+sectorNumber: 45
+ OpenFile(sectorNumber: 29
+sectorNumber: 45
+DirectorySsectorNumber: 29
+sectorNumber: 45
+ector);
+  sectorNumber: 29
+sectorNumber: 45
+   
+    //sectorNumber: 29
+sectorNumber: 45
+ Once we hsectorNumber: 29
+sectorNumber: 45
+ave the fisectorNumber: 29
+sectorNumber: 45
+sectorNumber: 29
+sectorNumber: 46
+les "open"sectorNumber: 29
+sectorNumber: 46
+, we can wsectorNumber: 29
+sectorNumber: 46
+rite the isectorNumber: 29
+sectorNumber: 46
+nitial versectorNumber: 29
+sectorNumber: 46
+sion
+    /sectorNumber: 29
+sectorNumber: 46
+/ of each sectorNumber: 29
+sectorNumber: 46
+file back sectorNumber: 29
+sectorNumber: 46
+to disk.  sectorNumber: 29
+sectorNumber: 46
+The directsectorNumber: 29
+sectorNumber: 46
+ory at thisectorNumber: 29
+sectorNumber: 46
+s point issectorNumber: 29
+sectorNumber: 46
+ completelsectorNumber: 29
+sectorNumber: 46
+y
+    // esectorNumber: 29
+sectorNumber: 46
+sectorNumber: 29
+sectorNumber: 47
+mpty; but sectorNumber: 29
+sectorNumber: 47
+the bitmapsectorNumber: 29
+sectorNumber: 47
+ has been sectorNumber: 29
+sectorNumber: 47
+changed tosectorNumber: 29
+sectorNumber: 47
+ reflect tsectorNumber: 29
+sectorNumber: 47
+he fact thsectorNumber: 29
+sectorNumber: 47
+at
+    // sectorNumber: 29
+sectorNumber: 47
+sectors onsectorNumber: 29
+sectorNumber: 47
+ the disk sectorNumber: 29
+sectorNumber: 47
+have been sectorNumber: 29
+sectorNumber: 47
+allocated sectorNumber: 29
+sectorNumber: 47
+for the fisectorNumber: 29
+sectorNumber: 47
+le headerssectorNumber: 29
+sectorNumber: 48
+ and
+    /sectorNumber: 29
+sectorNumber: 48
+/ to hold sectorNumber: 29
+sectorNumber: 48
+the file dsectorNumber: 29
+sectorNumber: 48
+ata for thsectorNumber: 29
+sectorNumber: 48
+e directorsectorNumber: 29
+sectorNumber: 48
+y and bitmsectorNumber: 29
+sectorNumber: 48
+ap.
+
+     sectorNumber: 29
+sectorNumber: 48
+   DEBUG('sectorNumber: 29
+sectorNumber: 48
+f', "WritisectorNumber: 29
+sectorNumber: 48
+ng bitmap sectorNumber: 29
+sectorNumber: 48
+and directsectorNumber: 29
+sectorNumber: 48
+ory back tsectorNumber: 29
+sectorNumber: 48
+sectorNumber: 29
+sectorNumber: 49
+o disk.\n"sectorNumber: 29
+sectorNumber: 49
+);
+	freeMasectorNumber: 29
+sectorNumber: 49
+p->WriteBasectorNumber: 29
+sectorNumber: 49
+ck(freeMapsectorNumber: 29
+sectorNumber: 49
+File);	 //sectorNumber: 29
+sectorNumber: 49
+ flush chasectorNumber: 29
+sectorNumber: 49
+nges to disectorNumber: 29
+sectorNumber: 49
+sk
+	directsectorNumber: 29
+sectorNumber: 49
+ory->WritesectorNumber: 29
+sectorNumber: 49
+Back(direcsectorNumber: 29
+sectorNumber: 49
+toryFile);sectorNumber: 29
+sectorNumber: 49
+
+
+	if (DebsectorNumber: 29
+sectorNumber: 49
+ugIsEnablesectorNumber: 29
+sectorNumber: 49
+sectorNumber: 29
+sectorNumber: 50
+d('f')) {
+sectorNumber: 29
+sectorNumber: 50
+	    freeMsectorNumber: 29
+sectorNumber: 50
+ap->Print(sectorNumber: 29
+sectorNumber: 50
+);
+	    disectorNumber: 29
+sectorNumber: 50
+rectory->PsectorNumber: 29
+sectorNumber: 50
+rint();
+
+ sectorNumber: 29
+sectorNumber: 50
+       delsectorNumber: 29
+sectorNumber: 50
+ete freeMasectorNumber: 29
+sectorNumber: 50
+p; 
+	deletsectorNumber: 29
+sectorNumber: 50
+e directorsectorNumber: 29
+sectorNumber: 50
+y; 
+	deletsectorNumber: 29
+sectorNumber: 50
+e mapHdr; sectorNumber: 29
+sectorNumber: 50
+
+	delete dsectorNumber: 29
+sectorNumber: 50
+sectorNumber: 29
+sectorNumber: 51
+irHdr;
+	}
+sectorNumber: 29
+sectorNumber: 51
+    } elsesectorNumber: 29
+sectorNumber: 51
+ {
+    // sectorNumber: 29
+sectorNumber: 51
+if we are sectorNumber: 29
+sectorNumber: 51
+not formatsectorNumber: 29
+sectorNumber: 51
+ting the dsectorNumber: 29
+sectorNumber: 51
+isk, just sectorNumber: 29
+sectorNumber: 51
+open the fsectorNumber: 29
+sectorNumber: 51
+iles represectorNumber: 29
+sectorNumber: 51
+senting
+  sectorNumber: 29
+sectorNumber: 51
+  // the bsectorNumber: 29
+sectorNumber: 51
+itmap and sectorNumber: 29
+sectorNumber: 51
+directory;sectorNumber: 29
+sectorNumber: 51
+sectorNumber: 29
+sectorNumber: 52
+ these aresectorNumber: 29
+sectorNumber: 52
+ left opensectorNumber: 29
+sectorNumber: 52
+ while NacsectorNumber: 29
+sectorNumber: 52
+hos is runsectorNumber: 29
+sectorNumber: 52
+ning
+     sectorNumber: 29
+sectorNumber: 52
+   freeMapsectorNumber: 29
+sectorNumber: 52
+File = newsectorNumber: 29
+sectorNumber: 52
+ OpenFile(sectorNumber: 29
+sectorNumber: 52
+FreeMapSecsectorNumber: 29
+sectorNumber: 52
+tor);
+    sectorNumber: 29
+sectorNumber: 52
+    directsectorNumber: 29
+sectorNumber: 52
+oryFile = sectorNumber: 29
+sectorNumber: 52
+new OpenFisectorNumber: 29
+sectorNumber: 53
+le(DirectosectorNumber: 29
+sectorNumber: 53
+rySector);sectorNumber: 29
+sectorNumber: 53
+
+    }
+}
+
+sectorNumber: 29
+sectorNumber: 53
+//--------sectorNumber: 29
+sectorNumber: 53
+----------sectorNumber: 29
+sectorNumber: 53
+----------sectorNumber: 29
+sectorNumber: 53
+----------sectorNumber: 29
+sectorNumber: 53
+----------sectorNumber: 29
+sectorNumber: 53
+----------sectorNumber: 29
+sectorNumber: 53
+----------sectorNumber: 29
+sectorNumber: 53
+--
+// FilesectorNumber: 29
+sectorNumber: 53
+System::CrsectorNumber: 29
+sectorNumber: 53
+sectorNumber: 29
+sectorNumber: 54
+eate
+// 	CsectorNumber: 29
+sectorNumber: 54
+reate a fisectorNumber: 29
+sectorNumber: 54
+le in the sectorNumber: 29
+sectorNumber: 54
+Nachos filsectorNumber: 29
+sectorNumber: 54
+e system (sectorNumber: 29
+sectorNumber: 54
+similar tosectorNumber: 29
+sectorNumber: 54
+ UNIX creasectorNumber: 29
+sectorNumber: 54
+te).
+//	SisectorNumber: 29
+sectorNumber: 54
+nce we cansectorNumber: 29
+sectorNumber: 54
+'t increassectorNumber: 29
+sectorNumber: 54
+e the sizesectorNumber: 29
+sectorNumber: 54
+ of files sectorNumber: 29
+sectorNumber: 54
+dynamicallsectorNumber: 29
+sectorNumber: 54
+sectorNumber: 29
+sectorNumber: 55
+y, we havesectorNumber: 29
+sectorNumber: 55
+
+//	to givsectorNumber: 29
+sectorNumber: 55
+e Create tsectorNumber: 29
+sectorNumber: 55
+he initialsectorNumber: 29
+sectorNumber: 55
+ size of tsectorNumber: 29
+sectorNumber: 55
+he file.
+/sectorNumber: 29
+sectorNumber: 55
+/
+//	The ssectorNumber: 29
+sectorNumber: 55
+teps to crsectorNumber: 29
+sectorNumber: 55
+eate a filsectorNumber: 29
+sectorNumber: 55
+e are:
+//	sectorNumber: 29
+sectorNumber: 55
+  Make sursectorNumber: 29
+sectorNumber: 55
+e the filesectorNumber: 29
+sectorNumber: 55
+ doesn't asectorNumber: 29
+sectorNumber: 55
+sectorNumber: 29
+sectorNumber: 56
+lready exisectorNumber: 29
+sectorNumber: 56
+st
+//     sectorNumber: 29
+sectorNumber: 56
+   AllocatsectorNumber: 29
+sectorNumber: 56
+e a sectorsectorNumber: 29
+sectorNumber: 56
+ for the fsectorNumber: 29
+sectorNumber: 56
+ile headersectorNumber: 29
+sectorNumber: 56
+
+// 	  AllsectorNumber: 29
+sectorNumber: 56
+ocate spacsectorNumber: 29
+sectorNumber: 56
+e on disk sectorNumber: 29
+sectorNumber: 56
+for the dasectorNumber: 29
+sectorNumber: 56
+ta blocks sectorNumber: 29
+sectorNumber: 56
+for the fisectorNumber: 29
+sectorNumber: 56
+le
+//	  AdsectorNumber: 29
+sectorNumber: 56
+sectorNumber: 29
+sectorNumber: 57
+d the namesectorNumber: 29
+sectorNumber: 57
+ to the disectorNumber: 29
+sectorNumber: 57
+rectory
+//sectorNumber: 29
+sectorNumber: 57
+	  Store tsectorNumber: 29
+sectorNumber: 57
+he new filsectorNumber: 29
+sectorNumber: 57
+e header osectorNumber: 29
+sectorNumber: 57
+n disk 
+//sectorNumber: 29
+sectorNumber: 57
+	  Flush tsectorNumber: 29
+sectorNumber: 57
+he changessectorNumber: 29
+sectorNumber: 57
+ to the bisectorNumber: 29
+sectorNumber: 57
+tmap and tsectorNumber: 29
+sectorNumber: 57
+he directosectorNumber: 29
+sectorNumber: 57
+ry back tosectorNumber: 29
+sectorNumber: 58
+ disk
+//
+/sectorNumber: 29
+sectorNumber: 58
+/	Return TsectorNumber: 29
+sectorNumber: 58
+RUE if evesectorNumber: 29
+sectorNumber: 58
+rything gosectorNumber: 29
+sectorNumber: 58
+es ok, othsectorNumber: 29
+sectorNumber: 58
+erwise, resectorNumber: 29
+sectorNumber: 58
+turn FALSEsectorNumber: 29
+sectorNumber: 58
+.
+//
+// 	CsectorNumber: 29
+sectorNumber: 58
+reate failsectorNumber: 29
+sectorNumber: 58
+s if:
+//  sectorNumber: 29
+sectorNumber: 58
+ 		file issectorNumber: 29
+sectorNumber: 58
+ already isectorNumber: 29
+sectorNumber: 58
+sectorNumber: 29
+sectorNumber: 59
+n directorsectorNumber: 29
+sectorNumber: 59
+y
+//	 	no sectorNumber: 29
+sectorNumber: 59
+free spacesectorNumber: 29
+sectorNumber: 59
+ for file sectorNumber: 29
+sectorNumber: 59
+header
+//	sectorNumber: 29
+sectorNumber: 59
+ 	no free sectorNumber: 29
+sectorNumber: 59
+entry for sectorNumber: 29
+sectorNumber: 59
+file in disectorNumber: 29
+sectorNumber: 59
+rectory
+//sectorNumber: 29
+sectorNumber: 59
+	 	no freesectorNumber: 29
+sectorNumber: 59
+ space forsectorNumber: 29
+sectorNumber: 59
+ data blocsectorNumber: 29
+sectorNumber: 59
+ks for thesectorNumber: 29
+sectorNumber: 59
+sectorNumber: 29
+sectorNumber: 60
+ file 
+//
+sectorNumber: 29
+sectorNumber: 60
+// 	Note tsectorNumber: 29
+sectorNumber: 60
+hat this isectorNumber: 29
+sectorNumber: 60
+mplementatsectorNumber: 29
+sectorNumber: 60
+ion assumesectorNumber: 29
+sectorNumber: 60
+s there issectorNumber: 29
+sectorNumber: 60
+ no concursectorNumber: 29
+sectorNumber: 60
+rent accessectorNumber: 29
+sectorNumber: 60
+s
+//	to thsectorNumber: 29
+sectorNumber: 60
+e file syssectorNumber: 29
+sectorNumber: 60
+tem!
+//
+//sectorNumber: 29
+sectorNumber: 60
+	"name" --sectorNumber: 29
+sectorNumber: 60
+ name of fsectorNumber: 29
+sectorNumber: 60
+sectorNumber: 29
+sectorNumber: 61
+ile to be sectorNumber: 29
+sectorNumber: 61
+created
+//sectorNumber: 29
+sectorNumber: 61
+	"initialSsectorNumber: 29
+sectorNumber: 61
+ize" -- sisectorNumber: 29
+sectorNumber: 61
+ze of filesectorNumber: 29
+sectorNumber: 61
+ to be cresectorNumber: 29
+sectorNumber: 61
+ated
+//---sectorNumber: 29
+sectorNumber: 61
+----------sectorNumber: 29
+sectorNumber: 61
+----------sectorNumber: 29
+sectorNumber: 61
+----------sectorNumber: 29
+sectorNumber: 61
+----------sectorNumber: 29
+sectorNumber: 61
+----------sectorNumber: 29
+sectorNumber: 61
+----------sectorNumber: 29
+sectorNumber: 61
+sectorNumber: 29
+sectorNumber: 62
+-------
+
+bsectorNumber: 29
+sectorNumber: 62
+ool
+FileSysectorNumber: 29
+sectorNumber: 62
+stem::CreasectorNumber: 29
+sectorNumber: 62
+te(char *nsectorNumber: 29
+sectorNumber: 62
+ame, int isectorNumber: 29
+sectorNumber: 62
+nitialSizesectorNumber: 29
+sectorNumber: 62
+)
+{
+    DisectorNumber: 29
+sectorNumber: 62
+rectory *dsectorNumber: 29
+sectorNumber: 62
+irectory;
+sectorNumber: 29
+sectorNumber: 62
+    BitMapsectorNumber: 29
+sectorNumber: 62
+ *freeMap;sectorNumber: 29
+sectorNumber: 62
+
+    FileHsectorNumber: 29
+sectorNumber: 62
+eader *hdrsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+;
+    int sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+sector;
+  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+  bool sucsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+cess;
+
+   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+ DEBUG('f'sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+, "CreatinsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+g file %s,sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+ size %d\nsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+", name, isectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+nitialSizesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+);
+    dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+ectory = nsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 65
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+ew DirectosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+ry(NumDirEsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+ntries);
+ sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+   directosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+ry->FetchFsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+rom(directsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+oryFile);
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+
+    if (dsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+irectory->sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+Find(name)sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+ != -1)
+  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+    successectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+s = FALSE;sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 66
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+			// filesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+ is alreadsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+y in direcsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+tory
+    esectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+lse {	
+   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+     freeMsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+ap = new BsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+itMap(NumSsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+ectors);
+ sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+       fresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+eMap->FetcsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+hFrom(freesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+MapFile);
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 67
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+        sesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+ctor = fresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+eMap->FindsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+();	// finsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+d a sectorsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+ to hold tsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+he file hesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+ader
+    	sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+if (sectorsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+ == -1) 		sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+
+         sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+   successsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+ = FALSE;	sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 68
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+	// no fresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+e block fosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+r file heasectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+der 
+     sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+   else ifsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+ (!directosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+ry->Add(nasectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+me, sectorsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+))
+       sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+     succesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+ss = FALSEsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+;	// no spsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 69
+ace in dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+ectory
+	elsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+se {
+    	sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+    hdr = sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+new FileHesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+ader;
+	   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+ if (!hdr-sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+>Allocate(sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+freeMap, isectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+nitialSizesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+))
+       sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+     	succsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+ess = FALSsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 70
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+E;	// no ssectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+pace on disectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+sk for datsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+a
+	    elssectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+e {	
+	    sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+	success =sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+ TRUE;
+		/sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+/ everthinsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+g worked, sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+flush all sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+changes basectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+ck to disksectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+
+         sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 71
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+       hdrsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+->setCreatsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+eTime();
+ sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+   	    	hsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+dr->WriteBsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+ack(sectorsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+); 		
+    sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+	    	diresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+ctory->WrisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+teBack(dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+ectoryFilesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+);
+    	  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+  	freeMapsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 72
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+->WriteBacsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+k(freeMapFsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+ile);
+	   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+ }
+       sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+     deletsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+e hdr;
+	}
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+        desectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+lete freeMsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+ap;
+    }
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+    deletesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+ directorysectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+;
+    retusectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+rn successsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 73
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+;
+}
+
+//---sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+-------
+//sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+ FileSystesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+m::Open
+//sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+ 	Open a fsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+ile for resectorNumber: 30
+sectorNumber: 63
+sectorNumber: 74
+ading and sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+writing.  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+
+//	To opesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+n a file:
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+//	  Find sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+the locatisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+on of the sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+file's heasectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+der, usingsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+ the direcsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+tory 
+//	 sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+ Bring thesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+ header insectorNumber: 30
+sectorNumber: 63
+sectorNumber: 75
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+to memory
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+//
+//	"namsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+e" -- the sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+text name sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+of the filsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+e to be opsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+ened
+//---sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 76
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+-------
+
+OsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+penFile *
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+FileSystemsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+::Open(chasectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+r *name)
+{sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+ 
+    DiresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+ctory *dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+ectory = nsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+ew DirectosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+ry(NumDirEsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+ntries);
+ sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+   OpenFilsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+e *openFilsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 77
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+e = NULL;
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+    int sesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+ctor;
+
+   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+ DEBUG('f'sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+, "OpeningsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+ file %s\nsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+", name);
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+    directsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+ory->FetchsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+From(direcsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+toryFile);sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+
+    sectosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+r = directsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 78
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+ory->Find(sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+name); 
+  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+  if (sectsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+or >= 0) 	sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+	
+	openFilsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+e = new OpsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+enFile(secsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+tor);	// nsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+ame was fosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+und in dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+ectory 
+  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+  delete dsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 79
+irectory;
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+    returnsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+ openFile;sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+				// retsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+urn NULL isectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+f not founsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+d
+}
+
+//---sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 80
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+-------
+//sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+ FileSystesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+m::Remove
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+// 	DeletesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+ a file frsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+om the filsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+e system. sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+ This requsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+ires:
+//	 sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+   Remove sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+it from thsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+e directorsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+y
+//	    DsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 81
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+elete the sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+space for sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+its headersectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+
+//	    DesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+lete the ssectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+pace for isectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+ts data blsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+ocks
+//	  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+  Write chsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+anges to dsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+irectory, sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+bitmap bacsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+k to disk
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 82
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+//
+//	RetusectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+rn TRUE ifsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+ the file sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+was deletesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+d, FALSE isectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+f the filesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+ wasn't
+//sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+	in the fisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+le system.sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+
+//
+//	"nasectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+me" -- thesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+ text namesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+ of the fisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 83
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+le to be rsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+emoved
+//-sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+---------
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+
+bool
+FilesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+System::ResectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+move(char sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 84
+*name)
+{ 
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+    DirectsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+ory *direcsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+tory;
+    sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+BitMap *frsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+eeMap;
+   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+ FileHeadesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+r *fileHdrsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+;
+    int sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+sector;
+  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+  
+    dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+ectory = nsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+ew DirectosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 85
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+ry(NumDirEsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+ntries);
+ sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+   directosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+ry->FetchFsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+rom(directsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+oryFile);
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+    sectorsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+ = directosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+ry->Find(nsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+ame);
+    sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+if (sectorsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+ == -1) {
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+       delsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 86
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+ete directsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+ory;
+     sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+  return FsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+ALSE;			 /sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+/ file notsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+ found 
+  sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+  }
+    fisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+leHdr = nesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+w FileHeadsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+er;
+    fisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+leHdr->FetsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+chFrom(secsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+tor);
+
+   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 87
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+ freeMap =sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+ new BitMasectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+p(NumSectosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+rs);
+    fsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+reeMap->FesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+tchFrom(frsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+eeMapFile)sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+;
+
+    filsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+eHdr->DealsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+locate(fresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+eMap);  		sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+// remove sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+data blocksectorNumber: 30
+sectorNumber: 63
+sectorNumber: 88
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+s
+    freesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+Map->ClearsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+(sector);	sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+		// removsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+e header bsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+lock
+    dsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+irectory->sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+Remove(namsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+e);
+
+    fsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+reeMap->WrsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+iteBack(frsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+eeMapFile)sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 89
+;		// flussectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+h to disk
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+    directsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+ory->WritesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+Back(direcsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+toryFile);sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+        //sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+ flush to sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+disk
+    dsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+elete filesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+Hdr;
+    dsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+elete diresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+ctory;
+   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 90
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+ delete frsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+eeMap;
+   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+ return TRsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+UE;
+} 
+
+//sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+
+// FileSysectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+stem::ListsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 91
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+
+// 	List sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+all the fisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+les in thesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+ file systsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+em directosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+ry.
+//----sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+------
+
+vosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 92
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+id
+FileSyssectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+tem::List(sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+)
+{
+    DisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+rectory *dsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+irectory =sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+ new DirecsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+tory(NumDisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+rEntries);sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+
+
+    diresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+ctory->FetsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+chFrom(dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+ectoryFilesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+);
+    dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 93
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+ectory->LisectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+st();
+    sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+delete dirsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+ectory;
+}
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+
+//-------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+---
+// FilsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 94
+eSystem::PsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+rint
+// 	PsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+rint everysectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+thing abousectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+t the filesectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+ system:
+/sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+/	  the cosectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+ntents of sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+the bitmapsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+
+//	  the sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+contents osectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+f the diresectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+ctory
+//	 sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 95
+sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+ for each sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+file in thsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+e directorsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+y,
+//	    sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+  the contsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+ents of thsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+e file heasectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+der
+//	   sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+   the datsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+a in the fsectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+ile
+//----sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+----------sectorNumber: 30
+sectorNumber: 63
+sectorNumber: 96
+sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+----------sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+----------sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+----------sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+----------sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+------
+
+vosectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+id
+FileSyssectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+tem::PrintsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+()
+{
+    FsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+ileHeader sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+*bitHdr = sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+new FileHesectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+ader;
+    sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+FileHeadersectorNumber: 30
+sectorNumber: 64
+sectorNumber: 97
+sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+ *dirHdr =sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+ new FileHsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+eader;
+   sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+ BitMap *fsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+reeMap = nsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+ew BitMap(sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+NumSectorssectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+);
+    DirsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+ectory *disectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+rectory = sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+new DirectsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+ory(NumDirsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+Entries);
+sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 98
+sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+
+    printsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+f("Bit mapsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+ file headsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+er:\n");
+ sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+   bitHdr-sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+>FetchFromsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+(FreeMapSesectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+ctor);
+   sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+ bitHdr->PsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+rint();
+
+ sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+   printf(sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+"DirectorysectorNumber: 30
+sectorNumber: 64
+sectorNumber: 99
+ file headsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+er:\n");
+ sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+   dirHdr-sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+>FetchFromsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+(DirectorysectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+Sector);
+ sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+   dirHdr-sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+>Print();
+sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+
+    freeMsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+ap->FetchFsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+rom(freeMasectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+pFile);
+  sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+  freeMap-sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 100
+sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+>Print();
+sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+
+    direcsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+tory->FetcsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+hFrom(diresectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+ctoryFile)sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+;
+    diresectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+ctory->PrisectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+nt();
+
+   sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+ delete bisectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+tHdr;
+    sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+delete dirsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+Hdr;
+    dsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+elete freesectorNumber: 30
+sectorNumber: 64
+sectorNumber: 101
+sectorNumber: 30
+sectorNumber: 64
+sectorNumber: 102
+Map;
+    dsectorNumber: 30
+sectorNumber: 64
+sectorNumber: 102
+elete diresectorNumber: 30
+sectorNumber: 64
+sectorNumber: 102
+ctory;
+} 
+finish
+No threads ready or runnable, and no pending interrupts.
+Assuming the program completed.
+Machine halting!
+
+Ticks: total 31939100, idle 31822460, system 116640, user 0
+Disk I/O: reads 2706, writes 1181
+Console I/O: reads 0, writes 0
+Paging: faults 0
+Network I/O: packets received 0, sent 0
+
+Cleaning up...

@@ -20,6 +20,7 @@
 #include "directory.h"
 
 #define NumDirect 	((SectorSize-4*sizeof(int)-3*sizeof(time_t))/sizeof(int))
+#define SectorsInSector  (SectorSize/sizeof(int))
 #define MaxFileSize 	(NumDirect * SectorSize)
 
 // The following class defines the Nachos "file header" (in UNIX terms,  
@@ -64,6 +65,8 @@ class FileHeader {
     char* getCreateTime();
     char* getLastAccessTime();
     char* getLastModifyTime();
+
+    int LogicalSectorToSector(int logi);
 
   private:
     int sector;

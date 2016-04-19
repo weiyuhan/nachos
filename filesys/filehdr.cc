@@ -41,13 +41,69 @@
 bool
 FileHeader::Allocate(BitMap *freeMap, int fileSize)
 { 
+    //printf("fileSize %d\n", fileSize);
     numBytes = fileSize;
     numSectors  = divRoundUp(fileSize, SectorSize);
-    if (freeMap->NumClear() < numSectors)
-	return FALSE;		// not enough space
+    //printf("numSectors: %d\n", numSectors);
+    if(numSectors <= NumDirect - 2)
+    {
+        if (freeMap->NumClear() < numSectors)
+    	   return FALSE;		// not enough space
 
-    for (int i = 0; i < numSectors; i++)
-	dataSectors[i] = freeMap->Find();
+        for (int i = 0; i < numSectors; i++)
+    	   dataSectors[i] = freeMap->Find();
+    }
+    else if(numSectors <= NumDirect - 2 + SectorsInSector)
+    {
+        if(freeMap->NumClear() < numSectors + 1)
+            return FALSE;
+        int left = numSectors - (NumDirect-2);
+        for (int i = 0; i < (NumDirect-1); i++) // direct
+            dataSectors[i] = freeMap->Find();
+
+        int sectorTable[SectorsInSector] = {};
+        for(int i = 0; i < left; i++) // indirect
+            sectorTable[i] = freeMap->Find();
+        synchDisk->WriteSector(dataSectors[NumDirect-2],
+            (char*)sectorTable);
+    }
+    else if(numSectors <= NumDirect - 2 + SectorsInSector
+        + SectorsInSector * SectorsInSector)
+    {
+        int left = numSectors - (NumDirect-2) - SectorsInSector;
+        int indirectSectors = divRoundUp(left, SectorsInSector);
+        if(freeMap->NumClear() < numSectors + 1 + indirectSectors)
+            return FALSE;
+        for (int i = 0; i < NumDirect; i++) // direct
+            dataSectors[i] = freeMap->Find();
+
+        int sectorTable[SectorsInSector] = {};
+        for(int i = 0; i < SectorsInSector; i++) // indirect
+        {
+            sectorTable[i] = freeMap->Find();
+        }
+        synchDisk->WriteSector(dataSectors[NumDirect-2],
+            (char*)sectorTable);
+
+        int InsectorTable[SectorsInSector] = {};
+        for(int i = 0; i < indirectSectors; i++)
+        {
+            InsectorTable[i] = freeMap->Find();
+        }
+        synchDisk->WriteSector(dataSectors[NumDirect-1],
+            (char*)InsectorTable);
+        for(int i = 0; i < indirectSectors; i++)
+        {
+            int fillup = left <= SectorsInSector? left:SectorsInSector;
+            left -= SectorsInSector;
+
+            int InInsectorTable[SectorsInSector] = {};
+            for(int j = 0; j < fillup; j++)
+                InInsectorTable[j] = freeMap->Find();
+            synchDisk->WriteSector(InsectorTable[i], 
+                (char*)InInsectorTable);
+        }
+    }
     return TRUE;
 }
 
@@ -61,9 +117,75 @@ FileHeader::Allocate(BitMap *freeMap, int fileSize)
 void 
 FileHeader::Deallocate(BitMap *freeMap)
 {
-    for (int i = 0; i < numSectors; i++) {
-	ASSERT(freeMap->Test((int) dataSectors[i]));  // ought to be marked!
-	freeMap->Clear((int) dataSectors[i]);
+    if(numSectors <= NumDirect - 2)
+    {
+        for (int i = 0; i < numSectors; i++) 
+        {
+            ASSERT(freeMap->Test((int) dataSectors[i]));  // ought to be marked!
+            freeMap->Clear((int) dataSectors[i]);
+        }
+    }
+    else if(numSectors <= NumDirect - 2 + SectorsInSector)
+    {
+        int left = numSectors - (NumDirect-2);
+
+        int sectorTable[SectorsInSector] = {};
+        synchDisk->ReadSector(dataSectors[NumDirect-2],
+            (char*)sectorTable);
+        for(int i = 0; i < left; i++) // indirect
+        {
+            ASSERT(freeMap->Test((int) sectorTable[i]));  // ought to be marked!
+            freeMap->Clear((int) sectorTable[i]);
+        }
+
+        for (int i = 0; i < (NumDirect-1); i++) // direct
+        {
+            ASSERT(freeMap->Test((int) dataSectors[i]));  // ought to be marked!
+            freeMap->Clear((int) dataSectors[i]);
+        }
+    }
+    else
+    {
+        int left = numSectors - (NumDirect-2) - SectorsInSector;
+        int indirectSectors = divRoundUp(left, SectorsInSector); 
+
+        int sectorTable[SectorsInSector] = {};
+        synchDisk->ReadSector(dataSectors[NumDirect-2],
+            (char*)sectorTable);
+        for(int i = 0; i < SectorsInSector; i++) // indirect
+        {
+            ASSERT(freeMap->Test((int) sectorTable[i]));  // ought to be marked!
+            freeMap->Clear((int) sectorTable[i]);
+        }
+
+        int InsectorTable[SectorsInSector] = {};
+        synchDisk->ReadSector(dataSectors[NumDirect-1],
+            (char*)InsectorTable);
+        for(int i = 0; i < indirectSectors; i++)
+        {
+            int fillup = left <= SectorsInSector? left:SectorsInSector;
+            left -= SectorsInSector;
+
+            int InInsectorTable[SectorsInSector] = {};
+            synchDisk->ReadSector(InsectorTable[i], 
+                (char*)InInsectorTable);
+            for(int j = 0; j < fillup; j++)
+            {
+                ASSERT(freeMap->Test((int) InInsectorTable[i]));  // ought to be marked!
+                freeMap->Clear((int) InInsectorTable[i]);
+            }
+
+            ASSERT(freeMap->Test((int) InsectorTable[i]));  // ought to be marked!
+            freeMap->Clear((int) InsectorTable[i]);
+        }
+
+
+
+        for (int i = 0; i < NumDirect; i++) // direct
+        {
+            ASSERT(freeMap->Test((int) dataSectors[i]));  // ought to be marked!
+            freeMap->Clear((int) dataSectors[i]);
+        }
     }
 }
 
@@ -108,9 +230,45 @@ FileHeader::WriteBack(int sector)
 int
 FileHeader::ByteToSector(int offset)
 {
-    return(dataSectors[offset / SectorSize]);
+    return LogicalSectorToSector(offset/SectorSize);
 }
 
+int 
+FileHeader::LogicalSectorToSector(int logi)
+{
+    if(logi >= numSectors)
+        return -1;
+    if(logi < NumDirect - 2)
+    {
+        return dataSectors[logi];
+    }
+    else if(logi < NumDirect - 2 + SectorsInSector)
+    {
+        int left = logi - (NumDirect-2);
+
+        int sectorTable[SectorsInSector] = {};
+        synchDisk->ReadSector(dataSectors[NumDirect-2],
+            (char*)sectorTable);
+
+        return sectorTable[left];
+    }
+    else
+    {
+        int left = logi - (NumDirect-2) - SectorsInSector;
+        int indirectSectors = left/SectorsInSector;
+        int offset = left % SectorsInSector;
+
+        int InsectorTable[SectorsInSector] = {};
+        synchDisk->ReadSector(dataSectors[NumDirect-1],
+            (char*)InsectorTable);
+
+        int InInsectorTable[SectorsInSector] = {};
+        synchDisk->ReadSector(InsectorTable[indirectSectors],
+            (char*)InInsectorTable);
+        return InInsectorTable[offset];
+    }
+    return -1;
+}
 //----------------------------------------------------------------------
 // FileHeader::FileLength
 // 	Return the number of bytes in the file.
@@ -140,16 +298,18 @@ FileHeader::Print()
     printf("LastModify: %s.  ", getLastModifyTime());
     printf("File blocks:\n");
     for (i = 0; i < numSectors; i++)
-	printf("%d ", dataSectors[i]);
+	   printf("%d ", LogicalSectorToSector(i));
     printf("\nFile contents:\n");
-    for (i = k = 0; i < numSectors; i++) {
-	synchDisk->ReadSector(dataSectors[i], data);
-        for (j = 0; (j < SectorSize) && (k < numBytes); j++, k++) {
-	    if ('\040' <= data[j] && data[j] <= '\176')   // isprint(data[j])
-		printf("%c", data[j]);
-            else
-		printf("\\%x", (unsigned char)data[j]);
-	}
+    for (i = k = 0; i < numSectors; i++) 
+    {
+	    synchDisk->ReadSector(LogicalSectorToSector(i), data);
+        for (j = 0; (j < SectorSize) && (k < numBytes); j++, k++) 
+        {
+    	    if ('\040' <= data[j] && data[j] <= '\176')   // isprint(data[j])
+    		printf("%c", data[j]);
+                else
+    		printf("\\%x", (unsigned char)data[j]);
+    	}
         printf("\n"); 
     }
     delete [] data;
