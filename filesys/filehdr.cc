@@ -41,10 +41,8 @@
 bool
 FileHeader::Allocate(BitMap *freeMap, int fileSize)
 { 
-    //printf("fileSize %d\n", fileSize);
     numBytes = fileSize;
     numSectors  = divRoundUp(fileSize, SectorSize);
-    //printf("numSectors: %d\n", numSectors);
     if(numSectors <= NumDirect - 2)
     {
         if (freeMap->NumClear() < numSectors)

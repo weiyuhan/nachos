@@ -40,7 +40,7 @@ char* getNameFromDictorySector(int sector)
     }
     OpenFile* directoryFile = new OpenFile(sector);
     Directory *directory;
-    directory = new Directory(10);
+    directory = new Directory(12);
     directory->FetchFrom(directoryFile);
     char* name = directory->FindEntryName(paSector);
     int fatherSector = directory->Find(name);
