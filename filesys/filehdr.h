@@ -43,6 +43,7 @@ class FileHeader {
     bool Allocate(BitMap *bitMap, int fileSize);// Initialize a file header, 
 						//  including allocating space 
 						//  on disk for the file data
+    bool AllocateMore(BitMap *freeMap, int size);
     void Deallocate(BitMap *bitMap);  		// De-allocate this file's 
 						//  data blocks
 
@@ -65,6 +66,8 @@ class FileHeader {
     char* getCreateTime();
     char* getLastAccessTime();
     char* getLastModifyTime();
+
+    int getHdrSector(){return sector;}
 
     int LogicalSectorToSector(int logi);
 

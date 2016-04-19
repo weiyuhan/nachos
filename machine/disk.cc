@@ -139,6 +139,7 @@ Disk::WriteRequest(int sectorNumber, char* data)
     int ticks = ComputeLatency(sectorNumber, TRUE);
 
     ASSERT(!active);
+    //printf("sectorNumber: %d, NumSectors: %d\n",sectorNumber, NumSectors);
     ASSERT((sectorNumber >= 0) && (sectorNumber < NumSectors));
     
     DEBUG('d', "Writing to sector %d\n", sectorNumber);

@@ -174,7 +174,7 @@ FileSystem::FileSystem(bool format)
 //----------------------------------------------------------------------
 
 bool
-FileSystem::Create(char *name, int initialSize)
+FileSystem::Create(char *name, int initialSize, char* path = "/")
 {
     Directory *directory;
     BitMap *freeMap;
@@ -186,7 +186,7 @@ FileSystem::Create(char *name, int initialSize)
     directory = new Directory(NumDirEntries);
     directory->FetchFrom(directoryFile);
 
-    if (directory->Find(name) != -1)
+    if (directory->Find(name, path) != -1)
       success = FALSE;			// file is already in directory
     else {	
         freeMap = new BitMap(NumSectors);
@@ -194,7 +194,7 @@ FileSystem::Create(char *name, int initialSize)
         sector = freeMap->Find();	// find a sector to hold the file header
     	if (sector == -1) 		
             success = FALSE;		// no free block for file header 
-        else if (!directory->Add(name, sector))
+        else if (!directory->Add(name, sector, FALSE, path))
             success = FALSE;	// no space in directory
 	else {
     	    hdr = new FileHeader;
@@ -216,6 +216,55 @@ FileSystem::Create(char *name, int initialSize)
     return success;
 }
 
+bool
+FileSystem::CreateDir(char *name, char* path = "/")
+{
+    Directory *directory;
+    BitMap *freeMap;
+    FileHeader *hdr;
+    int sector;
+    bool success;
+
+    DEBUG('f', "Creating Directory %s\n", name);
+
+    directory = new Directory(NumDirEntries);
+    directory->FetchFrom(directoryFile);
+
+    if (directory->Find(name, path) != -1)
+      success = FALSE;          // file is already in directory
+    else {  
+        freeMap = new BitMap(NumSectors);
+        freeMap->FetchFrom(freeMapFile);
+        sector = freeMap->Find();   // find a sector to hold the file header
+        if (sector == -1)       
+            success = FALSE;        // no free block for file header 
+        else
+        {
+            hdr = new FileHeader;
+            if (!hdr->Allocate(freeMap, DirectoryFileSize))
+                success = FALSE;    // no space on disk for data
+            else if (!directory->Add(name, sector, TRUE, path))
+            {
+                success = FALSE;    // no space in directory
+                hdr->Deallocate(freeMap);
+            }
+            else
+            {  
+                success = TRUE;
+        // everthing worked, flush all changes back to disk
+                hdr->setCreateTime();
+                hdr->WriteBack(sector);         
+                directory->WriteBack(directoryFile);
+                freeMap->WriteBack(freeMapFile);
+            }
+            delete hdr;
+        }
+        delete freeMap;
+    }
+    delete directory;
+    return success;
+}
+
 //----------------------------------------------------------------------
 // FileSystem::Open
 // 	Open a file for reading and writing.  
@@ -227,7 +276,7 @@ FileSystem::Create(char *name, int initialSize)
 //----------------------------------------------------------------------
 
 OpenFile *
-FileSystem::Open(char *name)
+FileSystem::Open(char *name, char *path = "/")
 { 
     Directory *directory = new Directory(NumDirEntries);
     OpenFile *openFile = NULL;
@@ -235,7 +284,7 @@ FileSystem::Open(char *name)
 
     DEBUG('f', "Opening file %s\n", name);
     directory->FetchFrom(directoryFile);
-    sector = directory->Find(name); 
+    sector = directory->Find(name, path); 
     if (sector >= 0) 		
 	openFile = new OpenFile(sector);	// name was found in directory 
     delete directory;
@@ -257,7 +306,7 @@ FileSystem::Open(char *name)
 //----------------------------------------------------------------------
 
 bool
-FileSystem::Remove(char *name)
+FileSystem::Remove(char *name, char *path = "/")
 { 
     Directory *directory;
     BitMap *freeMap;
@@ -266,7 +315,7 @@ FileSystem::Remove(char *name)
     
     directory = new Directory(NumDirEntries);
     directory->FetchFrom(directoryFile);
-    sector = directory->Find(name);
+    sector = directory->Find(name, path);
     if (sector == -1) {
        delete directory;
        return FALSE;			 // file not found 
@@ -279,7 +328,7 @@ FileSystem::Remove(char *name)
 
     fileHdr->Deallocate(freeMap);  		// remove data blocks
     freeMap->Clear(sector);			// remove header block
-    directory->Remove(name);
+    directory->Remove(name, path);
 
     freeMap->WriteBack(freeMapFile);		// flush to disk
     directory->WriteBack(directoryFile);        // flush to disk

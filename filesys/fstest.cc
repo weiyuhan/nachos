@@ -120,23 +120,29 @@ FileWrite()
     int i, numBytes;
 
     printf("Sequential write of %d byte file, in %d byte chunks\n", 
-	FileSize, ContentSize);
-    if (!fileSystem->Create(FileName, 0)) {
-      printf("Perf test: can't create %s\n", FileName);
-      return;
+	   FileSize, ContentSize);
+    if (!fileSystem->Create(FileName, 0)) 
+    {
+        printf("Perf test: can't create %s\n", FileName);
+        return;
     }
     openFile = fileSystem->Open(FileName);
-    if (openFile == NULL) {
-	printf("Perf test: unable to open %s\n", FileName);
-	return;
+    if (openFile == NULL) 
+    {
+    	printf("Perf test: unable to open %s\n", FileName);
+    	return;
     }
-    for (i = 0; i < FileSize; i += ContentSize) {
+    for (i = 0; i < FileSize; i += ContentSize) 
+    {
+        //printf("wirtebegin: %s\n", FileName);
         numBytes = openFile->Write(Contents, ContentSize);
-	if (numBytes < 10) {
-	    printf("Perf test: unable to write %s\n", FileName);
-	    delete openFile;
-	    return;
-	}
+        //printf("writeend: %s\n", FileName);
+    	if (numBytes < 10) 
+        {
+    	    printf("Perf test: unable to write %s\n", FileName);
+    	    delete openFile;
+    	    return;
+    	}
     }
     delete openFile;	// close file
 }
@@ -151,19 +157,23 @@ FileRead()
     printf("Sequential read of %d byte file, in %d byte chunks\n", 
 	FileSize, ContentSize);
 
-    if ((openFile = fileSystem->Open(FileName)) == NULL) {
-	printf("Perf test: unable to open file %s\n", FileName);
-	delete [] buffer;
-	return;
+    if ((openFile = fileSystem->Open(FileName)) == NULL) 
+    {
+    	printf("Perf test: unable to open file %s\n", FileName);
+    	delete [] buffer;
+    	return;
     }
-    for (i = 0; i < FileSize; i += ContentSize) {
+
+    for (i = 0; i < FileSize; i += ContentSize) 
+    {
         numBytes = openFile->Read(buffer, ContentSize);
-	if ((numBytes < 10) || strncmp(buffer, Contents, ContentSize)) {
-	    printf("Perf test: unable to read %s\n", FileName);
-	    delete openFile;
-	    delete [] buffer;
-	    return;
-	}
+    	if ((numBytes < 10) || strncmp(buffer, Contents, ContentSize)) 
+        {
+    	    printf("Perf test: unable to read %s\n", FileName);
+    	    delete openFile;
+    	    delete [] buffer;
+    	    return;
+    	}
     }
     delete [] buffer;
     delete openFile;	// close file
@@ -172,6 +182,28 @@ FileRead()
 void
 PerformanceTest()
 {
+    /*
+    bool success;
+
+    success = fileSystem->CreateDir("A");
+
+    success = fileSystem->CreateDir("B", "/A/");
+
+    success = fileSystem->Create("test", 100, "/A/");
+
+    success = fileSystem->Create("test2", 100, "/A/");
+
+    success = fileSystem->Create("test", 100, "/A/B/");
+
+    success = fileSystem->Remove("test", "/A/");
+
+    success = fileSystem->CreateDir("C", "/A/");
+
+    success = fileSystem->Create("test", 100, "/A/C/");
+
+    success = fileSystem->Remove("C", "/A/");
+    */
+    
     printf("Starting file system performance test:\n");
     stats->Print();
     FileWrite();

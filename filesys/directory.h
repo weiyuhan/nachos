@@ -60,19 +60,22 @@ class Directory {
     void WriteBack(OpenFile *file);	// Write modifications to 
 					// directory contents back to disk
 
-    int Find(char *name);		// Find the sector number of the 
+    int Find(char *name, char *path = "/");		// Find the sector number of the 
 					// FileHeader for file: "name"
 
-    bool Add(char *name, int newSector, bool isDirectory = FALSE);  // Add a file name into the directory
+    bool Add(char *name, int newSector, bool isDirectory = FALSE, 
+    char* path = "/");  // Add a file name into the directory
 
-    bool Remove(char *name);		// Remove a file from the directory
+    bool Remove(char *name, char* path = "/");		// Remove a file from the directory
 
-    void List();			// Print the names of all the files
+    void List(int deep = 0);			// Print the names of all the files
 					//  in the directory
     void Print();			// Verbose print of the contents
 					//  of the directory -- all the file
 					//  names and their contents.
     char* FindEntryName(int index){return table[index].name;}
+
+    bool RemoveAll();
 
   private:
     int tableSize;			// Number of directory entries

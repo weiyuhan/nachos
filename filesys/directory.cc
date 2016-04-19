@@ -164,12 +164,50 @@ Directory::FindIndex(char *name)
 //----------------------------------------------------------------------
 
 int
-Directory::Find(char *name)
+Directory::Find(char *name, char *path = "/")
 {
-    int i = FindIndex(name);
+    if(strlen(path) == 1)
+    {
+        int i = FindIndex(name);
 
-    if (i != -1)
-	return table[i].sector;
+        if (i != -1)
+           return table[i].sector;
+
+       return -1;
+    }
+    else
+    {
+        char* end = path;
+        end++;
+        int length = 0;
+        while(*end != '/')
+        {
+            end++;
+            length++;
+        }
+        char* begin = path;
+        begin++;
+        char pathName[length + 1];
+        strncpy(pathName, begin, length);
+        pathName[length] = '\0';
+
+        int index = FindIndex(pathName);
+        if (index == -1)
+           return -1;
+
+        if (table[index].isDirectory) 
+        {
+            int sector = table[index].sector;
+            OpenFile* directoryFile = new OpenFile(sector);
+            Directory* directory = new Directory(12, sector, 
+                table[meSector].sector);
+            directory->FetchFrom(directoryFile);
+            int _ret = directory->Find(name, end);
+            delete directoryFile;
+            delete directory;
+            return _ret;
+        }
+    }
     return -1;
 }
 
@@ -185,20 +223,74 @@ Directory::Find(char *name)
 //----------------------------------------------------------------------
 
 bool
-Directory::Add(char *name, int newSector, bool isDirectory = FALSE)
+Directory::Add(char *name, int newSector, bool isDirectory = FALSE, char* path = "/")
 { 
-    if (FindIndex(name) != -1)
-	return FALSE;
+    if(strlen(path) == 1)
+    {
+        if (FindIndex(name) != -1)
+    	   return FALSE;
 
-    for (int i = 0; i < tableSize; i++)
-        if (!table[i].inUse) {
-            table[i].inUse = TRUE;
-            table[i].isDirectory = isDirectory;
-            strncpy(table[i].name, name, FileNameMaxLen); 
-            table[i].sector = newSector;
-        return TRUE;
-	}
-    return FALSE;	// no space.  Fix when we have extensible files.
+        for (int i = 0; i < tableSize; i++)
+        {
+            if (!table[i].inUse) 
+            {
+                table[i].inUse = TRUE;
+                table[i].isDirectory = isDirectory;
+                strncpy(table[i].name, name, FileNameMaxLen); 
+                table[i].sector = newSector;
+ 
+                if(isDirectory)
+                {
+                    Directory* directory = new Directory(12, newSector,
+                        table[meSector].sector);
+                    OpenFile* directoryFile = new OpenFile(newSector);
+                    directory->WriteBack(directoryFile);
+                    delete directoryFile;
+                    delete directory;
+                }
+
+                return TRUE;
+            }
+    	}
+        return FALSE;	// no space.  Fix when we have extensible files.
+    }
+    else
+    {
+        char* end = path;
+        end++;
+        int length = 0;
+        while(*end != '/')
+        {
+            end++;
+            length++;
+        }
+        char* begin = path;
+        begin++;
+        char pathName[length + 1];
+        strncpy(pathName, begin, length);
+        pathName[length] = '\0';
+
+
+        int index = FindIndex(pathName);
+        if (index == -1)
+           return -1;
+
+        if (table[index].isDirectory) 
+        {
+            int sector = table[index].sector;
+            OpenFile* directoryFile = new OpenFile(sector);
+            Directory* directory = new Directory(12, sector, 
+                table[meSector].sector);
+            directory->FetchFrom(directoryFile);
+            bool success = directory->Add(name, newSector,
+                isDirectory, end);
+            directory->WriteBack(directoryFile);
+            delete directory;
+            delete directoryFile;
+            return success;
+        }
+    }
+    return FALSE;
 }
 
 //----------------------------------------------------------------------
@@ -209,32 +301,150 @@ Directory::Add(char *name, int newSector, bool isDirectory = FALSE)
 //	"name" -- the file name to be removed
 //----------------------------------------------------------------------
 
-bool
-Directory::Remove(char *name)
-{ 
-    int i = FindIndex(name);
+bool 
+Directory::RemoveAll()
+{
+    for (int i = 2; i < tableSize; i++)
+    {
+        if(table[i].inUse)
+        {
+            if(table[i].isDirectory)
+            {
+                
+                OpenFile* directoryFile = new OpenFile(table[i].sector);
+                Directory* directory = new Directory(12);
+                directory->FetchFrom(directoryFile);
+                directory->RemoveAll();
+                directory->WriteBack(directoryFile);
+                delete directory;
+                delete directoryFile;
+            }
+            //printf("removeFile in dir\n", table[i].name);
+            table[i].inUse = FALSE;
 
-    if (i == -1)
-	return FALSE; 		// name not in directory
-    table[i].inUse = FALSE;
-    return TRUE;	
+            BitMap *freeMap;
+            FileHeader *fileHdr;
+            OpenFile *freeMapFile = new OpenFile(0);
+
+            int sector = table[i].sector;
+
+            fileHdr = new FileHeader;
+            fileHdr->FetchFrom(sector);
+
+            freeMap = new BitMap(NumSectors);
+            freeMap->FetchFrom(freeMapFile);
+
+            fileHdr->Deallocate(freeMap);       // remove data blocks
+            freeMap->Clear(sector);         // remove header block
+
+            freeMap->WriteBack(freeMapFile);        // flush to disk
+            delete fileHdr;
+            delete freeMap;
+            delete freeMapFile;
+        }
+    }
+}
+
+bool
+Directory::Remove(char *name, char* path = "/")
+{ 
+    	
+    if(strlen(path) == 1)
+    {
+        int i = FindIndex(name);
+
+        if (i < 2)
+            return FALSE;       // name not in directory
+        if(table[i].isDirectory)
+        {
+            int sector = table[i].sector;
+            OpenFile* directoryFile = new OpenFile(sector);
+            Directory* directory = new Directory(12, sector, 
+                table[meSector].sector);
+            directory->FetchFrom(directoryFile);
+            directory->RemoveAll();
+            directory->WriteBack(directoryFile);
+            delete directoryFile;
+            delete directory;
+        }
+        table[i].inUse = FALSE;
+        return TRUE;
+    }
+    else
+    {
+        char* end = path;
+        end++;
+        int length = 0;
+        while(*end != '/')
+        {
+            end++;
+            length++;
+        }
+        char* begin = path;
+        begin++;
+        char pathName[length + 1];
+        strncpy(pathName, begin, length);
+        pathName[length] = '\0';
+
+        int index = FindIndex(pathName);
+        if (index == -1)
+           return -1;
+
+        if (table[index].isDirectory) 
+        {
+            int sector = table[index].sector;
+            OpenFile* directoryFile = new OpenFile(sector);
+            Directory* directory = new Directory(12, sector, 
+                table[meSector].sector);
+            directory->FetchFrom(directoryFile);
+            bool success = directory->Remove(name, end);
+            directory->WriteBack(directoryFile);
+            delete directory;
+            delete directoryFile;
+            return success;
+        }
+    }
+    return FALSE;
 }
 
 //----------------------------------------------------------------------
 // Directory::List
 // 	List all the file names in the directory. 
 //----------------------------------------------------------------------
+void tab(int deep)
+{
+    for(int i = 0; i < deep; i++)
+        printf("    ");
+}
 
 void
-Directory::List()
+Directory::List(int deep = 0)
 {
-   for (int i = 0; i < tableSize; i++)
-	if (table[i].inUse)
+    tab(deep);
+    printf("./\n");
+    tab(deep);
+    printf("../\n");
+    for (int i = 2; i < tableSize; i++)
     {
-        if(table[i].isDirectory)
-            printf("%s/\n", table[i].name);
-        else
-	        printf("%s\n", table[i].name);
+    	if (table[i].inUse)
+        {
+            if(table[i].isDirectory)
+            {
+                tab(deep);
+                printf("%s/\n", table[i].name);
+                OpenFile* directoryFile = new OpenFile(table[i].sector);
+                Directory* directory = new Directory(12);
+                directory->FetchFrom(directoryFile);
+                directory->List(deep + 1);
+                delete directory;
+                delete directoryFile;
+            }
+            else
+            {
+                tab(deep);
+    	        printf("%s\n", table[i].name);
+            }
+        }
     }
 }
 

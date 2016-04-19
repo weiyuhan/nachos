@@ -82,9 +82,10 @@ OpenFile::Read(char *into, int numBytes)
 int
 OpenFile::Write(char *into, int numBytes)
 {
-   int result = WriteAt(into, numBytes, seekPosition);
-   seekPosition += result;
-   return result;
+    //printf("before WriteAt\n");
+    int result = WriteAt(into, numBytes, seekPosition);
+    seekPosition += result;
+    return result;
 }
 
 //----------------------------------------------------------------------
@@ -151,10 +152,29 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
     bool firstAligned, lastAligned;
     char *buf;
 
-    if ((numBytes <= 0) || (position >= fileLength))
-	return 0;				// check request
+    if ((numBytes <= 0))
+	   return 0;				// check request
     if ((position + numBytes) > fileLength)
-	numBytes = fileLength - position;
+    {
+        //printf("po: %d, num: %d, fl: %d\n", position, numBytes, fileLength);
+        BitMap *freeMap;
+        OpenFile *freeMapFile;
+        freeMapFile = new OpenFile(0);
+        freeMap = new BitMap(NumSectors);
+        freeMap->FetchFrom(freeMapFile);
+        int newSize = position + numBytes - fileLength;
+        if(!hdr->AllocateMore(freeMap, newSize))
+        {
+            delete freeMap;
+            delete freeMapFile;
+            return 0;
+        }
+        hdr->WriteBack(hdr->getHdrSector());
+        freeMap->WriteBack(freeMapFile);
+        delete freeMap;
+        delete freeMapFile;
+        //numBytes = fileLength - position;
+    }
     DEBUG('f', "Writing %d bytes at %d, from file of length %d.\n", 	
 			numBytes, position, fileLength);
     firstSector = divRoundDown(position, SectorSize);

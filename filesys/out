@@ -1,3061 +1,2942 @@
-sectorNumber: 0
-sectorNumber: 1
-sectorNumber: 3
-sectorNumber: 4
-sectorNumber: 5
-sectorNumber: 6
-// filesyssectorNumber: 6
-.cc 
-//	RosectorNumber: 6
-utines to sectorNumber: 6
-manage thesectorNumber: 6
- overall osectorNumber: 6
-peration osectorNumber: 6
-f the filesectorNumber: 6
- system.
-/sectorNumber: 6
-/	ImplemensectorNumber: 6
-ts routinesectorNumber: 6
-s to map fsectorNumber: 6
-rom textuasectorNumber: 6
-sectorNumber: 7
-l file namsectorNumber: 7
-es to filesectorNumber: 7
-s.
-//
-//	EsectorNumber: 7
-ach file isectorNumber: 7
-n the filesectorNumber: 7
- system hasectorNumber: 7
-s:
-//	   AsectorNumber: 7
- file headsectorNumber: 7
-er, storedsectorNumber: 7
- in a sectsectorNumber: 7
-or on disksectorNumber: 7
- 
-//		(thesectorNumber: 7
- size of tsectorNumber: 7
-sectorNumber: 8
-he file hesectorNumber: 8
-ader data sectorNumber: 8
-structure sectorNumber: 8
-is arrangesectorNumber: 8
-d
-//		to bsectorNumber: 8
-e preciselsectorNumber: 8
-y the sizesectorNumber: 8
- of 1 disksectorNumber: 8
- sector)
-/sectorNumber: 8
-/	   A numsectorNumber: 8
-ber of datsectorNumber: 8
-a blocks
-/sectorNumber: 8
-/	   An ensectorNumber: 8
-sectorNumber: 9
-try in thesectorNumber: 9
- file systsectorNumber: 9
-em directosectorNumber: 9
-ry
-//
-// 	sectorNumber: 9
-The file ssectorNumber: 9
-ystem conssectorNumber: 9
-ists of sesectorNumber: 9
-veral datasectorNumber: 9
- structuresectorNumber: 9
-s:
-//	   AsectorNumber: 9
- bitmap ofsectorNumber: 9
- free disksectorNumber: 9
- sectors (sectorNumber: 9
-sectorNumber: 10
-cf. bitmapsectorNumber: 10
-.h)
-//	   sectorNumber: 10
-A directorsectorNumber: 10
-y of file sectorNumber: 10
-names and sectorNumber: 10
-file headesectorNumber: 10
-rs
-//
-//  sectorNumber: 10
-    Both tsectorNumber: 10
-he bitmap sectorNumber: 10
-and the disectorNumber: 10
-rectory arsectorNumber: 10
-e represensectorNumber: 10
-ted as norsectorNumber: 11
-mal
-//	filsectorNumber: 11
-es.  TheirsectorNumber: 11
- file headsectorNumber: 11
-ers are losectorNumber: 11
-cated in ssectorNumber: 11
-pecific sesectorNumber: 11
-ctors
-//	(sectorNumber: 11
-sector 0 asectorNumber: 11
-nd sector sectorNumber: 11
-1), so thasectorNumber: 11
-t the filesectorNumber: 11
- system casectorNumber: 11
-sectorNumber: 12
-n find thesectorNumber: 12
-m 
-//	on bsectorNumber: 12
-ootup.
-//
-sectorNumber: 12
-//	The filsectorNumber: 12
-e system asectorNumber: 12
-ssumes thasectorNumber: 12
-t the bitmsectorNumber: 12
-ap and dirsectorNumber: 12
-ectory filsectorNumber: 12
-es are
-//	sectorNumber: 12
-kept "opensectorNumber: 12
-" continuosectorNumber: 12
-usly whilesectorNumber: 12
-sectorNumber: 13
- Nachos issectorNumber: 13
- running.
-sectorNumber: 13
-//
-//	For sectorNumber: 13
-those opersectorNumber: 13
-ations (susectorNumber: 13
-ch as CreasectorNumber: 13
-te, RemovesectorNumber: 13
-) that modsectorNumber: 13
-ify the
-//sectorNumber: 13
-	directorysectorNumber: 13
- and/or bisectorNumber: 13
-tmap, if tsectorNumber: 13
-he operatisectorNumber: 13
-sectorNumber: 14
-on succeedsectorNumber: 14
-s, the chasectorNumber: 14
-nges
-//	arsectorNumber: 14
-e written sectorNumber: 14
-immediatelsectorNumber: 14
-y back to sectorNumber: 14
-disk (the sectorNumber: 14
-two files sectorNumber: 14
-are kept
-/sectorNumber: 14
-/	open dursectorNumber: 14
-ing all thsectorNumber: 14
-is time). sectorNumber: 14
- If the opsectorNumber: 14
-sectorNumber: 15
-eration fasectorNumber: 15
-ils, and wsectorNumber: 15
-e have
-//	sectorNumber: 15
-modified psectorNumber: 15
-art of thesectorNumber: 15
- directorysectorNumber: 15
- and/or bisectorNumber: 15
-tmap, we ssectorNumber: 15
-imply discsectorNumber: 15
-ard
-//	thesectorNumber: 15
- changed vsectorNumber: 15
-ersion, wisectorNumber: 15
-thout writsectorNumber: 16
-ing it bacsectorNumber: 16
-k to disk.sectorNumber: 16
-
-//
-// 	OusectorNumber: 16
-r implemensectorNumber: 16
-tation at sectorNumber: 16
-this pointsectorNumber: 16
- has the fsectorNumber: 16
-ollowing rsectorNumber: 16
-estrictionsectorNumber: 16
-s:
-//
-//	 sectorNumber: 16
-  there issectorNumber: 16
- no synchrsectorNumber: 16
-sectorNumber: 17
-onization sectorNumber: 17
-for concursectorNumber: 17
-rent accessectorNumber: 17
-ses
-//	   sectorNumber: 17
-files havesectorNumber: 17
- a fixed ssectorNumber: 17
-ize, set wsectorNumber: 17
-hen the fisectorNumber: 17
-le is creasectorNumber: 17
-ted
-//	   sectorNumber: 17
-files cannsectorNumber: 17
-ot be biggsectorNumber: 17
-er than absectorNumber: 17
-sectorNumber: 18
-out 3KB insectorNumber: 18
- size
-//	 sectorNumber: 18
-  there issectorNumber: 18
- no hierarsectorNumber: 18
-chical dirsectorNumber: 18
-ectory strsectorNumber: 18
-ucture, ansectorNumber: 18
-d only a lsectorNumber: 18
-imited
-//	sectorNumber: 18
-     numbesectorNumber: 18
-r of filessectorNumber: 18
- can be adsectorNumber: 18
-ded to thesectorNumber: 18
-sectorNumber: 19
- system
-//sectorNumber: 19
-	   there sectorNumber: 19
-is no attesectorNumber: 19
-mpt to maksectorNumber: 19
-e the systsectorNumber: 19
-em robust sectorNumber: 19
-to failuresectorNumber: 19
-s
-//	    (sectorNumber: 19
-if Nachos sectorNumber: 19
-exits in tsectorNumber: 19
-he middle sectorNumber: 19
-of an opersectorNumber: 19
-ation thatsectorNumber: 19
-sectorNumber: 20
- modifies
-sectorNumber: 20
-//	    thesectorNumber: 20
- file systsectorNumber: 20
-em, it maysectorNumber: 20
- corrupt tsectorNumber: 20
-he disk)
-/sectorNumber: 20
-/
-// CopyrsectorNumber: 20
-ight (c) 1sectorNumber: 20
-992-1993 TsectorNumber: 20
-he RegentssectorNumber: 20
- of the UnsectorNumber: 20
-iversity osectorNumber: 20
-f CalifornsectorNumber: 21
-ia.
-// AllsectorNumber: 21
- rights resectorNumber: 21
-served.  SsectorNumber: 21
-ee copyrigsectorNumber: 21
-ht.h for csectorNumber: 21
-opyright nsectorNumber: 21
-otice and sectorNumber: 21
-limitationsectorNumber: 21
- 
-// of lisectorNumber: 21
-ability ansectorNumber: 21
-d disclaimsectorNumber: 21
-er of warrsectorNumber: 21
-sectorNumber: 22
-anty provisectorNumber: 22
-sions.
-
-#isectorNumber: 22
-nclude "cosectorNumber: 22
-pyright.h"sectorNumber: 22
-
-
-#includesectorNumber: 22
- "disk.h"
-sectorNumber: 22
-#include "sectorNumber: 22
-bitmap.h"
-sectorNumber: 22
-#include "sectorNumber: 22
-directory.sectorNumber: 22
-h"
-#includsectorNumber: 22
-e "filehdrsectorNumber: 22
-.h"
-#inclusectorNumber: 22
-sectorNumber: 23
-de "filesysectorNumber: 23
-s.h"
-
-// SsectorNumber: 23
-ectors consectorNumber: 23
-taining thsectorNumber: 23
-e file heasectorNumber: 23
-ders for tsectorNumber: 23
-he bitmap sectorNumber: 23
-of free sesectorNumber: 23
-ctors,
-// sectorNumber: 23
-and the disectorNumber: 23
-rectory ofsectorNumber: 23
- files.  TsectorNumber: 23
-hese file sectorNumber: 23
-sectorNumber: 24
-headers arsectorNumber: 24
-e placed isectorNumber: 24
-n well-knosectorNumber: 24
-wn 
-// secsectorNumber: 24
-tors, so tsectorNumber: 24
-hat they csectorNumber: 24
-an be locasectorNumber: 24
-ted on boosectorNumber: 24
-t-up.
-#defsectorNumber: 24
-ine FreeMasectorNumber: 24
-pSector 		sectorNumber: 24
-0
-#define sectorNumber: 24
-DirectorySsectorNumber: 24
-sectorNumber: 25
-ector 	1
-
-sectorNumber: 25
-// InitialsectorNumber: 25
- file sizesectorNumber: 25
-s for the sectorNumber: 25
-bitmap andsectorNumber: 25
- directorysectorNumber: 25
-; until thsectorNumber: 25
-e file syssectorNumber: 25
-tem
-// supsectorNumber: 25
-ports extesectorNumber: 25
-nsible filsectorNumber: 25
-es, the disectorNumber: 25
-rectory sisectorNumber: 26
-ze sets thsectorNumber: 26
-e maximum sectorNumber: 26
-number 
-//sectorNumber: 26
- of files sectorNumber: 26
-that can bsectorNumber: 26
-e loaded osectorNumber: 26
-nto the disectorNumber: 26
-sk.
-#definsectorNumber: 26
-e FreeMapFsectorNumber: 26
-ileSize 	(sectorNumber: 26
-NumSectorssectorNumber: 26
- / BitsInBsectorNumber: 26
-sectorNumber: 27
-yte)
-#defisectorNumber: 27
-ne NumDirEsectorNumber: 27
-ntries 		1sectorNumber: 27
-0
-#define sectorNumber: 27
-DirectoryFsectorNumber: 27
-ileSize 	(sectorNumber: 27
-sizeof(DirsectorNumber: 27
-ectoryEntrsectorNumber: 27
-y) * NumDisectorNumber: 27
-rEntries)
-sectorNumber: 27
-
-//-------sectorNumber: 27
-----------sectorNumber: 27
-----------sectorNumber: 27
-sectorNumber: 28
-----------sectorNumber: 28
-----------sectorNumber: 28
-----------sectorNumber: 28
-----------sectorNumber: 28
----
-// FilsectorNumber: 28
-eSystem::FsectorNumber: 28
-ileSystem
-sectorNumber: 28
-// 	InitiasectorNumber: 28
-lize the fsectorNumber: 28
-ile systemsectorNumber: 28
-.  If formsectorNumber: 28
-at = TRUE,sectorNumber: 28
- the disk sectorNumber: 28
-sectorNumber: 29
-sectorNumber: 31
-has
-//	notsectorNumber: 29
-sectorNumber: 31
-hing on itsectorNumber: 29
-sectorNumber: 31
-, and we nsectorNumber: 29
-sectorNumber: 31
-eed to inisectorNumber: 29
-sectorNumber: 31
-tialize thsectorNumber: 29
-sectorNumber: 31
-e disk to sectorNumber: 29
-sectorNumber: 31
-contain
-//sectorNumber: 29
-sectorNumber: 31
-	an empty sectorNumber: 29
-sectorNumber: 31
-directory,sectorNumber: 29
-sectorNumber: 31
- and a bitsectorNumber: 29
-sectorNumber: 31
-map of fresectorNumber: 29
-sectorNumber: 31
-e sectors sectorNumber: 29
-sectorNumber: 31
-(with almosectorNumber: 29
-sectorNumber: 31
-sectorNumber: 29
-sectorNumber: 32
-st but
-//	sectorNumber: 29
-sectorNumber: 32
-not all ofsectorNumber: 29
-sectorNumber: 32
- the sectosectorNumber: 29
-sectorNumber: 32
-rs marked sectorNumber: 29
-sectorNumber: 32
-as free). sectorNumber: 29
-sectorNumber: 32
- 
-//
-//	IfsectorNumber: 29
-sectorNumber: 32
- format = sectorNumber: 29
-sectorNumber: 32
-FALSE, we sectorNumber: 29
-sectorNumber: 32
-just have sectorNumber: 29
-sectorNumber: 32
-to open thsectorNumber: 29
-sectorNumber: 32
-e files
-//sectorNumber: 29
-sectorNumber: 32
-	representsectorNumber: 29
-sectorNumber: 32
-ing the bisectorNumber: 29
-sectorNumber: 33
-tmap and tsectorNumber: 29
-sectorNumber: 33
-he directosectorNumber: 29
-sectorNumber: 33
-ry.
-//
-//	sectorNumber: 29
-sectorNumber: 33
-"format" -sectorNumber: 29
-sectorNumber: 33
-- should wsectorNumber: 29
-sectorNumber: 33
-e initialisectorNumber: 29
-sectorNumber: 33
-ze the dissectorNumber: 29
-sectorNumber: 33
-k?
-//-----sectorNumber: 29
-sectorNumber: 33
-----------sectorNumber: 29
-sectorNumber: 33
-----------sectorNumber: 29
-sectorNumber: 33
-----------sectorNumber: 29
-sectorNumber: 33
-----------sectorNumber: 29
-sectorNumber: 33
-sectorNumber: 29
-sectorNumber: 34
-----------sectorNumber: 29
-sectorNumber: 34
-----------sectorNumber: 29
-sectorNumber: 34
------
-
-FilsectorNumber: 29
-sectorNumber: 34
-eSystem::FsectorNumber: 29
-sectorNumber: 34
-ileSystem(sectorNumber: 29
-sectorNumber: 34
-bool formasectorNumber: 29
-sectorNumber: 34
-t)
-{ 
-    sectorNumber: 29
-sectorNumber: 34
-DEBUG('f',sectorNumber: 29
-sectorNumber: 34
- "InitialisectorNumber: 29
-sectorNumber: 34
-zing the fsectorNumber: 29
-sectorNumber: 34
-ile systemsectorNumber: 29
-sectorNumber: 34
-.\n");
-   sectorNumber: 29
-sectorNumber: 34
- if (formasectorNumber: 29
-sectorNumber: 34
-sectorNumber: 29
-sectorNumber: 35
-t) {
-     sectorNumber: 29
-sectorNumber: 35
-   BitMap sectorNumber: 29
-sectorNumber: 35
-*freeMap =sectorNumber: 29
-sectorNumber: 35
- new BitMasectorNumber: 29
-sectorNumber: 35
-p(NumSectosectorNumber: 29
-sectorNumber: 35
-rs);
-     sectorNumber: 29
-sectorNumber: 35
-   DirectosectorNumber: 29
-sectorNumber: 35
-ry *directsectorNumber: 29
-sectorNumber: 35
-ory = new sectorNumber: 29
-sectorNumber: 35
-Directory(sectorNumber: 29
-sectorNumber: 35
-NumDirEntrsectorNumber: 29
-sectorNumber: 35
-ies);
-	FilsectorNumber: 29
-sectorNumber: 35
-eHeader *msectorNumber: 29
-sectorNumber: 35
-sectorNumber: 29
-sectorNumber: 36
-apHdr = nesectorNumber: 29
-sectorNumber: 36
-w FileHeadsectorNumber: 29
-sectorNumber: 36
-er;
-	FileHsectorNumber: 29
-sectorNumber: 36
-eader *dirsectorNumber: 29
-sectorNumber: 36
-Hdr = new sectorNumber: 29
-sectorNumber: 36
-FileHeadersectorNumber: 29
-sectorNumber: 36
-;
-
-       sectorNumber: 29
-sectorNumber: 36
- DEBUG('f'sectorNumber: 29
-sectorNumber: 36
-, "FormattsectorNumber: 29
-sectorNumber: 36
-ing the fisectorNumber: 29
-sectorNumber: 36
-le system.sectorNumber: 29
-sectorNumber: 36
-\n");
-
-   sectorNumber: 29
-sectorNumber: 36
- // First,sectorNumber: 29
-sectorNumber: 36
-sectorNumber: 29
-sectorNumber: 37
- allocate sectorNumber: 29
-sectorNumber: 37
-space for sectorNumber: 29
-sectorNumber: 37
-FileHeadersectorNumber: 29
-sectorNumber: 37
-s for the sectorNumber: 29
-sectorNumber: 37
-directory sectorNumber: 29
-sectorNumber: 37
-and bitmapsectorNumber: 29
-sectorNumber: 37
-
-    // (msectorNumber: 29
-sectorNumber: 37
-ake sure nsectorNumber: 29
-sectorNumber: 37
-o one elsesectorNumber: 29
-sectorNumber: 37
- grabs thesectorNumber: 29
-sectorNumber: 37
-se!)
-	freesectorNumber: 29
-sectorNumber: 37
-Map->Mark(sectorNumber: 29
-sectorNumber: 37
-FreeMapSecsectorNumber: 29
-sectorNumber: 38
-tor);	    sectorNumber: 29
-sectorNumber: 38
-
-	freeMap-sectorNumber: 29
-sectorNumber: 38
->Mark(DiresectorNumber: 29
-sectorNumber: 38
-ctorySectosectorNumber: 29
-sectorNumber: 38
-r);
-
-    /sectorNumber: 29
-sectorNumber: 38
-/ Second, sectorNumber: 29
-sectorNumber: 38
-allocate ssectorNumber: 29
-sectorNumber: 38
-pace for tsectorNumber: 29
-sectorNumber: 38
-he data blsectorNumber: 29
-sectorNumber: 38
-ocks contasectorNumber: 29
-sectorNumber: 38
-ining the sectorNumber: 29
-sectorNumber: 38
-contents
- sectorNumber: 29
-sectorNumber: 38
-sectorNumber: 29
-sectorNumber: 39
-   // of tsectorNumber: 29
-sectorNumber: 39
-he directosectorNumber: 29
-sectorNumber: 39
-ry and bitsectorNumber: 29
-sectorNumber: 39
-map files.sectorNumber: 29
-sectorNumber: 39
-  There besectorNumber: 29
-sectorNumber: 39
-tter be ensectorNumber: 29
-sectorNumber: 39
-ough spacesectorNumber: 29
-sectorNumber: 39
-!
-
-	ASSERTsectorNumber: 29
-sectorNumber: 39
-(mapHdr->AsectorNumber: 29
-sectorNumber: 39
-llocate(frsectorNumber: 29
-sectorNumber: 39
-eeMap, FresectorNumber: 29
-sectorNumber: 39
-eMapFileSisectorNumber: 29
-sectorNumber: 39
-ze));
-	ASSsectorNumber: 29
-sectorNumber: 39
-sectorNumber: 29
-sectorNumber: 40
-ERT(dirHdrsectorNumber: 29
-sectorNumber: 40
-->AllocatesectorNumber: 29
-sectorNumber: 40
-(freeMap, sectorNumber: 29
-sectorNumber: 40
-DirectoryFsectorNumber: 29
-sectorNumber: 40
-ileSize));sectorNumber: 29
-sectorNumber: 40
-
-
-    // FsectorNumber: 29
-sectorNumber: 40
-lush the bsectorNumber: 29
-sectorNumber: 40
-itmap and sectorNumber: 29
-sectorNumber: 40
-directory sectorNumber: 29
-sectorNumber: 40
-FileHeadersectorNumber: 29
-sectorNumber: 40
-s back to sectorNumber: 29
-sectorNumber: 40
-disk
-    /sectorNumber: 29
-sectorNumber: 40
-/ We need sectorNumber: 29
-sectorNumber: 40
-sectorNumber: 29
-sectorNumber: 41
-to do thissectorNumber: 29
-sectorNumber: 41
- before wesectorNumber: 29
-sectorNumber: 41
- can "OpensectorNumber: 29
-sectorNumber: 41
-" the filesectorNumber: 29
-sectorNumber: 41
-, since opsectorNumber: 29
-sectorNumber: 41
-en
-    // sectorNumber: 29
-sectorNumber: 41
-reads the sectorNumber: 29
-sectorNumber: 41
-file headesectorNumber: 29
-sectorNumber: 41
-r off of dsectorNumber: 29
-sectorNumber: 41
-isk (and csectorNumber: 29
-sectorNumber: 41
-urrently tsectorNumber: 29
-sectorNumber: 41
-he disk hasectorNumber: 29
-sectorNumber: 41
-s garbage
-sectorNumber: 29
-sectorNumber: 41
-sectorNumber: 29
-sectorNumber: 42
-    // on sectorNumber: 29
-sectorNumber: 42
-it!).
-
-   sectorNumber: 29
-sectorNumber: 42
-     DEBUGsectorNumber: 29
-sectorNumber: 42
-('f', "WrisectorNumber: 29
-sectorNumber: 42
-ting headesectorNumber: 29
-sectorNumber: 42
-rs back tosectorNumber: 29
-sectorNumber: 42
- disk.\n")sectorNumber: 29
-sectorNumber: 42
-;
-        sectorNumber: 29
-sectorNumber: 42
-mapHdr->sesectorNumber: 29
-sectorNumber: 42
-tCreateTimsectorNumber: 29
-sectorNumber: 42
-e();
-     sectorNumber: 29
-sectorNumber: 42
-   dirHdr-sectorNumber: 29
-sectorNumber: 42
->setCreatesectorNumber: 29
-sectorNumber: 43
-Time();
-	msectorNumber: 29
-sectorNumber: 43
-apHdr->WrisectorNumber: 29
-sectorNumber: 43
-teBack(FresectorNumber: 29
-sectorNumber: 43
-eMapSectorsectorNumber: 29
-sectorNumber: 43
-);    
-	disectorNumber: 29
-sectorNumber: 43
-rHdr->WritsectorNumber: 29
-sectorNumber: 43
-eBack(DiresectorNumber: 29
-sectorNumber: 43
-ctorySectosectorNumber: 29
-sectorNumber: 43
-r);
-
-    /sectorNumber: 29
-sectorNumber: 43
-/ OK to opsectorNumber: 29
-sectorNumber: 43
-en the bitsectorNumber: 29
-sectorNumber: 43
-map and disectorNumber: 29
-sectorNumber: 43
-sectorNumber: 29
-sectorNumber: 44
-rectory fisectorNumber: 29
-sectorNumber: 44
-les now
-  sectorNumber: 29
-sectorNumber: 44
-  // The fsectorNumber: 29
-sectorNumber: 44
-ile systemsectorNumber: 29
-sectorNumber: 44
- operationsectorNumber: 29
-sectorNumber: 44
-s assume tsectorNumber: 29
-sectorNumber: 44
-hese two fsectorNumber: 29
-sectorNumber: 44
-iles are lsectorNumber: 29
-sectorNumber: 44
-eft open
- sectorNumber: 29
-sectorNumber: 44
-   // whilsectorNumber: 29
-sectorNumber: 44
-e Nachos isectorNumber: 29
-sectorNumber: 44
-s running.sectorNumber: 29
-sectorNumber: 44
-
-
-        sectorNumber: 29
-sectorNumber: 44
-sectorNumber: 29
-sectorNumber: 45
-freeMapFilsectorNumber: 29
-sectorNumber: 45
-e = new OpsectorNumber: 29
-sectorNumber: 45
-enFile(FresectorNumber: 29
-sectorNumber: 45
-eMapSectorsectorNumber: 29
-sectorNumber: 45
-);
-       sectorNumber: 29
-sectorNumber: 45
- directorysectorNumber: 29
-sectorNumber: 45
-File = newsectorNumber: 29
-sectorNumber: 45
- OpenFile(sectorNumber: 29
-sectorNumber: 45
-DirectorySsectorNumber: 29
-sectorNumber: 45
-ector);
-  sectorNumber: 29
-sectorNumber: 45
-   
-    //sectorNumber: 29
-sectorNumber: 45
- Once we hsectorNumber: 29
-sectorNumber: 45
-ave the fisectorNumber: 29
-sectorNumber: 45
-sectorNumber: 29
-sectorNumber: 46
-les "open"sectorNumber: 29
-sectorNumber: 46
-, we can wsectorNumber: 29
-sectorNumber: 46
-rite the isectorNumber: 29
-sectorNumber: 46
-nitial versectorNumber: 29
-sectorNumber: 46
-sion
-    /sectorNumber: 29
-sectorNumber: 46
-/ of each sectorNumber: 29
-sectorNumber: 46
-file back sectorNumber: 29
-sectorNumber: 46
-to disk.  sectorNumber: 29
-sectorNumber: 46
-The directsectorNumber: 29
-sectorNumber: 46
-ory at thisectorNumber: 29
-sectorNumber: 46
-s point issectorNumber: 29
-sectorNumber: 46
- completelsectorNumber: 29
-sectorNumber: 46
-y
-    // esectorNumber: 29
-sectorNumber: 46
-sectorNumber: 29
-sectorNumber: 47
-mpty; but sectorNumber: 29
-sectorNumber: 47
-the bitmapsectorNumber: 29
-sectorNumber: 47
- has been sectorNumber: 29
-sectorNumber: 47
-changed tosectorNumber: 29
-sectorNumber: 47
- reflect tsectorNumber: 29
-sectorNumber: 47
-he fact thsectorNumber: 29
-sectorNumber: 47
-at
-    // sectorNumber: 29
-sectorNumber: 47
-sectors onsectorNumber: 29
-sectorNumber: 47
- the disk sectorNumber: 29
-sectorNumber: 47
-have been sectorNumber: 29
-sectorNumber: 47
-allocated sectorNumber: 29
-sectorNumber: 47
-for the fisectorNumber: 29
-sectorNumber: 47
-le headerssectorNumber: 29
-sectorNumber: 48
- and
-    /sectorNumber: 29
-sectorNumber: 48
-/ to hold sectorNumber: 29
-sectorNumber: 48
-the file dsectorNumber: 29
-sectorNumber: 48
-ata for thsectorNumber: 29
-sectorNumber: 48
-e directorsectorNumber: 29
-sectorNumber: 48
-y and bitmsectorNumber: 29
-sectorNumber: 48
-ap.
-
-     sectorNumber: 29
-sectorNumber: 48
-   DEBUG('sectorNumber: 29
-sectorNumber: 48
-f', "WritisectorNumber: 29
-sectorNumber: 48
-ng bitmap sectorNumber: 29
-sectorNumber: 48
-and directsectorNumber: 29
-sectorNumber: 48
-ory back tsectorNumber: 29
-sectorNumber: 48
-sectorNumber: 29
-sectorNumber: 49
-o disk.\n"sectorNumber: 29
-sectorNumber: 49
-);
-	freeMasectorNumber: 29
-sectorNumber: 49
-p->WriteBasectorNumber: 29
-sectorNumber: 49
-ck(freeMapsectorNumber: 29
-sectorNumber: 49
-File);	 //sectorNumber: 29
-sectorNumber: 49
- flush chasectorNumber: 29
-sectorNumber: 49
-nges to disectorNumber: 29
-sectorNumber: 49
-sk
-	directsectorNumber: 29
-sectorNumber: 49
-ory->WritesectorNumber: 29
-sectorNumber: 49
-Back(direcsectorNumber: 29
-sectorNumber: 49
-toryFile);sectorNumber: 29
-sectorNumber: 49
-
-
-	if (DebsectorNumber: 29
-sectorNumber: 49
-ugIsEnablesectorNumber: 29
-sectorNumber: 49
-sectorNumber: 29
-sectorNumber: 50
-d('f')) {
-sectorNumber: 29
-sectorNumber: 50
-	    freeMsectorNumber: 29
-sectorNumber: 50
-ap->Print(sectorNumber: 29
-sectorNumber: 50
-);
-	    disectorNumber: 29
-sectorNumber: 50
-rectory->PsectorNumber: 29
-sectorNumber: 50
-rint();
-
- sectorNumber: 29
-sectorNumber: 50
-       delsectorNumber: 29
-sectorNumber: 50
-ete freeMasectorNumber: 29
-sectorNumber: 50
-p; 
-	deletsectorNumber: 29
-sectorNumber: 50
-e directorsectorNumber: 29
-sectorNumber: 50
-y; 
-	deletsectorNumber: 29
-sectorNumber: 50
-e mapHdr; sectorNumber: 29
-sectorNumber: 50
-
-	delete dsectorNumber: 29
-sectorNumber: 50
-sectorNumber: 29
-sectorNumber: 51
-irHdr;
-	}
-sectorNumber: 29
-sectorNumber: 51
-    } elsesectorNumber: 29
-sectorNumber: 51
- {
-    // sectorNumber: 29
-sectorNumber: 51
-if we are sectorNumber: 29
-sectorNumber: 51
-not formatsectorNumber: 29
-sectorNumber: 51
-ting the dsectorNumber: 29
-sectorNumber: 51
-isk, just sectorNumber: 29
-sectorNumber: 51
-open the fsectorNumber: 29
-sectorNumber: 51
-iles represectorNumber: 29
-sectorNumber: 51
-senting
-  sectorNumber: 29
-sectorNumber: 51
-  // the bsectorNumber: 29
-sectorNumber: 51
-itmap and sectorNumber: 29
-sectorNumber: 51
-directory;sectorNumber: 29
-sectorNumber: 51
-sectorNumber: 29
-sectorNumber: 52
- these aresectorNumber: 29
-sectorNumber: 52
- left opensectorNumber: 29
-sectorNumber: 52
- while NacsectorNumber: 29
-sectorNumber: 52
-hos is runsectorNumber: 29
-sectorNumber: 52
-ning
-     sectorNumber: 29
-sectorNumber: 52
-   freeMapsectorNumber: 29
-sectorNumber: 52
-File = newsectorNumber: 29
-sectorNumber: 52
- OpenFile(sectorNumber: 29
-sectorNumber: 52
-FreeMapSecsectorNumber: 29
-sectorNumber: 52
-tor);
-    sectorNumber: 29
-sectorNumber: 52
-    directsectorNumber: 29
-sectorNumber: 52
-oryFile = sectorNumber: 29
-sectorNumber: 52
-new OpenFisectorNumber: 29
-sectorNumber: 53
-le(DirectosectorNumber: 29
-sectorNumber: 53
-rySector);sectorNumber: 29
-sectorNumber: 53
-
-    }
-}
-
-sectorNumber: 29
-sectorNumber: 53
-//--------sectorNumber: 29
-sectorNumber: 53
-----------sectorNumber: 29
-sectorNumber: 53
-----------sectorNumber: 29
-sectorNumber: 53
-----------sectorNumber: 29
-sectorNumber: 53
-----------sectorNumber: 29
-sectorNumber: 53
-----------sectorNumber: 29
-sectorNumber: 53
-----------sectorNumber: 29
-sectorNumber: 53
---
-// FilesectorNumber: 29
-sectorNumber: 53
-System::CrsectorNumber: 29
-sectorNumber: 53
-sectorNumber: 29
-sectorNumber: 54
-eate
-// 	CsectorNumber: 29
-sectorNumber: 54
-reate a fisectorNumber: 29
-sectorNumber: 54
-le in the sectorNumber: 29
-sectorNumber: 54
-Nachos filsectorNumber: 29
-sectorNumber: 54
-e system (sectorNumber: 29
-sectorNumber: 54
-similar tosectorNumber: 29
-sectorNumber: 54
- UNIX creasectorNumber: 29
-sectorNumber: 54
-te).
-//	SisectorNumber: 29
-sectorNumber: 54
-nce we cansectorNumber: 29
-sectorNumber: 54
-'t increassectorNumber: 29
-sectorNumber: 54
-e the sizesectorNumber: 29
-sectorNumber: 54
- of files sectorNumber: 29
-sectorNumber: 54
-dynamicallsectorNumber: 29
-sectorNumber: 54
-sectorNumber: 29
-sectorNumber: 55
-y, we havesectorNumber: 29
-sectorNumber: 55
-
-//	to givsectorNumber: 29
-sectorNumber: 55
-e Create tsectorNumber: 29
-sectorNumber: 55
-he initialsectorNumber: 29
-sectorNumber: 55
- size of tsectorNumber: 29
-sectorNumber: 55
-he file.
-/sectorNumber: 29
-sectorNumber: 55
-/
-//	The ssectorNumber: 29
-sectorNumber: 55
-teps to crsectorNumber: 29
-sectorNumber: 55
-eate a filsectorNumber: 29
-sectorNumber: 55
-e are:
-//	sectorNumber: 29
-sectorNumber: 55
-  Make sursectorNumber: 29
-sectorNumber: 55
-e the filesectorNumber: 29
-sectorNumber: 55
- doesn't asectorNumber: 29
-sectorNumber: 55
-sectorNumber: 29
-sectorNumber: 56
-lready exisectorNumber: 29
-sectorNumber: 56
-st
-//     sectorNumber: 29
-sectorNumber: 56
-   AllocatsectorNumber: 29
-sectorNumber: 56
-e a sectorsectorNumber: 29
-sectorNumber: 56
- for the fsectorNumber: 29
-sectorNumber: 56
-ile headersectorNumber: 29
-sectorNumber: 56
-
-// 	  AllsectorNumber: 29
-sectorNumber: 56
-ocate spacsectorNumber: 29
-sectorNumber: 56
-e on disk sectorNumber: 29
-sectorNumber: 56
-for the dasectorNumber: 29
-sectorNumber: 56
-ta blocks sectorNumber: 29
-sectorNumber: 56
-for the fisectorNumber: 29
-sectorNumber: 56
-le
-//	  AdsectorNumber: 29
-sectorNumber: 56
-sectorNumber: 29
-sectorNumber: 57
-d the namesectorNumber: 29
-sectorNumber: 57
- to the disectorNumber: 29
-sectorNumber: 57
-rectory
-//sectorNumber: 29
-sectorNumber: 57
-	  Store tsectorNumber: 29
-sectorNumber: 57
-he new filsectorNumber: 29
-sectorNumber: 57
-e header osectorNumber: 29
-sectorNumber: 57
-n disk 
-//sectorNumber: 29
-sectorNumber: 57
-	  Flush tsectorNumber: 29
-sectorNumber: 57
-he changessectorNumber: 29
-sectorNumber: 57
- to the bisectorNumber: 29
-sectorNumber: 57
-tmap and tsectorNumber: 29
-sectorNumber: 57
-he directosectorNumber: 29
-sectorNumber: 57
-ry back tosectorNumber: 29
-sectorNumber: 58
- disk
-//
-/sectorNumber: 29
-sectorNumber: 58
-/	Return TsectorNumber: 29
-sectorNumber: 58
-RUE if evesectorNumber: 29
-sectorNumber: 58
-rything gosectorNumber: 29
-sectorNumber: 58
-es ok, othsectorNumber: 29
-sectorNumber: 58
-erwise, resectorNumber: 29
-sectorNumber: 58
-turn FALSEsectorNumber: 29
-sectorNumber: 58
-.
-//
-// 	CsectorNumber: 29
-sectorNumber: 58
-reate failsectorNumber: 29
-sectorNumber: 58
-s if:
-//  sectorNumber: 29
-sectorNumber: 58
- 		file issectorNumber: 29
-sectorNumber: 58
- already isectorNumber: 29
-sectorNumber: 58
-sectorNumber: 29
-sectorNumber: 59
-n directorsectorNumber: 29
-sectorNumber: 59
-y
-//	 	no sectorNumber: 29
-sectorNumber: 59
-free spacesectorNumber: 29
-sectorNumber: 59
- for file sectorNumber: 29
-sectorNumber: 59
-header
-//	sectorNumber: 29
-sectorNumber: 59
- 	no free sectorNumber: 29
-sectorNumber: 59
-entry for sectorNumber: 29
-sectorNumber: 59
-file in disectorNumber: 29
-sectorNumber: 59
-rectory
-//sectorNumber: 29
-sectorNumber: 59
-	 	no freesectorNumber: 29
-sectorNumber: 59
- space forsectorNumber: 29
-sectorNumber: 59
- data blocsectorNumber: 29
-sectorNumber: 59
-ks for thesectorNumber: 29
-sectorNumber: 59
-sectorNumber: 29
-sectorNumber: 60
- file 
-//
-sectorNumber: 29
-sectorNumber: 60
-// 	Note tsectorNumber: 29
-sectorNumber: 60
-hat this isectorNumber: 29
-sectorNumber: 60
-mplementatsectorNumber: 29
-sectorNumber: 60
-ion assumesectorNumber: 29
-sectorNumber: 60
-s there issectorNumber: 29
-sectorNumber: 60
- no concursectorNumber: 29
-sectorNumber: 60
-rent accessectorNumber: 29
-sectorNumber: 60
-s
-//	to thsectorNumber: 29
-sectorNumber: 60
-e file syssectorNumber: 29
-sectorNumber: 60
-tem!
-//
-//sectorNumber: 29
-sectorNumber: 60
-	"name" --sectorNumber: 29
-sectorNumber: 60
- name of fsectorNumber: 29
-sectorNumber: 60
-sectorNumber: 29
-sectorNumber: 61
-ile to be sectorNumber: 29
-sectorNumber: 61
-created
-//sectorNumber: 29
-sectorNumber: 61
-	"initialSsectorNumber: 29
-sectorNumber: 61
-ize" -- sisectorNumber: 29
-sectorNumber: 61
-ze of filesectorNumber: 29
-sectorNumber: 61
- to be cresectorNumber: 29
-sectorNumber: 61
-ated
-//---sectorNumber: 29
-sectorNumber: 61
-----------sectorNumber: 29
-sectorNumber: 61
-----------sectorNumber: 29
-sectorNumber: 61
-----------sectorNumber: 29
-sectorNumber: 61
-----------sectorNumber: 29
-sectorNumber: 61
-----------sectorNumber: 29
-sectorNumber: 61
-----------sectorNumber: 29
-sectorNumber: 61
-sectorNumber: 29
-sectorNumber: 62
--------
-
-bsectorNumber: 29
-sectorNumber: 62
-ool
-FileSysectorNumber: 29
-sectorNumber: 62
-stem::CreasectorNumber: 29
-sectorNumber: 62
-te(char *nsectorNumber: 29
-sectorNumber: 62
-ame, int isectorNumber: 29
-sectorNumber: 62
-nitialSizesectorNumber: 29
-sectorNumber: 62
-)
-{
-    DisectorNumber: 29
-sectorNumber: 62
-rectory *dsectorNumber: 29
-sectorNumber: 62
-irectory;
-sectorNumber: 29
-sectorNumber: 62
-    BitMapsectorNumber: 29
-sectorNumber: 62
- *freeMap;sectorNumber: 29
-sectorNumber: 62
-
-    FileHsectorNumber: 29
-sectorNumber: 62
-eader *hdrsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-;
-    int sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-sector;
-  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-  bool sucsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-cess;
-
-   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
- DEBUG('f'sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-, "CreatinsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-g file %s,sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
- size %d\nsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-", name, isectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-nitialSizesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-);
-    dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-ectory = nsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 65
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-ew DirectosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-ry(NumDirEsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-ntries);
- sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-   directosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-ry->FetchFsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-rom(directsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-oryFile);
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-
-    if (dsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-irectory->sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-Find(name)sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
- != -1)
-  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-    successectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-s = FALSE;sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 66
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-			// filesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
- is alreadsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-y in direcsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-tory
-    esectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-lse {	
-   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-     freeMsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-ap = new BsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-itMap(NumSsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-ectors);
- sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-       fresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-eMap->FetcsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-hFrom(freesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-MapFile);
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 67
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-        sesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-ctor = fresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-eMap->FindsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-();	// finsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-d a sectorsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
- to hold tsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-he file hesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-ader
-    	sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-if (sectorsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
- == -1) 		sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-
-         sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-   successsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
- = FALSE;	sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 68
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-	// no fresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-e block fosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-r file heasectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-der 
-     sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-   else ifsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
- (!directosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-ry->Add(nasectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-me, sectorsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-))
-       sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-     succesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-ss = FALSEsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-;	// no spsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 69
-ace in dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-ectory
-	elsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-se {
-    	sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-    hdr = sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-new FileHesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-ader;
-	   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
- if (!hdr-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
->Allocate(sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-freeMap, isectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-nitialSizesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-))
-       sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-     	succsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-ess = FALSsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 70
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-E;	// no ssectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-pace on disectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-sk for datsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-a
-	    elssectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-e {	
-	    sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-	success =sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
- TRUE;
-		/sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-/ everthinsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-g worked, sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-flush all sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-changes basectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-ck to disksectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-
-         sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 71
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-       hdrsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-->setCreatsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-eTime();
- sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-   	    	hsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-dr->WriteBsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-ack(sectorsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-); 		
-    sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-	    	diresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-ctory->WrisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-teBack(dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-ectoryFilesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-);
-    	  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-  	freeMapsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 72
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-->WriteBacsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-k(freeMapFsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-ile);
-	   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
- }
-       sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-     deletsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-e hdr;
-	}
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-        desectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-lete freeMsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-ap;
-    }
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-    deletesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
- directorysectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-;
-    retusectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-rn successsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 73
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-;
-}
-
-//---sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
--------
-//sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
- FileSystesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-m::Open
-//sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
- 	Open a fsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-ile for resectorNumber: 30
-sectorNumber: 63
-sectorNumber: 74
-ading and sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-writing.  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-
-//	To opesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-n a file:
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-//	  Find sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-the locatisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-on of the sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-file's heasectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-der, usingsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
- the direcsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-tory 
-//	 sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
- Bring thesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
- header insectorNumber: 30
-sectorNumber: 63
-sectorNumber: 75
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-to memory
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-//
-//	"namsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-e" -- the sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-text name sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-of the filsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-e to be opsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-ened
-//---sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 76
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
--------
-
-OsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-penFile *
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-FileSystemsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-::Open(chasectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-r *name)
-{sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
- 
-    DiresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-ctory *dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-ectory = nsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-ew DirectosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-ry(NumDirEsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-ntries);
- sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-   OpenFilsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-e *openFilsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 77
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-e = NULL;
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-    int sesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-ctor;
-
-   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
- DEBUG('f'sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-, "OpeningsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
- file %s\nsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-", name);
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-    directsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-ory->FetchsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-From(direcsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-toryFile);sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-
-    sectosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-r = directsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 78
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-ory->Find(sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-name); 
-  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-  if (sectsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-or >= 0) 	sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-	
-	openFilsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-e = new OpsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-enFile(secsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-tor);	// nsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-ame was fosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-und in dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-ectory 
-  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-  delete dsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 79
-irectory;
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-    returnsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
- openFile;sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-				// retsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-urn NULL isectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-f not founsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-d
-}
-
-//---sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 80
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
--------
-//sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
- FileSystesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-m::Remove
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-// 	DeletesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
- a file frsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-om the filsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-e system. sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
- This requsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-ires:
-//	 sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-   Remove sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-it from thsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-e directorsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-y
-//	    DsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 81
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-elete the sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-space for sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-its headersectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-
-//	    DesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-lete the ssectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-pace for isectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-ts data blsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-ocks
-//	  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-  Write chsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-anges to dsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-irectory, sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-bitmap bacsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-k to disk
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 82
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-//
-//	RetusectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-rn TRUE ifsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
- the file sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-was deletesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-d, FALSE isectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-f the filesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
- wasn't
-//sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-	in the fisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-le system.sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-
-//
-//	"nasectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-me" -- thesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
- text namesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
- of the fisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 83
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-le to be rsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-emoved
-//-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
----------
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-
-bool
-FilesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-System::ResectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-move(char sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 84
-*name)
-{ 
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-    DirectsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-ory *direcsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-tory;
-    sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-BitMap *frsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-eeMap;
-   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
- FileHeadesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-r *fileHdrsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-;
-    int sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-sector;
-  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-  
-    dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-ectory = nsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-ew DirectosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 85
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-ry(NumDirEsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-ntries);
- sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-   directosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-ry->FetchFsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-rom(directsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-oryFile);
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-    sectorsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
- = directosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-ry->Find(nsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-ame);
-    sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-if (sectorsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
- == -1) {
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-       delsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 86
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-ete directsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-ory;
-     sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-  return FsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-ALSE;			 /sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-/ file notsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
- found 
-  sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-  }
-    fisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-leHdr = nesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-w FileHeadsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-er;
-    fisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-leHdr->FetsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-chFrom(secsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-tor);
-
-   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 87
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
- freeMap =sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
- new BitMasectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-p(NumSectosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-rs);
-    fsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-reeMap->FesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-tchFrom(frsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-eeMapFile)sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-;
-
-    filsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-eHdr->DealsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-locate(fresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-eMap);  		sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-// remove sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-data blocksectorNumber: 30
-sectorNumber: 63
-sectorNumber: 88
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-s
-    freesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-Map->ClearsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-(sector);	sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-		// removsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-e header bsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-lock
-    dsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-irectory->sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-Remove(namsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-e);
-
-    fsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-reeMap->WrsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-iteBack(frsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-eeMapFile)sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 89
-;		// flussectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-h to disk
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-    directsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-ory->WritesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-Back(direcsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-toryFile);sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-        //sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
- flush to sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-disk
-    dsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-elete filesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-Hdr;
-    dsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-elete diresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-ctory;
-   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 90
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
- delete frsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-eeMap;
-   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
- return TRsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-UE;
-} 
-
-//sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-
-// FileSysectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-stem::ListsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 91
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-
-// 	List sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-all the fisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-les in thesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
- file systsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-em directosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-ry.
-//----sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-------
-
-vosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 92
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-id
-FileSyssectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-tem::List(sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-)
-{
-    DisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-rectory *dsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-irectory =sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
- new DirecsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-tory(NumDisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-rEntries);sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-
-
-    diresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-ctory->FetsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-chFrom(dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-ectoryFilesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-);
-    dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 93
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-ectory->LisectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-st();
-    sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-delete dirsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-ectory;
-}
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-
-//-------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
----
-// FilsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 94
-eSystem::PsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-rint
-// 	PsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-rint everysectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-thing abousectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-t the filesectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
- system:
-/sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-/	  the cosectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-ntents of sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-the bitmapsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-
-//	  the sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-contents osectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-f the diresectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-ctory
-//	 sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 95
-sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
- for each sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-file in thsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-e directorsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-y,
-//	    sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-  the contsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-ents of thsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-e file heasectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-der
-//	   sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-   the datsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-a in the fsectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-ile
-//----sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-----------sectorNumber: 30
-sectorNumber: 63
-sectorNumber: 96
-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-----------sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-----------sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-----------sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-----------sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-------
-
-vosectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-id
-FileSyssectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-tem::PrintsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-()
-{
-    FsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-ileHeader sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-*bitHdr = sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-new FileHesectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-ader;
-    sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-FileHeadersectorNumber: 30
-sectorNumber: 64
-sectorNumber: 97
-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
- *dirHdr =sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
- new FileHsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-eader;
-   sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
- BitMap *fsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-reeMap = nsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-ew BitMap(sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-NumSectorssectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-);
-    DirsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-ectory *disectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-rectory = sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-new DirectsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-ory(NumDirsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-Entries);
-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 98
-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-
-    printsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-f("Bit mapsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
- file headsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-er:\n");
- sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-   bitHdr-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
->FetchFromsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-(FreeMapSesectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-ctor);
-   sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
- bitHdr->PsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-rint();
-
- sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-   printf(sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
-"DirectorysectorNumber: 30
-sectorNumber: 64
-sectorNumber: 99
- file headsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-er:\n");
- sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-   dirHdr-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
->FetchFromsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-(DirectorysectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-Sector);
- sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-   dirHdr-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
->Print();
-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-
-    freeMsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-ap->FetchFsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-rom(freeMasectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-pFile);
-  sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-  freeMap-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 100
-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
->Print();
-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-
-    direcsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-tory->FetcsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-hFrom(diresectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-ctoryFile)sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-;
-    diresectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-ctory->PrisectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-nt();
-
-   sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
- delete bisectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-tHdr;
-    sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-delete dirsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-Hdr;
-    dsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-elete freesectorNumber: 30
-sectorNumber: 64
-sectorNumber: 101
-sectorNumber: 30
-sectorNumber: 64
-sectorNumber: 102
-Map;
-    dsectorNumber: 30
-sectorNumber: 64
-sectorNumber: 102
-elete diresectorNumber: 30
-sectorNumber: 64
-sectorNumber: 102
-ctory;
-} 
-finish
-No threads ready or runnable, and no pending interrupts.
-Assuming the program completed.
-Machine halting!
-
-Ticks: total 31939100, idle 31822460, system 116640, user 0
-Disk I/O: reads 2706, writes 1181
+Starting file system performance test:
+Ticks: total 1070, idle 1000, system 70, user 0
+Disk I/O: reads 2, writes 0
 Console I/O: reads 0, writes 0
 Paging: faults 0
 Network I/O: packets received 0, sent 0
-
-Cleaning up...
+Sequential write of 50000 byte file, in 10 byte chunks
+wirtebegin: TestFile
+before WriteAt
+po: 0, num: 10, fl: 0
+newSectors: 1, totalSectors: 1, numSectors: 0
+direct: 6
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 10, num: 10, fl: 10
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 20, num: 10, fl: 20
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 30, num: 10, fl: 30
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 40, num: 10, fl: 40
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 50, num: 10, fl: 50
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 60, num: 10, fl: 60
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 70, num: 10, fl: 70
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 80, num: 10, fl: 80
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 90, num: 10, fl: 90
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 100, num: 10, fl: 100
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 110, num: 10, fl: 110
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 120, num: 10, fl: 120
+newSectors: 1, totalSectors: 2, numSectors: 1
+direct: 7
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 130, num: 10, fl: 130
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 140, num: 10, fl: 140
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 150, num: 10, fl: 150
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 160, num: 10, fl: 160
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 170, num: 10, fl: 170
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 180, num: 10, fl: 180
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 190, num: 10, fl: 190
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 200, num: 10, fl: 200
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 210, num: 10, fl: 210
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 220, num: 10, fl: 220
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 230, num: 10, fl: 230
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 240, num: 10, fl: 240
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 250, num: 10, fl: 250
+newSectors: 1, totalSectors: 3, numSectors: 2
+direct: 8
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 260, num: 10, fl: 260
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 270, num: 10, fl: 270
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 280, num: 10, fl: 280
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 290, num: 10, fl: 290
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 300, num: 10, fl: 300
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 310, num: 10, fl: 310
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 320, num: 10, fl: 320
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 330, num: 10, fl: 330
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 340, num: 10, fl: 340
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 350, num: 10, fl: 350
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 360, num: 10, fl: 360
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 370, num: 10, fl: 370
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 380, num: 10, fl: 380
+newSectors: 1, totalSectors: 4, numSectors: 3
+direct: 9
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 390, num: 10, fl: 390
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 400, num: 10, fl: 400
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 410, num: 10, fl: 410
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 420, num: 10, fl: 420
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 430, num: 10, fl: 430
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 440, num: 10, fl: 440
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 450, num: 10, fl: 450
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 460, num: 10, fl: 460
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 470, num: 10, fl: 470
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 480, num: 10, fl: 480
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 490, num: 10, fl: 490
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 500, num: 10, fl: 500
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 510, num: 10, fl: 510
+newSectors: 1, totalSectors: 5, numSectors: 4
+direct: 10
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 520, num: 10, fl: 520
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 530, num: 10, fl: 530
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 540, num: 10, fl: 540
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 550, num: 10, fl: 550
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 560, num: 10, fl: 560
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 570, num: 10, fl: 570
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 580, num: 10, fl: 580
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 590, num: 10, fl: 590
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 600, num: 10, fl: 600
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 610, num: 10, fl: 610
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 620, num: 10, fl: 620
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 630, num: 10, fl: 630
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 640, num: 10, fl: 640
+newSectors: 1, totalSectors: 6, numSectors: 5
+direct: 11
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 650, num: 10, fl: 650
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 660, num: 10, fl: 660
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 670, num: 10, fl: 670
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 680, num: 10, fl: 680
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 690, num: 10, fl: 690
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 700, num: 10, fl: 700
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 710, num: 10, fl: 710
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 720, num: 10, fl: 720
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 730, num: 10, fl: 730
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 740, num: 10, fl: 740
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 750, num: 10, fl: 750
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 760, num: 10, fl: 760
+newSectors: 1, totalSectors: 7, numSectors: 6
+direct: 12
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 770, num: 10, fl: 770
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 780, num: 10, fl: 780
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 790, num: 10, fl: 790
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 800, num: 10, fl: 800
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 810, num: 10, fl: 810
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 820, num: 10, fl: 820
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 830, num: 10, fl: 830
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 840, num: 10, fl: 840
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 850, num: 10, fl: 850
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 860, num: 10, fl: 860
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 870, num: 10, fl: 870
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 880, num: 10, fl: 880
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 890, num: 10, fl: 890
+newSectors: 1, totalSectors: 8, numSectors: 7
+direct: 13
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 900, num: 10, fl: 900
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 910, num: 10, fl: 910
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 920, num: 10, fl: 920
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 930, num: 10, fl: 930
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 940, num: 10, fl: 940
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 950, num: 10, fl: 950
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 960, num: 10, fl: 960
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 970, num: 10, fl: 970
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 980, num: 10, fl: 980
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 990, num: 10, fl: 990
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1000, num: 10, fl: 1000
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1010, num: 10, fl: 1010
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1020, num: 10, fl: 1020
+newSectors: 1, totalSectors: 9, numSectors: 8
+direct: 14
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1030, num: 10, fl: 1030
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1040, num: 10, fl: 1040
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1050, num: 10, fl: 1050
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1060, num: 10, fl: 1060
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1070, num: 10, fl: 1070
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1080, num: 10, fl: 1080
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1090, num: 10, fl: 1090
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1100, num: 10, fl: 1100
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1110, num: 10, fl: 1110
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1120, num: 10, fl: 1120
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1130, num: 10, fl: 1130
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1140, num: 10, fl: 1140
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1150, num: 10, fl: 1150
+newSectors: 1, totalSectors: 10, numSectors: 9
+direct: 15
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1160, num: 10, fl: 1160
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1170, num: 10, fl: 1170
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1180, num: 10, fl: 1180
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1190, num: 10, fl: 1190
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1200, num: 10, fl: 1200
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1210, num: 10, fl: 1210
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1220, num: 10, fl: 1220
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1230, num: 10, fl: 1230
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1240, num: 10, fl: 1240
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1250, num: 10, fl: 1250
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1260, num: 10, fl: 1260
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1270, num: 10, fl: 1270
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1280, num: 10, fl: 1280
+newSectors: 1, totalSectors: 11, numSectors: 10
+direct: 16
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1290, num: 10, fl: 1290
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1300, num: 10, fl: 1300
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1310, num: 10, fl: 1310
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1320, num: 10, fl: 1320
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1330, num: 10, fl: 1330
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1340, num: 10, fl: 1340
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1350, num: 10, fl: 1350
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1360, num: 10, fl: 1360
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1370, num: 10, fl: 1370
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1380, num: 10, fl: 1380
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1390, num: 10, fl: 1390
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1400, num: 10, fl: 1400
+newSectors: 1, totalSectors: 12, numSectors: 11
+direct: 17
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1410, num: 10, fl: 1410
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1420, num: 10, fl: 1420
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1430, num: 10, fl: 1430
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1440, num: 10, fl: 1440
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1450, num: 10, fl: 1450
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1460, num: 10, fl: 1460
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1470, num: 10, fl: 1470
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1480, num: 10, fl: 1480
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1490, num: 10, fl: 1490
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1500, num: 10, fl: 1500
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1510, num: 10, fl: 1510
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1520, num: 10, fl: 1520
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1530, num: 10, fl: 1530
+newSectors: 1, totalSectors: 13, numSectors: 12
+direct: 18
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1540, num: 10, fl: 1540
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1550, num: 10, fl: 1550
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1560, num: 10, fl: 1560
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1570, num: 10, fl: 1570
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1580, num: 10, fl: 1580
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1590, num: 10, fl: 1590
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1600, num: 10, fl: 1600
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1610, num: 10, fl: 1610
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1620, num: 10, fl: 1620
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1630, num: 10, fl: 1630
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1640, num: 10, fl: 1640
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1650, num: 10, fl: 1650
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1660, num: 10, fl: 1660
+newSectors: 1, totalSectors: 14, numSectors: 13
+direct: 19
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1670, num: 10, fl: 1670
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1680, num: 10, fl: 1680
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1690, num: 10, fl: 1690
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1700, num: 10, fl: 1700
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1710, num: 10, fl: 1710
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1720, num: 10, fl: 1720
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1730, num: 10, fl: 1730
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1740, num: 10, fl: 1740
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1750, num: 10, fl: 1750
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1760, num: 10, fl: 1760
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1770, num: 10, fl: 1770
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1780, num: 10, fl: 1780
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1790, num: 10, fl: 1790
+newSectors: 1, totalSectors: 15, numSectors: 14
+direct: 20
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1800, num: 10, fl: 1800
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1810, num: 10, fl: 1810
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1820, num: 10, fl: 1820
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1830, num: 10, fl: 1830
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1840, num: 10, fl: 1840
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1850, num: 10, fl: 1850
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1860, num: 10, fl: 1860
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1870, num: 10, fl: 1870
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1880, num: 10, fl: 1880
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1890, num: 10, fl: 1890
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1900, num: 10, fl: 1900
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1910, num: 10, fl: 1910
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1920, num: 10, fl: 1920
+newSectors: 1, totalSectors: 16, numSectors: 15
+direct: 21
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1930, num: 10, fl: 1930
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1940, num: 10, fl: 1940
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1950, num: 10, fl: 1950
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1960, num: 10, fl: 1960
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1970, num: 10, fl: 1970
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1980, num: 10, fl: 1980
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 1990, num: 10, fl: 1990
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2000, num: 10, fl: 2000
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2010, num: 10, fl: 2010
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2020, num: 10, fl: 2020
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2030, num: 10, fl: 2030
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2040, num: 10, fl: 2040
+newSectors: 1, totalSectors: 17, numSectors: 16
+direct: 22
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2050, num: 10, fl: 2050
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2060, num: 10, fl: 2060
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2070, num: 10, fl: 2070
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2080, num: 10, fl: 2080
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2090, num: 10, fl: 2090
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2100, num: 10, fl: 2100
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2110, num: 10, fl: 2110
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2120, num: 10, fl: 2120
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2130, num: 10, fl: 2130
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2140, num: 10, fl: 2140
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2150, num: 10, fl: 2150
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2160, num: 10, fl: 2160
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2170, num: 10, fl: 2170
+newSectors: 1, totalSectors: 18, numSectors: 17
+direct: 23
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2180, num: 10, fl: 2180
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2190, num: 10, fl: 2190
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2200, num: 10, fl: 2200
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2210, num: 10, fl: 2210
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2220, num: 10, fl: 2220
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2230, num: 10, fl: 2230
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2240, num: 10, fl: 2240
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2250, num: 10, fl: 2250
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2260, num: 10, fl: 2260
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2270, num: 10, fl: 2270
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2280, num: 10, fl: 2280
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2290, num: 10, fl: 2290
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2300, num: 10, fl: 2300
+newSectors: 1, totalSectors: 19, numSectors: 18
+direct: 24
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2310, num: 10, fl: 2310
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2320, num: 10, fl: 2320
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2330, num: 10, fl: 2330
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2340, num: 10, fl: 2340
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2350, num: 10, fl: 2350
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2360, num: 10, fl: 2360
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2370, num: 10, fl: 2370
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2380, num: 10, fl: 2380
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2390, num: 10, fl: 2390
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2400, num: 10, fl: 2400
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2410, num: 10, fl: 2410
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2420, num: 10, fl: 2420
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2430, num: 10, fl: 2430
+newSectors: 1, totalSectors: 20, numSectors: 19
+direct: 25
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2440, num: 10, fl: 2440
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2450, num: 10, fl: 2450
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2460, num: 10, fl: 2460
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2470, num: 10, fl: 2470
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2480, num: 10, fl: 2480
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2490, num: 10, fl: 2490
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2500, num: 10, fl: 2500
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2510, num: 10, fl: 2510
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2520, num: 10, fl: 2520
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2530, num: 10, fl: 2530
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2540, num: 10, fl: 2540
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2550, num: 10, fl: 2550
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2560, num: 10, fl: 2560
+newSectors: 1, totalSectors: 21, numSectors: 20
+direct: 26
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2570, num: 10, fl: 2570
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2580, num: 10, fl: 2580
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2590, num: 10, fl: 2590
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2600, num: 10, fl: 2600
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2610, num: 10, fl: 2610
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2620, num: 10, fl: 2620
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2630, num: 10, fl: 2630
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2640, num: 10, fl: 2640
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2650, num: 10, fl: 2650
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2660, num: 10, fl: 2660
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2670, num: 10, fl: 2670
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2680, num: 10, fl: 2680
+newSectors: 1, totalSectors: 22, numSectors: 21
+direct: 27
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2690, num: 10, fl: 2690
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2700, num: 10, fl: 2700
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2710, num: 10, fl: 2710
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2720, num: 10, fl: 2720
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2730, num: 10, fl: 2730
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2740, num: 10, fl: 2740
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2750, num: 10, fl: 2750
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2760, num: 10, fl: 2760
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2770, num: 10, fl: 2770
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2780, num: 10, fl: 2780
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2790, num: 10, fl: 2790
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2800, num: 10, fl: 2800
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2810, num: 10, fl: 2810
+newSectors: 1, totalSectors: 23, numSectors: 22
+direct: 28
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2820, num: 10, fl: 2820
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2830, num: 10, fl: 2830
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2840, num: 10, fl: 2840
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2850, num: 10, fl: 2850
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2860, num: 10, fl: 2860
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2870, num: 10, fl: 2870
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2880, num: 10, fl: 2880
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2890, num: 10, fl: 2890
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2900, num: 10, fl: 2900
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2910, num: 10, fl: 2910
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2920, num: 10, fl: 2920
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2930, num: 10, fl: 2930
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2940, num: 10, fl: 2940
+newSectors: 1, totalSectors: 24, numSectors: 23
+indirect: 30
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2950, num: 10, fl: 2950
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2960, num: 10, fl: 2960
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2970, num: 10, fl: 2970
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2980, num: 10, fl: 2980
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 2990, num: 10, fl: 2990
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3000, num: 10, fl: 3000
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3010, num: 10, fl: 3010
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3020, num: 10, fl: 3020
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3030, num: 10, fl: 3030
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3040, num: 10, fl: 3040
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3050, num: 10, fl: 3050
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3060, num: 10, fl: 3060
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3070, num: 10, fl: 3070
+newSectors: 1, totalSectors: 25, numSectors: 24
+indirect: 31
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3080, num: 10, fl: 3080
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3090, num: 10, fl: 3090
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3100, num: 10, fl: 3100
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3110, num: 10, fl: 3110
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3120, num: 10, fl: 3120
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3130, num: 10, fl: 3130
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3140, num: 10, fl: 3140
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3150, num: 10, fl: 3150
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3160, num: 10, fl: 3160
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3170, num: 10, fl: 3170
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3180, num: 10, fl: 3180
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3190, num: 10, fl: 3190
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3200, num: 10, fl: 3200
+newSectors: 1, totalSectors: 26, numSectors: 25
+indirect: 32
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3210, num: 10, fl: 3210
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3220, num: 10, fl: 3220
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3230, num: 10, fl: 3230
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3240, num: 10, fl: 3240
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3250, num: 10, fl: 3250
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3260, num: 10, fl: 3260
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3270, num: 10, fl: 3270
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3280, num: 10, fl: 3280
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3290, num: 10, fl: 3290
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3300, num: 10, fl: 3300
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3310, num: 10, fl: 3310
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3320, num: 10, fl: 3320
+newSectors: 1, totalSectors: 27, numSectors: 26
+indirect: 33
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3330, num: 10, fl: 3330
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3340, num: 10, fl: 3340
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3350, num: 10, fl: 3350
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3360, num: 10, fl: 3360
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3370, num: 10, fl: 3370
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3380, num: 10, fl: 3380
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3390, num: 10, fl: 3390
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3400, num: 10, fl: 3400
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3410, num: 10, fl: 3410
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3420, num: 10, fl: 3420
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3430, num: 10, fl: 3430
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3440, num: 10, fl: 3440
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3450, num: 10, fl: 3450
+newSectors: 1, totalSectors: 28, numSectors: 27
+indirect: 34
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3460, num: 10, fl: 3460
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3470, num: 10, fl: 3470
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3480, num: 10, fl: 3480
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3490, num: 10, fl: 3490
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3500, num: 10, fl: 3500
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3510, num: 10, fl: 3510
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3520, num: 10, fl: 3520
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3530, num: 10, fl: 3530
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3540, num: 10, fl: 3540
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3550, num: 10, fl: 3550
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3560, num: 10, fl: 3560
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3570, num: 10, fl: 3570
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3580, num: 10, fl: 3580
+newSectors: 1, totalSectors: 29, numSectors: 28
+indirect: 35
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3590, num: 10, fl: 3590
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3600, num: 10, fl: 3600
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3610, num: 10, fl: 3610
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3620, num: 10, fl: 3620
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3630, num: 10, fl: 3630
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3640, num: 10, fl: 3640
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3650, num: 10, fl: 3650
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3660, num: 10, fl: 3660
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3670, num: 10, fl: 3670
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3680, num: 10, fl: 3680
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3690, num: 10, fl: 3690
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3700, num: 10, fl: 3700
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3710, num: 10, fl: 3710
+newSectors: 1, totalSectors: 30, numSectors: 29
+indirect: 36
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3720, num: 10, fl: 3720
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3730, num: 10, fl: 3730
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3740, num: 10, fl: 3740
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3750, num: 10, fl: 3750
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3760, num: 10, fl: 3760
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3770, num: 10, fl: 3770
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3780, num: 10, fl: 3780
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3790, num: 10, fl: 3790
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3800, num: 10, fl: 3800
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3810, num: 10, fl: 3810
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3820, num: 10, fl: 3820
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3830, num: 10, fl: 3830
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3840, num: 10, fl: 3840
+newSectors: 1, totalSectors: 31, numSectors: 30
+indirect: 37
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3850, num: 10, fl: 3850
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3860, num: 10, fl: 3860
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3870, num: 10, fl: 3870
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3880, num: 10, fl: 3880
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3890, num: 10, fl: 3890
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3900, num: 10, fl: 3900
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3910, num: 10, fl: 3910
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3920, num: 10, fl: 3920
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3930, num: 10, fl: 3930
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3940, num: 10, fl: 3940
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3950, num: 10, fl: 3950
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3960, num: 10, fl: 3960
+newSectors: 1, totalSectors: 32, numSectors: 31
+indirect: 38
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3970, num: 10, fl: 3970
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3980, num: 10, fl: 3980
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 3990, num: 10, fl: 3990
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4000, num: 10, fl: 4000
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4010, num: 10, fl: 4010
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4020, num: 10, fl: 4020
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4030, num: 10, fl: 4030
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4040, num: 10, fl: 4040
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4050, num: 10, fl: 4050
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4060, num: 10, fl: 4060
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4070, num: 10, fl: 4070
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4080, num: 10, fl: 4080
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4090, num: 10, fl: 4090
+newSectors: 1, totalSectors: 33, numSectors: 32
+indirect: 39
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4100, num: 10, fl: 4100
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4110, num: 10, fl: 4110
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4120, num: 10, fl: 4120
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4130, num: 10, fl: 4130
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4140, num: 10, fl: 4140
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4150, num: 10, fl: 4150
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4160, num: 10, fl: 4160
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4170, num: 10, fl: 4170
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4180, num: 10, fl: 4180
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4190, num: 10, fl: 4190
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4200, num: 10, fl: 4200
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4210, num: 10, fl: 4210
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4220, num: 10, fl: 4220
+newSectors: 1, totalSectors: 34, numSectors: 33
+indirect: 40
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4230, num: 10, fl: 4230
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4240, num: 10, fl: 4240
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4250, num: 10, fl: 4250
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4260, num: 10, fl: 4260
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4270, num: 10, fl: 4270
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4280, num: 10, fl: 4280
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4290, num: 10, fl: 4290
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4300, num: 10, fl: 4300
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4310, num: 10, fl: 4310
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4320, num: 10, fl: 4320
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4330, num: 10, fl: 4330
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4340, num: 10, fl: 4340
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4350, num: 10, fl: 4350
+newSectors: 1, totalSectors: 35, numSectors: 34
+indirect: 41
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4360, num: 10, fl: 4360
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4370, num: 10, fl: 4370
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4380, num: 10, fl: 4380
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4390, num: 10, fl: 4390
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4400, num: 10, fl: 4400
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4410, num: 10, fl: 4410
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4420, num: 10, fl: 4420
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4430, num: 10, fl: 4430
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4440, num: 10, fl: 4440
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4450, num: 10, fl: 4450
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4460, num: 10, fl: 4460
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4470, num: 10, fl: 4470
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4480, num: 10, fl: 4480
+newSectors: 1, totalSectors: 36, numSectors: 35
+indirect: 42
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4490, num: 10, fl: 4490
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4500, num: 10, fl: 4500
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4510, num: 10, fl: 4510
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4520, num: 10, fl: 4520
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4530, num: 10, fl: 4530
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4540, num: 10, fl: 4540
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4550, num: 10, fl: 4550
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4560, num: 10, fl: 4560
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4570, num: 10, fl: 4570
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4580, num: 10, fl: 4580
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4590, num: 10, fl: 4590
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4600, num: 10, fl: 4600
+newSectors: 1, totalSectors: 37, numSectors: 36
+indirect: 43
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4610, num: 10, fl: 4610
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4620, num: 10, fl: 4620
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4630, num: 10, fl: 4630
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4640, num: 10, fl: 4640
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4650, num: 10, fl: 4650
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4660, num: 10, fl: 4660
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4670, num: 10, fl: 4670
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4680, num: 10, fl: 4680
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4690, num: 10, fl: 4690
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4700, num: 10, fl: 4700
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4710, num: 10, fl: 4710
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4720, num: 10, fl: 4720
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4730, num: 10, fl: 4730
+newSectors: 1, totalSectors: 38, numSectors: 37
+indirect: 44
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4740, num: 10, fl: 4740
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4750, num: 10, fl: 4750
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4760, num: 10, fl: 4760
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4770, num: 10, fl: 4770
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4780, num: 10, fl: 4780
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4790, num: 10, fl: 4790
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4800, num: 10, fl: 4800
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4810, num: 10, fl: 4810
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4820, num: 10, fl: 4820
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4830, num: 10, fl: 4830
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4840, num: 10, fl: 4840
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4850, num: 10, fl: 4850
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4860, num: 10, fl: 4860
+newSectors: 1, totalSectors: 39, numSectors: 38
+indirect: 45
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4870, num: 10, fl: 4870
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4880, num: 10, fl: 4880
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4890, num: 10, fl: 4890
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4900, num: 10, fl: 4900
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4910, num: 10, fl: 4910
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4920, num: 10, fl: 4920
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4930, num: 10, fl: 4930
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4940, num: 10, fl: 4940
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4950, num: 10, fl: 4950
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4960, num: 10, fl: 4960
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4970, num: 10, fl: 4970
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4980, num: 10, fl: 4980
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 4990, num: 10, fl: 4990
+newSectors: 1, totalSectors: 40, numSectors: 39
+indirect: 46
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5000, num: 10, fl: 5000
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5010, num: 10, fl: 5010
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5020, num: 10, fl: 5020
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5030, num: 10, fl: 5030
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5040, num: 10, fl: 5040
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5050, num: 10, fl: 5050
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5060, num: 10, fl: 5060
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5070, num: 10, fl: 5070
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5080, num: 10, fl: 5080
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5090, num: 10, fl: 5090
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5100, num: 10, fl: 5100
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5110, num: 10, fl: 5110
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5120, num: 10, fl: 5120
+newSectors: 1, totalSectors: 41, numSectors: 40
+indirect: 47
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5130, num: 10, fl: 5130
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5140, num: 10, fl: 5140
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5150, num: 10, fl: 5150
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5160, num: 10, fl: 5160
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5170, num: 10, fl: 5170
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5180, num: 10, fl: 5180
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5190, num: 10, fl: 5190
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5200, num: 10, fl: 5200
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5210, num: 10, fl: 5210
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5220, num: 10, fl: 5220
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5230, num: 10, fl: 5230
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5240, num: 10, fl: 5240
+newSectors: 1, totalSectors: 42, numSectors: 41
+indirect: 48
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5250, num: 10, fl: 5250
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5260, num: 10, fl: 5260
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5270, num: 10, fl: 5270
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5280, num: 10, fl: 5280
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5290, num: 10, fl: 5290
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5300, num: 10, fl: 5300
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5310, num: 10, fl: 5310
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5320, num: 10, fl: 5320
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5330, num: 10, fl: 5330
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5340, num: 10, fl: 5340
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5350, num: 10, fl: 5350
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5360, num: 10, fl: 5360
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5370, num: 10, fl: 5370
+newSectors: 1, totalSectors: 43, numSectors: 42
+indirect: 49
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5380, num: 10, fl: 5380
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5390, num: 10, fl: 5390
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5400, num: 10, fl: 5400
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5410, num: 10, fl: 5410
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5420, num: 10, fl: 5420
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5430, num: 10, fl: 5430
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5440, num: 10, fl: 5440
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5450, num: 10, fl: 5450
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5460, num: 10, fl: 5460
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5470, num: 10, fl: 5470
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5480, num: 10, fl: 5480
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5490, num: 10, fl: 5490
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5500, num: 10, fl: 5500
+newSectors: 1, totalSectors: 44, numSectors: 43
+indirect: 50
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5510, num: 10, fl: 5510
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5520, num: 10, fl: 5520
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5530, num: 10, fl: 5530
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5540, num: 10, fl: 5540
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5550, num: 10, fl: 5550
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5560, num: 10, fl: 5560
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5570, num: 10, fl: 5570
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5580, num: 10, fl: 5580
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5590, num: 10, fl: 5590
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5600, num: 10, fl: 5600
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5610, num: 10, fl: 5610
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5620, num: 10, fl: 5620
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5630, num: 10, fl: 5630
+newSectors: 1, totalSectors: 45, numSectors: 44
+indirect: 51
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5640, num: 10, fl: 5640
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5650, num: 10, fl: 5650
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5660, num: 10, fl: 5660
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5670, num: 10, fl: 5670
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5680, num: 10, fl: 5680
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5690, num: 10, fl: 5690
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5700, num: 10, fl: 5700
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5710, num: 10, fl: 5710
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5720, num: 10, fl: 5720
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5730, num: 10, fl: 5730
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5740, num: 10, fl: 5740
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5750, num: 10, fl: 5750
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5760, num: 10, fl: 5760
+newSectors: 1, totalSectors: 46, numSectors: 45
+indirect: 52
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5770, num: 10, fl: 5770
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5780, num: 10, fl: 5780
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5790, num: 10, fl: 5790
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5800, num: 10, fl: 5800
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5810, num: 10, fl: 5810
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5820, num: 10, fl: 5820
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5830, num: 10, fl: 5830
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5840, num: 10, fl: 5840
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5850, num: 10, fl: 5850
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5860, num: 10, fl: 5860
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5870, num: 10, fl: 5870
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5880, num: 10, fl: 5880
+newSectors: 1, totalSectors: 47, numSectors: 46
+indirect: 53
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5890, num: 10, fl: 5890
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5900, num: 10, fl: 5900
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5910, num: 10, fl: 5910
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5920, num: 10, fl: 5920
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5930, num: 10, fl: 5930
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5940, num: 10, fl: 5940
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5950, num: 10, fl: 5950
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5960, num: 10, fl: 5960
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5970, num: 10, fl: 5970
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5980, num: 10, fl: 5980
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 5990, num: 10, fl: 5990
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6000, num: 10, fl: 6000
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6010, num: 10, fl: 6010
+newSectors: 1, totalSectors: 48, numSectors: 47
+indirect: 54
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6020, num: 10, fl: 6020
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6030, num: 10, fl: 6030
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6040, num: 10, fl: 6040
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6050, num: 10, fl: 6050
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6060, num: 10, fl: 6060
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6070, num: 10, fl: 6070
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6080, num: 10, fl: 6080
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6090, num: 10, fl: 6090
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6100, num: 10, fl: 6100
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6110, num: 10, fl: 6110
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6120, num: 10, fl: 6120
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6130, num: 10, fl: 6130
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6140, num: 10, fl: 6140
+newSectors: 1, totalSectors: 49, numSectors: 48
+indirect: 55
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6150, num: 10, fl: 6150
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6160, num: 10, fl: 6160
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6170, num: 10, fl: 6170
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6180, num: 10, fl: 6180
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6190, num: 10, fl: 6190
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6200, num: 10, fl: 6200
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6210, num: 10, fl: 6210
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6220, num: 10, fl: 6220
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6230, num: 10, fl: 6230
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6240, num: 10, fl: 6240
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6250, num: 10, fl: 6250
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6260, num: 10, fl: 6260
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6270, num: 10, fl: 6270
+newSectors: 1, totalSectors: 50, numSectors: 49
+indirect: 56
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6280, num: 10, fl: 6280
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6290, num: 10, fl: 6290
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6300, num: 10, fl: 6300
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6310, num: 10, fl: 6310
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6320, num: 10, fl: 6320
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6330, num: 10, fl: 6330
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6340, num: 10, fl: 6340
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6350, num: 10, fl: 6350
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6360, num: 10, fl: 6360
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6370, num: 10, fl: 6370
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6380, num: 10, fl: 6380
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6390, num: 10, fl: 6390
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6400, num: 10, fl: 6400
+newSectors: 1, totalSectors: 51, numSectors: 50
+indirect: 57
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6410, num: 10, fl: 6410
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6420, num: 10, fl: 6420
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6430, num: 10, fl: 6430
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6440, num: 10, fl: 6440
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6450, num: 10, fl: 6450
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6460, num: 10, fl: 6460
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6470, num: 10, fl: 6470
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6480, num: 10, fl: 6480
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6490, num: 10, fl: 6490
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6500, num: 10, fl: 6500
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6510, num: 10, fl: 6510
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6520, num: 10, fl: 6520
+newSectors: 1, totalSectors: 52, numSectors: 51
+indirect: 58
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6530, num: 10, fl: 6530
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6540, num: 10, fl: 6540
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6550, num: 10, fl: 6550
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6560, num: 10, fl: 6560
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6570, num: 10, fl: 6570
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6580, num: 10, fl: 6580
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6590, num: 10, fl: 6590
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6600, num: 10, fl: 6600
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6610, num: 10, fl: 6610
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6620, num: 10, fl: 6620
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6630, num: 10, fl: 6630
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6640, num: 10, fl: 6640
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6650, num: 10, fl: 6650
+newSectors: 1, totalSectors: 53, numSectors: 52
+indirect: 59
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6660, num: 10, fl: 6660
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6670, num: 10, fl: 6670
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6680, num: 10, fl: 6680
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6690, num: 10, fl: 6690
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6700, num: 10, fl: 6700
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6710, num: 10, fl: 6710
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6720, num: 10, fl: 6720
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6730, num: 10, fl: 6730
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6740, num: 10, fl: 6740
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6750, num: 10, fl: 6750
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6760, num: 10, fl: 6760
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6770, num: 10, fl: 6770
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6780, num: 10, fl: 6780
+newSectors: 1, totalSectors: 54, numSectors: 53
+indirect: 60
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6790, num: 10, fl: 6790
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6800, num: 10, fl: 6800
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6810, num: 10, fl: 6810
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6820, num: 10, fl: 6820
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6830, num: 10, fl: 6830
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6840, num: 10, fl: 6840
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6850, num: 10, fl: 6850
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6860, num: 10, fl: 6860
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6870, num: 10, fl: 6870
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6880, num: 10, fl: 6880
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6890, num: 10, fl: 6890
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6900, num: 10, fl: 6900
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6910, num: 10, fl: 6910
+newSectors: 1, totalSectors: 55, numSectors: 54
+indirect: 61
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6920, num: 10, fl: 6920
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6930, num: 10, fl: 6930
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6940, num: 10, fl: 6940
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6950, num: 10, fl: 6950
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6960, num: 10, fl: 6960
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6970, num: 10, fl: 6970
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6980, num: 10, fl: 6980
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 6990, num: 10, fl: 6990
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 7000, num: 10, fl: 7000
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 7010, num: 10, fl: 7010
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 7020, num: 10, fl: 7020
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 7030, num: 10, fl: 7030
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 7040, num: 10, fl: 7040
+newSectors: 1, totalSectors: 56, numSectors: 55
+inindirect: 63
+writeend: TestFile
+wirtebegin: TestFile
+before WriteAt
+po: 7050, num: 10, fl: 7050

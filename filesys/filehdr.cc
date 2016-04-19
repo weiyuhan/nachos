@@ -87,11 +87,6 @@ FileHeader::Allocate(BitMap *freeMap, int fileSize)
         for(int i = 0; i < indirectSectors; i++)
         {
             InsectorTable[i] = freeMap->Find();
-        }
-        synchDisk->WriteSector(dataSectors[NumDirect-1],
-            (char*)InsectorTable);
-        for(int i = 0; i < indirectSectors; i++)
-        {
             int fillup = left <= SectorsInSector? left:SectorsInSector;
             left -= SectorsInSector;
 
@@ -101,10 +96,151 @@ FileHeader::Allocate(BitMap *freeMap, int fileSize)
             synchDisk->WriteSector(InsectorTable[i], 
                 (char*)InInsectorTable);
         }
+        synchDisk->WriteSector(dataSectors[NumDirect-1],
+            (char*)InsectorTable);
     }
     return TRUE;
 }
 
+bool
+FileHeader::AllocateMore(BitMap *freeMap, int size)
+{ 
+    int SectorIndex = 0;
+    int totalBytes = numBytes + size;
+    int totalSectors = divRoundUp(totalBytes, SectorSize);
+    int newSectors  = totalSectors - numSectors;
+    if(newSectors == 0)
+    {
+        numBytes = totalBytes;
+        numSectors = totalSectors;
+        return TRUE;
+    }
+    if(totalSectors <= NumDirect - 2)
+    {
+        if (freeMap->NumClear() < newSectors)
+           return FALSE;        // not enough space
+        for (int i = 0; i < totalSectors; i++)
+        {
+            if(SectorIndex >= numSectors)
+            {
+                dataSectors[i] = freeMap->Find();
+                //printf("direct: %d\n", dataSectors[i]);
+            }
+            SectorIndex++;
+        }
+    }
+    else if(totalSectors <= NumDirect - 2 + SectorsInSector)
+    {
+        int newindirectSectors = numSectors <= (NumDirect-2)? 1:0;
+        if(freeMap->NumClear() < newSectors + newindirectSectors)
+            return FALSE;
+        int left = totalSectors - (NumDirect-2);
+        for (int i = 0; i < (NumDirect-2); i++) // direct
+        {
+            if(SectorIndex >= numSectors)
+            {
+                dataSectors[i] = freeMap->Find();
+                //printf("direct: %d\n", dataSectors[i]);
+            }
+            SectorIndex++;
+        }
+
+        int sectorTable[SectorsInSector] = {};
+        if(numSectors <= NumDirect - 2)
+            dataSectors[NumDirect-2] = freeMap->Find();
+        else
+            synchDisk->ReadSector(dataSectors[NumDirect-2],
+                (char*)sectorTable);
+
+        for(int i = 0; i < left; i++) // indirect
+        {   
+            if(SectorIndex >= numSectors)
+            {
+                sectorTable[i] = freeMap->Find();
+                //printf("indirect: %d\n", sectorTable[i]);
+            }
+            SectorIndex++;
+        }
+        synchDisk->WriteSector(dataSectors[NumDirect-2],
+            (char*)sectorTable);
+    }
+    else if(totalSectors <= NumDirect - 2 + SectorsInSector
+        + SectorsInSector * SectorsInSector)
+    {
+        int left = totalSectors - (NumDirect-2) - SectorsInSector;
+        int indirectSectors = divRoundUp(left, SectorsInSector);
+        int preleft = divRoundUp(numSectors - 
+            (NumDirect-2) - SectorsInSector, SectorsInSector);
+        if(preleft < 0)
+            preleft = 0;
+        int newindirectSectors = preleft + (
+            numSectors <= (NumDirect-2)?1:0);
+        if(freeMap->NumClear() < newSectors + newindirectSectors)
+            return FALSE;
+        for (int i = 0; i < NumDirect - 2; i++) // direct
+        {
+            if(SectorIndex >= numSectors)
+            {
+                dataSectors[i] = freeMap->Find();
+                //printf("direct: %d\n", dataSectors[i]);
+            }
+            SectorIndex++;
+        }
+
+        int sectorTable[SectorsInSector] = {};
+        if(numSectors <= NumDirect - 2)
+            dataSectors[NumDirect-2] = freeMap->Find();
+        else
+            synchDisk->ReadSector(dataSectors[NumDirect-2],
+                (char*)sectorTable);
+        for(int i = 0; i < SectorsInSector; i++) // indirect
+        {   
+            if(SectorIndex >= numSectors)
+            {
+                sectorTable[i] = freeMap->Find();
+                //printf("indirect: %d\n", sectorTable[i]);
+            }
+            SectorIndex++;
+        }
+        synchDisk->WriteSector(dataSectors[NumDirect-2],
+            (char*)sectorTable);
+
+        int InsectorTable[SectorsInSector] = {};
+        if(numSectors <= NumDirect - 2 + SectorsInSector)
+            dataSectors[NumDirect-1] = freeMap->Find();
+        else
+            synchDisk->ReadSector(dataSectors[NumDirect-1],
+                (char*)InsectorTable);
+        for(int i = 0; i < indirectSectors; i++)
+        {
+            int InInsectorTable[SectorsInSector] = {};
+            if(SectorIndex >= numSectors)
+                InsectorTable[i] = freeMap->Find();
+            else
+                synchDisk->ReadSector(InsectorTable[i],
+                    (char*)InInsectorTable);
+            int fillup = left <= SectorsInSector? left:SectorsInSector;
+            left -= SectorsInSector;
+
+            for(int j = 0; j < fillup; j++)
+            {
+                if(SectorIndex >= numSectors)
+                {
+                    InInsectorTable[j] = freeMap->Find();
+                    //printf("inindirect: %d\n", InInsectorTable[i]);
+                }
+                SectorIndex++;
+            }
+            synchDisk->WriteSector(InsectorTable[i], 
+                (char*)InInsectorTable);
+        }
+        synchDisk->WriteSector(dataSectors[NumDirect-1],
+            (char*)InsectorTable);
+    }
+    numBytes = totalBytes;
+    numSectors = totalSectors;
+    return TRUE;
+}
 //----------------------------------------------------------------------
 // FileHeader::Deallocate
 // 	De-allocate all the space allocated for data blocks for this file.
@@ -169,8 +305,8 @@ FileHeader::Deallocate(BitMap *freeMap)
                 (char*)InInsectorTable);
             for(int j = 0; j < fillup; j++)
             {
-                ASSERT(freeMap->Test((int) InInsectorTable[i]));  // ought to be marked!
-                freeMap->Clear((int) InInsectorTable[i]);
+                ASSERT(freeMap->Test((int) InInsectorTable[j]));  // ought to be marked!
+                freeMap->Clear((int) InInsectorTable[j]);
             }
 
             ASSERT(freeMap->Test((int) InsectorTable[i]));  // ought to be marked!
