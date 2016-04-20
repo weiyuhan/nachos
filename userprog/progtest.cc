@@ -66,7 +66,8 @@ void useConsole(int dummy)
     char ch;
     while(console != NULL) 
     {
-        console->PutCharPipe(ch);   // echo it!
+        ch = console->GetCharPipe();   // echo it!
+        console->PutChar(ch);
         if (ch == 'q') 
         {
             delete console;
@@ -100,7 +101,8 @@ ConsoleTest (char *in, char *out)
 
     while(console != NULL) 
     {
-        ch = console->GetCharPipe();
+        ch = console->GetChar();
+        console->PutCharPipe(ch);
         if (ch == 'q') 
         {
             delete console;

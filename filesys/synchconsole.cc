@@ -75,7 +75,7 @@ SynchConsole::PutChar(char ch)
     lock->Acquire();
     console->PutChar(ch);
     write->P();
-    //printf("putchar: %c\n", ch);	
+    //printf("Thread %d: %s put ch: %c\n", currentThread->gettid(),currentThread->getName(), ch);
     lock->Release();
 }
 
@@ -86,27 +86,9 @@ SynchConsole::GetChar()
 	lock->Acquire();
 	read->P();	
     ch = console->GetChar();
-    //printf("getchar: %c\n", ch);
+    //printf("Thread %d: %s get ch: %c\n", currentThread->gettid(),currentThread->getName(), ch);
     lock->Release();
     return ch;
-}
-
-void 
-SynchConsole::PutCharPipe(char ch)
-{
-    if(!pipe)
-        return;
-    lock->Acquire();
-    while(pipeFileread->Read(&ch,1) == 0)
-    {
-        pipeAvail->Wait(lock);
-    }
-    printf("Thread %d: %s put ch: %c\n", currentThread->gettid(),
-            currentThread->getName(), ch);
-    console->PutChar(ch);
-    write->P();
-    //printf("putchar: %c\n", ch);  
-    lock->Release();
 }
 
 char 
@@ -116,18 +98,28 @@ SynchConsole::GetCharPipe()
     if(!pipe)
         return ch;
     lock->Acquire();
-    read->P();  
-    ch = console->GetChar();
-    printf("Thread %d: %s get ch: %c\n", currentThread->gettid(),
-            currentThread->getName(), ch);
-    if(pipe)
+    while(pipeFileread->Read(&ch,1) == 0)
     {
-        pipeFilewrite->Write(&ch, 1);
-        pipeAvail->Signal(lock);
+        pipeAvail->Wait(lock);
     }
-
+    //printf("Thread %d: %s get ch: %c from pipe\n", currentThread->gettid(),currentThread->getName(), ch);
     lock->Release();
     return ch;
+}
+
+void
+SynchConsole::PutCharPipe(char ch)
+{
+    if(!pipe)
+        return;
+    lock->Acquire();
+
+    //printf("Thread %d: %s put ch: %c to pipe\n", currentThread->gettid(),currentThread->getName(), ch);
+    
+    pipeFilewrite->Write(&ch, 1);
+    pipeAvail->Signal(lock);
+
+    lock->Release();
 }
     
 void 
