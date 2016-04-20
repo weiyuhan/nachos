@@ -19,7 +19,7 @@
 #include <time.h>
 #include "directory.h"
 
-#define NumDirect 	((SectorSize-4*sizeof(int)-3*sizeof(time_t))/sizeof(int))
+#define NumDirect 	((SectorSize-5*sizeof(int)-3*sizeof(time_t))/sizeof(int))
 #define SectorsInSector  (SectorSize/sizeof(int))
 #define MaxFileSize 	(NumDirect * SectorSize)
 
@@ -67,6 +67,13 @@ class FileHeader {
     char* getLastAccessTime();
     char* getLastModifyTime();
 
+    void addOpenCount();
+    void minusOpenCount();
+    int getOpenCount();
+
+    void addWCount();
+    int getWCount();
+
     int getHdrSector(){return sector;}
 
     int LogicalSectorToSector(int logi);
@@ -75,7 +82,8 @@ class FileHeader {
     int sector;
     int numBytes;			// Number of bytes in the file
     int numSectors;			// Number of data sectors in the file
-    int fatherSector;
+    int openCount;
+    int wCount;
     time_t createTime;
     time_t lastAccessTime;
     time_t lastModifyTime;

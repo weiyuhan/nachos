@@ -31,6 +31,7 @@ OpenFile::OpenFile(int sector)
 { 
     hdr = new FileHeader;
     hdr->FetchFrom(sector);
+    hdr->addOpenCount();
     seekPosition = 0;
 }
 
@@ -41,6 +42,7 @@ OpenFile::OpenFile(int sector)
 
 OpenFile::~OpenFile()
 {
+    hdr->minusOpenCount();
     delete hdr;
 }
 
@@ -74,15 +76,25 @@ OpenFile::Seek(int position)
 int
 OpenFile::Read(char *into, int numBytes)
 {
-   int result = ReadAt(into, numBytes, seekPosition);
-   seekPosition += result;
-   return result;
+
+    int result;
+    int begin;
+    int end;
+    do
+    {
+        begin = hdr->getWCount();
+        result = ReadAt(into, numBytes, seekPosition);
+        end = hdr->getWCount();
+    }
+    while(begin != end);
+    seekPosition += result;
+    return result;
 }
 
 int
 OpenFile::Write(char *into, int numBytes)
 {
-    //printf("before WriteAt\n");
+    hdr->addWCount();
     int result = WriteAt(into, numBytes, seekPosition);
     seekPosition += result;
     return result;

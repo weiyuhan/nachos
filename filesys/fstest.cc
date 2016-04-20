@@ -203,15 +203,32 @@ PerformanceTest()
 
     success = fileSystem->Remove("C", "/A/");
     */
+
+    Thread* t = new Thread("fork");
+    if(t->gettid() != -1)
+    {
+        t->Fork(FileRead, (void*)1);
+    }
     
     printf("Starting file system performance test:\n");
     stats->Print();
     FileWrite();
     FileRead();
+
+    OpenFile *openFile;
+    if ((openFile = fileSystem->Open(FileName)) == NULL) 
+    {
+        printf("Perf test: unable to open file %s\n", FileName);
+        return;
+    }
+
     if (!fileSystem->Remove(FileName)) {
       printf("Perf test: unable to remove %s\n", FileName);
+      delete openFile;
       return;
     }
     stats->Print();
+
+    delete openFile;
 }
 

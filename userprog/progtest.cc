@@ -88,13 +88,15 @@ ConsoleTest (char *in, char *out)
 
     console = new SynchConsole(in, out);
     
+    /*
     Thread *t = new Thread("forked thread", 1);
     if(t->gettid() == -1)
     {
         printf("can't fork!\n");
     }
     t->Fork(useConsole, 0);
-    
+    */
+
     while(true) 
     {
         ch = console->GetChar();

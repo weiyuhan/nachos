@@ -456,6 +456,8 @@ void FileHeader::setCreateTime()
     createTime = rawtime;
     lastAccessTime = rawtime;
     lastModifyTime = rawtime;
+    openCount = 0;
+    wCount = 0;
 }
 void FileHeader::setLastAccessTime()
 {
@@ -489,4 +491,48 @@ char* FileHeader::getLastModifyTime()
     struct tm* timeinfo;
     timeinfo = localtime (&lastModifyTime);
     return asctime(timeinfo);
+}
+
+void 
+FileHeader::addOpenCount()
+{
+    FetchFrom(sector);
+    openCount++;
+    if(openCount <= 1)
+        wCount = 0;
+    WriteBack(sector);
+}
+    
+void 
+FileHeader::minusOpenCount()
+{
+    FetchFrom(sector);
+    openCount--;
+    if(openCount <= 1)
+        wCount = 0;
+    WriteBack(sector);
+}
+    
+int 
+FileHeader::getOpenCount()
+{
+    FetchFrom(sector);
+    return openCount;
+}
+
+    
+void 
+FileHeader::addWCount()
+{
+    FetchFrom(sector);
+    if(openCount > 1)
+        wCount++;
+    WriteBack(sector);
+}
+    
+int 
+FileHeader::getWCount()
+{
+    FetchFrom(sector);
+    return wCount;
 }

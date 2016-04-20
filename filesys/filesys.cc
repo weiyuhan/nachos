@@ -323,6 +323,13 @@ FileSystem::Remove(char *name, char *path = "/")
     fileHdr = new FileHeader;
     fileHdr->FetchFrom(sector);
 
+    if(fileHdr->getOpenCount() > 0)
+    {
+        delete directory;
+        delete fileHdr;
+        return FALSE;
+    }
+
     freeMap = new BitMap(NumSectors);
     freeMap->FetchFrom(freeMapFile);
 
