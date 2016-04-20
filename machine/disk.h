@@ -19,6 +19,7 @@
 
 #include "copyright.h"
 #include "utility.h"
+#include "list.h"
 
 // The following class defines a physical disk I/O device.  The disk
 // has a single surface, split up into "tracks", and each track split
@@ -70,6 +71,7 @@ class Disk {
     void HandleInterrupt();		// Interrupt handler, invoked when
 					// disk request finishes.
 
+    bool useWriteBuffer(int newSector, bool writing);
     int ComputeLatency(int newSector, bool writing);	
     					// Return how long a request to 
 					// newSector will take: 
@@ -84,6 +86,7 @@ class Disk {
     int lastSector;			// The previous disk request 
     int bufferInit;			// When the track buffer started 
 					// being loaded
+    List* writeBuffer;
 
     int TimeToSeek(int newSector, int *rotate); // time to get to the new track
     int ModuloDiff(int to, int from);        // # sectors between to and from

@@ -25,6 +25,12 @@
 
 #define DiskSize 	(MagicSize + (NumSectors * SectorSize))
 
+#define WriteBufferSize 32
+
+#define WriteBufferLatency 500
+
+#define checkBufferTime 100
+
 // dummy procedure because we can't take a pointer of a member function
 static void DiskDone(int arg) { ((Disk *)arg)->HandleInterrupt(); }
 
@@ -65,6 +71,7 @@ Disk::Disk(char* name, VoidFunctionPtr callWhenDone, int callArg)
 	WriteFile(fileno, (char *)&tmp, sizeof(int));  
     }
     active = FALSE;
+    writeBuffer = new List();
 }
 
 //----------------------------------------------------------------------
@@ -76,6 +83,7 @@ Disk::Disk(char* name, VoidFunctionPtr callWhenDone, int callArg)
 Disk::~Disk()
 {
     Close(fileno);
+    delete writeBuffer;
 }
 
 //----------------------------------------------------------------------
@@ -231,9 +239,57 @@ Disk::ModuloDiff(int to, int from)
 //   	a new track.
 //----------------------------------------------------------------------
 
+bool 
+Disk::useWriteBuffer(int newSector, bool writing)
+{
+
+    //printf("useWriteBuffer\n");
+    while(TRUE)
+    {
+        if(writeBuffer->NumInList() == 0)
+            break;
+        int when;
+        int oldSector = writeBuffer->SortedRemove(&when);
+        //printf("oldSector: %d, when: %d\n", oldSector, when);
+        if(!(when + WriteBufferLatency <= stats->totalTicks))
+        {
+            writeBuffer->SortedInsert(oldSector, when);
+            break;
+        }
+        //printf("Remove\n");
+    }
+
+    //printf("newSector: %d\n", newSector);
+
+    if(writing)
+    {
+        if(writeBuffer->Find(newSector))
+        {
+            writeBuffer->Remove(newSector);
+            int when = stats->totalTicks;
+            writeBuffer->SortedInsert(newSector, when);
+            return TRUE;
+        }
+        else if(writeBuffer->NumInList() < WriteBufferSize)
+        {
+            int when = stats->totalTicks;
+            writeBuffer->SortedInsert(newSector, when);
+            return TRUE;
+        }
+    }
+    else
+    {
+        if(writeBuffer->Find(newSector))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 int
 Disk::ComputeLatency(int newSector, bool writing)
 {
+    if(useWriteBuffer(newSector,writing))
+        return checkBufferTime;
     int rotation;
     int seek = TimeToSeek(newSector, &rotation);
     int timeAfter = stats->totalTicks + seek + rotation;

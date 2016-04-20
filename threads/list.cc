@@ -270,6 +270,33 @@ List::SortedRemove(int *keyPtr)
     return thing;
 }
 
+bool
+List::Find(void* item)
+{
+    ListElement *prev, *ptr;
+
+
+    // if first item on list is match, then remove from front
+    if(numInList == 0)
+        return FALSE;
+    if (item == first->item) 
+    {  
+        return TRUE;
+    } 
+    else 
+    {
+        prev = first;
+        for (ptr = first->next; ptr != NULL; prev = ptr, ptr = ptr->next) 
+        {
+            if (item == ptr->item) 
+            {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
 
 
 void
