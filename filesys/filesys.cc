@@ -325,6 +325,7 @@ FileSystem::Remove(char *name, char *path = "/")
 
     if(fileHdr->getOpenCount() > 0)
     {
+        //printf("can't delete\n");
         delete directory;
         delete fileHdr;
         return FALSE;

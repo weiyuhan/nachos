@@ -64,14 +64,15 @@ static SynchConsole* console;
 void useConsole(int dummy)
 {
     char ch;
-    while(true) 
+    while(console != NULL) 
     {
-        ch = console->GetChar();
-        printf("Thread %d: %s, ch: %c\n", currentThread->gettid(),
-            currentThread->getName(), ch);
-        console->PutChar(ch);   // echo it!
+        console->PutCharPipe(ch);   // echo it!
         if (ch == 'q') 
+        {
+            delete console;
+            console = NULL;
             return;  // if q, quit
+        }
         if (ch == 't') // ts
         {
             scheduler->ThreadStatus();
@@ -86,25 +87,26 @@ ConsoleTest (char *in, char *out)
 {
     char ch;
 
-    console = new SynchConsole(in, out);
+    console = new SynchConsole(in, out, TRUE);
     
-    /*
+    
     Thread *t = new Thread("forked thread", 1);
     if(t->gettid() == -1)
     {
         printf("can't fork!\n");
     }
     t->Fork(useConsole, 0);
-    */
+    
 
-    while(true) 
+    while(console != NULL) 
     {
-        ch = console->GetChar();
-        printf("Thread %d: %s, ch: %c\n", currentThread->gettid(),
-            currentThread->getName(), ch);
-        console->PutChar(ch);   // echo it!
+        ch = console->GetCharPipe();
         if (ch == 'q') 
+        {
+            delete console;
+            console = NULL;
             return;  // if q, quit
+        }
         if (ch == 't') // ts
         {
             scheduler->ThreadStatus();
