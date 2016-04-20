@@ -10,7 +10,6 @@
 
 #include "copyright.h"
 #include "system.h"
-#include "console.h"
 #include "addrspace.h"
 #include "synch.h"
 
@@ -56,6 +55,65 @@ StartProcess(char *filename)
 					// by doing the syscall "exit"
 }
 
+#ifdef FILESYS
+
+#include "synchconsole.h"
+
+static SynchConsole* console;
+
+void useConsole(int dummy)
+{
+    char ch;
+    while(true) 
+    {
+        ch = console->GetChar();
+        printf("Thread %d: %s, ch: %c\n", currentThread->gettid(),
+            currentThread->getName(), ch);
+        console->PutChar(ch);   // echo it!
+        if (ch == 'q') 
+            return;  // if q, quit
+        if (ch == 't') // ts
+        {
+            scheduler->ThreadStatus();
+        }
+        currentThread->Yield();
+    }
+}
+
+
+void 
+ConsoleTest (char *in, char *out)
+{
+    char ch;
+
+    console = new SynchConsole(in, out);
+    
+    Thread *t = new Thread("forked thread", 1);
+    if(t->gettid() == -1)
+    {
+        printf("can't fork!\n");
+    }
+    t->Fork(useConsole, 0);
+    
+    while(true) 
+    {
+        ch = console->GetChar();
+        printf("Thread %d: %s, ch: %c\n", currentThread->gettid(),
+            currentThread->getName(), ch);
+        console->PutChar(ch);   // echo it!
+        if (ch == 'q') 
+            return;  // if q, quit
+        if (ch == 't') // ts
+        {
+            scheduler->ThreadStatus();
+        }
+        currentThread->Yield();
+    }
+}
+
+#else
+
+#include "console.h"
 // Data structures needed for the console test.  Threads making
 // I/O requests wait on a Semaphore to delay until the I/O completes.
 
@@ -126,3 +184,4 @@ ConsoleTest (char *in, char *out)
     }
 }
 
+#endif

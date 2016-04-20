@@ -35,7 +35,7 @@ int currentCounts = 0;
 //	"threadName" is an arbitrary string, useful for debugging.
 //----------------------------------------------------------------------
 
-Thread::Thread(char* threadName, int uid = 0, int _priority = 10)
+Thread::Thread(char* threadName, int uid = 0, int _priority = 10, int remain = 500)
 {
     if(currentCounts >= 128)
     {
@@ -51,7 +51,7 @@ Thread::Thread(char* threadName, int uid = 0, int _priority = 10)
     currentCounts++;
     userID = uid;
     priority = _priority;
-    remainTime = 500;
+    remainTime = remain;
 
     name = threadName;
     stackTop = NULL;
@@ -238,6 +238,7 @@ Thread::Yield ()
     nextThread = scheduler->FindNextToRun();
     if(nextThread != NULL)
     {
+        /*
         if(currentThread->getremainTime() <= 0)
         {
             currentThread->setpriority(currentThread->getpriority() - 1);
@@ -254,6 +255,9 @@ Thread::Yield ()
         }
         else
             scheduler->ReadyToRun(nextThread);
+        */
+        scheduler->ReadyToRun(this);
+        scheduler->Run(nextThread);
     }
     else
         scheduler->Run(this);

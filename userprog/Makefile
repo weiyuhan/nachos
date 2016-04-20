@@ -450,8 +450,8 @@ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
  ../threads/list.h ../threads/scheduler.h ../threads/list.h \
  ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
- ../userprog/bitmap.h ../filesys/openfile.h ../machine/console.h \
- ../userprog/addrspace.h ../threads/synch.h
+ ../userprog/bitmap.h ../filesys/openfile.h ../userprog/addrspace.h \
+ ../threads/synch.h ../machine/console.h
 console.o: ../machine/console.cc ../threads/copyright.h \
  ../machine/console.h ../threads/utility.h ../threads/copyright.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \

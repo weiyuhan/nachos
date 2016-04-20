@@ -1,0 +1,1442 @@
+diff --git a/filesys/Makefile b/filesys/Makefile
+index 2d47147..bbdb470 100644
+--- a/filesys/Makefile
++++ b/filesys/Makefile
+@@ -43,8 +43,8 @@ main.o: ../threads/main.cc ../threads/copyright.h ../threads/utility.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/thread.h \
+  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
+ list.o: ../threads/list.cc ../threads/copyright.h ../threads/list.h \
+@@ -80,7 +80,7 @@ scheduler.o: ../threads/scheduler.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/system.h ../machine/interrupt.h ../threads/list.h \
++ ../threads/list.h ../threads/system.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h
+ synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
+@@ -100,8 +100,8 @@ synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
+  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
+  ../threads/synchlist.h ../threads/list.h ../threads/utility.h \
+@@ -121,7 +121,7 @@ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/synch.h ../threads/thread.h \
+  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h
++ ../filesys/openfile.h ../threads/list.h
+ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
+@@ -139,8 +139,8 @@ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/switch.h \
+  ../threads/synch.h ../threads/thread.h ../threads/utility.h \
+@@ -160,8 +160,8 @@ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/switch.h \
+  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+ utility.o: ../threads/utility.cc ../threads/copyright.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+@@ -195,8 +195,8 @@ threadtest.o: ../threads/threadtest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../machine/elevatortest.h ../threads/synch.h ../threads/synchlist.h
+ interrupt.o: ../machine/interrupt.cc ../threads/copyright.h \
+@@ -320,8 +320,8 @@ timer.o: ../machine/timer.cc ../threads/copyright.h ../machine/timer.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
+ elevatortest.o: ../machine/elevatortest.cc ../threads/copyright.h \
+@@ -394,8 +394,8 @@ addrspace.o: ../userprog/addrspace.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../userprog/addrspace.h ../bin/noff.h
+ bitmap.o: ../userprog/bitmap.cc ../threads/copyright.h \
+@@ -430,8 +430,8 @@ exception.o: ../userprog/exception.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../userprog/syscall.h
+ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
+@@ -451,8 +451,8 @@ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../machine/console.h ../userprog/addrspace.h
+ console.o: ../machine/console.cc ../threads/copyright.h \
+@@ -472,8 +472,8 @@ console.o: ../machine/console.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
+ machine.o: ../machine/machine.cc ../threads/copyright.h \
+@@ -493,8 +493,8 @@ machine.o: ../machine/machine.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../threads/system.h ../threads/utility.h ../threads/thread.h \
+  ../machine/machine.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
+ mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
+@@ -514,8 +514,8 @@ mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../machine/mipssim.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../userprog/addrspace.h \
+- ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
+- ../threads/list.h ../machine/interrupt.h ../threads/list.h \
++ ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
++ ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h
+ translate.o: ../machine/translate.cc ../threads/copyright.h \
+@@ -534,9 +534,9 @@ translate.o: ../machine/translate.cc ../threads/copyright.h \
+  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/system.h ../threads/utility.h ../threads/thread.h \
+- ../machine/machine.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../threads/list.h ../threads/utility.h ../threads/system.h \
++ ../threads/thread.h ../machine/machine.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
+ directory.o: ../filesys/directory.cc ../threads/copyright.h \
+@@ -573,8 +573,8 @@ filehdr.o: ../filesys/filehdr.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../filesys/filehdr.h ../userprog/bitmap.h ../filesys/openfile.h
+ filesys.o: ../filesys/filesys.cc ../threads/copyright.h ../machine/disk.h \
+@@ -611,8 +611,8 @@ fstest.o: ../filesys/fstest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../filesys/filesys.h ../filesys/openfile.h \
+  ../threads/system.h ../threads/utility.h ../threads/thread.h \
+  ../machine/machine.h ../machine/translate.h ../machine/disk.h \
+- ../userprog/addrspace.h ../filesys/filesys.h ../threads/scheduler.h \
+- ../threads/list.h ../machine/interrupt.h ../threads/list.h \
++ ../userprog/addrspace.h ../filesys/filesys.h ../threads/list.h \
++ ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h ../threads/thread.h
+ openfile.o: ../filesys/openfile.cc ../threads/copyright.h \
+@@ -634,8 +634,8 @@ openfile.o: ../filesys/openfile.cc ../threads/copyright.h \
+  ../filesys/openfile.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../threads/synch.h
+ synchdisk.o: ../filesys/synchdisk.cc ../threads/copyright.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/utility.h \
+@@ -655,7 +655,7 @@ synchdisk.o: ../filesys/synchdisk.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/synch.h ../threads/thread.h \
+  ../threads/utility.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/list.h
++ ../filesys/openfile.h ../threads/list.h ../threads/list.h
+ disk.o: ../machine/disk.cc ../threads/copyright.h ../machine/disk.h \
+  ../threads/utility.h ../threads/copyright.h ../threads/bool.h \
+  ../machine/sysdep.h /usr/include/stdio.h /usr/include/features.h \
+@@ -673,8 +673,8 @@ disk.o: ../machine/disk.cc ../threads/copyright.h ../machine/disk.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+ # DEPENDENCIES MUST END AT END OF FILE
+ # IF YOU PUT STUFF HERE IT WILL GO AWAY
+diff --git a/filesys/addrspace.o b/filesys/addrspace.o
+index 2c461fa..e5df6d3 100644
+Binary files a/filesys/addrspace.o and b/filesys/addrspace.o differ
+diff --git a/filesys/elevator.o b/filesys/elevator.o
+index 366b2d2..618bf69 100644
+Binary files a/filesys/elevator.o and b/filesys/elevator.o differ
+diff --git a/filesys/elevatortest.o b/filesys/elevatortest.o
+index 8123053..e6149a9 100644
+Binary files a/filesys/elevatortest.o and b/filesys/elevatortest.o differ
+diff --git a/filesys/exception.o b/filesys/exception.o
+index 7de6833..b308ef5 100644
+Binary files a/filesys/exception.o and b/filesys/exception.o differ
+diff --git a/filesys/filehdr.o b/filesys/filehdr.o
+index db24c99..c36a4dd 100644
+Binary files a/filesys/filehdr.o and b/filesys/filehdr.o differ
+diff --git a/filesys/interrupt.o b/filesys/interrupt.o
+index f1eb0af..ee5580e 100644
+Binary files a/filesys/interrupt.o and b/filesys/interrupt.o differ
+diff --git a/filesys/machine.o b/filesys/machine.o
+index 0dda2f0..dd17cb5 100644
+Binary files a/filesys/machine.o and b/filesys/machine.o differ
+diff --git a/filesys/main.o b/filesys/main.o
+index f31f84c..aa9a1b9 100644
+Binary files a/filesys/main.o and b/filesys/main.o differ
+diff --git a/filesys/mipssim.o b/filesys/mipssim.o
+index 38fdbaf..c4720be 100644
+Binary files a/filesys/mipssim.o and b/filesys/mipssim.o differ
+diff --git a/filesys/nachos b/filesys/nachos
+index 1c99730..af3c92b 100755
+Binary files a/filesys/nachos and b/filesys/nachos differ
+diff --git a/filesys/openfile.o b/filesys/openfile.o
+index da33afb..9558804 100644
+Binary files a/filesys/openfile.o and b/filesys/openfile.o differ
+diff --git a/filesys/progtest.o b/filesys/progtest.o
+index e55d0ba..a847eef 100644
+Binary files a/filesys/progtest.o and b/filesys/progtest.o differ
+diff --git a/filesys/scheduler.o b/filesys/scheduler.o
+index 5a9877e..0773107 100644
+Binary files a/filesys/scheduler.o and b/filesys/scheduler.o differ
+diff --git a/filesys/synch.o b/filesys/synch.o
+index c46f7c4..1e6f2b0 100644
+Binary files a/filesys/synch.o and b/filesys/synch.o differ
+diff --git a/filesys/synchdisk.o b/filesys/synchdisk.o
+index c8305a9..21afea7 100644
+Binary files a/filesys/synchdisk.o and b/filesys/synchdisk.o differ
+diff --git a/filesys/synchlist.o b/filesys/synchlist.o
+index 06fc0ef..22a0325 100644
+Binary files a/filesys/synchlist.o and b/filesys/synchlist.o differ
+diff --git a/filesys/system.o b/filesys/system.o
+index d5ed6ff..da94cca 100644
+Binary files a/filesys/system.o and b/filesys/system.o differ
+diff --git a/filesys/thread.o b/filesys/thread.o
+index 298efc5..e24bbd0 100644
+Binary files a/filesys/thread.o and b/filesys/thread.o differ
+diff --git a/filesys/threadtest.o b/filesys/threadtest.o
+index b2b1631..d635591 100644
+Binary files a/filesys/threadtest.o and b/filesys/threadtest.o differ
+diff --git a/filesys/translate.o b/filesys/translate.o
+index 8e24c05..18d9e71 100644
+Binary files a/filesys/translate.o and b/filesys/translate.o differ
+diff --git a/machine/machine.cc b/machine/machine.cc
+index 744b454..28e25a3 100644
+--- a/machine/machine.cc
++++ b/machine/machine.cc
+@@ -14,9 +14,9 @@
+ // Textual names of the exceptions that can be generated by user program
+ // execution, for debugging.
+ static char* exceptionNames[] = { "no exception", "syscall", 
+-				"page fault/no TLB entry", "page read only",
+-				"bus error", "address error", "overflow",
+-				"illegal instruction" };
++				"page fault/no TLB entry", "tlb miss", 
++                "page read only", "bus error", "address error", 
++                "overflow",	"illegal instruction" };
+ 
+ //----------------------------------------------------------------------
+ // CheckEndian
+diff --git a/machine/machine.h b/machine/machine.h
+index 188c966..5f16236 100644
+--- a/machine/machine.h
++++ b/machine/machine.h
+@@ -39,6 +39,7 @@
+ enum ExceptionType { NoException,           // Everything ok!
+ 		     SyscallException,      // A program executed a system call.
+ 		     PageFaultException,    // No valid translation found
++             TLBMissException,
+ 		     ReadOnlyException,     // Write attempted to page marked 
+ 					    // "read-only"
+ 		     BusErrorException,     // Translation resulted in an 
+@@ -132,7 +133,7 @@ class Machine {
+ 				// memory (at addr).  Return FALSE if a 
+ 				// correct translation couldn't be found.
+     
+-    ExceptionType Translate(int virtAddr, int* physAddr, int size,bool writing);
++    ExceptionType Translate(int virtAddr, int* physAddr, int size, bool writing, bool usePageTable);
+     				// Translate an address, and check for 
+ 				// alignment.  Set the use and dirty bits in 
+ 				// the translation entry appropriately,
+@@ -146,6 +147,9 @@ class Machine {
+     void Debugger();		// invoke the user program debugger
+     void DumpState();		// print the user CPU and memory state 
+ 
++    void TLBLoad(int virtAddr); // load a tlb entry
++    int FindTLBindex();  // find a tlb index to load tlb
++
+ 
+ // Data structures -- all of these are accessible to Nachos kernel code.
+ // "public" for convenience.
+diff --git a/machine/translate.cc b/machine/translate.cc
+index 39491db..8953ba8 100644
+--- a/machine/translate.cc
++++ b/machine/translate.cc
+@@ -93,8 +93,26 @@ Machine::ReadMem(int addr, int size, int *value)
+     
+     DEBUG('a', "Reading VA 0x%x, size %d\n", addr, size);
+     
+-    exception = Translate(addr, &physicalAddress, size, FALSE);
+-    if (exception != NoException) {
++    exception = Translate(addr, &physicalAddress, size, FALSE, FALSE);
++    if(exception == TLBMissException)
++    {
++    	machine->RaiseException(exception, addr);
++    	exception = Translate(addr, &physicalAddress, size, FALSE, TRUE);
++    	if(exception == PageFaultException)
++    	{
++    		machine->RaiseException(exception, addr);
++    		exception = Translate(addr, &physicalAddress, size, FALSE, TRUE);
++    		if (exception != NoException) {
++				machine->RaiseException(exception, addr);
++				return FALSE;
++    		}
++    	}
++    	else if (exception != NoException) {
++			machine->RaiseException(exception, addr);
++			return FALSE;
++    	}
++    	machine->RaiseException(TLBMissException, addr);
++    }else if (exception != NoException) {
+ 	machine->RaiseException(exception, addr);
+ 	return FALSE;
+     }
+@@ -142,8 +160,26 @@ Machine::WriteMem(int addr, int size, int value)
+      
+     DEBUG('a', "Writing VA 0x%x, size %d, value 0x%x\n", addr, size, value);
+ 
+-    exception = Translate(addr, &physicalAddress, size, TRUE);
+-    if (exception != NoException) {
++    exception = Translate(addr, &physicalAddress, size, TRUE, FALSE);
++    if(exception == TLBMissException) // TLB Miss
++    {
++    	exception = Translate(addr, &physicalAddress, size, TRUE, TRUE);
++    	// find in page table
++    	if(exception == PageFaultException) // page fault
++    	{
++    		machine->RaiseException(exception, addr); // load page
++    		exception = Translate(addr, &physicalAddress, size, TRUE, TRUE);
++    		if (exception != NoException) {
++				machine->RaiseException(exception, addr);
++				return FALSE;
++    		}
++    	}
++    	else if (exception != NoException) {
++			machine->RaiseException(exception, addr);
++			return FALSE;
++    	}
++    	machine->RaiseException(TLBMissException, addr);
++    }else if (exception != NoException) {
+ 	machine->RaiseException(exception, addr);
+ 	return FALSE;
+     }
+@@ -184,7 +220,7 @@ Machine::WriteMem(int addr, int size, int value)
+ //----------------------------------------------------------------------
+ 
+ ExceptionType
+-Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
++Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool usePageTable)
+ {
+     int i;
+     unsigned int vpn, offset;
+@@ -199,8 +235,8 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
+ 	return AddressErrorException;
+     }
+     
+-    // we must have either a TLB or a page table, but not both!
+-    ASSERT(tlb == NULL || pageTable == NULL);	
++    // we must have either a TLB or a page table, or both!
++    //ASSERT(tlb == NULL || pageTable == NULL);	
+     ASSERT(tlb != NULL || pageTable != NULL);	
+ 
+ // calculate the virtual page number, and offset within the page,
+@@ -208,29 +244,37 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
+     vpn = (unsigned) virtAddr / PageSize;
+     offset = (unsigned) virtAddr % PageSize;
+     
+-    if (tlb == NULL) {		// => page table => vpn is index into table
++    if (usePageTable) {		// => page table => vpn is index into table
+ 	if (vpn >= pageTableSize) {
+ 	    DEBUG('a', "virtual page # %d too large for page table size %d!\n", 
+ 			virtAddr, pageTableSize);
+ 	    return AddressErrorException;
+ 	} else if (!pageTable[vpn].valid) {
+-	    DEBUG('a', "virtual page # %d too large for page table size %d!\n", 
+-			virtAddr, pageTableSize);
++	    DEBUG('a', "virtual page # %d is invalid!\n", virtAddr);
+ 	    return PageFaultException;
+ 	}
+ 	entry = &pageTable[vpn];
+-    } else {
++    } else 
++    {
+         for (entry = NULL, i = 0; i < TLBSize; i++)
+-    	    if (tlb[i].valid && (tlb[i].virtualPage == vpn)) {
+-		entry = &tlb[i];			// FOUND!
+-		break;
+-	    }
+-	if (entry == NULL) {				// not found
+-    	    DEBUG('a', "*** no valid TLB entry found for this virtual page!\n");
+-    	    return PageFaultException;		// really, this is a TLB fault,
+-						// the page may be in memory,
+-						// but not in the TLB
+-	}
++        {
++    	    if (tlb[i].valid && (tlb[i].virtualPage == vpn)) 
++    	    {
++				entry = &tlb[i];			// FOUND!
++				tlb[i].use = true;
++				#ifdef TLB_LRU
++				tlb[i].TLBlastUseTime = stats->totalTicks;
++				#endif
++				break;
++		    }
++		}
++		if (entry == NULL) 
++		{				// not found
++	    	    DEBUG('a', "*** no valid TLB entry found for this virtual page!\n");
++	    	    return TLBMissException;		// really, this is a TLB fault,
++							// the page may be in memory,
++							// but not in the TLB
++		}
+     }
+ 
+     if (entry->readOnly && writing) {	// trying to write to a read-only page
+@@ -253,3 +297,58 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing)
+     DEBUG('a', "phys addr = 0x%x\n", *physAddr);
+     return NoException;
+ }
++
++
++void Machine::TLBLoad(int virtAddr)
++{
++	int vpn = (unsigned) virtAddr / PageSize;
++	if (vpn >= pageTableSize) {
++	    DEBUG('a', "virtual page # %d too large for page table size %d!\n", 
++			virtAddr, pageTableSize);
++	    return;
++	} else if (!pageTable[vpn].valid) {
++	    DEBUG('a', "virtual page # %d is invalid!\n", virtAddr);
++	    return;
++	}
++	int tlbindex = FindTLBindex();
++	tlb[tlbindex].virtualPage = pageTable[vpn].virtualPage;
++	tlb[tlbindex].physicalPage = pageTable[vpn].physicalPage;
++	tlb[tlbindex].valid = pageTable[vpn].valid;
++	tlb[tlbindex].readOnly = pageTable[vpn].readOnly;
++	tlb[tlbindex].use = pageTable[vpn].use; 
++	tlb[tlbindex].dirty = pageTable[vpn].dirty;
++}
++
++int Machine::FindTLBindex()
++{
++	int index = -1;
++	for(int i = 0; i < TLBSize; i++)
++	{
++		if(!tlb[i].valid)
++		{
++			index = i;
++		}
++	}
++#ifdef TLB_FIFO
++	if(index == -1)
++		index = (int)currentThread->space->TLBFIFO_List->Remove();
++	currentThread->space->TLBFIFO_List->Append((void*)index);
++#endif
++#ifdef TLB_LRU
++	int lastedtime = tlb[0].TLBlastUseTime;
++	if(index == -1)
++	{
++		index = 0;
++		for(int i = 1; i < TLBSize; i++)
++		{
++			if(tlb[i].TLBlastUseTime < lastedtime)
++			{
++				lastedtime = tlb[i].TLBlastUseTime;
++				index = i;
++			}
++		}
++	}
++	tlb[i].TLBlastUseTime = stats->totalTicks;
++#endif
++	return index;
++}
+diff --git a/machine/translate.h b/machine/translate.h
+index 8f355cd..3ff39ce 100644
+--- a/machine/translate.h
++++ b/machine/translate.h
+@@ -40,6 +40,9 @@ class TranslationEntry {
+ 			// page is referenced or modified.
+     bool dirty;         // This bit is set by the hardware every time the
+ 			// page is modified.
++#ifdef TLB_LRU
++    int TLBlastUseTime;
++#endif
+ };
+ 
+ #endif
+diff --git a/network/Makefile b/network/Makefile
+index 7f300ef..a4da7c5 100644
+--- a/network/Makefile
++++ b/network/Makefile
+@@ -43,8 +43,8 @@ main.o: ../threads/main.cc ../threads/copyright.h ../threads/utility.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/thread.h \
+  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h ../network/post.h ../machine/network.h \
+  ../threads/synchlist.h ../threads/synch.h
+@@ -81,7 +81,7 @@ scheduler.o: ../threads/scheduler.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/system.h ../machine/interrupt.h ../threads/list.h \
++ ../threads/list.h ../threads/system.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h ../network/post.h \
+  ../machine/network.h ../threads/synchlist.h ../threads/synch.h
+@@ -102,8 +102,8 @@ synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
+  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h
+ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
+@@ -124,7 +124,7 @@ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/synch.h ../threads/thread.h \
+  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h
++ ../filesys/openfile.h ../threads/list.h
+ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
+@@ -142,8 +142,8 @@ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h
+@@ -165,8 +165,8 @@ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/switch.h \
+  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h
+ utility.o: ../threads/utility.cc ../threads/copyright.h \
+@@ -201,8 +201,8 @@ threadtest.o: ../threads/threadtest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h ../machine/elevatortest.h ../threads/synchlist.h
+@@ -330,8 +330,8 @@ timer.o: ../machine/timer.cc ../threads/copyright.h ../machine/timer.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h ../network/post.h ../machine/network.h \
+  ../threads/synchlist.h ../threads/synch.h
+@@ -406,8 +406,8 @@ addrspace.o: ../userprog/addrspace.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h ../userprog/addrspace.h ../bin/noff.h
+@@ -443,8 +443,8 @@ exception.o: ../userprog/exception.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h ../userprog/syscall.h
+@@ -465,8 +465,8 @@ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h ../machine/console.h ../userprog/addrspace.h
+@@ -487,8 +487,8 @@ console.o: ../machine/console.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h ../network/post.h ../machine/network.h \
+  ../threads/synchlist.h ../threads/synch.h
+@@ -509,8 +509,8 @@ machine.o: ../machine/machine.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../threads/system.h ../threads/utility.h ../threads/thread.h \
+  ../machine/machine.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h ../network/post.h ../machine/network.h \
+  ../threads/synchlist.h ../threads/synch.h
+@@ -531,8 +531,8 @@ mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../machine/mipssim.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../userprog/addrspace.h \
+- ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
+- ../threads/list.h ../machine/interrupt.h ../threads/list.h \
++ ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
++ ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h ../network/post.h \
+  ../machine/network.h ../threads/synchlist.h ../threads/synch.h
+@@ -552,9 +552,9 @@ translate.o: ../machine/translate.cc ../threads/copyright.h \
+  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/system.h ../threads/utility.h ../threads/thread.h \
+- ../machine/machine.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../threads/list.h ../threads/utility.h ../threads/system.h \
++ ../threads/thread.h ../machine/machine.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h ../network/post.h ../machine/network.h \
+  ../threads/synchlist.h ../threads/synch.h
+@@ -592,8 +592,8 @@ filehdr.o: ../filesys/filehdr.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h ../filesys/filehdr.h ../userprog/bitmap.h \
+@@ -632,8 +632,8 @@ fstest.o: ../filesys/fstest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../filesys/filesys.h ../filesys/openfile.h \
+  ../threads/system.h ../threads/utility.h ../threads/thread.h \
+  ../machine/machine.h ../machine/translate.h ../machine/disk.h \
+- ../userprog/addrspace.h ../filesys/filesys.h ../threads/scheduler.h \
+- ../threads/list.h ../machine/interrupt.h ../threads/list.h \
++ ../userprog/addrspace.h ../filesys/filesys.h ../threads/list.h \
++ ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h ../network/post.h \
+  ../machine/network.h ../threads/synchlist.h ../threads/synch.h \
+@@ -657,8 +657,8 @@ openfile.o: ../filesys/openfile.cc ../threads/copyright.h \
+  ../filesys/openfile.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../threads/synch.h ../network/post.h \
+  ../machine/network.h ../threads/synchlist.h ../threads/synch.h
+ synchdisk.o: ../filesys/synchdisk.cc ../threads/copyright.h \
+@@ -679,7 +679,7 @@ synchdisk.o: ../filesys/synchdisk.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/synch.h ../threads/thread.h \
+  ../threads/utility.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/list.h
++ ../filesys/openfile.h ../threads/list.h ../threads/list.h
+ disk.o: ../machine/disk.cc ../threads/copyright.h ../machine/disk.h \
+  ../threads/utility.h ../threads/copyright.h ../threads/bool.h \
+  ../machine/sysdep.h /usr/include/stdio.h /usr/include/features.h \
+@@ -697,8 +697,8 @@ disk.o: ../machine/disk.cc ../threads/copyright.h ../machine/disk.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h
+@@ -719,8 +719,8 @@ nettest.o: ../network/nettest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h ../network/post.h
+@@ -741,7 +741,8 @@ post.o: ../network/post.cc ../threads/copyright.h ../network/post.h \
+  /usr/include/xlocale.h ../threads/synchlist.h ../threads/list.h \
+  ../threads/utility.h ../threads/synch.h ../threads/thread.h \
+  ../machine/machine.h ../machine/translate.h ../machine/disk.h \
+- ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h
++ ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
++ ../threads/list.h
+ network.o: ../machine/network.cc ../threads/copyright.h \
+  ../threads/system.h ../threads/copyright.h ../threads/utility.h \
+  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
+@@ -759,8 +760,8 @@ network.o: ../machine/network.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../network/post.h ../machine/network.h ../threads/synchlist.h \
+  ../threads/synch.h
+diff --git a/network/addrspace.o b/network/addrspace.o
+index 352b54e..9edd57e 100644
+Binary files a/network/addrspace.o and b/network/addrspace.o differ
+diff --git a/network/elevator.o b/network/elevator.o
+index 3a5863d..523a06a 100644
+Binary files a/network/elevator.o and b/network/elevator.o differ
+diff --git a/network/elevatortest.o b/network/elevatortest.o
+index 71a1f6a..5f3f7a0 100644
+Binary files a/network/elevatortest.o and b/network/elevatortest.o differ
+diff --git a/network/exception.o b/network/exception.o
+index 7780ed9..b0c5f54 100644
+Binary files a/network/exception.o and b/network/exception.o differ
+diff --git a/network/filehdr.o b/network/filehdr.o
+index cce38f0..8657ee2 100644
+Binary files a/network/filehdr.o and b/network/filehdr.o differ
+diff --git a/network/interrupt.o b/network/interrupt.o
+index 55bb629..8288a3c 100644
+Binary files a/network/interrupt.o and b/network/interrupt.o differ
+diff --git a/network/machine.o b/network/machine.o
+index 85ed8a5..be5498a 100644
+Binary files a/network/machine.o and b/network/machine.o differ
+diff --git a/network/main.o b/network/main.o
+index ba67af6..89e72f6 100644
+Binary files a/network/main.o and b/network/main.o differ
+diff --git a/network/mipssim.o b/network/mipssim.o
+index d6ae6da..001b729 100644
+Binary files a/network/mipssim.o and b/network/mipssim.o differ
+diff --git a/network/nachos b/network/nachos
+index 07b9b27..8442145 100755
+Binary files a/network/nachos and b/network/nachos differ
+diff --git a/network/nettest.o b/network/nettest.o
+index a91c6ba..a76f55f 100644
+Binary files a/network/nettest.o and b/network/nettest.o differ
+diff --git a/network/openfile.o b/network/openfile.o
+index 4610374..ec13a30 100644
+Binary files a/network/openfile.o and b/network/openfile.o differ
+diff --git a/network/post.o b/network/post.o
+index 6f95c1a..b70ec9c 100644
+Binary files a/network/post.o and b/network/post.o differ
+diff --git a/network/progtest.o b/network/progtest.o
+index 203fcf5..d10eee8 100644
+Binary files a/network/progtest.o and b/network/progtest.o differ
+diff --git a/network/scheduler.o b/network/scheduler.o
+index c2bf5e4..4e6d5a2 100644
+Binary files a/network/scheduler.o and b/network/scheduler.o differ
+diff --git a/network/synch.o b/network/synch.o
+index 46c1494..4b9bab3 100644
+Binary files a/network/synch.o and b/network/synch.o differ
+diff --git a/network/synchdisk.o b/network/synchdisk.o
+index 4587709..6c4e528 100644
+Binary files a/network/synchdisk.o and b/network/synchdisk.o differ
+diff --git a/network/synchlist.o b/network/synchlist.o
+index 587da9c..247673e 100644
+Binary files a/network/synchlist.o and b/network/synchlist.o differ
+diff --git a/network/system.o b/network/system.o
+index eb3fe77..3753d15 100644
+Binary files a/network/system.o and b/network/system.o differ
+diff --git a/network/thread.o b/network/thread.o
+index 781d188..4c4f56d 100644
+Binary files a/network/thread.o and b/network/thread.o differ
+diff --git a/network/threadtest.o b/network/threadtest.o
+index 690ad4d..a4857bb 100644
+Binary files a/network/threadtest.o and b/network/threadtest.o differ
+diff --git a/network/translate.o b/network/translate.o
+index 49790b3..4f2e865 100644
+Binary files a/network/translate.o and b/network/translate.o differ
+diff --git a/threads/nachos b/threads/nachos
+index 38ca732..498f798 100755
+Binary files a/threads/nachos and b/threads/nachos differ
+diff --git a/threads/thread.cc b/threads/thread.cc
+index 019e33b..d25dcca 100644
+--- a/threads/thread.cc
++++ b/threads/thread.cc
+@@ -81,6 +81,10 @@ Thread::~Thread()
+     ASSERT(this != currentThread);
+     if (stack != NULL)
+ 	DeallocBoundedArray((char *) stack, StackSize * sizeof(int));
++#ifdef USER_PROGRAM
++    if(space != NULL)
++        delete space;
++#endif
+ }
+ 
+ 
+diff --git a/threads/thread.o b/threads/thread.o
+index 2e0f169..20bc3d8 100644
+Binary files a/threads/thread.o and b/threads/thread.o differ
+diff --git a/userprog/Makefile b/userprog/Makefile
+index 2dd96ad..452b2df 100644
+--- a/userprog/Makefile
++++ b/userprog/Makefile
+@@ -44,8 +44,8 @@ main.o: ../threads/main.cc ../threads/copyright.h ../threads/utility.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/thread.h \
+  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ list.o: ../threads/list.cc ../threads/copyright.h ../threads/list.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+@@ -80,7 +80,7 @@ scheduler.o: ../threads/scheduler.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/system.h ../machine/interrupt.h ../threads/list.h \
++ ../threads/list.h ../threads/system.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h
+ synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
+  ../threads/thread.h ../threads/utility.h ../threads/bool.h \
+@@ -99,8 +99,8 @@ synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
+  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h
++ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h
+ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
+  ../threads/synchlist.h ../threads/list.h ../threads/utility.h \
+  ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
+@@ -119,7 +119,7 @@ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/synch.h ../threads/thread.h \
+  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h
++ ../filesys/openfile.h ../threads/list.h
+ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
+@@ -137,8 +137,8 @@ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h
+ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/switch.h \
+  ../threads/synch.h ../threads/thread.h ../threads/utility.h \
+  ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
+@@ -157,8 +157,8 @@ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/switch.h \
+  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h
++ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h
+ utility.o: ../threads/utility.cc ../threads/copyright.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
+@@ -191,8 +191,8 @@ threadtest.o: ../threads/threadtest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../machine/elevatortest.h ../threads/synch.h ../threads/synchlist.h
+ interrupt.o: ../machine/interrupt.cc ../threads/copyright.h \
+  ../machine/interrupt.h ../threads/list.h ../threads/copyright.h \
+@@ -313,8 +313,8 @@ timer.o: ../machine/timer.cc ../threads/copyright.h ../machine/timer.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ elevatortest.o: ../machine/elevatortest.cc ../threads/copyright.h \
+  ../machine/elevatortest.h ../machine/elevator.h ../threads/utility.h \
+@@ -385,8 +385,8 @@ addrspace.o: ../userprog/addrspace.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../userprog/addrspace.h ../bin/noff.h
+ bitmap.o: ../userprog/bitmap.cc ../threads/copyright.h \
+  ../userprog/bitmap.h ../threads/utility.h ../threads/copyright.h \
+@@ -420,8 +420,8 @@ exception.o: ../userprog/exception.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../userprog/syscall.h
+ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
+  ../threads/system.h ../threads/copyright.h ../threads/utility.h \
+@@ -440,8 +440,8 @@ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../machine/console.h ../userprog/addrspace.h ../threads/synch.h
+ console.o: ../machine/console.cc ../threads/copyright.h \
+  ../machine/console.h ../threads/utility.h ../threads/copyright.h \
+@@ -460,8 +460,8 @@ console.o: ../machine/console.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ machine.o: ../machine/machine.cc ../threads/copyright.h \
+  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
+@@ -480,8 +480,8 @@ machine.o: ../machine/machine.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../threads/system.h ../threads/utility.h ../threads/thread.h \
+  ../machine/machine.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
+  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
+@@ -500,8 +500,8 @@ mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../machine/mipssim.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../userprog/addrspace.h \
+- ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
+- ../threads/list.h ../machine/interrupt.h ../threads/list.h \
++ ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
++ ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h
+ translate.o: ../machine/translate.cc ../threads/copyright.h \
+  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
+@@ -519,9 +519,9 @@ translate.o: ../machine/translate.cc ../threads/copyright.h \
+  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/system.h ../threads/utility.h ../threads/thread.h \
+- ../machine/machine.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../threads/list.h ../threads/utility.h ../threads/system.h \
++ ../threads/thread.h ../machine/machine.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ # DEPENDENCIES MUST END AT END OF FILE
+ # IF YOU PUT STUFF HERE IT WILL GO AWAY
+diff --git a/userprog/addrspace.cc b/userprog/addrspace.cc
+index 1476a8e..0fb23ba 100644
+--- a/userprog/addrspace.cc
++++ b/userprog/addrspace.cc
+@@ -62,6 +62,10 @@ SwapHeader (NoffHeader *noffH)
+ 
+ AddrSpace::AddrSpace(OpenFile *executable)
+ {
++    TLBMissCount = 0;
++#ifdef TLB_FIFO
++    TLBFIFO_List = new List;
++#endif
+     NoffHeader noffH;
+     unsigned int i, size;
+ 
+@@ -126,6 +130,9 @@ AddrSpace::AddrSpace(OpenFile *executable)
+ AddrSpace::~AddrSpace()
+ {
+    delete pageTable;
++#ifdef TLB_FIFO
++    delete TLBFIFO_List;
++#endif
+ }
+ 
+ //----------------------------------------------------------------------
+diff --git a/userprog/addrspace.h b/userprog/addrspace.h
+index 931a6af..9776051 100644
+--- a/userprog/addrspace.h
++++ b/userprog/addrspace.h
+@@ -15,6 +15,7 @@
+ 
+ #include "copyright.h"
+ #include "filesys.h"
++#include "list.h"
+ 
+ #define UserStackSize		1024 	// increase this as necessary!
+ 
+@@ -29,7 +30,11 @@ class AddrSpace {
+ 					// before jumping to user code
+ 
+     void SaveState();			// Save/restore address space-specific
+-    void RestoreState();		// info on a context switch 
++    void RestoreState();		// info on a context switch
++    int TLBMissCount;
++#ifdef TLB_FIFO
++    List* TLBFIFO_List;
++#endif 
+ 
+   private:
+     TranslationEntry *pageTable;	// Assume linear page table translation
+diff --git a/userprog/addrspace.o b/userprog/addrspace.o
+index 76ee881..fdd642e 100644
+Binary files a/userprog/addrspace.o and b/userprog/addrspace.o differ
+diff --git a/userprog/elevator.o b/userprog/elevator.o
+index 35b156c..42279b5 100644
+Binary files a/userprog/elevator.o and b/userprog/elevator.o differ
+diff --git a/userprog/elevatortest.o b/userprog/elevatortest.o
+index fc68342..cb73fdb 100644
+Binary files a/userprog/elevatortest.o and b/userprog/elevatortest.o differ
+diff --git a/userprog/exception.cc b/userprog/exception.cc
+index 3a82131..f046d45 100644
+--- a/userprog/exception.cc
++++ b/userprog/exception.cc
+@@ -53,10 +53,31 @@ ExceptionHandler(ExceptionType which)
+ {
+     int type = machine->ReadRegister(2);
+ 
+-    if ((which == SyscallException) && (type == SC_Halt)) {
+-	DEBUG('a', "Shutdown, initiated by user program.\n");
+-   	interrupt->Halt();
+-    } else {
++    if (which == SyscallException)
++    {
++        switch(type)
++        {
++            case SC_Halt:
++                DEBUG('a', "Shutdown, initiated by user program.\n");
++                interrupt->Halt();
++                break;
++            case SC_Exit:
++                printf("EXIT NUM : %d\n", machine->ReadRegister(4));
++                printf("Total TLB miss : %d\n",
++                    currentThread->space->TLBMissCount);
++                currentThread->Print();
++                break;
++            default:
++                break;
++        }
++    } else if ((which == TLBMissException))
++    {
++    	DEBUG('a', "TLB Miss.\n");
++        int addr = machine->ReadRegister(BadVAddrReg);
++        machine->TLBLoad(addr);
++        currentThread->space->TLBMissCount++;
++    }
++    else{
+ 	printf("Unexpected user mode exception %d %d\n", which, type);
+ 	ASSERT(FALSE);
+     }
+diff --git a/userprog/exception.o b/userprog/exception.o
+index a9600b6..ede3ba8 100644
+Binary files a/userprog/exception.o and b/userprog/exception.o differ
+diff --git a/userprog/interrupt.o b/userprog/interrupt.o
+index 7de4f4f..800319e 100644
+Binary files a/userprog/interrupt.o and b/userprog/interrupt.o differ
+diff --git a/userprog/machine.o b/userprog/machine.o
+index c6498b4..59f37dc 100644
+Binary files a/userprog/machine.o and b/userprog/machine.o differ
+diff --git a/userprog/main.o b/userprog/main.o
+index fbfb3ed..c9daaa7 100644
+Binary files a/userprog/main.o and b/userprog/main.o differ
+diff --git a/userprog/mipssim.o b/userprog/mipssim.o
+index c1ca95c..699e8bf 100644
+Binary files a/userprog/mipssim.o and b/userprog/mipssim.o differ
+diff --git a/userprog/nachos b/userprog/nachos
+index 3bd20e6..43956b7 100755
+Binary files a/userprog/nachos and b/userprog/nachos differ
+diff --git a/userprog/progtest.cc b/userprog/progtest.cc
+index 3d19f9c..225bb35 100644
+--- a/userprog/progtest.cc
++++ b/userprog/progtest.cc
+@@ -89,15 +89,17 @@ ConsoleTest (char *in, char *out)
+         }
+         if(ch == 'c') // create 130 thread
+         {
+-            for(int i = 0; i < 130; i++)
++            #ifdef TLB_FIFO
++            printf("hahaha\n");
++            #endif
++            Thread *t = new Thread("forked thread", 1);
++            if(t->gettid() == -1)
+             {
+-                Thread *t = new Thread("forked thread", 1);
+-                if(t->gettid() == -1)
+-                {
+-                    printf("can't fork!\n");
+-                    continue;
+-                }
++                printf("can't fork!\n");
++                continue;
+             }
++            char* filename = "halt.coff";
++            t->Fork(StartProcess, (void*)filename);
+         }
+ 
+         if(ch >= '0' && ch <= '9')
+diff --git a/userprog/progtest.o b/userprog/progtest.o
+index 6f43322..174ddc2 100644
+Binary files a/userprog/progtest.o and b/userprog/progtest.o differ
+diff --git a/userprog/scheduler.o b/userprog/scheduler.o
+index 87fbb86..89753bb 100644
+Binary files a/userprog/scheduler.o and b/userprog/scheduler.o differ
+diff --git a/userprog/synch.o b/userprog/synch.o
+index e475daa..f2556a4 100644
+Binary files a/userprog/synch.o and b/userprog/synch.o differ
+diff --git a/userprog/synchlist.o b/userprog/synchlist.o
+index 4947ac5..637a80b 100644
+Binary files a/userprog/synchlist.o and b/userprog/synchlist.o differ
+diff --git a/userprog/system.o b/userprog/system.o
+index 70ec5d7..e81a773 100644
+Binary files a/userprog/system.o and b/userprog/system.o differ
+diff --git a/userprog/thread.o b/userprog/thread.o
+index 08e40d4..3c441b4 100644
+Binary files a/userprog/thread.o and b/userprog/thread.o differ
+diff --git a/userprog/threadtest.o b/userprog/threadtest.o
+index b1d2794..92d7cdf 100644
+Binary files a/userprog/threadtest.o and b/userprog/threadtest.o differ
+diff --git a/userprog/translate.o b/userprog/translate.o
+index 95cccd8..3a4548b 100644
+Binary files a/userprog/translate.o and b/userprog/translate.o differ
+diff --git a/vm/Makefile b/vm/Makefile
+index 1694dd2..b460e38 100644
+--- a/vm/Makefile
++++ b/vm/Makefile
+@@ -12,7 +12,7 @@
+ # All rights reserved.  See copyright.h for copyright notice and limitation 
+ # of liability and disclaimer of warranty provisions.
+ 
+-DEFINES = -DUSER_PROGRAM  -DFILESYS_NEEDED -DFILESYS_STUB -DVM -DUSE_TLB
++DEFINES = -DUSER_PROGRAM  -DFILESYS_NEEDED -DFILESYS_STUB -DVM -DUSE_TLB -DTLB_LRU
+ INCPATH = -I../filesys -I../bin -I../vm -I../userprog -I../threads -I../machine
+ HFILES = $(THREAD_H) $(USERPROG_H) $(VM_H)
+ CFILES = $(THREAD_C) $(USERPROG_C) $(VM_C)
+@@ -47,8 +47,8 @@ main.o: ../threads/main.cc ../threads/copyright.h ../threads/utility.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/thread.h \
+  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ list.o: ../threads/list.cc ../threads/copyright.h ../threads/list.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+@@ -83,7 +83,7 @@ scheduler.o: ../threads/scheduler.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/system.h ../machine/interrupt.h ../threads/list.h \
++ ../threads/list.h ../threads/system.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h
+ synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
+  ../threads/thread.h ../threads/utility.h ../threads/bool.h \
+@@ -102,8 +102,8 @@ synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
+  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h
++ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h
+ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
+  ../threads/synchlist.h ../threads/list.h ../threads/utility.h \
+  ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
+@@ -122,7 +122,7 @@ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/synch.h ../threads/thread.h \
+  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h
++ ../filesys/openfile.h ../threads/list.h
+ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
+@@ -140,8 +140,8 @@ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h
+ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/switch.h \
+  ../threads/synch.h ../threads/thread.h ../threads/utility.h \
+  ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
+@@ -160,8 +160,8 @@ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/switch.h \
+  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
+- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h
++ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h
+ utility.o: ../threads/utility.cc ../threads/copyright.h \
+  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
+  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
+@@ -194,8 +194,8 @@ threadtest.o: ../threads/threadtest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../machine/elevatortest.h ../threads/synch.h ../threads/synchlist.h
+ interrupt.o: ../machine/interrupt.cc ../threads/copyright.h \
+  ../machine/interrupt.h ../threads/list.h ../threads/copyright.h \
+@@ -316,8 +316,8 @@ timer.o: ../machine/timer.cc ../threads/copyright.h ../machine/timer.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ elevatortest.o: ../machine/elevatortest.cc ../threads/copyright.h \
+  ../machine/elevatortest.h ../machine/elevator.h ../threads/utility.h \
+@@ -388,8 +388,8 @@ addrspace.o: ../userprog/addrspace.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../userprog/addrspace.h ../bin/noff.h
+ bitmap.o: ../userprog/bitmap.cc ../threads/copyright.h \
+  ../userprog/bitmap.h ../threads/utility.h ../threads/copyright.h \
+@@ -423,8 +423,8 @@ exception.o: ../userprog/exception.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../userprog/syscall.h
+ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
+  ../threads/system.h ../threads/copyright.h ../threads/utility.h \
+@@ -443,8 +443,8 @@ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+- ../threads/list.h ../machine/stats.h ../machine/timer.h \
++ ../threads/list.h ../threads/scheduler.h ../threads/list.h \
++ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+  ../machine/console.h ../userprog/addrspace.h ../threads/synch.h
+ console.o: ../machine/console.cc ../threads/copyright.h \
+  ../machine/console.h ../threads/utility.h ../threads/copyright.h \
+@@ -463,8 +463,8 @@ console.o: ../machine/console.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
+  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ machine.o: ../machine/machine.cc ../threads/copyright.h \
+  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
+@@ -483,8 +483,8 @@ machine.o: ../machine/machine.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../threads/system.h ../threads/utility.h ../threads/thread.h \
+  ../machine/machine.h ../userprog/addrspace.h ../filesys/filesys.h \
+- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../filesys/openfile.h ../threads/list.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
+  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
+@@ -503,8 +503,8 @@ mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../machine/mipssim.h ../threads/system.h ../threads/utility.h \
+  ../threads/thread.h ../machine/machine.h ../userprog/addrspace.h \
+- ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
+- ../threads/list.h ../machine/interrupt.h ../threads/list.h \
++ ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
++ ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+  ../machine/stats.h ../machine/timer.h
+ translate.o: ../machine/translate.cc ../threads/copyright.h \
+  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
+@@ -522,9 +522,9 @@ translate.o: ../machine/translate.cc ../threads/copyright.h \
+  /usr/include/i386-linux-gnu/bits/sys_errlist.h /usr/include/string.h \
+  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
+  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+- ../threads/system.h ../threads/utility.h ../threads/thread.h \
+- ../machine/machine.h ../threads/scheduler.h ../threads/list.h \
+- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
++ ../threads/list.h ../threads/utility.h ../threads/system.h \
++ ../threads/thread.h ../machine/machine.h ../threads/scheduler.h \
++ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+  ../machine/timer.h
+ # DEPENDENCIES MUST END AT END OF FILE
+ # IF YOU PUT STUFF HERE IT WILL GO AWAY
+diff --git a/vm/addrspace.o b/vm/addrspace.o
+index 334b9b2..ff9bdee 100644
+Binary files a/vm/addrspace.o and b/vm/addrspace.o differ
+diff --git a/vm/elevator.o b/vm/elevator.o
+index 8acc648..3097077 100644
+Binary files a/vm/elevator.o and b/vm/elevator.o differ
+diff --git a/vm/elevatortest.o b/vm/elevatortest.o
+index b02a7d2..da66553 100644
+Binary files a/vm/elevatortest.o and b/vm/elevatortest.o differ
+diff --git a/vm/exception.o b/vm/exception.o
+index 70dbd67..3ca920d 100644
+Binary files a/vm/exception.o and b/vm/exception.o differ
+diff --git a/vm/halt.coff b/vm/halt.coff
+new file mode 100755
+index 0000000..e626c56
+Binary files /dev/null and b/vm/halt.coff differ
+diff --git a/vm/interrupt.o b/vm/interrupt.o
+index 7fb32b1..a8df00d 100644
+Binary files a/vm/interrupt.o and b/vm/interrupt.o differ
+diff --git a/vm/machine.o b/vm/machine.o
+index 4f538dd..45e9dc3 100644
+Binary files a/vm/machine.o and b/vm/machine.o differ
+diff --git a/vm/main.o b/vm/main.o
+index 22e62fb..eaa1747 100644
+Binary files a/vm/main.o and b/vm/main.o differ
+diff --git a/vm/mipssim.o b/vm/mipssim.o
+index f96b8d5..c95b5fb 100644
+Binary files a/vm/mipssim.o and b/vm/mipssim.o differ
+diff --git a/vm/nachos b/vm/nachos
+index 549f6ff..9eb05f9 100755
+Binary files a/vm/nachos and b/vm/nachos differ
+diff --git a/vm/progtest.o b/vm/progtest.o
+index 9e7fa89..a74a1f2 100644
+Binary files a/vm/progtest.o and b/vm/progtest.o differ
+diff --git a/vm/scheduler.o b/vm/scheduler.o
+index 4893066..78c3bdf 100644
+Binary files a/vm/scheduler.o and b/vm/scheduler.o differ
+diff --git a/vm/synch.o b/vm/synch.o
+index 4394bad..a7bd4e5 100644
+Binary files a/vm/synch.o and b/vm/synch.o differ
+diff --git a/vm/synchlist.o b/vm/synchlist.o
+index 57c0f96..949201c 100644
+Binary files a/vm/synchlist.o and b/vm/synchlist.o differ
+diff --git a/vm/system.o b/vm/system.o
+index 17e3369..90eda10 100644
+Binary files a/vm/system.o and b/vm/system.o differ
+diff --git a/vm/thread.o b/vm/thread.o
+index 9367f4c..0cdb9f0 100644
+Binary files a/vm/thread.o and b/vm/thread.o differ
+diff --git a/vm/threadtest.o b/vm/threadtest.o
+index c4e997b..7ffe073 100644
+Binary files a/vm/threadtest.o and b/vm/threadtest.o differ
+diff --git a/vm/translate.o b/vm/translate.o
+index aff5845..f3d0545 100644
+Binary files a/vm/translate.o and b/vm/translate.o differ
