@@ -263,7 +263,7 @@ Disk::useWriteBuffer(int newSector, bool writing)
 
     if(writing)
     {
-        if(writeBuffer->Find(newSector))
+        if(writeBuffer->NumInList() > 0 && writeBuffer->Find(newSector))
         {
             writeBuffer->Remove(newSector);
             int when = stats->totalTicks;

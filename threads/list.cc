@@ -275,7 +275,7 @@ List::Find(void* item)
 {
     ListElement *prev, *ptr;
 
-
+    //printf("%d\n", item);
     // if first item on list is match, then remove from front
     if(numInList == 0)
         return FALSE;
