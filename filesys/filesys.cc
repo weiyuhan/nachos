@@ -240,24 +240,26 @@ FileSystem::CreateDir(char *name, char* path = "/")
             success = FALSE;        // no free block for file header 
         else
         {
-            hdr = new FileHeader;
+            hdr = new FileHeader();
             if (!hdr->Allocate(freeMap, DirectoryFileSize))
                 success = FALSE;    // no space on disk for data
-            else if (!directory->Add(name, sector, TRUE, path))
-            {
-                success = FALSE;    // no space in directory
-                hdr->Deallocate(freeMap);
-            }
             else
-            {  
-                success = TRUE;
-        // everthing worked, flush all changes back to disk
-                hdr->setCreateTime();
-                hdr->WriteBack(sector);         
-                directory->WriteBack(directoryFile);
-                freeMap->WriteBack(freeMapFile);
+            {
+                hdr->WriteBack(sector); 
+                if (!directory->Add(name, sector, TRUE, path))
+                {
+                    success = FALSE;    // no space in directory
+                    hdr->Deallocate(freeMap);
+                }
+                else
+                {  
+                    success = TRUE;
+            // everthing worked, flush all changes back to disk       
+                    directory->WriteBack(directoryFile);
+                    freeMap->WriteBack(freeMapFile);
+                }
+                delete hdr;
             }
-            delete hdr;
         }
         delete freeMap;
     }

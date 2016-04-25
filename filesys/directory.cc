@@ -71,6 +71,7 @@ DirectoryEntry::getName(int fatherSector = 0)
         return name;
 }
 
+
 //----------------------------------------------------------------------
 // Directory::Directory
 // 	Initialize a directory; initially, the directory is completely
@@ -248,6 +249,14 @@ Directory::Add(char *name, int newSector, bool isDirectory = FALSE, char* path =
                     delete directoryFile;
                     delete directory;
                 }
+
+
+                FileHeader* fileHdr = new FileHeader();
+                fileHdr->FetchFrom(newSector);
+                fileHdr->setFather(table[meSector].sector);
+                fileHdr->setCreateTime();
+                fileHdr->WriteBack(newSector);
+                delete fileHdr;
 
                 return TRUE;
             }
@@ -453,6 +462,19 @@ Directory::List(int deep = 0)
 // 	List all the file names in the directory, their FileHeader locations,
 //	and the contents of each file.  For debugging.
 //----------------------------------------------------------------------
+
+char* 
+Directory::getFileName(int sector)
+{
+    for (int i = 2; i < tableSize; i++)
+    {
+        if (table[i].inUse && table[i].sector == sector) 
+        {
+            return table[i].getName(table[meSector].sector);
+        }
+    }
+    return NULL;
+}
 
 void
 Directory::Print()

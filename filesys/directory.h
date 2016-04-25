@@ -74,6 +74,7 @@ class Directory {
 					//  of the directory -- all the file
 					//  names and their contents.
     char* FindEntryName(int index){return table[index].name;}
+    char* getFileName(int sector);
 
     bool RemoveAll();
 

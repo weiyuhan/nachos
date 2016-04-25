@@ -420,6 +420,8 @@ FileHeader::FileLength()
 //	the data blocks pointed to by the file header.
 //----------------------------------------------------------------------
 
+
+
 void
 FileHeader::Print()
 {
@@ -430,6 +432,9 @@ FileHeader::Print()
     printf("CreateTime: %s.  ", getCreateTime());
     printf("LastAccess: %s.  ", getLastAccessTime());
     printf("LastModify: %s.  ", getLastModifyTime());
+    char* name = getName();
+    if(name != NULL)
+        printf("Name: %s.  ", name);
     printf("File blocks:\n");
     for (i = 0; i < numSectors; i++)
 	   printf("%d ", LogicalSectorToSector(i));
@@ -447,6 +452,22 @@ FileHeader::Print()
         printf("\n"); 
     }
     delete [] data;
+}
+
+char* 
+FileHeader::getName()
+{
+    Directory* directory;
+    OpenFile* directoryFile;
+    directoryFile = new OpenFile(fatherSector);
+    directory = new Directory(12);
+    directory->FetchFrom(directoryFile);
+    char* name = directory->getFileName(sector);
+
+    delete directoryFile;
+    delete directory;
+
+    return name;
 }
 
 void FileHeader::setCreateTime()
