@@ -162,12 +162,14 @@ AddrSpace::InitRegisters()
 
 void AddrSpace::SaveState() 
 {
+    #ifdef USE_TLB
     for(int i = 0; i < TLBSize; i++)
     {
         machine->tlb[i].valid = FALSE;
         machine->tlb[i].dirty = FALSE;
         machine->tlb[i].readOnly = FALSE;
     }
+    #endif
 }
 
 //----------------------------------------------------------------------

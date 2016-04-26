@@ -46,7 +46,6 @@
 #include "copyright.h"
 
 #include "disk.h"
-#include "bitmap.h"
 #include "directory.h"
 #include "filehdr.h"
 #include "filesys.h"
@@ -63,6 +62,8 @@
 #define FreeMapFileSize 	(NumSectors / BitsInByte)
 #define NumDirEntries 		12
 #define DirectoryFileSize 	(sizeof(DirectoryEntry) * NumDirEntries)
+
+#define MaxOpenFile 100
 
 //----------------------------------------------------------------------
 // FileSystem::FileSystem
@@ -142,6 +143,12 @@ FileSystem::FileSystem(bool format)
         freeMapFile = new OpenFile(FreeMapSector);
         directoryFile = new OpenFile(DirectorySector);
     }
+
+    fileEntry = new OpenFile*[MaxOpenFile];
+    fileIdMap = new BitMap(MaxOpenFile);
+    fileIdMap->Mark(0);
+    fileIdMap->Mark(1);
+
 }
 
 //----------------------------------------------------------------------
@@ -174,7 +181,7 @@ FileSystem::FileSystem(bool format)
 //----------------------------------------------------------------------
 
 bool
-FileSystem::Create(char *name, int initialSize, char* path = "/")
+FileSystem::Create(char *name, int initialSize = 0, char* path = "/")
 {
     Directory *directory;
     BitMap *freeMap;
@@ -293,6 +300,51 @@ FileSystem::Open(char *name, char *path = "/")
     return openFile;				// return NULL if not found
 }
 
+int 
+FileSystem::OpenAFile(char *name, char *path = "/")
+{
+    OpenFile* openFile = Open(name, path);
+    int fileId = fileIdMap->Find();
+    if(fileId == -1)
+    {
+        delete openFile;
+        return fileId;
+    }
+    fileEntry[fileId] = openFile;
+    return fileId;
+}
+
+void 
+FileSystem::CloseFile(int fileId)
+{
+    if(!fileIdMap->Test(fileId))
+        return;
+    OpenFile* openFile = fileEntry[fileId];
+    delete openFile;
+    fileIdMap->Clear(fileId);
+    return;
+}
+
+int 
+FileSystem::WriteFile(char* from, int size, int fileId)
+{
+    if(!fileIdMap->Test(fileId))
+        return -1;
+    OpenFile* openFile = fileEntry[fileId];
+    int numWrite = openFile->Write(from, size);
+    return numWrite;
+}
+
+int 
+FileSystem::ReadFile(char* to, int size, int fileId)
+{
+    if(!fileIdMap->Test(fileId))
+        return -1;
+    OpenFile* openFile = fileEntry[fileId];
+    int numRead = openFile->Read(to, size);
+    return numRead;
+}
+
 //----------------------------------------------------------------------
 // FileSystem::Remove
 // 	Delete a file from the file system.  This requires:
@@ -314,6 +366,7 @@ FileSystem::Remove(char *name, char *path = "/")
     BitMap *freeMap;
     FileHeader *fileHdr;
     int sector;
+
     
     directory = new Directory(NumDirEntries);
     directory->FetchFrom(directoryFile);

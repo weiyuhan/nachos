@@ -48,6 +48,140 @@
 //	are in machine.h.
 //----------------------------------------------------------------------
 
+void SysHalt()
+{
+    DEBUG('a', "Shutdown, initiated by user program.\n");
+    interrupt->Halt();
+}
+
+void SysExit()
+{
+    int exitAddress = machine->ReadRegister(4);
+    int exitNum;
+    machine->ReadMem(exitAddress, 1, &exitNum);
+    printf("EXIT NUM : %d\n", exitAddress);
+    printf("Total TLB miss : %d\n",
+            currentThread->space->TLBMissCount);
+    printf("Total Page Fault : %d\n",
+            currentThread->space->PageFaultCount);
+    currentThread->Print();
+    currentThread->Finish();
+}
+
+void SysCreate()
+{
+    int nameAddress = machine->ReadRegister(4);
+    int value;
+    int count = 0;
+    char name[20];
+    do
+    {
+        machine->ReadMem(nameAddress++, 1, &value);
+        name[count++] = (char)value;
+    }while(value != 0);
+
+    if(!fileSystem->Create(name))
+        machine->WriteRegister(2, 0);
+    machine->WriteRegister(2, 1);
+}
+
+void SysOpen()
+{
+    int nameAddress = machine->ReadRegister(4);
+    int value;
+    int count = 0;
+    char name[20];
+    do
+    {
+        machine->ReadMem(nameAddress++, 1, &value);
+        name[count++] = (char)value;
+    }while(value != 0);
+
+    OpenFileId fileId = fileSystem->OpenAFile(name);
+    machine->WriteRegister(2, fileId);
+}
+
+void SysClose()
+{
+    OpenFileId fileId = (OpenFileId)machine->ReadRegister(4);
+    fileSystem->CloseFile((int)fileId);
+}
+
+void SysWrite()
+{
+
+    int bufferAddress = machine->ReadRegister(4);
+    int size = (int)machine->ReadRegister(5);
+    int value;
+    int count = 0;
+    char* buffer = new char[size];
+    while(count < size)
+    {
+        machine->ReadMem(bufferAddress++, 1, &value);
+        buffer[count] = (char)value;
+    }
+
+    OpenFileId fileId = (OpenFileId)machine->ReadRegister(6);
+    int numWrite = fileSystem->WriteFile(buffer, size, fileId);
+    machine->WriteRegister(2, numWrite);
+
+    delete buffer;
+}
+
+void SysRead()
+{
+    int bufferAddress = machine->ReadRegister(4);
+    int size = (int)machine->ReadRegister(5);
+    int value;
+    int count = 0;
+    char* buffer = new char[size];
+    while(count < size)
+    {
+        machine->ReadMem(bufferAddress++, 1, &value);
+        buffer[count] = (char)value;
+    }
+
+    OpenFileId fileId = (OpenFileId)machine->ReadRegister(6);
+    int numRead = fileSystem->ReadFile(buffer, size, fileId);
+    machine->WriteRegister(2, numRead);
+
+    delete buffer;
+}
+
+void SysPrint()
+{
+    int* contentAddress = machine->ReadRegister(4);
+    char type = (char)machine->ReadRegister(5);
+    int value;
+    int count = 0;
+    switch(type)
+    {
+        case 'd':
+            machine->ReadMem(contentAddress, 1, &value);
+            printf("%d\n", value);
+            break;
+        case 's':
+            char buffer[100];
+            do
+            {
+                machine->ReadMem(contentAddress++, 1, &value);
+                buffer[count++] = (char)value;
+            }while(value != 0);
+            printf("%s\n", buffer);
+            break;
+        case 'x':
+            machine->ReadMem(contentAddress, 1, &value);
+            printf("%x\n", value);
+            break;
+        case 'c':
+            machine->ReadMem(contentAddress, 1, &value);
+            printf("%c\n", (char)value);
+            break;
+        default:
+            break;
+    }
+}
+
 void
 ExceptionHandler(ExceptionType which)
 {
@@ -55,20 +189,35 @@ ExceptionHandler(ExceptionType which)
 
     if (which == SyscallException)
     {
-        if(type == SC_Halt)
+        switch(type)
         {
-            DEBUG('a', "Shutdown, initiated by user program.\n");
-            interrupt->Halt();
-        }
-        if(type == SC_Exit)
-        {
-            printf("EXIT NUM : %d\n", machine->ReadRegister(4));
-            printf("Total TLB miss : %d\n",
-                    currentThread->space->TLBMissCount);
-            printf("Total Page Fault : %d\n",
-                    currentThread->space->PageFaultCount);
-            currentThread->Print();
-            currentThread->Finish();
+            case SC_Halt:
+                SysHalt();
+                break;
+            case SC_Exit:
+                SysExit();
+                break;
+            case SC_Create:
+                SysCreate();
+                break;
+            case SC_Open:
+                SysOpen();
+                break;
+            case SC_Close:
+                SysClose();
+                break;
+            case SC_Write:
+                SysWrite();
+                break;
+            case SC_Read:
+                SysRead();
+                break;
+            case SC_Print:
+                SysPrint();
+                break;
+            default:
+                printf("Unexpected syscall %d\n", type);
+                ASSERT(FALSE);
         }
     } else if ((which == TLBMissException))
     {

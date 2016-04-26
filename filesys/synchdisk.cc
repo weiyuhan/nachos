@@ -16,6 +16,7 @@
 
 #include "copyright.h"
 #include "synchdisk.h"
+#include "system.h"
 
 //----------------------------------------------------------------------
 // DiskRequestDone
@@ -92,7 +93,7 @@ SynchDisk::WriteSector(int sectorNumber, char* data)
 {
     lock->Acquire();			// only one disk I/O at a time
     disk->WriteRequest(sectorNumber, data);
-    semaphore->P();			// wait for interrupt
+    semaphore->P();         // wait for interrupt
     lock->Release();
 }
 

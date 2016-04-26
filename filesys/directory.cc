@@ -231,7 +231,7 @@ Directory::Add(char *name, int newSector, bool isDirectory = FALSE, char* path =
         if (FindIndex(name) != -1)
     	   return FALSE;
 
-        for (int i = 0; i < tableSize; i++)
+        for (int i = 2; i < tableSize; i++)
         {
             if (!table[i].inUse) 
             {
@@ -357,11 +357,9 @@ Directory::RemoveAll()
 bool
 Directory::Remove(char *name, char* path = "/")
 { 
-    	
     if(strlen(path) == 1)
     {
         int i = FindIndex(name);
-
         if (i < 2)
             return FALSE;       // name not in directory
         if(table[i].isDirectory)
