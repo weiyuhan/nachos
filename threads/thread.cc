@@ -19,6 +19,8 @@
 #include "synch.h"
 #include "system.h"
 
+extern char* itoa(int num);
+
 #define STACK_FENCEPOST 0xdeadbeef	// this is put at the top of the
 					// execution stack, for detecting 
 					// stack overflows
@@ -81,10 +83,7 @@ Thread::~Thread()
     ASSERT(this != currentThread);
     if (stack != NULL)
 	DeallocBoundedArray((char *) stack, StackSize * sizeof(int));
-#ifdef USER_PROGRAM
-    if(space != NULL)
-        delete space;
-#endif
+
 }
 
 
@@ -190,6 +189,10 @@ Thread::CheckOverflow()
 void
 Thread::Finish ()
 {
+    #ifdef USER_PROGRAM
+    fileSystem->Remove(itoa(currentThread->gettid()), "/", TRUE);
+    #endif
+
     (void) interrupt->SetLevel(IntOff);		
 
     currentCounts--;
@@ -203,6 +206,7 @@ Thread::Finish ()
         threadToBeDestroyed = NULL;
     }
     threadToBeDestroyed = currentThread;
+
     Sleep();					// invokes SWITCH
     // not reached
 }

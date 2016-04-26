@@ -48,10 +48,19 @@
 //	are in machine.h.
 //----------------------------------------------------------------------
 
+void PCAdd()
+{
+    machine->WriteRegister(PrevPCReg, machine->registers[PCReg]);
+    machine->WriteRegister(PCReg, machine->registers[NextPCReg]);
+    machine->WriteRegister(NextPCReg, machine->registers[NextPCReg] + 4);
+}
+
 void SysHalt()
 {
     DEBUG('a', "Shutdown, initiated by user program.\n");
     interrupt->Halt();
+
+    PCAdd();
 }
 
 void SysExit()
@@ -66,6 +75,8 @@ void SysExit()
             currentThread->space->PageFaultCount);
     currentThread->Print();
     currentThread->Finish();
+
+    PCAdd();
 }
 
 void SysCreate()
@@ -73,16 +84,17 @@ void SysCreate()
     int nameAddress = machine->ReadRegister(4);
     int value;
     int count = 0;
-    char name[20];
+    char name[10];
     do
     {
         machine->ReadMem(nameAddress++, 1, &value);
         name[count++] = (char)value;
-    }while(value != 0);
+    }while(value != 0 && count < 10);
 
     if(!fileSystem->Create(name))
         machine->WriteRegister(2, 0);
     machine->WriteRegister(2, 1);
+    PCAdd();
 }
 
 void SysOpen()
@@ -95,16 +107,18 @@ void SysOpen()
     {
         machine->ReadMem(nameAddress++, 1, &value);
         name[count++] = (char)value;
-    }while(value != 0);
+    }while(value != 0 && count < 10);
 
     OpenFileId fileId = fileSystem->OpenAFile(name);
     machine->WriteRegister(2, fileId);
+    PCAdd();
 }
 
 void SysClose()
 {
     OpenFileId fileId = (OpenFileId)machine->ReadRegister(4);
     fileSystem->CloseFile((int)fileId);
+    PCAdd();
 }
 
 void SysWrite()
@@ -118,7 +132,7 @@ void SysWrite()
     while(count < size)
     {
         machine->ReadMem(bufferAddress++, 1, &value);
-        buffer[count] = (char)value;
+        buffer[count++] = (char)value;
     }
 
     OpenFileId fileId = (OpenFileId)machine->ReadRegister(6);
@@ -126,60 +140,61 @@ void SysWrite()
     machine->WriteRegister(2, numWrite);
 
     delete buffer;
+    PCAdd();
 }
 
 void SysRead()
 {
     int bufferAddress = machine->ReadRegister(4);
     int size = (int)machine->ReadRegister(5);
-    int value;
     int count = 0;
     char* buffer = new char[size];
-    while(count < size)
-    {
-        machine->ReadMem(bufferAddress++, 1, &value);
-        buffer[count] = (char)value;
-    }
 
     OpenFileId fileId = (OpenFileId)machine->ReadRegister(6);
     int numRead = fileSystem->ReadFile(buffer, size, fileId);
     machine->WriteRegister(2, numRead);
 
+
+    while(count < size)
+    {
+        char value = buffer[count++];
+        machine->WriteMem(bufferAddress++, 1, value);
+    }
+
     delete buffer;
+    PCAdd();
 }
 
 void SysPrint()
 {
-    int* contentAddress = machine->ReadRegister(4);
+    int content = machine->ReadRegister(4);
     char type = (char)machine->ReadRegister(5);
     int value;
     int count = 0;
     switch(type)
     {
         case 'd':
-            machine->ReadMem(contentAddress, 1, &value);
-            printf("%d\n", value);
+            printf("%d\n", content);
             break;
         case 's':
             char buffer[100];
             do
             {
-                machine->ReadMem(contentAddress++, 1, &value);
+                machine->ReadMem(content++, 1, &value);
                 buffer[count++] = (char)value;
-            }while(value != 0);
+            }while(value != 0 && count < 100);
             printf("%s\n", buffer);
             break;
         case 'x':
-            machine->ReadMem(contentAddress, 1, &value);
-            printf("%x\n", value);
+            printf("%x\n", content);
             break;
         case 'c':
-            machine->ReadMem(contentAddress, 1, &value);
-            printf("%c\n", (char)value);
+            printf("%c\n", (char)content);
             break;
         default:
             break;
     }
+    PCAdd();
 }
 
 void

@@ -115,9 +115,6 @@ AddrSpace::~AddrSpace()
 #ifdef TLB_FIFO
     delete TLBFIFO_List;
 #endif
-    delete swap;
-    fileSystem->Remove(itoa(threadToBeDestroyed->gettid()));
-
 }
 
 //----------------------------------------------------------------------

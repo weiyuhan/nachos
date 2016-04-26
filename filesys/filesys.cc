@@ -322,6 +322,7 @@ FileSystem::CloseFile(int fileId)
     OpenFile* openFile = fileEntry[fileId];
     delete openFile;
     fileIdMap->Clear(fileId);
+    fileEntry[fileId] = NULL;
     return;
 }
 
@@ -360,13 +361,12 @@ FileSystem::ReadFile(char* to, int size, int fileId)
 //----------------------------------------------------------------------
 
 bool
-FileSystem::Remove(char *name, char *path = "/")
+FileSystem::Remove(char *name, char *path = "/", bool force = FALSE)
 { 
     Directory *directory;
     BitMap *freeMap;
     FileHeader *fileHdr;
     int sector;
-
     
     directory = new Directory(NumDirEntries);
     directory->FetchFrom(directoryFile);
@@ -378,13 +378,14 @@ FileSystem::Remove(char *name, char *path = "/")
     fileHdr = new FileHeader;
     fileHdr->FetchFrom(sector);
 
-    if(fileHdr->getOpenCount() > 0)
+    if(!force && fileHdr->getOpenCount() > 0)
     {
-        //printf("can't delete\n");
+        printf("can't delete\n");
         delete directory;
         delete fileHdr;
         return FALSE;
     }
+
 
     freeMap = new BitMap(NumSectors);
     freeMap->FetchFrom(freeMapFile);
