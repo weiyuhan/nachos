@@ -28,6 +28,7 @@ main()
     num = 10;
     Print(num, 'd');
     Fork(run);
+    Yield();
     Print("after fork", 's');
     Print(num, 'd');
     Exit(0);

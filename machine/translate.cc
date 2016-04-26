@@ -341,6 +341,18 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
     entry->use = TRUE;		// set the use, dirty bits
     if (writing)
 		entry->dirty = TRUE;
+	if(usePageTable)
+	{
+		for(int i = 0; i < TLBSize; i++)
+		{
+			if (tlb[i].valid && (tlb[i].virtualPage == vpn)) 
+			{
+				tlb[i].dirty = entry->dirty;
+				tlb[i].use = entry->use;
+				tlb[i].lastUseTime = entry->lastUseTime;
+			}
+		}
+	}
     *physAddr = pageFrame * PageSize + offset;
     ASSERT((*physAddr >= 0) && ((*physAddr + size) <= MemorySize));
     DEBUG('a', "phys addr = 0x%x\n", *physAddr);

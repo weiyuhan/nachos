@@ -199,12 +199,12 @@ void SysPrint()
 void SysYield()
 {
     currentThread->Yield();
-
     PCAdd();
 }
 
 void ForkRun(int startAddr)
 {
+
     machine->WriteRegister(PCReg, startAddr);
     machine->WriteRegister(NextPCReg, startAddr + 4);
 
