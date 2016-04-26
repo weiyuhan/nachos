@@ -32,9 +32,9 @@
 					// the disk sector size, for
 					// simplicity
 
-#define NumPhysPages    32
+#define NumPhysPages    256
 #define MemorySize 	(NumPhysPages * PageSize)
-#define TLBSize		4		// if there is a TLB, make it small
+#define TLBSize		32		// if there is a TLB, make it small
 
 
 enum ExceptionType { NoException,           // Everything ok!
@@ -130,6 +130,7 @@ class Machine {
     
     bool ReadMem(int addr, int size, int* value);
     bool WriteMem(int addr, int size, int value);
+    void RefreshSwap();
     				// Read or write 1, 2, or 4 bytes of virtual 
 				// memory (at addr).  Return FALSE if a 
 				// correct translation couldn't be found.

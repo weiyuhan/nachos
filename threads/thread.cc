@@ -49,6 +49,7 @@ Thread::Thread(char* threadName, int uid = 0, int _priority = 10, int remain = 5
     int success = scheduler->AddThread(this);
     if(success == -1)
         return;
+    threadID = success;
     threadCounts++;
     currentCounts++;
     userID = uid;
@@ -83,6 +84,11 @@ Thread::~Thread()
     ASSERT(this != currentThread);
     if (stack != NULL)
 	DeallocBoundedArray((char *) stack, StackSize * sizeof(int));
+
+#ifdef USER_PROGRAM
+    if(space != NULL)
+        delete space;
+#endif
 
 }
 

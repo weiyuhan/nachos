@@ -33,6 +33,10 @@ Scheduler::Scheduler()
     readyList = new List; 
     allList = new List;
     suspendList = new List;
+#ifdef USER_PROGRAM
+    threadMap = new BitMap(MaxThreadNum);
+    threadEntry = new Thread*[MaxThreadNum];
+#endif
 } 
 
 //----------------------------------------------------------------------
@@ -46,6 +50,10 @@ Scheduler::~Scheduler()
     delete readyList; 
     delete allList;
     delete suspendList;
+#ifdef USER_PROGRAM
+    delete threadMap;
+    delete [] threadEntry;
+#endif
 } 
 
 //----------------------------------------------------------------------
@@ -58,10 +66,17 @@ Scheduler::~Scheduler()
 int
 Scheduler::AddThread(Thread *thread)
 {
+#ifdef USER_PROGRAM
+    int tid = threadMap->Find();
+    if(tid == -1)
+        return -1;
+    threadEntry[tid] = thread;
+    thread->settid(tid);
+#endif
     if(allList->NumInList() > 128)
         return -1;
     allList->SortedInsert(thread, thread->gettid());
-    return 0;
+    return thread->gettid();
 }
 
 //----------------------------------------------------------------------
@@ -72,6 +87,14 @@ Scheduler::AddThread(Thread *thread)
 void 
 Scheduler::RemoveThread(Thread *thread)
 {
+#ifdef USER_PROGRAM
+    int tid = thread->gettid();
+    if(threadMap->Test(tid))
+    {
+        threadEntry[tid] = NULL;
+        threadMap->Clear(tid);
+    }
+#endif
     allList->Remove(thread);
 }
 

@@ -251,7 +251,8 @@ void Machine::refreshPage(int index)
 	{
 		if(tlb[i].virtualPage == entry->virtualPage)
 		{
-			entry->dirty = tlb[i].dirty;
+			if(!entry->dirty)
+				entry->dirty = tlb[i].dirty;
 			entry->use = tlb[i].use;
 			entry->lastUseTime = tlb[i].lastUseTime;
 			entry->readOnly = tlb[i].readOnly;
@@ -308,6 +309,8 @@ Machine::Translate(int virtAddr, int* physAddr, int size, bool writing, bool use
 				tlb[i].use = true;
 				tlb[i].lastUseTime = stats->totalTicks;
 			#endif
+				if(writing)
+					tlb[i].dirty = TRUE;
 				break;
 		    }
 		}
@@ -400,7 +403,8 @@ int Machine::FindTLBindex()
 	TranslationEntry *entry = getPyhsPage(tlb[index].virtualPage);
 	if(entry != NULL)
 	{
-		entry->dirty = tlb[index].dirty;
+		if(!entry->dirty)
+			entry->dirty = tlb[index].dirty;
 		entry->use = tlb[index].use;
 		entry->lastUseTime = tlb[index].lastUseTime;
 		entry->readOnly = tlb[index].readOnly;
@@ -456,6 +460,24 @@ void Machine::PageSwap(int index = -1)
 		{
 			tlb[i].valid = FALSE;
 			break;
+		}
+	}
+}
+
+void Machine::RefreshSwap()
+{
+	for(int i = 0; i < NumPhysPages; i++)
+	{
+		if(reversePageTable[i].valid)
+		{
+			refreshPage(i);
+			Thread* ownerThread = (Thread*)reversePageTable[i].ownerThread;
+			if(reversePageTable[i].dirty)
+			{
+				ownerThread->space->swap->WriteAt(
+					&(machine->mainMemory[i*PageSize])
+					, PageSize, reversePageTable[i].virtualPage * PageSize);
+			}
 		}
 	}
 }

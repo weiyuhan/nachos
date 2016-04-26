@@ -106,6 +106,7 @@ class Thread {
     char* getName() { return (name); }
     int getuid(){return userID;}
     int gettid(){return threadID;}
+    void settid(int tid){threadID = tid;}
     int getpriority(){return priority;}
     bool isStatus(ThreadStatus s){return status == s;}
     void setpriority(int p){if(p >= 0)priority = p;}

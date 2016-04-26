@@ -82,9 +82,11 @@ SwapHeader (NoffHeader *noffH)
 //	"executable" is the file containing the object code to load into memory
 //----------------------------------------------------------------------
 
-AddrSpace::AddrSpace(OpenFile *executable)
+AddrSpace::AddrSpace(OpenFile *executable, int tid = -1)
 {
-    LoadSwapSpace(executable);
+    if(tid == -1)
+        tid = currentThread->gettid();
+    LoadSwapSpace(executable, tid);
 
 // first, set up the translation 
     TLBMissCount = 0;
@@ -93,6 +95,37 @@ AddrSpace::AddrSpace(OpenFile *executable)
     TLBFIFO_List = new List;
 #endif
 
+}
+
+AddrSpace::AddrSpace(AddrSpace *space, int tid = -1)
+{
+    if(tid == -1)
+        tid = currentThread->gettid();
+
+    TLBMissCount = 0;
+    PageFaultCount = 0;
+#ifdef TLB_FIFO
+    TLBFIFO_List = new List;
+#endif
+
+    numPages = space->getNumPages();
+    unsigned int size;
+    size = numPages * PageSize;
+
+    DEBUG('a', "loadint swap space, num pages %d, size %d\n", 
+                numPages, size);
+
+    char* Buffer = new char[size];
+
+    space->swap->ReadAt(Buffer, size, 0);
+
+
+    char* swapname = itoa(tid);
+    fileSystem->Create(swapname, size);
+    swap = fileSystem->Open(swapname);
+    swap->WriteAt(Buffer,size,0);
+
+    delete [] Buffer;
 }
 
 //----------------------------------------------------------------------
@@ -184,7 +217,7 @@ void AddrSpace::RestoreState()
 
 }
 
-void AddrSpace::LoadSwapSpace(OpenFile *executable)
+void AddrSpace::LoadSwapSpace(OpenFile *executable, int tid)
 {
     NoffHeader noffH;
     unsigned int i, size;
@@ -218,7 +251,7 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable)
         executable->ReadAt(Buffer + noffH.code.size, noffH.initData.size, 
             noffH.initData.inFileAddr);
     }
-    char* swapname = itoa(currentThread->gettid());
+    char* swapname = itoa(tid);
     fileSystem->Create(swapname, size);
     swap = fileSystem->Open(swapname);
     swap->WriteAt(Buffer,size,0);

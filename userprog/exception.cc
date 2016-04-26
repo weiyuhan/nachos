@@ -65,10 +65,9 @@ void SysHalt()
 
 void SysExit()
 {
-    int exitAddress = machine->ReadRegister(4);
-    int exitNum;
-    machine->ReadMem(exitAddress, 1, &exitNum);
-    printf("EXIT NUM : %d\n", exitAddress);
+    int exitNum = machine->ReadRegister(4);
+    scheduler->setExitNum(currentThread->gettid(), exitNum);
+    printf("EXIT NUM : %d\n", exitNum);
     printf("Total TLB miss : %d\n",
             currentThread->space->TLBMissCount);
     printf("Total Page Fault : %d\n",
@@ -197,6 +196,98 @@ void SysPrint()
     PCAdd();
 }
 
+void SysYield()
+{
+    currentThread->Yield();
+
+    PCAdd();
+}
+
+void ForkRun(int startAddr)
+{
+    machine->WriteRegister(PCReg, startAddr);
+    machine->WriteRegister(NextPCReg, startAddr + 4);
+
+    currentThread->SaveUserState();
+
+    machine->Run();
+}
+
+void SysFork()
+{
+    int startAddr = machine->ReadRegister(4);
+
+    machine->RefreshSwap();
+
+    Thread* t = new Thread("ForkThread");
+    if(t->gettid() != -1)
+    {
+        t->space = new AddrSpace(currentThread->space, t->gettid());
+
+        t->Fork(ForkRun, startAddr);
+    }
+
+
+    PCAdd();
+}
+
+void ExecRun()
+{
+    currentThread->space->InitRegisters();     // set the initial register values
+    currentThread->space->RestoreState();      // load page table register
+
+    machine->Run();         // jump to the user progam
+}
+
+void SysExec()
+{
+    int nameAddress = machine->ReadRegister(4);
+    int value;
+    int count = 0;
+    char filename[20];
+    do
+    {
+        machine->ReadMem(nameAddress++, 1, &value);
+        filename[count++] = (char)value;
+    }while(value != 0 && count < 10);
+
+    Thread *t = new Thread("forked thread");
+    if(t->gettid() != -1)
+    {
+        OpenFile *executable = fileSystem->Open(filename);
+        AddrSpace *space;
+
+        if (executable == NULL) {
+        printf("Unable to open file %s\n", filename);
+        return;
+        }
+        space = new AddrSpace(executable, t->gettid());    
+        t->space = space;
+
+        delete executable;          // close file
+
+        t->Fork(ExecRun, 0);
+    }
+
+    machine->WriteRegister(2, t->gettid());
+
+    PCAdd();
+}
+
+void SysJoin()
+{
+    int spaceId = machine->ReadRegister(4);
+    while(scheduler->isActive(spaceId))
+    {
+        currentThread->Yield();
+    }
+    int exitNum = scheduler->getExitNum(spaceId);
+
+    machine->WriteRegister(2, exitNum);
+
+    PCAdd();
+}
+
 void
 ExceptionHandler(ExceptionType which)
 {
@@ -229,6 +320,18 @@ ExceptionHandler(ExceptionType which)
                 break;
             case SC_Print:
                 SysPrint();
+                break;
+            case SC_Join:
+                SysJoin();
+                break;
+            case SC_Exec:
+                SysExec();
+                break;
+            case SC_Fork:
+                SysFork();
+                break;
+            case SC_Yield:
+                SysYield();
                 break;
             default:
                 printf("Unexpected syscall %d\n", type);

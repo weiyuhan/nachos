@@ -21,9 +21,11 @@
 
 class AddrSpace {
   public:
-    AddrSpace(OpenFile *executable);	// Create an address space,
+    AddrSpace(OpenFile *executable, int tid = -1);	// Create an address space,
 					// initializing it with the program
 					// stored in the file "executable"
+    AddrSpace(AddrSpace *space, int tid = -1);
+
     ~AddrSpace();			// De-allocate an address space
 
     void InitRegisters();		// Initialize user-level CPU registers,
@@ -31,6 +33,9 @@ class AddrSpace {
 
     void SaveState();			// Save/restore address space-specific
     void RestoreState();		// info on a context switch
+
+    int getNumPages(){return numPages;}
+
     int TLBMissCount;
     int PageFaultCount;
 #ifdef TLB_FIFO
@@ -41,7 +46,7 @@ class AddrSpace {
     unsigned int PagesinMem;
 
   private:
-    void LoadSwapSpace(OpenFile *executable);
+    void LoadSwapSpace(OpenFile *executable,int tid);
     unsigned int numPages;		// Number of pages in the virtual 
 					// address space
 };
