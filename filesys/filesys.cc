@@ -55,6 +55,7 @@
 // sectors, so that they can be located on boot-up.
 #define FreeMapSector 		0
 #define DirectorySector 	1
+#define FileNameSector      2
 
 // Initial file sizes for the bitmap and directory; until the file system
 // supports extensible files, the directory size sets the maximum number 
@@ -62,6 +63,7 @@
 #define FreeMapFileSize 	(NumSectors / BitsInByte)
 #define NumDirEntries 		12
 #define DirectoryFileSize 	(sizeof(DirectoryEntry) * NumDirEntries)
+#define FileNameFileSize 500
 
 #define MaxOpenFile 100
 
@@ -86,6 +88,7 @@ FileSystem::FileSystem(bool format)
         Directory *directory = new Directory(NumDirEntries);
 	FileHeader *mapHdr = new FileHeader;
 	FileHeader *dirHdr = new FileHeader;
+    FileHeader *filenameHdr = new FileHeader;
 
         DEBUG('f', "Formatting the file system.\n");
 
@@ -93,13 +96,14 @@ FileSystem::FileSystem(bool format)
     // (make sure no one else grabs these!)
 	freeMap->Mark(FreeMapSector);	    
 	freeMap->Mark(DirectorySector);
+    freeMap->Mark(FileNameSector);
 
     // Second, allocate space for the data blocks containing the contents
     // of the directory and bitmap files.  There better be enough space!
 
 	ASSERT(mapHdr->Allocate(freeMap, FreeMapFileSize));
 	ASSERT(dirHdr->Allocate(freeMap, DirectoryFileSize));
-
+    ASSERT(filenameHdr->Allocate(freeMap, FileNameFileSize));
     // Flush the bitmap and directory FileHeaders back to disk
     // We need to do this before we can "Open" the file, since open
     // reads the file header off of disk (and currently the disk has garbage
@@ -108,8 +112,10 @@ FileSystem::FileSystem(bool format)
         DEBUG('f', "Writing headers back to disk.\n");
         mapHdr->setCreateTime();
         dirHdr->setCreateTime();
+        filenameHdr->setCreateTime();
 	mapHdr->WriteBack(FreeMapSector);    
 	dirHdr->WriteBack(DirectorySector);
+    filenameHdr->WriteBack(FileNameSector);
 
     // OK to open the bitmap and directory files now
     // The file system operations assume these two files are left open
@@ -136,6 +142,7 @@ FileSystem::FileSystem(bool format)
 	delete directory; 
 	delete mapHdr; 
 	delete dirHdr;
+    delete filenameHdr;
 	}
     } else {
     // if we are not formatting the disk, just open the files representing
@@ -448,6 +455,13 @@ FileSystem::Print()
 
     directory->FetchFrom(directoryFile);
     directory->Print();
+
+    
+    FileHeader* filenameHdr = new FileHeader;
+    filenameHdr->FetchFrom(FileNameSector);
+    filenameHdr->Print();
+    delete filenameHdr;
+
 
     delete bitHdr;
     delete dirHdr;

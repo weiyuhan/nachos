@@ -95,6 +95,7 @@ int
 OpenFile::Write(char *into, int numBytes)
 {
     hdr->addWCount();
+    //printf("write into : %s, %d, seekPosition: %d\n", into, numBytes, seekPosition);
     int result = WriteAt(into, numBytes, seekPosition);
     seekPosition += result;
     return result;
@@ -212,6 +213,7 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
     for (i = firstSector; i <= lastSector; i++)	
         synchDisk->WriteSector(hdr->ByteToSector(i * SectorSize), 
 					&buf[(i - firstSector) * SectorSize]);
+
     hdr->setLastModifyTime();
     delete [] buf;
     return numBytes;

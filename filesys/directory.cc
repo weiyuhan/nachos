@@ -58,6 +58,14 @@ char* getNameFromDictorySector(int sector)
 char*
 DirectoryEntry::getName(int fatherSector = 0)
 {
+    char* name = new char[nameSize+1];
+    OpenFile *filenameFile = new OpenFile(2);
+    filenameFile->Seek(nameIndex);
+    filenameFile->Read(name, nameSize);
+    delete filenameFile;
+    name[nameSize] = '\0';
+
+
     if(fatherSector > 0)
     {
         char* fatherName = getNameFromDictorySector(fatherSector);
@@ -65,10 +73,28 @@ DirectoryEntry::getName(int fatherSector = 0)
         strcpy(_ret, fatherName);
         strcat(_ret, name);
         delete [] fatherName;
+        delete [] name;
         return _ret;
     }
     else
         return name;
+}
+
+void 
+DirectoryEntry::setName(char* name)
+{
+    nameSize = strlen(name);
+    FileHeader* filenameHdr = new FileHeader();
+    filenameHdr->FetchFrom(2); 
+    OpenFile *filenameFile = new OpenFile(2);
+    nameIndex = filenameHdr->FileLength();
+
+    filenameFile->Seek(nameIndex);
+    filenameFile->Write(name, nameSize);
+
+    delete filenameHdr;
+    delete filenameFile;
+
 }
 
 
@@ -150,7 +176,7 @@ int
 Directory::FindIndex(char *name)
 {
     for (int i = 0; i < tableSize; i++)
-        if (table[i].inUse && !strncmp(table[i].name, name, FileNameMaxLen))
+        if (table[i].inUse && !strncmp(table[i].getName(), name, FileNameMaxLen))
 	    return i;
     return -1;		// name not in directory
 }
@@ -184,7 +210,6 @@ Directory::Find(char *name, char *path = "/")
         while(*end != '/')
         {
             end++;
-            length++;
         }
         char* begin = path;
         begin++;
@@ -237,8 +262,13 @@ Directory::Add(char *name, int newSector, bool isDirectory = FALSE, char* path =
             {
                 table[i].inUse = TRUE;
                 table[i].isDirectory = isDirectory;
-                strncpy(table[i].name, name, FileNameMaxLen); 
+                table[i].setName(name); 
                 table[i].sector = newSector;
+
+                FileHeader* filenameHdr = new FileHeader();
+                filenameHdr->FetchFrom(2); 
+                filenameHdr->Print();
+                delete filenameHdr;
  
                 if(isDirectory)
                 {
@@ -251,12 +281,14 @@ Directory::Add(char *name, int newSector, bool isDirectory = FALSE, char* path =
                 }
 
 
+
                 FileHeader* fileHdr = new FileHeader();
                 fileHdr->FetchFrom(newSector);
                 fileHdr->setFather(table[meSector].sector);
                 fileHdr->setCreateTime();
                 fileHdr->WriteBack(newSector);
                 delete fileHdr;
+
 
                 return TRUE;
             }
@@ -438,7 +470,7 @@ Directory::List(int deep = 0)
             if(table[i].isDirectory)
             {
                 tab(deep);
-                printf("%s/\n", table[i].name);
+                printf("%s/\n", table[i].getName());
                 OpenFile* directoryFile = new OpenFile(table[i].sector);
                 Directory* directory = new Directory(12);
                 directory->FetchFrom(directoryFile);
@@ -449,7 +481,7 @@ Directory::List(int deep = 0)
             else
             {
                 tab(deep);
-    	        printf("%s\n", table[i].name);
+    	        printf("%s\n", table[i].getName());
             }
         }
     }

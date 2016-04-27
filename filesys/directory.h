@@ -35,9 +35,12 @@ class DirectoryEntry {
     bool isDirectory;
     int sector;				// Location on disk to find the 
 					//   FileHeader for this file 
-    char name[FileNameMaxLen + 1];	// Text name for file, with +1 for 
+    int nameIndex;	// Text name for file, with +1 for 
 					// the trailing '\0'
+    int nameSize;
     char* getName(int fatherSector = 0);
+
+    void setName(char* name);
 };
 
 // The following class defines a UNIX-like "directory".  Each entry in
@@ -73,7 +76,7 @@ class Directory {
     void Print();			// Verbose print of the contents
 					//  of the directory -- all the file
 					//  names and their contents.
-    char* FindEntryName(int index){return table[index].name;}
+    char* FindEntryName(int index){return table[index].getName();}
     char* getFileName(int sector);
 
     bool RemoveAll();
