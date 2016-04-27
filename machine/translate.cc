@@ -457,9 +457,11 @@ void Machine::PageSwap(int index = -1)
 	if(reversePageTable[index].dirty)
 	{
 		Thread* ownerThread = (Thread*)reversePageTable[index].ownerThread;
+		int inSwapAddr = ownerThread->space->transVirtualAddr(
+					reversePageTable[index].virtualPage * PageSize);
 		ownerThread->space->swap->WriteAt(
 			&(machine->mainMemory[index*PageSize])
-			, PageSize, reversePageTable[index].virtualPage * PageSize);
+			, PageSize, inSwapAddr);
 	}
 	reversePageTable[index].dirty = FALSE;
 	reversePageTable[index].valid = FALSE;
@@ -486,9 +488,11 @@ void Machine::RefreshSwap()
 			Thread* ownerThread = (Thread*)reversePageTable[i].ownerThread;
 			if(reversePageTable[i].dirty)
 			{
+				int inSwapAddr = ownerThread->space->transVirtualAddr(
+					reversePageTable[i].virtualPage * PageSize);
 				ownerThread->space->swap->WriteAt(
 					&(machine->mainMemory[i*PageSize])
-					, PageSize, reversePageTable[i].virtualPage * PageSize);
+					, PageSize, inSwapAddr);
 			}
 		}
 	}
@@ -506,9 +510,11 @@ void Machine::PageLoad(int virtAddr)
 
 	TranslationEntry *entry = &reversePageTable[physicalPage];
 
+	int inSwapAddr = currentThread->space->transVirtualAddr(vpn*PageSize);
+
 	currentThread->space->swap->ReadAt(
 		&(machine->mainMemory[physicalPage * PageSize]),
-		PageSize, vpn*PageSize);
+		PageSize, inSwapAddr);
 
 	entry->valid = TRUE;
 	entry->virtualPage = vpn;

@@ -16,6 +16,7 @@
 #include "copyright.h"
 #include "filesys.h"
 #include "list.h"
+#include "noff.h"  
 
 #define UserStackSize		1024 	// increase this as necessary!
 
@@ -36,6 +37,8 @@ class AddrSpace {
 
     int getNumPages(){return numPages;}
 
+    int transVirtualAddr(int virtualAddr);
+
     int TLBMissCount;
     int PageFaultCount;
 #ifdef TLB_FIFO
@@ -44,6 +47,8 @@ class AddrSpace {
     OpenFile *swap;
     unsigned int maxPagesinMem;
     unsigned int PagesinMem;
+
+    NoffHeader noffH;
 
   private:
     void LoadSwapSpace(OpenFile *executable,int tid);

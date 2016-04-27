@@ -18,7 +18,6 @@
 #include "copyright.h"
 #include "system.h"
 #include "addrspace.h"
-#include "noff.h"   
 #ifdef HOST_SPARC
 #include <strings.h>
 #endif
@@ -219,7 +218,6 @@ void AddrSpace::RestoreState()
 
 void AddrSpace::LoadSwapSpace(OpenFile *executable, int tid)
 {
-    NoffHeader noffH;
     unsigned int i, size;
 
     executable->ReadAt((char *)&noffH, sizeof(noffH), 0);
@@ -242,14 +240,25 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable, int tid)
     char* Buffer = new char[size];
     memset(Buffer,0,sizeof(Buffer));
 
+    /*
+    printf("noffH.code.virtualAddr : %x\n", noffH.code.virtualAddr);
+    printf("noffH.code.size : %x\n", noffH.code.size);
+    printf("noffH.initData.virtualAddr : %x\n", noffH.initData.virtualAddr);
+    printf("noffH.initData.size : %x\n", noffH.initData.size);
+    printf("noffH.uninitData.virtualAddr : %x\n", noffH.uninitData.virtualAddr);
+    printf("noffH.uninitData.size : %x\n", noffH.uninitData.size);
+    */
+    
+    printf("%d\n", size);
+
     if(noffH.code.size > 0)
     {
         executable->ReadAt(Buffer, noffH.code.size, noffH.code.inFileAddr);
     }
     if(noffH.initData.size > 0)
     {
-        executable->ReadAt(Buffer + noffH.code.size, noffH.initData.size, 
-            noffH.initData.inFileAddr);
+        executable->ReadAt(Buffer + noffH.code.size + noffH.uninitData.size, 
+            noffH.initData.size, noffH.initData.inFileAddr);
     }
     char* swapname = itoa(tid);
     fileSystem->Create(swapname, size);
@@ -257,4 +266,26 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable, int tid)
     swap->WriteAt(Buffer,size,0);
 
     delete [] Buffer;
+}
+
+int 
+AddrSpace::transVirtualAddr(int virtualAddr)
+{
+    if(virtualAddr >= noffH.code.virtualAddr && 
+        virtualAddr <= noffH.code.virtualAddr + noffH.code.size)
+    {
+        return virtualAddr - noffH.code.virtualAddr;
+    }
+    if(virtualAddr >= noffH.uninitData.virtualAddr && 
+        virtualAddr <= noffH.uninitData.virtualAddr + noffH.uninitData.size)
+    {
+        return virtualAddr - noffH.uninitData.virtualAddr + noffH.code.size;
+    }
+    if(virtualAddr >= noffH.initData.virtualAddr && 
+        virtualAddr <= noffH.initData.virtualAddr + noffH.initData.size)
+    {
+        return virtualAddr - noffH.initData.virtualAddr
+         + noffH.code.size + noffH.uninitData.size;
+    }
+    return 0;
 }
