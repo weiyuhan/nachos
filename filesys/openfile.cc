@@ -182,8 +182,8 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
             delete freeMapFile;
             return 0;
         }
-        hdr->WriteBack(hdr->getHdrSector());
         freeMap->WriteBack(freeMapFile);
+        hdr->WriteBack(hdr->getHdrSector());
         delete freeMap;
         delete freeMapFile;
         //numBytes = fileLength - position;

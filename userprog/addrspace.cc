@@ -248,8 +248,7 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable, int tid)
     printf("noffH.uninitData.virtualAddr : %x\n", noffH.uninitData.virtualAddr);
     printf("noffH.uninitData.size : %x\n", noffH.uninitData.size);
     */
-    
-    printf("%d\n", size);
+
 
     if(noffH.code.size > 0)
     {

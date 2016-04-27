@@ -124,7 +124,6 @@ FileHeader::AllocateMore(BitMap *freeMap, int size)
             if(SectorIndex >= numSectors)
             {
                 dataSectors[i] = freeMap->Find();
-                //printf("direct: %d\n", dataSectors[i]);
             }
             SectorIndex++;
         }

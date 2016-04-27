@@ -63,7 +63,7 @@
 #define FreeMapFileSize 	(NumSectors / BitsInByte)
 #define NumDirEntries 		12
 #define DirectoryFileSize 	(sizeof(DirectoryEntry) * NumDirEntries)
-#define FileNameFileSize 500
+#define FileNameFileSize 0
 
 #define MaxOpenFile 100
 
@@ -206,24 +206,28 @@ FileSystem::Create(char *name, int initialSize = 0, char* path = "/")
         freeMap = new BitMap(NumSectors);
         freeMap->FetchFrom(freeMapFile);
         sector = freeMap->Find();	// find a sector to hold the file header
+        freeMap->WriteBack(freeMapFile);
     	if (sector == -1) 		
             success = FALSE;		// no free block for file header 
         else if (!directory->Add(name, sector, FALSE, path))
             success = FALSE;	// no space in directory
-	else {
+	    else 
+        {
     	    hdr = new FileHeader;
-	    if (!hdr->Allocate(freeMap, initialSize))
-            	success = FALSE;	// no space on disk for data
-	    else {	
-	    	success = TRUE;
-		// everthing worked, flush all changes back to disk
+            freeMap->FetchFrom(freeMapFile);
+    	    if (!hdr->Allocate(freeMap, initialSize))
+                success = FALSE;	// no space on disk for data
+    	    else 
+            {	
+    	    	success = TRUE;
+    		// everthing worked, flush all changes back to disk
                 hdr->setCreateTime();
-    	    	hdr->WriteBack(sector); 		
-    	    	directory->WriteBack(directoryFile);
-    	    	freeMap->WriteBack(freeMapFile);
-	    }
+        	    hdr->WriteBack(sector);
+                freeMap->WriteBack(freeMapFile); 		
+        	    directory->WriteBack(directoryFile);
+    	    }
             delete hdr;
-	}
+	   }
         delete freeMap;
     }
     delete directory;
@@ -250,27 +254,32 @@ FileSystem::CreateDir(char *name, char* path = "/")
         freeMap = new BitMap(NumSectors);
         freeMap->FetchFrom(freeMapFile);
         sector = freeMap->Find();   // find a sector to hold the file header
+        freeMap->WriteBack(freeMapFile);
         if (sector == -1)       
             success = FALSE;        // no free block for file header 
         else
         {
             hdr = new FileHeader();
+            freeMap->FetchFrom(freeMapFile);
             if (!hdr->Allocate(freeMap, DirectoryFileSize))
                 success = FALSE;    // no space on disk for data
             else
             {
+                freeMap->WriteBack(freeMapFile);
                 hdr->WriteBack(sector); 
                 if (!directory->Add(name, sector, TRUE, path))
                 {
                     success = FALSE;    // no space in directory
+                    freeMap->FetchFrom(freeMapFile);
                     hdr->Deallocate(freeMap);
                 }
                 else
                 {  
                     success = TRUE;
-            // everthing worked, flush all changes back to disk       
+            // everthing worked, flush all changes back to disk 
+                    hdr->setCreateTime();
+                    hdr->WriteBack(sector);      
                     directory->WriteBack(directoryFile);
-                    freeMap->WriteBack(freeMapFile);
                 }
                 delete hdr;
             }

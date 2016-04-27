@@ -182,9 +182,7 @@ FileRead()
 void
 PerformanceTest()
 {
-    printf("haha\n");
-    bool success = fileSystem->Create("asdsafasdasdas");
-    printf("haha\n");
+    //bool success = fileSystem->Create("asdsafasdasdas");
     /*
     bool success;
 
@@ -207,7 +205,7 @@ PerformanceTest()
     success = fileSystem->Remove("C", "/A/");
     */
 
-    /*
+    
     Thread* t = new Thread("fork");
     if(t->gettid() != -1)
     {
@@ -234,6 +232,6 @@ PerformanceTest()
     stats->Print();
 
     delete openFile;
-    */
+    
 }
 

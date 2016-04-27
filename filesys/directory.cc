@@ -88,7 +88,7 @@ DirectoryEntry::setName(char* name)
     filenameHdr->FetchFrom(2); 
     OpenFile *filenameFile = new OpenFile(2);
     nameIndex = filenameHdr->FileLength();
-
+    
     filenameFile->Seek(nameIndex);
     filenameFile->Write(name, nameSize);
 
@@ -176,7 +176,7 @@ int
 Directory::FindIndex(char *name)
 {
     for (int i = 0; i < tableSize; i++)
-        if (table[i].inUse && !strncmp(table[i].getName(), name, FileNameMaxLen))
+        if (table[i].inUse && !strcmp(table[i].getName(), name))
 	    return i;
     return -1;		// name not in directory
 }
@@ -265,10 +265,6 @@ Directory::Add(char *name, int newSector, bool isDirectory = FALSE, char* path =
                 table[i].setName(name); 
                 table[i].sector = newSector;
 
-                FileHeader* filenameHdr = new FileHeader();
-                filenameHdr->FetchFrom(2); 
-                filenameHdr->Print();
-                delete filenameHdr;
  
                 if(isDirectory)
                 {
