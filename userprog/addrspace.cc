@@ -240,14 +240,14 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable, int tid)
     char* Buffer = new char[size];
     memset(Buffer,0,sizeof(Buffer));
 
-    /*
-    printf("noffH.code.virtualAddr : %x\n", noffH.code.virtualAddr);
-    printf("noffH.code.size : %x\n", noffH.code.size);
-    printf("noffH.initData.virtualAddr : %x\n", noffH.initData.virtualAddr);
-    printf("noffH.initData.size : %x\n", noffH.initData.size);
-    printf("noffH.uninitData.virtualAddr : %x\n", noffH.uninitData.virtualAddr);
-    printf("noffH.uninitData.size : %x\n", noffH.uninitData.size);
-    */
+    
+    printf("noffH.code.virtualAddr : %d\n", noffH.code.virtualAddr);
+    printf("noffH.code.size : %d\n", noffH.code.size);
+    printf("noffH.initData.virtualAddr : %d\n", noffH.initData.virtualAddr);
+    printf("noffH.initData.size : %d\n", noffH.initData.size);
+    printf("noffH.uninitData.virtualAddr : %d\n", noffH.uninitData.virtualAddr);
+    printf("noffH.uninitData.size : %d\n", noffH.uninitData.size);
+    
 
 
     if(noffH.code.size > 0)
@@ -256,7 +256,7 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable, int tid)
     }
     if(noffH.initData.size > 0)
     {
-        executable->ReadAt(Buffer + noffH.code.size + noffH.uninitData.size, 
+        executable->ReadAt(Buffer + noffH.code.size, 
             noffH.initData.size, noffH.initData.inFileAddr);
     }
     char* swapname = itoa(tid);
@@ -275,16 +275,16 @@ AddrSpace::transVirtualAddr(int virtualAddr)
     {
         return virtualAddr - noffH.code.virtualAddr;
     }
-    if(virtualAddr >= noffH.uninitData.virtualAddr && 
-        virtualAddr <= noffH.uninitData.virtualAddr + noffH.uninitData.size)
-    {
-        return virtualAddr - noffH.uninitData.virtualAddr + noffH.code.size;
-    }
     if(virtualAddr >= noffH.initData.virtualAddr && 
         virtualAddr <= noffH.initData.virtualAddr + noffH.initData.size)
     {
-        return virtualAddr - noffH.initData.virtualAddr
-         + noffH.code.size + noffH.uninitData.size;
+        return virtualAddr - noffH.initData.virtualAddr + noffH.code.size;
+    }
+    if(virtualAddr >= noffH.uninitData.virtualAddr && 
+        virtualAddr <= noffH.uninitData.virtualAddr + noffH.uninitData.size)
+    {
+        return virtualAddr - noffH.uninitData.virtualAddr + noffH.code.size
+        + noffH.initData.size;
     }
     return 0;
 }
