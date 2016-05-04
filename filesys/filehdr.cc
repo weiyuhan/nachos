@@ -477,7 +477,6 @@ void FileHeader::setCreateTime()
     lastAccessTime = rawtime;
     lastModifyTime = rawtime;
     openCount = 0;
-    wCount = 0;
 }
 void FileHeader::setLastAccessTime()
 {
@@ -518,8 +517,6 @@ FileHeader::addOpenCount()
 {
     FetchFrom(sector);
     openCount++;
-    if(openCount <= 1)
-        wCount = 0;
     WriteBack(sector);
 }
     
@@ -528,8 +525,6 @@ FileHeader::minusOpenCount()
 {
     FetchFrom(sector);
     openCount--;
-    if(openCount <= 1)
-        wCount = 0;
     WriteBack(sector);
 }
     
@@ -540,19 +535,3 @@ FileHeader::getOpenCount()
     return openCount;
 }
 
-    
-void 
-FileHeader::addWCount()
-{
-    FetchFrom(sector);
-    if(openCount > 1)
-        wCount++;
-    WriteBack(sector);
-}
-    
-int 
-FileHeader::getWCount()
-{
-    FetchFrom(sector);
-    return wCount;
-}

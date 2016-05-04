@@ -15,6 +15,7 @@
 #include "interrupt.h"
 #include "stats.h"
 #include "timer.h"
+#include "synch.h"
 
 // Initialization and cleanup routines
 extern void Initialize(int argc, char **argv); 	// Initialization,
@@ -44,6 +45,8 @@ extern FileSystem  *fileSystem;
 #ifdef FILESYS
 #include "synchdisk.h"
 extern SynchDisk   *synchDisk;
+extern RWLock **rwLockTable;
+extern int* rwLockSector;
 #endif
 
 #ifdef NETWORK

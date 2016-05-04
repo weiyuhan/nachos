@@ -26,6 +26,8 @@ FileSystem  *fileSystem;
 
 #ifdef FILESYS
 SynchDisk   *synchDisk;
+RWLock **rwLockTable;
+int* rwLockSector;
 #endif
 
 #ifdef USER_PROGRAM	// requires either FILESYS or FILESYS_STUB
@@ -159,6 +161,13 @@ Initialize(int argc, char **argv)
 
 #ifdef FILESYS
     synchDisk = new SynchDisk("DISK");
+    rwLockTable = new RWLock*[100];
+    rwLockSector = new int[100];
+    for(int i = 0; i < 100; i++)
+    {
+        rwLockTable[i] = NULL;
+        rwLockSector[i] = -1;
+    }    
 #endif
 
 #ifdef FILESYS_NEEDED

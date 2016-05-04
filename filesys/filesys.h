@@ -39,6 +39,7 @@
 #include "openfile.h"
 #include "bitmap.h"
 
+
 #ifdef FILESYS_STUB 		// Temporarily implement file system calls as 
 				// calls to UNIX, until the real file system
 				// implementation is available
@@ -92,6 +93,7 @@ class FileSystem {
     void CloseFile(int fileId);
 
     void Print();			// List all the files and their contents
+
 
   private:
     OpenFile** fileEntry;

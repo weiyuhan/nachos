@@ -143,7 +143,7 @@ class Barrier
 public:
     Barrier(char* debugName, int num);
     ~Barrier();
-
+    char* getName() { return name;}
     void Wait();
 private:
     Condition* arrival;
@@ -162,6 +162,7 @@ public:
     void Read_end();
     void Write_start();
     void Write_end();
+    char* getName() { return name;}
 
 private:
     Lock* mutex;

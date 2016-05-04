@@ -224,14 +224,14 @@ PerformanceTest()
         return;
     }
 
-    if (!fileSystem->Remove(FileName)) {
+    delete openFile;
+
+    while (!fileSystem->Remove(FileName)) {
       printf("Perf test: unable to remove %s\n", FileName);
-      delete openFile;
-      return;
+      //return;
+      currentThread->Yield();
     }
     stats->Print();
-
-    delete openFile;
     
 }
 

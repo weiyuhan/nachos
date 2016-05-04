@@ -240,14 +240,14 @@ void AddrSpace::LoadSwapSpace(OpenFile *executable, int tid)
     char* Buffer = new char[size];
     memset(Buffer,0,sizeof(Buffer));
 
-    
+    /*
     printf("noffH.code.virtualAddr : %d\n", noffH.code.virtualAddr);
     printf("noffH.code.size : %d\n", noffH.code.size);
     printf("noffH.initData.virtualAddr : %d\n", noffH.initData.virtualAddr);
     printf("noffH.initData.size : %d\n", noffH.initData.size);
     printf("noffH.uninitData.virtualAddr : %d\n", noffH.uninitData.virtualAddr);
     printf("noffH.uninitData.size : %d\n", noffH.uninitData.size);
-    
+    */
 
 
     if(noffH.code.size > 0)

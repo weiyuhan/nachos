@@ -14,6 +14,7 @@
 #include "copyright.h"
 #include "filehdr.h"
 #include "openfile.h"
+#include "synch.h"
 #include "system.h"
 #ifdef HOST_SPARC
 #include <strings.h>
@@ -76,28 +77,62 @@ OpenFile::Seek(int position)
 int
 OpenFile::Read(char *into, int numBytes)
 {
-
-    int result;
-    int begin;
-    int end;
-    do
+    int sector = hdr->getHdrSector();
+    RWLock* rwLock = NULL;
+    int firstEmpty = -1;
+    for(int i = 0; i < 100; i++)
     {
-        begin = hdr->getWCount();
-        result = ReadAt(into, numBytes, seekPosition);
-        end = hdr->getWCount();
+        if(firstEmpty == -1 && rwLockSector[i] == -1)
+            firstEmpty = i;
+        if(rwLockSector[i] == sector)
+            rwLock = rwLockTable[i];
+        if(firstEmpty != -1 && rwLock != NULL)
+            break;
     }
-    while(begin != end);
+    if(rwLock == NULL)
+    {
+        rwLock = new RWLock("rw");
+        rwLockSector[firstEmpty] = sector;
+        rwLockTable[firstEmpty] = rwLock;
+    }
+
+    rwLock->Read_start();
+
+    int result = ReadAt(into, numBytes, seekPosition);
     seekPosition += result;
+
+    rwLock->Read_end();
     return result;
 }
 
 int
 OpenFile::Write(char *into, int numBytes)
 {
-    hdr->addWCount();
-    //printf("write into : %s, %d, seekPosition: %d\n", into, numBytes, seekPosition);
+    int sector = hdr->getHdrSector();
+    RWLock* rwLock = NULL;
+    int firstEmpty = -1;
+    for(int i = 0; i < 100; i++)
+    {
+        if(firstEmpty == -1 && rwLockSector[i] == -1)
+            firstEmpty = i;
+        if(rwLockSector[i] == sector)
+            rwLock = rwLockTable[i];
+        if(firstEmpty != -1 && rwLock != NULL)
+            break;
+    }
+    if(rwLock == NULL)
+    {
+        rwLock = new RWLock("rw");
+        rwLockSector[firstEmpty] = sector;
+        rwLockTable[firstEmpty] = rwLock;
+    }
+
+    rwLock->Write_start();
+
     int result = WriteAt(into, numBytes, seekPosition);
     seekPosition += result;
+
+    rwLock->Write_end();
     return result;
 }
 

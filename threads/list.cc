@@ -297,7 +297,32 @@ List::Find(void* item)
     return FALSE;
 }
 
+void*
+List::FindByKey(int key)
+{
+    ListElement *prev, *ptr;
 
+    //printf("%d\n", item);
+    // if first item on list is match, then remove from front
+    if(numInList == 0)
+        return NULL;
+    if (key == first->key) 
+    {  
+        return first;
+    } 
+    else 
+    {
+        prev = first;
+        for (ptr = first->next; ptr != NULL; prev = ptr, ptr = ptr->next) 
+        {
+            if (key == ptr->key) 
+            {
+                return ptr;
+            }
+        }
+    }
+    return NULL;
+}
 
 void
 List::Remove(void *item)

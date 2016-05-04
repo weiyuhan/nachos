@@ -49,6 +49,7 @@ class List {
     void Append(void *item); 	// Put item at the end of the list
     void *Remove(); 	 	// Take item off the front of the list
     bool Find(void* item);
+    void* FindByKey(int key);
 
     void Remove(void *item);    // Remove specific item from list
 
