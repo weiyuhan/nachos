@@ -44,6 +44,19 @@ OpenFile::OpenFile(int sector)
 OpenFile::~OpenFile()
 {
     hdr->minusOpenCount();
+    if(hdr->getOpenCount() == 0)
+    {
+        for(int i = 0; i < 100; i++)
+        {
+            if(rwLockSector[i] == hdr->getHdrSector())
+            {
+                RWLock* rwLock = rwLockTable[i];
+                rwLockTable[i] = NULL;
+                rwLockSector[i] = -1;
+                delete rwLock;
+            }
+        }
+    }
     delete hdr;
 }
 
