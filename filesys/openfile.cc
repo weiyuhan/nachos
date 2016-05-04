@@ -54,6 +54,7 @@ OpenFile::~OpenFile()
                 rwLockTable[i] = NULL;
                 rwLockSector[i] = -1;
                 delete rwLock;
+                break;
             }
         }
     }
