@@ -506,7 +506,9 @@ void Machine::PageLoad(int virtAddr)
 		PageSwap();
 	}
 
-	int physicalPage = pageMap->Find();
+	int physicalPage;
+	while((physicalPage = pageMap->Find()) == -1)
+		PageSwap();
 
 	TranslationEntry *entry = &reversePageTable[physicalPage];
 

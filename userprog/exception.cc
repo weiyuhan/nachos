@@ -65,7 +65,7 @@ void SysHalt()
 
 void SysExit()
 {
-    int exitNum = machine->ReadRegister(5);
+    int exitNum = machine->ReadRegister(4);
     scheduler->setExitNum(currentThread->gettid(), exitNum);
     printf("EXIT NUM : %d\n", exitNum);
     printf("Total TLB miss : %d\n",
