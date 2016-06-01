@@ -9,6 +9,7 @@ main()
     OpenFileId output = ConsoleOutput;
     char prompt[2], ch, buffer[60], cmd[20], arg[40];
     int bufferSize, bufferIndex, cmdIndex, argIndex;
+    OpenFileId fd;
 
 
     prompt[0] = '-';
@@ -82,6 +83,32 @@ main()
 			if(argIndex > 0 && StrCmp("cd", cmd, 2) == 0)
 			{
 				CDDir(arg);
+			}
+			if(argIndex > 0 && StrCmp("rm", cmd, 2) == 0)
+			{
+				Remove(arg);
+			}
+			if(argIndex > 0 && StrCmp("create", cmd, 6) == 0)
+			{
+				Create(arg);
+			}
+			if(argIndex > 0 && StrCmp("open", cmd, 4) == 0)
+			{
+				fd = Open(arg);
+			}
+			if(StrCmp("close", cmd, 5) == 0)
+			{
+				Close(fd);
+			}
+			if(argIndex > 0 && StrCmp("write", cmd, 5) == 0)
+			{
+				Write(arg, argIndex, fd);
+			}
+			if(StrCmp("read", cmd, 4) == 0)
+			{
+				int readNum = Read(arg, 40, fd);
+				arg[readNum] = '\0';
+				Println(arg, 's');
 			}
 		}
     }

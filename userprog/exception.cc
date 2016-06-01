@@ -399,10 +399,6 @@ void SysCDDir()
     #endif
 }
 
-void SysRMDir()
-{
-
-}
 
 void SysMKDir()
 {
@@ -430,7 +426,23 @@ void SysMKDir()
 
 void SysRemove()
 {
+    int nameAddr = machine->ReadRegister(4);
+    int value;
+    int count = 0;
+    char* name = new char[10];
+    while(true)
+    {
+        machine->ReadMem(nameAddr++, 1, &value);
+        name[count++] = (char)value;
+        if(value == 0)
+            break;
+    }
 
+    #ifdef FILESYS
+        #ifdef FILESYS_NEEDED
+            fileSystem->Remove(name);
+        #endif
+    #endif
 }
 
 void SysPath()
@@ -514,9 +526,6 @@ ExceptionHandler(ExceptionType which)
                 break;
             case SC_Remove:
                 SysRemove();
-                break;
-            case SC_RMDir:
-                SysRMDir();
                 break;
             case SC_Path:
                 SysPath();

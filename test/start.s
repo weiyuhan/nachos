@@ -178,14 +178,6 @@ Remove:
 	j	$31
 	.end Remove
 
-	.globl RMDir
-	.ent	RMDir
-RMDir:
-	addiu $2,$0,SC_RMDir
-	syscall
-	j	$31
-	.end RMDir
-
 	.globl Path
 	.ent	Path
 Path:
