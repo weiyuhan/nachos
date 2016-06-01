@@ -388,7 +388,7 @@ void SysCDDir()
     {
         machine->ReadMem(nameAddr++, 1, &value);
         name[count++] = (char)value;
-        if(value = 0)
+        if(value == 0)
             break;
     }
 
@@ -414,7 +414,7 @@ void SysMKDir()
     {
         machine->ReadMem(nameAddr++, 1, &value);
         name[count++] = (char)value;
-        if(value = 0)
+        if(value == 0)
             break;
     }
 
@@ -423,6 +423,8 @@ void SysMKDir()
             fileSystem->CreateDir(name);
         #endif
     #endif
+
+    delete name;
 
 }
 

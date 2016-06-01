@@ -203,6 +203,7 @@ Directory::FindIndex(char *name)
 int
 Directory::Find(char *name, char *path = "/", bool findDirectory = FALSE)
 {
+    //printf("%s\n", name);
     if(findDirectory == TRUE)
     {
         if(!strcmp(".", name))
