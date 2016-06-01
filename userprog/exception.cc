@@ -143,11 +143,10 @@ void SysWrite()
     if(fileId == ConsoleOutput)
     {
         #ifdef FILESYS
-        init();
         int index = 0;
         while(index < size)
         {
-            console->PutChar(buffer[index++]);
+            printf("%c", buffer[index++]);
         }
         machine->WriteRegister(2, size);
         #endif
@@ -173,11 +172,11 @@ void SysRead()
     if(fileId == ConsoleInput)
     {
         #ifdef FILESYS
-        init();
         int index = 0;
         while(index < size)
         {
-            char value = console->GetChar();
+            char value;
+            scanf("%c", &value);
             buffer[index++] = value;
         }
         machine->WriteRegister(2, index);
@@ -187,9 +186,10 @@ void SysRead()
     {
         int numRead = fileSystem->ReadFile(buffer, size, fileId);
         machine->WriteRegister(2, numRead);
+        //printf("%s\n", buffer);
     }
 
-
+    //printf("%s\n", buffer);
     while(count < size)
     {
         char value = buffer[count++];
@@ -345,38 +345,6 @@ void SysJoin()
     machine->WriteRegister(2, exitNum);
 }
 
-void SysStrCmp()
-{
-    int addr1 = machine->ReadRegister(4);
-    int addr2 = machine->ReadRegister(5);
-    int size = (int)machine->ReadRegister(6);
-    char s1[20], s2[20];
-    int s1Size, s2Size, value;
-
-    s1Size = 0;
-    while(value != '\0')
-    {
-        machine->ReadMem(addr1++, 1, &value);
-        s1[s1Size++] = (char)value;
-    }
-
-    value = 'a';
-    s2Size = 0;
-    while(value != '\0')
-    {
-        machine->ReadMem(addr2++, 1, &value);
-        s2[s2Size++] = (char)value;
-    }
-
-    if(strncmp(s1, s2, size) != 0)
-    {
-        machine->WriteRegister(2, 1);
-    }
-    else
-    {
-        machine->WriteRegister(2, 0);
-    }
-}
 
 void SysCDDir()
 {
@@ -514,9 +482,6 @@ ExceptionHandler(ExceptionType which)
                 break;
             case SC_Println:
                 SysPrintln();
-                break;
-            case SC_StrCmp:
-                SysStrCmp();
                 break;
             case SC_CDDir:
                 SysCDDir();

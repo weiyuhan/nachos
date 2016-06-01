@@ -276,7 +276,14 @@ FileSystem::ChangeDirectory(char* name)
         delete myDirectoryFile;
 
     if(sector != -1)
+    {
+        FileHeader* hdr = new FileHeader();
+        hdr->FetchFrom(sector);
+        hdr->setFather(myDirectorySector);
+        hdr->WriteBack(sector);
+        delete hdr;
         currentThread->myDirectorySector = sector;
+    }
 
     return sector;
 }
@@ -569,11 +576,15 @@ char* FileSystem::currentPath()
         char* name = new char[2];
         name[0] = '/';
         name[1] = '\0';
+        return name;
     }
+
     //printf("myDirectorySector : %d\n", myDirectorySector);
+
     FileHeader* hdr = new FileHeader();
 
     hdr->FetchFrom(myDirectorySector);
+
 
     char* name = hdr->getName();
 

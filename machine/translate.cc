@@ -117,9 +117,10 @@ Machine::ReadMem(int addr, int size, int *value)
     	}
     	if(!PageFaultOccur)
     		machine->RaiseException(TLBMissException, addr);
-    }else if (exception != NoException) {
-	machine->RaiseException(exception, addr);
-	return FALSE;
+    }else if (exception != NoException) 
+    {
+		machine->RaiseException(exception, addr);
+		return FALSE;
     }
     switch (size) {
       case 1:
