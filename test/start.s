@@ -194,6 +194,14 @@ Path:
 	j	$31
 	.end Path
 
+	.globl LS
+	.ent	LS
+LS:
+	addiu $2,$0,SC_LS
+	syscall
+	j	$31
+	.end LS
+
 
 /* dummy function to keep gcc happy */
         .globl  __main

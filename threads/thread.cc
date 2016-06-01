@@ -250,13 +250,8 @@ Thread::Yield ()
     nextThread = scheduler->FindNextToRun();
     if(nextThread != NULL)
     {
-        if(currentThread->getremainTime() <= 0)
-        {
-            scheduler->ReadyToRun(this);
-            scheduler->Run(nextThread);
-        }
-        else
-            scheduler->ReadyToRun(nextThread);
+        scheduler->ReadyToRun(this);
+        scheduler->Run(nextThread);
     }
     else
         scheduler->Run(this);
@@ -293,7 +288,7 @@ Thread::Sleep ()
 
     status = BLOCKED;
     while ((nextThread = scheduler->FindNextToRun()) == NULL)
-	interrupt->Idle();	// no one to run, wait for an interrupt
+	   interrupt->Idle();	// no one to run, wait for an interrupt
 
         
     scheduler->Run(nextThread); // returns when we've been signalled

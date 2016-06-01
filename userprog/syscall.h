@@ -36,7 +36,8 @@
 #define SC_CDDir	15
 #define SC_Remove	16
 #define SC_RMDir	17
-#define SC_Path	18
+#define SC_Path		18
+#define SC_LS       19 
 
 
 #ifndef IN_ASM
@@ -121,7 +122,7 @@ void Print(void* content, char type);
 
 void Println(void* content, char type);
 
-int StrCmp(char* s1, char* s2);
+int StrCmp(char* s1, char* s2, int size);
 
 int MKDir(char* name);
 
@@ -132,6 +133,8 @@ int Remove(char* name);
 int RMDir(char* name);
 
 void Path();
+
+void LS();
 
 
 

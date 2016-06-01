@@ -68,18 +68,18 @@ DirectoryEntry::getName(int fatherSector = 0)
     */
     if(fatherSector > 0)
     {
+        //printf("father : %d\n", fatherSector);
         char* fatherName = getNameFromDictorySector(fatherSector);
         char* _ret = new char[strlen(fatherName) + 1 + strlen(name)];
         strcpy(_ret, fatherName);
         strcat(_ret, name);
         delete [] fatherName;
-        delete [] name;
         return _ret;
     }
     else
         return name;
 
-    return name;
+    //return name;
 }
 
 void 
@@ -530,7 +530,8 @@ Directory::Print()
 
     printf("Directory contents:\n");
     for (int i = 2; i < tableSize; i++)
-	if (table[i].inUse) {
+	if (table[i].inUse) 
+    {
 	    printf("Name: %s, Sector: %d\n", 
             table[i].getName(table[meSector].sector), table[i].sector);
 	    hdr->FetchFrom(table[i].sector);

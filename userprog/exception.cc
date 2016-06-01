@@ -24,6 +24,7 @@
 #include "copyright.h"
 #include "system.h"
 #include "syscall.h"
+#include <stdio.h>
 
 //----------------------------------------------------------------------
 // ExceptionHandler
@@ -47,6 +48,17 @@
 //	"which" is the kind of exception.  The list of possible exceptions 
 //	are in machine.h.
 //----------------------------------------------------------------------
+#ifdef FILESYS
+#include "synchconsole.h"
+
+SynchConsole* console;
+
+void init()
+{
+    if(console == NULL)
+        console = new SynchConsole(NULL, NULL, FALSE);
+}
+#endif
 
 void PCAdd()
 {
@@ -122,7 +134,6 @@ void SysClose()
 
 void SysWrite()
 {
-
     int bufferAddress = machine->ReadRegister(4);
     int size = (int)machine->ReadRegister(5);
     int value;
@@ -135,8 +146,24 @@ void SysWrite()
     }
 
     OpenFileId fileId = (OpenFileId)machine->ReadRegister(6);
-    int numWrite = fileSystem->WriteFile(buffer, size, fileId);
-    machine->WriteRegister(2, numWrite);
+
+    if(fileId == ConsoleOutput)
+    {
+        #ifdef FILESYS
+        init();
+        int index = 0;
+        while(index < size)
+        {
+            console->PutChar(buffer[index++]);
+        }
+        machine->WriteRegister(2, size);
+        #endif
+    }
+    else
+    {
+        int numWrite = fileSystem->WriteFile(buffer, size, fileId);
+        machine->WriteRegister(2, numWrite);
+    }
 
     delete buffer;
     PCAdd();
@@ -150,8 +177,25 @@ void SysRead()
     char* buffer = new char[size];
 
     OpenFileId fileId = (OpenFileId)machine->ReadRegister(6);
-    int numRead = fileSystem->ReadFile(buffer, size, fileId);
-    machine->WriteRegister(2, numRead);
+
+    if(fileId == ConsoleInput)
+    {
+        #ifdef FILESYS
+        init();
+        int index = 0;
+        while(index < size)
+        {
+            char value = console->GetChar();
+            buffer[index++] = value;
+        }
+        machine->WriteRegister(2, index);
+        #endif
+    }
+    else
+    {
+        int numRead = fileSystem->ReadFile(buffer, size, fileId);
+        machine->WriteRegister(2, numRead);
+    }
 
 
     while(count < size)
@@ -322,6 +366,36 @@ void SysJoin()
 
 void SysStrCmp()
 {
+    int addr1 = machine->ReadRegister(4);
+    int addr2 = machine->ReadRegister(5);
+    int size = (int)machine->ReadRegister(6);
+    char s1[20], s2[20];
+    int s1Size, s2Size, value;
+
+    s1Size = 0;
+    while(value != '\0')
+    {
+        machine->ReadMem(addr1++, 1, &value);
+        s1[s1Size++] = (char)value;
+    }
+
+    value = 'a';
+    s2Size = 0;
+    while(value != '\0')
+    {
+        machine->ReadMem(addr2++, 1, &value);
+        s2[s2Size++] = (char)value;
+    }
+
+    if(strncmp(s1, s2, size) != 0)
+    {
+        machine->WriteRegister(2, 1);
+    }
+    else
+    {
+        machine->WriteRegister(2, 0);
+    }
+
     PCAdd();
 }
 
@@ -347,13 +421,21 @@ void SysRemove()
 
 void SysPath()
 {
-
     #ifdef FILESYS
         #ifdef FILESYS_NEEDED
-            printf("%s/:", fileSystem->currentPath());
+            printf("%s",fileSystem->currentPath());
         #endif
     #endif
+    PCAdd();
+}
 
+void SysLS()
+{
+    #ifdef FILESYS
+        #ifdef FILESYS_NEEDED
+            fileSystem->LS();
+        #endif
+    #endif
     PCAdd();
 }
 
@@ -422,6 +504,9 @@ ExceptionHandler(ExceptionType which)
                 break;
             case SC_Path:
                 SysPath();
+                break;
+            case SC_LS:
+                SysLS();
                 break;
             default:
                 printf("Unexpected syscall %d\n", type);

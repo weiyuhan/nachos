@@ -1,37 +1,76 @@
 #include "syscall.h"
 
+
 int
 main()
 {
     SpaceId newProc;
     OpenFileId input = ConsoleInput;
     OpenFileId output = ConsoleOutput;
-    char prompt[2], ch, buffer[60];
-    int i;
+    char prompt[2], ch, buffer[60], cmd[20], arg[40];
+    int bufferSize, bufferIndex, cmdIndex, argIndex;
+
 
     prompt[0] = '-';
     prompt[1] = '-';
 
     while( 1 )
     {
-    	Path();
-		Write(prompt, 2, output);
+    	Write(prompt, 2, output);
 
-		i = 0;
+		bufferSize = 0;
 		
 		do 
 		{
 		
-		    Read(&buffer[i], 1, input); 
+		    Read(&buffer[bufferSize], 1, input); 
 
-		} while( buffer[i++] != '\n' );
+		} while( buffer[bufferSize++] != '\n' );
 
-		buffer[--i] = '\0';
+		buffer[--bufferSize] = '\0';
 
-		if( i > 0 ) 
+		bufferIndex = 0;
+		cmdIndex = 0;
+		while(bufferIndex < bufferSize && buffer[bufferIndex] != '\0' 
+			&& buffer[bufferIndex] != ' ')
 		{
-			newProc = Exec(buffer);
-			Join(newProc);
+			cmd[cmdIndex++] = buffer[bufferIndex++];
+		}
+		cmd[cmdIndex] = '\0';
+
+		while(bufferIndex < bufferSize && buffer[bufferIndex] == ' ')
+		{
+			bufferIndex++;
+		}
+
+		argIndex = 0;
+		while(bufferIndex < bufferSize && buffer[bufferIndex] != '\0' 
+			&& buffer[bufferIndex] != ' ')
+		{
+			arg[argIndex++] = buffer[bufferIndex++];
+		}
+		arg[argIndex] = '\0';
+
+
+		if(cmdIndex > 0) 
+		{
+			if(argIndex > 0 && StrCmp("exec", cmd, 4) == 0)
+			{
+				newProc = Exec(arg);
+				Join(newProc);
+			}
+			if(StrCmp("ls", cmd, 2) == 0)
+			{
+				LS();
+			}
+			if(StrCmp("quit", cmd, 4) == 0)
+			{
+				Halt();
+			}
+			if(StrCmp("path", cmd, 4) == 0)
+			{
+				Path();
+			}
 		}
     }
 }

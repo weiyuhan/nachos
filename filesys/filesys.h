@@ -98,6 +98,8 @@ class FileSystem {
 
     char* currentPath();
 
+    void LS();
+
 
   private:
     OpenFile** fileEntry;

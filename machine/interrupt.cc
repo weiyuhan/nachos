@@ -296,7 +296,6 @@ Interrupt::CheckIfDue(bool advanceClock)
 {
     MachineStatus old = status;
     int when;
-
     ASSERT(level == IntOff);		// interrupts need to be disabled,
 					// to invoke an interrupt handler
     if (DebugIsEnabled('i'))
@@ -324,6 +323,8 @@ Interrupt::CheckIfDue(bool advanceClock)
 
     DEBUG('i', "Invoking interrupt handler for the %s at time %d\n", 
 			intTypeNames[toOccur->type], toOccur->when);
+    printf("Invoking interrupt handler for the %s at time %d\n", 
+            intTypeNames[toOccur->type], toOccur->when);
 #ifdef USER_PROGRAM
     if (machine != NULL)
     	machine->DelayedLoad(0, 0);
@@ -336,6 +337,7 @@ Interrupt::CheckIfDue(bool advanceClock)
     status = old;				// restore the machine status
     inHandler = FALSE;
     delete toOccur;
+
     return TRUE;
 }
 

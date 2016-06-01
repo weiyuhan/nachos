@@ -449,7 +449,8 @@ exception.o: ../userprog/exception.cc ../threads/copyright.h \
  ../bin/noff.h ../threads/scheduler.h ../threads/list.h \
  ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
  ../threads/synch.h ../filesys/synchdisk.h ../machine/disk.h \
- ../threads/synch.h ../userprog/syscall.h
+ ../threads/synch.h ../userprog/syscall.h ../filesys/synchconsole.h \
+ ../machine/console.h
 progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
  ../threads/system.h ../threads/copyright.h ../threads/utility.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \

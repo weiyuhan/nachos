@@ -551,12 +551,6 @@ FileSystem::Print()
     directory->FetchFrom(directoryFile);
     directory->Print();
 
-    
-    FileHeader* filenameHdr = new FileHeader;
-    filenameHdr->FetchFrom(FileNameSector);
-    filenameHdr->Print();
-    delete filenameHdr;
-
 
     delete bitHdr;
     delete dirHdr;
@@ -567,6 +561,13 @@ FileSystem::Print()
 char* FileSystem::currentPath()
 {
     int myDirectorySector = currentThread->myDirectorySector;
+    if(myDirectorySector == 1)
+    {
+        char* name = new char[2];
+        name[0] = '/';
+        name[1] = '\0';
+    }
+    //printf("myDirectorySector : %d\n", myDirectorySector);
     FileHeader* hdr = new FileHeader();
 
     hdr->FetchFrom(myDirectorySector);
@@ -576,4 +577,20 @@ char* FileSystem::currentPath()
     delete hdr;
 
     return name;
+}
+
+void FileSystem::LS()
+{
+    int myDirectorySector = currentThread->myDirectorySector;
+
+    OpenFile* myDirectoryFile = NULL;
+    myDirectoryFile = new OpenFile(myDirectorySector);
+    
+    Directory* directory = new Directory(NumDirEntries);
+    directory->FetchFrom(myDirectoryFile);
+
+    directory->List();
+
+    delete directory;
+    delete myDirectoryFile;
 }
