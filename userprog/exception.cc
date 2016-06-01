@@ -173,6 +173,38 @@ void SysPrint()
     switch(type)
     {
         case 'd':
+            printf("%d", content);
+            break;
+        case 's':
+            char buffer[100];
+            do
+            {
+                machine->ReadMem(content++, 1, &value);
+                buffer[count++] = (char)value;
+            }while(value != 0 && count < 100);
+            printf("%s", buffer);
+            break;
+        case 'x':
+            printf("%x", content);
+            break;
+        case 'c':
+            printf("%c", (char)content);
+            break;
+        default:
+            break;
+    }
+    PCAdd();
+}
+
+void SysPrintln()
+{
+    int content = machine->ReadRegister(4);
+    char type = (char)machine->ReadRegister(5);
+    int value;
+    int count = 0;
+    switch(type)
+    {
+        case 'd':
             printf("%d\n", content);
             break;
         case 's':
@@ -288,6 +320,43 @@ void SysJoin()
     PCAdd();
 }
 
+void SysStrCmp()
+{
+    PCAdd();
+}
+
+void SysCDDir()
+{
+    PCAdd();
+}
+
+void SysRMDir()
+{
+    PCAdd();
+}
+
+void SysMKDir()
+{
+    PCAdd();
+}
+
+void SysRemove()
+{
+    PCAdd();
+}
+
+void SysPath()
+{
+
+    #ifdef FILESYS
+        #ifdef FILESYS_NEEDED
+            printf("%s/:", fileSystem->currentPath());
+        #endif
+    #endif
+
+    PCAdd();
+}
+
 void
 ExceptionHandler(ExceptionType which)
 {
@@ -332,6 +401,27 @@ ExceptionHandler(ExceptionType which)
                 break;
             case SC_Yield:
                 SysYield();
+                break;
+            case SC_Println:
+                SysPrintln();
+                break;
+            case SC_StrCmp:
+                SysStrCmp();
+                break;
+            case SC_CDDir:
+                SysCDDir();
+                break;
+            case SC_MKDir:
+                SysMKDir();
+                break;
+            case SC_Remove:
+                SysRemove();
+                break;
+            case SC_RMDir:
+                SysRMDir();
+                break;
+            case SC_Path:
+                SysPath();
                 break;
             default:
                 printf("Unexpected syscall %d\n", type);

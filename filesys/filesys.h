@@ -74,17 +74,17 @@ class FileSystem {
 					// the disk, so initialize the directory
     					// and the bitmap of free blocks.
 
-    bool Create(char *name, int initialSize = 0, char* path = "/", int myDirectorySector = 1);
-    bool CreateDir(char *name, char* path = "/", int myDirectorySector = 1);  	
+    bool Create(char *name, int initialSize = 0, char* path = "/");
+    bool CreateDir(char *name, char* path = "/");  	
 					// Create a file (UNIX creat)
 
-    OpenFile* Open(char *name, char *path = "/", int myDirectorySector = 1); 	// Open a file (UNIX open)
+    OpenFile* Open(char *name, char *path = "/"); 	// Open a file (UNIX open)
 
-    bool Remove(char *name, char *path = "/", bool force = FALSE, int myDirectorySector = 1);  		// Delete a file (UNIX unlink)
+    bool Remove(char *name, char *path = "/", bool force = FALSE);  		// Delete a file (UNIX unlink)
 
     void List();			// List all the files in the file system
 
-    int OpenAFile(char *name, char *path = "/", int myDirectorySector = 1);
+    int OpenAFile(char *name, char *path = "/");
 
     int WriteFile(char* from, int size, int fileId);
 
@@ -94,7 +94,9 @@ class FileSystem {
 
     void Print();			// List all the files and their contents
 
-    int ChangeDirectory(char* name, int myDirectorySector);
+    int ChangeDirectory(char* name);
+
+    char* currentPath();
 
 
   private:

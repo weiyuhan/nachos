@@ -450,7 +450,7 @@ Thread::changeDirectory(char* name)
 #ifdef FILESYS
     #ifdef FILESYS_NEEDED
 
-    int sector = fileSystem->ChangeDirectory(name, myDirectorySector);
+    int sector = fileSystem->ChangeDirectory(name);
     if(sector != -1)
         myDirectorySector = sector;
 

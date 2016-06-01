@@ -49,6 +49,7 @@
 #include "directory.h"
 #include "filehdr.h"
 #include "filesys.h"
+#include "system.h"
 
 // Sectors containing the file headers for the bitmap of free sectors,
 // and the directory of files.  These file headers are placed in well-known 
@@ -188,13 +189,15 @@ FileSystem::FileSystem(bool format)
 //----------------------------------------------------------------------
 
 bool
-FileSystem::Create(char *name, int initialSize = 0, char* path = "/", int myDirectorySector = 1)
+FileSystem::Create(char *name, int initialSize = 0, char* path = "/")
 {
     Directory *directory;
     BitMap *freeMap;
     FileHeader *hdr;
     int sector;
     bool success;
+
+    int myDirectorySector = currentThread->myDirectorySector;
 
     OpenFile* myDirectoryFile = NULL;
     if(myDirectorySector == 1)
@@ -247,10 +250,12 @@ FileSystem::Create(char *name, int initialSize = 0, char* path = "/", int myDire
 }
 
 int 
-FileSystem::ChangeDirectory(char* name, int myDirectorySector)
+FileSystem::ChangeDirectory(char* name)
 {
     Directory *directory;
     int sector;
+
+    int myDirectorySector = currentThread->myDirectorySector;
 
     OpenFile* myDirectoryFile = NULL;
     if(myDirectorySector == 1)
@@ -274,13 +279,15 @@ FileSystem::ChangeDirectory(char* name, int myDirectorySector)
 }
 
 bool
-FileSystem::CreateDir(char *name, char* path = "/", int myDirectorySector = 1)
+FileSystem::CreateDir(char *name, char* path = "/")
 {
     Directory *directory;
     BitMap *freeMap;
     FileHeader *hdr;
     int sector;
     bool success;
+
+    int myDirectorySector = currentThread->myDirectorySector;
 
     OpenFile* myDirectoryFile = NULL;
     if(myDirectorySector == 1)
@@ -352,11 +359,13 @@ FileSystem::CreateDir(char *name, char* path = "/", int myDirectorySector = 1)
 //----------------------------------------------------------------------
 
 OpenFile *
-FileSystem::Open(char *name, char *path = "/", int myDirectorySector = 1)
+FileSystem::Open(char *name, char *path = "/")
 { 
     Directory *directory = new Directory(NumDirEntries);
     OpenFile *openFile = NULL;
     int sector;
+
+    int myDirectorySector = currentThread->myDirectorySector;
 
     OpenFile* myDirectoryFile = NULL;
     if(myDirectorySector == 1)
@@ -380,9 +389,9 @@ FileSystem::Open(char *name, char *path = "/", int myDirectorySector = 1)
 }
 
 int 
-FileSystem::OpenAFile(char *name, char *path = "/", int myDirectorySector = 1)
+FileSystem::OpenAFile(char *name, char *path = "/")
 {
-    OpenFile* openFile = Open(name, path, myDirectorySector);
+    OpenFile* openFile = Open(name, path);
     int fileId = fileIdMap->Find();
     if(fileId == -1)
     {
@@ -440,12 +449,14 @@ FileSystem::ReadFile(char* to, int size, int fileId)
 //----------------------------------------------------------------------
 
 bool
-FileSystem::Remove(char *name, char *path = "/", bool force = FALSE, int myDirectorySector = 1)
+FileSystem::Remove(char *name, char *path = "/", bool force = FALSE)
 { 
     Directory *directory;
     BitMap *freeMap;
     FileHeader *fileHdr;
     int sector;
+
+    int myDirectorySector = currentThread->myDirectorySector;
 
     OpenFile* myDirectoryFile = NULL;
     if(myDirectorySector == 1)
@@ -552,3 +563,17 @@ FileSystem::Print()
     delete freeMap;
     delete directory;
 } 
+
+char* FileSystem::currentPath()
+{
+    int myDirectorySector = currentThread->myDirectorySector;
+    FileHeader* hdr = new FileHeader();
+
+    hdr->FetchFrom(myDirectorySector);
+
+    char* name = hdr->getName();
+
+    delete hdr;
+
+    return name;
+}

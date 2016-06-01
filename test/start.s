@@ -138,6 +138,63 @@ Print:
 	j	$31
 	.end Print
 
+	.globl Println
+	.ent	Println
+Println:
+	addiu $2,$0,SC_Println
+	syscall
+	j	$31
+	.end Println
+
+	.globl StrCmp
+	.ent	StrCmp
+StrCmp:
+	addiu $2,$0,SC_StrCmp
+	syscall
+	j	$31
+	.end StrCmp
+
+	.globl MKDir
+	.ent	MKDir
+MKDir:
+	addiu $2,$0,SC_MKDir
+	syscall
+	j	$31
+	.end MKDir
+
+	.globl CDDir
+	.ent	CDDir
+CDDir:
+	addiu $2,$0,SC_CDDir
+	syscall
+	j	$31
+	.end CDDir
+
+	.globl Remove
+	.ent	Remove
+Remove:
+	addiu $2,$0,SC_Remove
+	syscall
+	j	$31
+	.end Remove
+
+	.globl RMDir
+	.ent	RMDir
+RMDir:
+	addiu $2,$0,SC_RMDir
+	syscall
+	j	$31
+	.end RMDir
+
+	.globl Path
+	.ent	Path
+Path:
+	addiu $2,$0,SC_Path
+	syscall
+	j	$31
+	.end Path
+
+
 /* dummy function to keep gcc happy */
         .globl  __main
         .ent    __main

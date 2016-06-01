@@ -30,6 +30,14 @@
 #define SC_Fork		9
 #define SC_Yield	10
 #define SC_Print	11
+#define SC_Println  12
+#define SC_StrCmp   13
+#define SC_MKDir	14
+#define SC_CDDir	15
+#define SC_Remove	16
+#define SC_RMDir	17
+#define SC_Path	18
+
 
 #ifndef IN_ASM
 
@@ -110,6 +118,20 @@ int Read(char *buffer, int size, OpenFileId id);
 void Close(OpenFileId id);
 
 void Print(void* content, char type);
+
+void Println(void* content, char type);
+
+int StrCmp(char* s1, char* s2);
+
+int MKDir(char* name);
+
+int CDDir(char* name);
+
+int Remove(char* name);
+
+int RMDir(char* name);
+
+void Path();
 
 
 
