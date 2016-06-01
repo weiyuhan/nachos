@@ -183,10 +183,12 @@ void
 PerformanceTest()
 {
     //bool success = fileSystem->Create("asdsafasdasdas");
-    /*
+    
     bool success;
 
     success = fileSystem->CreateDir("A");
+
+    success = fileSystem->Create("test");
 
     success = fileSystem->CreateDir("B", "/A/");
 
@@ -196,6 +198,8 @@ PerformanceTest()
 
     success = fileSystem->Create("test", 100, "/A/B/");
 
+    success = fileSystem->Remove("test");
+
     success = fileSystem->Remove("test", "/A/");
 
     success = fileSystem->CreateDir("C", "/A/");
@@ -203,9 +207,9 @@ PerformanceTest()
     success = fileSystem->Create("test", 100, "/A/C/");
 
     success = fileSystem->Remove("C", "/A/");
-    */
-
     
+
+    /*
     Thread* t = new Thread("fork");
     if(t->gettid() != -1)
     {
@@ -232,6 +236,7 @@ PerformanceTest()
       currentThread->Yield();
     }
     stats->Print();
+    */
     
 }
 

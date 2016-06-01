@@ -188,7 +188,7 @@ FileSystem::FileSystem(bool format)
 //----------------------------------------------------------------------
 
 bool
-FileSystem::Create(char *name, int initialSize = 0, char* path = "/")
+FileSystem::Create(char *name, int initialSize = 0, char* path = "/", int myDirectorySector = 1)
 {
     Directory *directory;
     BitMap *freeMap;
@@ -196,9 +196,17 @@ FileSystem::Create(char *name, int initialSize = 0, char* path = "/")
     int sector;
     bool success;
 
+    OpenFile* myDirectoryFile = NULL;
+    if(myDirectorySector == 1)
+        myDirectoryFile = directoryFile;
+    else
+    {
+        myDirectoryFile = new OpenFile(myDirectorySector);
+    }
+
     DEBUG('f', "Creating file %s, size %d\n", name, initialSize);
     directory = new Directory(NumDirEntries);
-    directory->FetchFrom(directoryFile);
+    directory->FetchFrom(myDirectoryFile);
 
     if (directory->Find(name, path) != -1)
       success = FALSE;			// file is already in directory
@@ -224,18 +232,49 @@ FileSystem::Create(char *name, int initialSize = 0, char* path = "/")
                 hdr->setCreateTime();
         	    hdr->WriteBack(sector);
                 freeMap->WriteBack(freeMapFile); 		
-        	    directory->WriteBack(directoryFile);
+        	    directory->WriteBack(myDirectoryFile);
     	    }
             delete hdr;
 	   }
         delete freeMap;
     }
     delete directory;
+
+    if(myDirectorySector != 1)
+        delete myDirectoryFile;
+
     return success;
 }
 
+int 
+FileSystem::ChangeDirectory(char* name, int myDirectorySector)
+{
+    Directory *directory;
+    int sector;
+
+    OpenFile* myDirectoryFile = NULL;
+    if(myDirectorySector == 1)
+        myDirectoryFile = directoryFile;
+    else
+    {
+        myDirectoryFile = new OpenFile(myDirectorySector);
+    }
+
+    directory = new Directory(NumDirEntries);
+    directory->FetchFrom(myDirectoryFile);
+
+    sector = directory->Find(name, "/", TRUE);
+
+    delete directory;
+
+    if(myDirectorySector != 1)
+        delete myDirectoryFile;
+
+    return sector;
+}
+
 bool
-FileSystem::CreateDir(char *name, char* path = "/")
+FileSystem::CreateDir(char *name, char* path = "/", int myDirectorySector = 1)
 {
     Directory *directory;
     BitMap *freeMap;
@@ -243,10 +282,18 @@ FileSystem::CreateDir(char *name, char* path = "/")
     int sector;
     bool success;
 
+    OpenFile* myDirectoryFile = NULL;
+    if(myDirectorySector == 1)
+        myDirectoryFile = directoryFile;
+    else
+    {
+        myDirectoryFile = new OpenFile(myDirectorySector);
+    }
+
     DEBUG('f', "Creating Directory %s\n", name);
 
     directory = new Directory(NumDirEntries);
-    directory->FetchFrom(directoryFile);
+    directory->FetchFrom(myDirectoryFile);
 
     if (directory->Find(name, path) != -1)
       success = FALSE;          // file is already in directory
@@ -279,7 +326,7 @@ FileSystem::CreateDir(char *name, char* path = "/")
             // everthing worked, flush all changes back to disk 
                     hdr->setCreateTime();
                     hdr->WriteBack(sector);      
-                    directory->WriteBack(directoryFile);
+                    directory->WriteBack(myDirectoryFile);
                 }
                 delete hdr;
             }
@@ -287,6 +334,10 @@ FileSystem::CreateDir(char *name, char* path = "/")
         delete freeMap;
     }
     delete directory;
+
+    if(myDirectorySector != 1)
+        delete myDirectoryFile;
+
     return success;
 }
 
@@ -301,25 +352,37 @@ FileSystem::CreateDir(char *name, char* path = "/")
 //----------------------------------------------------------------------
 
 OpenFile *
-FileSystem::Open(char *name, char *path = "/")
+FileSystem::Open(char *name, char *path = "/", int myDirectorySector = 1)
 { 
     Directory *directory = new Directory(NumDirEntries);
     OpenFile *openFile = NULL;
     int sector;
 
+    OpenFile* myDirectoryFile = NULL;
+    if(myDirectorySector == 1)
+        myDirectoryFile = directoryFile;
+    else
+    {
+        myDirectoryFile = new OpenFile(myDirectorySector);
+    }
+
     DEBUG('f', "Opening file %s\n", name);
-    directory->FetchFrom(directoryFile);
+    directory->FetchFrom(myDirectoryFile);
     sector = directory->Find(name, path); 
     if (sector >= 0) 		
 	openFile = new OpenFile(sector);	// name was found in directory 
     delete directory;
+
+    if(myDirectorySector != 1)
+        delete myDirectoryFile;
+
     return openFile;				// return NULL if not found
 }
 
 int 
-FileSystem::OpenAFile(char *name, char *path = "/")
+FileSystem::OpenAFile(char *name, char *path = "/", int myDirectorySector = 1)
 {
-    OpenFile* openFile = Open(name, path);
+    OpenFile* openFile = Open(name, path, myDirectorySector);
     int fileId = fileIdMap->Find();
     if(fileId == -1)
     {
@@ -377,15 +440,23 @@ FileSystem::ReadFile(char* to, int size, int fileId)
 //----------------------------------------------------------------------
 
 bool
-FileSystem::Remove(char *name, char *path = "/", bool force = FALSE)
+FileSystem::Remove(char *name, char *path = "/", bool force = FALSE, int myDirectorySector = 1)
 { 
     Directory *directory;
     BitMap *freeMap;
     FileHeader *fileHdr;
     int sector;
+
+    OpenFile* myDirectoryFile = NULL;
+    if(myDirectorySector == 1)
+        myDirectoryFile = directoryFile;
+    else
+    {
+        myDirectoryFile = new OpenFile(myDirectorySector);
+    }
     
     directory = new Directory(NumDirEntries);
-    directory->FetchFrom(directoryFile);
+    directory->FetchFrom(myDirectoryFile);
     sector = directory->Find(name, path);
     if (sector == -1) {
        delete directory;
@@ -411,10 +482,14 @@ FileSystem::Remove(char *name, char *path = "/", bool force = FALSE)
     directory->Remove(name, path);
 
     freeMap->WriteBack(freeMapFile);		// flush to disk
-    directory->WriteBack(directoryFile);        // flush to disk
+    directory->WriteBack(myDirectoryFile);        // flush to disk
     delete fileHdr;
     delete directory;
     delete freeMap;
+
+    if(myDirectorySector != 1)
+        delete myDirectoryFile;
+
     return TRUE;
 } 
 

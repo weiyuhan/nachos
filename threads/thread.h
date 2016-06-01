@@ -116,6 +116,10 @@ class Thread {
     void Print() { printf("%s, uid:%d, tid:%d, status:%s, priority:%d, remainTime:%d\n", 
         name, userID, threadID, getStatus(), getpriority(), getremainTime()); }
 
+    void changeDirectory(char* name);
+
+    int myDirectorySector;
+
   private:
     // some of the private data for this class is listed above
     
@@ -133,6 +137,7 @@ class Thread {
     					// Allocate a stack for thread.
 					// Used internally by Fork()
 
+
 #ifdef USER_PROGRAM
 // A thread running a user program actually has *two* sets of CPU registers -- 
 // one for its state while executing user code, one for its state 
@@ -148,6 +153,7 @@ class Thread {
     int PagesinMem();
     AddrSpace *space;			// User code this thread is running.
 #endif
+
 };
 
 // Magical machine-dependent routines, defined in switch.s

@@ -58,14 +58,14 @@ char* getNameFromDictorySector(int sector)
 char*
 DirectoryEntry::getName(int fatherSector = 0)
 {
+    /*
     char* name = new char[nameSize+1];
     OpenFile *filenameFile = new OpenFile(2);
     filenameFile->Seek(nameIndex);
     filenameFile->Read(name, nameSize);
     delete filenameFile;
     name[nameSize] = '\0';
-
-
+    */
     if(fatherSector > 0)
     {
         char* fatherName = getNameFromDictorySector(fatherSector);
@@ -78,11 +78,14 @@ DirectoryEntry::getName(int fatherSector = 0)
     }
     else
         return name;
+
+    return name;
 }
 
 void 
-DirectoryEntry::setName(char* name)
+DirectoryEntry::setName(char* newName)
 {
+    /*
     nameSize = strlen(name);
     FileHeader* filenameHdr = new FileHeader();
     filenameHdr->FetchFrom(2); 
@@ -94,6 +97,9 @@ DirectoryEntry::setName(char* name)
 
     delete filenameHdr;
     delete filenameFile;
+    */
+    strncpy(name, newName, strlen(newName));
+    name[strlen(newName)] = '\0';
 
 }
 
@@ -175,9 +181,13 @@ Directory::WriteBack(OpenFile *file)
 int
 Directory::FindIndex(char *name)
 {
+    //printf("find in Directory %s\n", name);
     for (int i = 0; i < tableSize; i++)
+    {
+        //printf("table[%d]:%s\n", i, table[i].getName());
         if (table[i].inUse && !strcmp(table[i].getName(), name))
-	    return i;
+	       return i;
+    }
     return -1;		// name not in directory
 }
 
@@ -191,14 +201,25 @@ Directory::FindIndex(char *name)
 //----------------------------------------------------------------------
 
 int
-Directory::Find(char *name, char *path = "/")
+Directory::Find(char *name, char *path = "/", bool findDirectory = FALSE)
 {
+    if(findDirectory == TRUE)
+    {
+        if(!strcmp(".", name))
+            return table[meSector].sector;
+        if(!strcmp("..", name))
+            return table[paSector].sector;
+    }
     if(strlen(path) == 1)
     {
         int i = FindIndex(name);
 
         if (i != -1)
-           return table[i].sector;
+        {
+            if(table[i].isDirectory == FALSE && findDirectory == TRUE)
+                return -1;
+            return table[i].sector;
+        }
 
        return -1;
     }

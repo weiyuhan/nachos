@@ -60,6 +60,8 @@ Thread::Thread(char* threadName, int uid = 0, int _priority = 10, int remain = 5
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
+
+    myDirectorySector = 1;
 #ifdef USER_PROGRAM
     space = NULL;
 #endif
@@ -250,17 +252,8 @@ Thread::Yield ()
     {
         if(currentThread->getremainTime() <= 0)
         {
-            currentThread->setpriority(currentThread->getpriority() - 1);
-            if(currentThread->getpriority() > nextThread->getpriority())
-            {
-                scheduler->ReadyToRun(nextThread);
-                scheduler->Run(this);
-            }
-            else
-            {
-                scheduler->ReadyToRun(this);
-                scheduler->Run(nextThread);
-            }
+            scheduler->ReadyToRun(this);
+            scheduler->Run(nextThread);
         }
         else
             scheduler->ReadyToRun(nextThread);
@@ -449,6 +442,21 @@ int Thread::PagesinMem()
         }
     }
     return count;
+}
+
+void
+Thread::changeDirectory(char* name)
+{
+#ifdef FILESYS
+    #ifdef FILESYS_NEEDED
+
+    int sector = fileSystem->ChangeDirectory(name, myDirectorySector);
+    if(sector != -1)
+        myDirectorySector = sector;
+
+    #endif
+
+#endif
 }
 
 #endif

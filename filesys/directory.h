@@ -35,9 +35,12 @@ class DirectoryEntry {
     bool isDirectory;
     int sector;				// Location on disk to find the 
 					//   FileHeader for this file 
-    int nameIndex;	// Text name for file, with +1 for 
+
+    char name[FileNameMaxLen+1];
+
+    //int nameIndex;	// Text name for file, with +1 for 
 					// the trailing '\0'
-    int nameSize;
+    //int nameSize;
     char* getName(int fatherSector = 0);
 
     void setName(char* name);
@@ -63,7 +66,7 @@ class Directory {
     void WriteBack(OpenFile *file);	// Write modifications to 
 					// directory contents back to disk
 
-    int Find(char *name, char *path = "/");		// Find the sector number of the 
+    int Find(char *name, char *path = "/", bool findDirectory = FALSE);		// Find the sector number of the 
 					// FileHeader for file: "name"
 
     bool Add(char *name, int newSector, bool isDirectory = FALSE, 
