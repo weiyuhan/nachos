@@ -116,7 +116,7 @@ class Thread {
     void Print() { printf("%s, uid:%d, tid:%d, status:%s, priority:%d, remainTime:%d\n", 
         name, userID, threadID, getStatus(), getpriority(), getremainTime()); }
 
-    void changeDirectory(char* name);
+    //void changeDirectory(char* name);
 
     int myDirectorySector;
 

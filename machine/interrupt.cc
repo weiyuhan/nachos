@@ -323,8 +323,6 @@ Interrupt::CheckIfDue(bool advanceClock)
 
     DEBUG('i', "Invoking interrupt handler for the %s at time %d\n", 
 			intTypeNames[toOccur->type], toOccur->when);
-    printf("Invoking interrupt handler for the %s at time %d\n", 
-            intTypeNames[toOccur->type], toOccur->when);
 #ifdef USER_PROGRAM
     if (machine != NULL)
     	machine->DelayedLoad(0, 0);

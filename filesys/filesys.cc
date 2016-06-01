@@ -275,6 +275,9 @@ FileSystem::ChangeDirectory(char* name)
     if(myDirectorySector != 1)
         delete myDirectoryFile;
 
+    if(sector != -1)
+        currentThread->myDirectorySector = sector;
+
     return sector;
 }
 

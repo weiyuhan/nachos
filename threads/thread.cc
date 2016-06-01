@@ -438,7 +438,7 @@ int Thread::PagesinMem()
     }
     return count;
 }
-
+/*
 void
 Thread::changeDirectory(char* name)
 {
@@ -453,5 +453,6 @@ Thread::changeDirectory(char* name)
 
 #endif
 }
+*/
 
 #endif

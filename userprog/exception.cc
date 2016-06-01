@@ -71,8 +71,6 @@ void SysHalt()
 {
     DEBUG('a', "Shutdown, initiated by user program.\n");
     interrupt->Halt();
-
-    PCAdd();
 }
 
 void SysExit()
@@ -86,8 +84,6 @@ void SysExit()
             currentThread->space->PageFaultCount);
     currentThread->Print();
     currentThread->Finish();
-
-    PCAdd();
 }
 
 void SysCreate()
@@ -105,7 +101,6 @@ void SysCreate()
     if(!fileSystem->Create(name))
         machine->WriteRegister(2, 0);
     machine->WriteRegister(2, 1);
-    PCAdd();
 }
 
 void SysOpen()
@@ -122,14 +117,12 @@ void SysOpen()
 
     OpenFileId fileId = fileSystem->OpenAFile(name);
     machine->WriteRegister(2, fileId);
-    PCAdd();
 }
 
 void SysClose()
 {
     OpenFileId fileId = (OpenFileId)machine->ReadRegister(4);
     fileSystem->CloseFile((int)fileId);
-    PCAdd();
 }
 
 void SysWrite()
@@ -166,7 +159,6 @@ void SysWrite()
     }
 
     delete buffer;
-    PCAdd();
 }
 
 void SysRead()
@@ -205,7 +197,6 @@ void SysRead()
     }
 
     delete buffer;
-    PCAdd();
 }
 
 void SysPrint()
@@ -237,7 +228,6 @@ void SysPrint()
         default:
             break;
     }
-    PCAdd();
 }
 
 void SysPrintln()
@@ -269,13 +259,11 @@ void SysPrintln()
         default:
             break;
     }
-    PCAdd();
 }
 
 void SysYield()
 {
     currentThread->Yield();
-    PCAdd();
 }
 
 void ForkRun(int startAddr)
@@ -302,9 +290,6 @@ void SysFork()
 
         t->Fork(ForkRun, startAddr);
     }
-
-
-    PCAdd();
 }
 
 void ExecRun()
@@ -346,8 +331,6 @@ void SysExec()
     }
 
     machine->WriteRegister(2, t->gettid());
-
-    PCAdd();
 }
 
 void SysJoin()
@@ -360,8 +343,6 @@ void SysJoin()
     int exitNum = scheduler->getExitNum(spaceId);
 
     machine->WriteRegister(2, exitNum);
-
-    PCAdd();
 }
 
 void SysStrCmp()
@@ -395,38 +376,72 @@ void SysStrCmp()
     {
         machine->WriteRegister(2, 0);
     }
-
-    PCAdd();
 }
 
 void SysCDDir()
 {
-    PCAdd();
+    int nameAddr = machine->ReadRegister(4);
+    int value;
+    int count = 0;
+    char* name = new char[10];
+    while(true)
+    {
+        machine->ReadMem(nameAddr++, 1, &value);
+        name[count++] = (char)value;
+        if(value = 0)
+            break;
+    }
+
+    #ifdef FILESYS
+        #ifdef FILESYS_NEEDED
+            fileSystem->ChangeDirectory(name);
+        #endif
+    #endif
 }
 
 void SysRMDir()
 {
-    PCAdd();
+
 }
 
 void SysMKDir()
 {
-    PCAdd();
+    int nameAddr = machine->ReadRegister(4);
+    int value;
+    int count = 0;
+    char* name = new char[10];
+    while(true)
+    {
+        machine->ReadMem(nameAddr++, 1, &value);
+        name[count++] = (char)value;
+        if(value = 0)
+            break;
+    }
+
+    #ifdef FILESYS
+        #ifdef FILESYS_NEEDED
+            fileSystem->CreateDir(name);
+        #endif
+    #endif
+
 }
 
 void SysRemove()
 {
-    PCAdd();
+
 }
 
 void SysPath()
 {
     #ifdef FILESYS
         #ifdef FILESYS_NEEDED
-            printf("%s",fileSystem->currentPath());
+            char* path = fileSystem->currentPath();
+            if(path == NULL)
+                printf("/\n");
+            else
+                printf("%s\n",path);
         #endif
     #endif
-    PCAdd();
 }
 
 void SysLS()
@@ -436,7 +451,6 @@ void SysLS()
             fileSystem->LS();
         #endif
     #endif
-    PCAdd();
 }
 
 void
@@ -512,6 +526,7 @@ ExceptionHandler(ExceptionType which)
                 printf("Unexpected syscall %d\n", type);
                 ASSERT(FALSE);
         }
+        PCAdd();
     } else if ((which == TLBMissException))
     {
     	DEBUG('a', "TLB Miss.\n");

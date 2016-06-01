@@ -71,6 +71,18 @@ main()
 			{
 				Path();
 			}
+			if(argIndex > 0 && StrCmp("echo", cmd, 4) == 0)
+			{
+				Println(arg, 's');
+			}
+			if(argIndex > 0 && StrCmp("mkdir", cmd, 5) == 0)
+			{
+				MKDir(arg);
+			}
+			if(argIndex > 0 && StrCmp("cd", cmd, 2) == 0)
+			{
+				CDDir(arg);
+			}
 		}
     }
 }
