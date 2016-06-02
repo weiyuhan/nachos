@@ -59,6 +59,15 @@ SynchList::Append(void *item)
     lock->Release();
 }
 
+void
+SynchList::Append(void *item, int key)
+{
+    lock->Acquire();        // enforce mutual exclusive access to the list 
+    list->SortedInsert(item, key);
+    listEmpty->Signal(lock);    // wake up a waiter, if any
+    lock->Release();
+}
+
 //----------------------------------------------------------------------
 // SynchList::Remove
 //      Remove an "item" from the beginning of the list.  Wait if
@@ -80,6 +89,22 @@ SynchList::Remove()
     lock->Release();
     return item;
 }
+
+
+void *
+SynchList::Remove(int key)
+{
+    void *item;
+
+    lock->Acquire();            // enforce mutual exclusion
+    while (list->IsEmpty() || (item = list->FindByKey(key)) == NULL)
+        listEmpty->Wait(lock);      // wait until list isn't empty
+    list->Remove(item);
+    ASSERT(item != NULL);
+    lock->Release();
+    return item;
+}
+
 
 //----------------------------------------------------------------------
 // SynchList::Mapcar

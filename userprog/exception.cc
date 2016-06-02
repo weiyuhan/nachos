@@ -25,6 +25,7 @@
 #include "system.h"
 #include "syscall.h"
 #include <stdio.h>
+#include "synchlist.h"
 
 //----------------------------------------------------------------------
 // ExceptionHandler
@@ -48,17 +49,8 @@
 //	"which" is the kind of exception.  The list of possible exceptions 
 //	are in machine.h.
 //----------------------------------------------------------------------
-#ifdef FILESYS
-#include "synchconsole.h"
 
-SynchConsole* console;
-
-void init()
-{
-    if(console == NULL)
-        console = new SynchConsole(NULL, NULL, FALSE);
-}
-#endif
+SynchList* synchlist;
 
 void PCAdd()
 {
@@ -435,10 +427,32 @@ void SysLS()
     #endif
 }
 
+void SysPutMsg()
+{
+    int msg = machine->ReadRegister(4);
+    int target = machine->ReadRegister(5);
+    synchlist->Append(msg, target);
+}
+
+void SysGetMsg()
+{
+    int tid = currentThread->gettid();
+    int msg = synchlist->Remove(tid);
+    machine->WriteRegister(2, msg);
+}
+
+void SysTS()
+{
+    scheduler->ThreadStatus();
+}
+
 void
 ExceptionHandler(ExceptionType which)
 {
     int type = machine->ReadRegister(2);
+
+    if(synchlist == NULL)
+        synchlist = new SynchList();
 
     if (which == SyscallException)
     {
@@ -497,6 +511,15 @@ ExceptionHandler(ExceptionType which)
                 break;
             case SC_LS:
                 SysLS();
+                break;
+            case SC_PutMsg:
+                SysPutMsg();
+                break;
+            case SC_GetMsg:
+                SysGetMsg();
+                break;
+            case SC_TS:
+                SysTS();
                 break;
             default:
                 printf("Unexpected syscall %d\n", type);

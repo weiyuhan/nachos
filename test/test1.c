@@ -3,21 +3,16 @@
 int
 main()
 {
-	OpenFileId fd;
-	char buffer[5];
-	int readNum;
-
-
-    Create("testFile");
-    fd = Open("testFile");
-    Write("fuck", 4, fd);
-    Close(fd);
-
-    fd = Open("testFile");
-    readNum = Read(buffer, 100, fd);
-    Print(readNum, 'd');
-    buffer[4] = '\0';
-    Print(buffer, 's');
-    Close(fd);
-    Exit(0);
+    int a, b, ret, index;
+    a = GetMsg();
+    b = GetMsg();
+    ret = 1;
+    index = 0;
+    while(index < b)
+    {
+        ret = ret * a;
+        index++;
+    }
+    PutMsg(ret, 0);
+    Exit(1024);
 }

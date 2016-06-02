@@ -120,13 +120,14 @@ class Thread {
 
     int myDirectorySector;
 
+    ThreadStatus status;
+
   private:
     // some of the private data for this class is listed above
     
     int* stack; 	 		// Bottom of the stack 
 					// NULL if this is the main thread
 					// (If NULL, don't deallocate stack)
-    ThreadStatus status;		// ready, running or blocked
     char* name;
     int userID;
     int threadID;

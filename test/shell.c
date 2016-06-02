@@ -14,6 +14,21 @@ int strcmp(char* s1, char* s2, int len)
 	return 0;
 }
 
+int parseInt(char* s,int len)
+{
+	int ret, index;
+	ret = 0;
+	index = 0;
+	while(index < len)
+	{
+		ret = ret + (s[index] - '0');
+		ret = ret * 10;
+		index++;
+	}
+	ret = ret / 10;
+	return ret;
+}
+
 
 int
 main()
@@ -79,7 +94,14 @@ main()
 					Println(arg, 's');
 					continue;
 				}
+				Print("SpaceId : ", 's');
+				Println(newProc, 'd');
 				Join(newProc);
+			}
+			if(strcmp("join", cmd, 4) == 0)
+			{
+				if(newProc >= 0)
+					Join(newProc);
 			}
 			if(strcmp("ls", cmd, 2) == 0)
 			{
@@ -147,6 +169,20 @@ main()
 				int readNum = Read(arg, 40, fd);
 				arg[readNum] = '\0';
 				Println(arg, 's');
+			}
+			if(strcmp("send", cmd, 4) == 0)
+			{
+				int num = parseInt(arg, argIndex);
+				PutMsg(num, newProc);
+			}
+			if(strcmp("get", cmd, 3) == 0)
+			{
+				int num = GetMsg();
+				Println(num, 'd');
+			}
+			if(strcmp("ts", cmd, 2) == 0)
+			{
+				TS();
 			}
 		}
     }

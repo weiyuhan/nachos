@@ -13,7 +13,6 @@
 #include "system.h"
 #include "elevatortest.h"
 #include "synch.h"
-#include "synchlist.h"
 
 // testnum is set in main.cc
 int testnum = 1;
@@ -22,7 +21,6 @@ Lock* lock;
 Condition* condition;
 Condition* notfull;
 Condition* notempty;
-SynchList* synchlist;
 Semaphore* mutex;
 Semaphore* full;
 Semaphore* empty;

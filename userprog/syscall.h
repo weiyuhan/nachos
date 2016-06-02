@@ -37,6 +37,9 @@
 #define SC_Remove	16
 #define SC_Path		17
 #define SC_LS       18 
+#define SC_PutMsg	19
+#define SC_GetMsg	20
+#define SC_TS       21
 
 
 #ifndef IN_ASM
@@ -132,6 +135,12 @@ int RMDir(char* name);
 void Path();
 
 void LS();
+
+void PutMsg(int msg, int target);
+
+int GetMsg();
+
+int TS();
 
 
 

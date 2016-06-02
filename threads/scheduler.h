@@ -32,7 +32,12 @@ class Scheduler {
     void Run(Thread* nextThread);	// Cause nextThread to start running
     void Print();			// Print contents of ready list
 #ifdef USER_PROGRAM
-    bool isActive(int tid){return threadMap->Test(tid);}
+    bool isActive(int tid)
+    {
+        if(threadEntry[tid]->status == BLOCKED)
+            return FALSE;
+        return threadMap->Test(tid);
+    }
 
     int getExitNum(int tid){return exitNum[tid];}
 

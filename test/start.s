@@ -194,6 +194,30 @@ LS:
 	j	$31
 	.end LS
 
+	.globl PutMsg
+	.ent	PutMsg
+PutMsg:
+	addiu $2,$0,SC_PutMsg
+	syscall
+	j	$31
+	.end PutMsg
+
+	.globl GetMsg
+	.ent	GetMsg
+GetMsg:
+	addiu $2,$0,SC_GetMsg
+	syscall
+	j	$31
+	.end GetMsg
+
+	.globl TS
+	.ent	TS
+TS:
+	addiu $2,$0,SC_TS
+	syscall
+	j	$31
+	.end TS
+
 
 /* dummy function to keep gcc happy */
         .globl  __main

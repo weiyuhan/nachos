@@ -206,6 +206,7 @@ List::SortedInsert(void *item, int sortKey)
     numInList++;
 }
 
+
 void
 List::SortedInsertReverse(void *item, int sortKey)
 {
@@ -308,7 +309,7 @@ List::FindByKey(int key)
         return NULL;
     if (key == first->key) 
     {  
-        return first;
+        return first->item;
     } 
     else 
     {
@@ -317,7 +318,7 @@ List::FindByKey(int key)
         {
             if (key == ptr->key) 
             {
-                return ptr;
+                return ptr->item;
             }
         }
     }
